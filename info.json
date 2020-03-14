@@ -1,0 +1,13 @@
+{
+  "name": "reskins-library",
+  "version": "0.18.1",
+  "factorio_version": "0.18",
+  "title": "Reskins: Function's Library",
+  "author": "Kirazy",
+  "contact": "kirazy@live.com",
+  "description": "Reskins series function library. Part of the Reskins series.",
+  "dependencies": 
+  [	
+    "base >= 0.18.0"
+  ]
+}
