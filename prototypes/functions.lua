@@ -35,6 +35,17 @@ function reskins.lib.setup_common_attributes(name, tier, inputs)
     -- Create icons
     if inputs.make_icons == true then
         -- Setup standard icon
+
+
+        -- New Icon Workflow, determine if we're using vanilla icons or Reskins icons as a base
+        -- IF RESKINS THEN...
+        -- inputs.icon = 
+        -- {
+        --     {
+        --         icon
+        --     }
+        -- }
+        
         -- THIS NEEDS TO BE REWORKED
         inputs.icon = inputs.directory.."/graphics/icons/structures/"..inputs.mod.."/"..inputs.root_name.."/"..inputs.internal_name..".png"
 
