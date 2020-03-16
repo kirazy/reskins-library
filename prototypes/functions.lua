@@ -313,6 +313,7 @@ reskins.lib.particle_index =
     ["medium-long"] = "long-metal-particle-medium",
     ["medium-stone"] = "stone-particle-medium",
     ["big"] = "metal-particle-big",
-    ["big-stone"] = "stone-particle-big"
+    ["big-stone"] = "stone-particle-big",
+    ["big-tint"] = "metal-particle-big-tint",
 
 }
