@@ -11,7 +11,7 @@ if not reskins.lib then reskins.lib = {} end
 reskins.lib.directory = "__reskins-library__"
 
 -- Most entities have a common process for reskinning, so consolidate the other functions under one superfunction for ease of use
-function reskins.lib.setup_common_attributes(name, tier, inputs)
+function reskins.lib.setup_standard_structure(name, tier, inputs)
     -- Parse inputs
     reskins.lib.parse_inputs(inputs)    
     
@@ -34,6 +34,11 @@ function reskins.lib.setup_common_attributes(name, tier, inputs)
 
     -- Create icons
     if inputs.make_icons == true then
+        reskins.lib.setup_standard_icon(name, tier, inputs)
+    end
+end
+
+function reskins.lib.setup_standard_icon(name, tier, inputs)
         -- Setup standard icon
 
 
@@ -68,8 +73,8 @@ function reskins.lib.setup_common_attributes(name, tier, inputs)
         
         -- Assign icons
         reskins.lib.assign_icons(name, inputs)
-    end
 end
+
 
 -- Parses the main inputs table of parameters
 function reskins.lib.parse_inputs(inputs)
