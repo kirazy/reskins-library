@@ -47,7 +47,7 @@ function reskins.lib.setup_common_attributes(name, tier, inputs)
         -- }
         
         -- THIS NEEDS TO BE REWORKED
-        inputs.icon = inputs.directory.."/graphics/icons/structures/"..inputs.mod.."/"..inputs.root_name.."/"..inputs.internal_name..".png"
+        inputs.icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.root_name.."/"..inputs.internal_name..".png"
 
         -- Setup icon with tier label
         if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 then
@@ -89,7 +89,7 @@ function reskins.lib.parse_inputs(inputs)
 end
 
 function reskins.lib.assign_icons(name, inputs)
-    -- inputs required by this function
+    -- Inputs required by this function
     -- type            - Entity type
     -- icon            - Table or string defining icon
     -- icon_size       - Pixel size of icons
