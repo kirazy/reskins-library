@@ -11,7 +11,7 @@ if not reskins.lib then reskins.lib = {} end
 reskins.lib.directory = "__reskins-library__"
 
 -- Most entities have a common process for reskinning, so consolidate the other functions under one superfunction for ease of use
-function reskins.lib.setup_standard_structure(name, tier, inputs)
+function reskins.lib.setup_standard_entity(name, tier, inputs)
     -- Parse inputs
     reskins.lib.parse_inputs(inputs)    
     
