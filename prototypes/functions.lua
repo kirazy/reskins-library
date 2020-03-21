@@ -191,7 +191,7 @@ end
 -- Create explosion; assign particles after calling this function
 function reskins.lib.create_explosion(name, inputs)
     -- Inputs expected by this function:
-    -- base_entity - Entity to copy remnant prototype from
+    -- base_entity - Entity to copy explosion prototype from
     -- type        - Entity type
 
     -- Copy explosion prototype
