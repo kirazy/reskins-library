@@ -23,7 +23,7 @@ function reskins.lib.setup_standard_entity(name, tier, inputs)
         -- Create and assign needed particles with appropriate tints
         for particle, key in pairs(inputs.particles) do 
             -- Create and assign the particle
-            reskins.lib.create_particle(name, inputs.base_entity, reskins.lib.particle_index[particle], key, reskins.lib.tint_index["tier-"..tier])
+            reskins.lib.create_particle(name, inputs.base_entity, reskins.lib.particle_index[particle], key, inputs.tint) -- reskins.lib.tint_index["tier-"..tier])
         end
     end
   
@@ -322,3 +322,87 @@ reskins.lib.particle_index =
     ["big-tint"] = "metal-particle-big-tint",
 
 }
+
+local fields = {
+    "shift", 
+    "scale", 
+    "collision_box",
+    "selection_box",
+    "north_position", 
+    "south_position", 
+    "east_position", 
+    "west_position",
+    "window_bounding_box",
+    "circuit_wire_connection_points",
+}
+
+local ignored_fields ={
+    "fluid_boxes",
+    "fluid_box",
+    "energy_source",
+    "input_fluid_box",
+}
+
+function reskins.lib.scale(object, scale)
+    -- Walk table and scale values contained within
+    local function scale_subtable(object, scale)
+        for key, value in pairs(object) do
+            if type(value) == "table" then
+                scale_subtable(value, scale)
+            elseif type(value) == "number" then
+                object[key] = value*scale
+            end
+        end
+    end
+
+    -- Check if we're a number
+    if type(object) == "number" then
+        return object*scale
+    -- Object is a table
+    elseif type(object) == "table" then
+        -- Break reference, work on local copy
+        object = table.deepcopy(object)
+        -- Recursively call scale_subtable
+        scale_subtable(object, scale)
+        return object
+    end
+end
+
+function reskins.lib.rescale_entity(entity, scalar)
+	for key, value in pairs(entity) do
+		-- This section checks to see where we are, and for the existence of scale.
+		-- Scale is defined if it is missing where it should be present.
+
+		-- This checks to see if we're within an hr_version table
+		if key == "hr_version" then
+			entity.scale = entity.scale or 0.5
+		-- If we're not, see if there's a filename, which means we're in a low-res table
+		elseif entity.filename then
+			entity.scale = entity.scale or 1
+		end
+
+        -- Check to see if we need to scale this key's value
+        for n = 1, #fields do
+            if fields[n] == key then
+                entity[key] = reskins.lib.scale(value, scalar)
+                -- Move to the next key rather than digging down further
+                goto continue
+            end
+        end
+
+        -- Check to see if we need to ignore this key
+        for n = 1, #ignored_fields do
+            if ignored_fields[n] == key then
+                -- Move to the next key rather than digging down further
+                goto continue
+            end
+        end
+
+        if(type(value) == "table") then
+            reskins.lib.rescale_entity(value, scalar)
+        end
+
+        -- Label to skip to next iteration
+        ::continue::
+    end
+end
