@@ -39,40 +39,72 @@ function reskins.lib.setup_standard_entity(name, tier, inputs)
 end
 
 function reskins.lib.setup_standard_icon(name, tier, inputs)
-        -- Setup standard icon
-
-
-        -- New Icon Workflow, determine if we're using vanilla icons or Reskins icons as a base
-        -- IF RESKINS THEN...
-        -- inputs.icon = 
-        -- {
-        --     {
-        --         icon
-        --     }
-        -- }
-        
-        -- THIS NEEDS TO BE REWORKED
-        inputs.icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.root_name.."/"..inputs.internal_name..".png"
-
-        -- Setup icon with tier label
-        if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 then
-            inputs.icon = 
+    -- Some entities have identical masks and highlights but variable bases, e.g. assembling machines; handle those
+    local icon_base = inputs.icon_base or inputs.icon_name        
+    
+    -- Setup standard icon
+    inputs.icon = {        
+        -- Base
+        {
+            icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..icon_base.."-icon-base.png"
+        },
+        -- Mask
+        {
+            icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..inputs.icon_name.."-icon-mask.png",
+            tint = inputs.tint
+        },
+        -- Highlights
+        {
+            icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..inputs.icon_name.."-icon-highlights.png",
+            blend_mode = "additive"
+        }
+    }
+    
+    -- Setup item picture
+    inputs.icon_picture = {
+        layers = {
+            -- Base
             {
-                {
-                    icon = inputs.icon
-                },
-                {
-                    icon = reskins.lib.directory.."/graphics/icons/tiers/"..inputs.icon_size.."/tier-"..tier..".png",
-                },
-                {
-                    icon = reskins.lib.directory.."/graphics/icons/tiers/"..inputs.icon_size.."/tier-"..tier..".png",
-                    tint = reskins.lib.adjust_alpha(reskins.lib.tint_index["tier-"..tier], 0.75),
-                }
+                filename = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..icon_base.."-icon-base.png",
+                size = inputs.icon_size,
+                mipmaps = inputs.icon_mipmaps,
+                scale = 0.25
+            },
+            -- Mask
+            {
+                filename = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..inputs.icon_name.."-icon-mask.png",
+                size = inputs.icon_size,
+                mipmaps = inputs.icon_mipmaps,
+                scale = 0.25,
+                tint = inputs.tint
+            },
+            -- Highlights
+            {
+                filename = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..inputs.icon_name.."-icon-highlights.png",
+                size = inputs.icon_size,
+                mipmaps = inputs.icon_mipmaps,
+                scale = 0.25,
+                blend_mode = "additive"
             }
-        end
-        
-        -- Assign icons
-        reskins.lib.assign_icons(name, inputs)
+        }
+    }
+
+    -- Setup icon with tier label
+    if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 then
+        local tier_label = {
+            icon = reskins.lib.directory.."/graphics/icons/tiers/"..inputs.icon_size.."/tier-"..tier..".png"
+        }
+
+        local tier_label_tinted = {
+            icon = reskins.lib.directory.."/graphics/icons/tiers/"..inputs.icon_size.."/tier-"..tier..".png",
+            tint = reskins.lib.adjust_alpha(reskins.lib.tint_index["tier-"..tier], 0.75)
+        }
+        table.insert(inputs.icon, tier_labe)
+        table.insert(inputs.icon, tier_label_tinted)
+    end
+    
+    -- Assign icons
+    reskins.lib.assign_icons(name, inputs)
 end
 
 
@@ -117,6 +149,9 @@ function reskins.lib.assign_icons(name, inputs)
         if item then
             item.icon = nil
             item.icons = inputs.icon
+            -- if inputs.icon_picture then
+            --     item.pictures = inputs.icon_picture
+            -- end
         end
 
         if explosion then 
@@ -138,6 +173,9 @@ function reskins.lib.assign_icons(name, inputs)
         if item then
             item.icons = nil        
             item.icon = inputs.icon
+            -- if inputs.icon_picture then
+            --     item.pictures = inputs.icon_picture
+            -- end
         end
 
         if explosion then
