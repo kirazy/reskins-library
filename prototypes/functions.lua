@@ -58,7 +58,7 @@ function reskins.lib.setup_standard_icon(name, tier, inputs)
         -- Highlights
         {
             icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..highlights.."-icon-highlights.png",
-            blend_mode = "additive"
+            tint = {1,1,1,0}
         }
     }
     
