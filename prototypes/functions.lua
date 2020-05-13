@@ -40,22 +40,24 @@ end
 
 function reskins.lib.setup_standard_icon(name, tier, inputs)
     -- Some entities have identical masks and highlights but variable bases, e.g. assembling machines; handle those
-    local icon_base = inputs.icon_base or inputs.icon_name        
+    local base = inputs.icon_base or inputs.icon_name
+    local mask = inputs.icon_mask or inputs.icon_name
+    local highlights = inputs.icon_highlights or inputs.icon_name
     
     -- Setup standard icon
     inputs.icon = {        
         -- Base
         {
-            icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..icon_base.."-icon-base.png"
+            icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..base.."-icon-base.png"
         },
         -- Mask
         {
-            icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..inputs.icon_name.."-icon-mask.png",
+            icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
             tint = inputs.tint
         },
         -- Highlights
         {
-            icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..inputs.icon_name.."-icon-highlights.png",
+            icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..highlights.."-icon-highlights.png",
             blend_mode = "additive"
         }
     }
@@ -65,14 +67,14 @@ function reskins.lib.setup_standard_icon(name, tier, inputs)
         layers = {
             -- Base
             {
-                filename = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..icon_base.."-icon-base.png",
+                filename = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..base.."-icon-base.png",
                 size = inputs.icon_size,
                 mipmaps = inputs.icon_mipmaps,
                 scale = 0.25
             },
             -- Mask
             {
-                filename = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..inputs.icon_name.."-icon-mask.png",
+                filename = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
                 size = inputs.icon_size,
                 mipmaps = inputs.icon_mipmaps,
                 scale = 0.25,
@@ -80,7 +82,7 @@ function reskins.lib.setup_standard_icon(name, tier, inputs)
             },
             -- Highlights
             {
-                filename = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..inputs.icon_name.."-icon-highlights.png",
+                filename = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..highlights.."-icon-highlights.png",
                 size = inputs.icon_size,
                 mipmaps = inputs.icon_mipmaps,
                 scale = 0.25,
@@ -149,9 +151,9 @@ function reskins.lib.assign_icons(name, inputs)
         if item then
             item.icon = nil
             item.icons = inputs.icon
-            -- if inputs.icon_picture then
-            --     item.pictures = inputs.icon_picture
-            -- end
+            if inputs.icon_picture then
+                item.pictures = inputs.icon_picture
+            end
         end
 
         if explosion then 
@@ -173,9 +175,9 @@ function reskins.lib.assign_icons(name, inputs)
         if item then
             item.icons = nil        
             item.icon = inputs.icon
-            -- if inputs.icon_picture then
-            --     item.pictures = inputs.icon_picture
-            -- end
+            if inputs.icon_picture then
+                item.pictures = inputs.icon_picture
+            end
         end
 
         if explosion then
