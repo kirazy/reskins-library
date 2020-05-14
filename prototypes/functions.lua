@@ -104,14 +104,8 @@ function reskins.lib.setup_standard_icon(name, tier, inputs)
         end
     end
 
-    -- Setup icon with tier label
-    if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 then
-        table.insert(inputs.icon, {icon = reskins.lib.directory.."/graphics/icons/tiers/"..inputs.icon_size.."/tier-"..tier..".png"})
-        table.insert(inputs.icon, {
-            icon = reskins.lib.directory.."/graphics/icons/tiers/"..inputs.icon_size.."/tier-"..tier..".png",
-            tint = reskins.lib.adjust_alpha(reskins.lib.tint_index["tier-"..tier], 0.75)
-        })
-    end
+    -- Append tier labels
+    reskins.lib.append_tier_labels(tier, inputs)
     
     -- Assign icons
     reskins.lib.assign_icons(name, inputs)
@@ -134,6 +128,47 @@ function reskins.lib.parse_inputs(inputs)
 
     return inputs
 end
+
+function reskins.lib.generate_basic_icon(name, icon_tier, type, filename, icon_size, icon_mipmaps)
+    -- Parse parameters
+    local size = icon_size or 64
+    local mipmaps = icon_mipmaps or 4
+
+    -- Setup inputs
+    local inputs = {
+        type = type,
+        icon = filename,
+        icon_size = size,
+        icon_mipmaps = mipmaps,
+    }
+
+    if icon_tier ~= false then
+        local tier
+        if settings.startup["reskins-lib-tier-mapping"].value == "name-map" then 
+            tier = icon_tier[1]
+        else 
+            tier = icon_tier[2]
+            inputs.icon_picture = {filename = filename, size = size, mipmaps = mipmaps, scale = 0.25}
+            inputs.icon = {{ icon = inputs.icon }}
+        end
+
+        reskins.lib.append_tier_labels(tier, inputs)
+    end
+
+    reskins.lib.assign_icons(name, inputs)
+end
+
+function reskins.lib.append_tier_labels(tier, inputs)
+    -- Setup icon with tier label
+    if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 then
+        table.insert(inputs.icon, {icon = reskins.lib.directory.."/graphics/icons/tiers/"..inputs.icon_size.."/tier-"..tier..".png"})
+        table.insert(inputs.icon, {
+            icon = reskins.lib.directory.."/graphics/icons/tiers/"..inputs.icon_size.."/tier-"..tier..".png",
+            tint = reskins.lib.adjust_alpha(reskins.lib.tint_index["tier-"..tier], 0.75)
+        })
+    end
+end
+
 
 function reskins.lib.assign_icons(name, inputs)
     -- Inputs required by this function
