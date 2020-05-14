@@ -91,18 +91,26 @@ function reskins.lib.setup_standard_icon(name, tier, inputs)
         }
     }
 
+    -- Extra layers
+    if inputs.icon_extras then
+        for n = 1, #inputs.icon_extras do
+            table.insert(inputs.icon, inputs.icon_extras[n])
+        end
+    end
+
+    if inputs.icon_picture_extras then
+        for n = 1, #inputs.icon_picture_extras do
+            table.insert(inputs.icon_picture.layers, inputs.icon_picture_extras[n])
+        end
+    end
+
     -- Setup icon with tier label
     if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 then
-        local tier_label = {
-            icon = reskins.lib.directory.."/graphics/icons/tiers/"..inputs.icon_size.."/tier-"..tier..".png"
-        }
-
-        local tier_label_tinted = {
+        table.insert(inputs.icon, {icon = reskins.lib.directory.."/graphics/icons/tiers/"..inputs.icon_size.."/tier-"..tier..".png"})
+        table.insert(inputs.icon, {
             icon = reskins.lib.directory.."/graphics/icons/tiers/"..inputs.icon_size.."/tier-"..tier..".png",
             tint = reskins.lib.adjust_alpha(reskins.lib.tint_index["tier-"..tier], 0.75)
-        }
-        table.insert(inputs.icon, tier_labe)
-        table.insert(inputs.icon, tier_label_tinted)
+        })
     end
     
     -- Assign icons
@@ -257,15 +265,40 @@ function reskins.lib.create_particle(name, base_entity, base_particle, key, tint
 end
 
 function reskins.lib.adjust_alpha(tint, alpha)
-    adjusted_tint = {tint[1], tint[2], tint[3], alpha*255}
+    adjusted_tint = {r = tint.r, g = tint.g, b = tint.b, a = alpha}
     return adjusted_tint
 end
 
-function reskins.lib.tint_hex_to_rgb(hex)
-    hex = hex:gsub("#","")
-    tint = {tonumber("0x"..hex:sub(1,2)), tonumber("0x"..hex:sub(3,4)), tonumber("0x"..hex:sub(5,6))}
-    return tint
+function reskins.lib.adjust_tint(tint, shift, alpha)
+    local adjusted_tint = {}
+    -- alpha = alpha or 1
+
+    -- Adjust the tint
+    adjusted_tint.r = tint.r + shift
+    adjusted_tint.g = tint.g + shift
+    adjusted_tint.b = tint.b + shift
+    adjusted_tint.a = alpha or tint.a
+
+    -- Check boundary conditions
+    if adjusted_tint.r > 1 then
+        adjusted_tint.r = 1
+    end
+    if adjusted_tint.g > 1 then
+        adjusted_tint.g = 1
+    end
+    if adjusted_tint.b > 1 then
+        adjusted_tint.b = 1
+    end
+
+    return adjusted_tint
 end
+
+
+-- function reskins.lib.tint_hex_to_rgb(hex)
+--     hex = hex:gsub("#","")
+--     tint = {tonumber("0x"..hex:sub(1,2)), tonumber("0x"..hex:sub(3,4)), tonumber("0x"..hex:sub(5,6))}
+--     return tint
+-- end
 
 function reskins.lib.make_4way_animation_from_spritesheet(animation)
     local function make_animation_layer(idx, anim)
@@ -330,22 +363,22 @@ function reskins.lib.make_4way_animation_from_spritesheet(animation)
 if settings.startup["reskins-lib-customize-tier-colors"].value == true then
     reskins.lib.tint_index =
     {
-        ["tier-0"] = reskins.lib.tint_hex_to_rgb(settings.startup["reskins-lib-custom-colors-tier-0"].value),
-        ["tier-1"] = reskins.lib.tint_hex_to_rgb(settings.startup["reskins-lib-custom-colors-tier-1"].value),
-        ["tier-2"] = reskins.lib.tint_hex_to_rgb(settings.startup["reskins-lib-custom-colors-tier-2"].value),
-        ["tier-3"] = reskins.lib.tint_hex_to_rgb(settings.startup["reskins-lib-custom-colors-tier-3"].value),
-        ["tier-4"] = reskins.lib.tint_hex_to_rgb(settings.startup["reskins-lib-custom-colors-tier-4"].value),
-        ["tier-5"] = reskins.lib.tint_hex_to_rgb(settings.startup["reskins-lib-custom-colors-tier-5"].value),
+        ["tier-0"] = util.color(settings.startup["reskins-lib-custom-colors-tier-0"].value),
+        ["tier-1"] = util.color(settings.startup["reskins-lib-custom-colors-tier-1"].value),
+        ["tier-2"] = util.color(settings.startup["reskins-lib-custom-colors-tier-2"].value),
+        ["tier-3"] = util.color(settings.startup["reskins-lib-custom-colors-tier-3"].value),
+        ["tier-4"] = util.color(settings.startup["reskins-lib-custom-colors-tier-4"].value),
+        ["tier-5"] = util.color(settings.startup["reskins-lib-custom-colors-tier-5"].value),
     }
 else
     reskins.lib.tint_index =
     {
-        ["tier-0"] = reskins.lib.tint_hex_to_rgb("4d4d4d"),
-        ["tier-1"] = reskins.lib.tint_hex_to_rgb("de9400"),
-        ["tier-2"] = reskins.lib.tint_hex_to_rgb("c20600"),
-        ["tier-3"] = reskins.lib.tint_hex_to_rgb("1b87c2"),
-        ["tier-4"] = reskins.lib.tint_hex_to_rgb("a600bf"),
-        ["tier-5"] = reskins.lib.tint_hex_to_rgb("23de55"),
+        ["tier-0"] = util.color("4d4d4d"),
+        ["tier-1"] = util.color("de9400"),
+        ["tier-2"] = util.color("c20600"),
+        ["tier-3"] = util.color("1b87c2"),
+        ["tier-4"] = util.color("a600bf"),
+        ["tier-5"] = util.color("23de55"),
     }
 end
 

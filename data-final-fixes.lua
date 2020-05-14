@@ -1,2 +1,4 @@
--- Mini Machine Testing
--- require("prototypes.scaling")
+-- Copyright (c) 2020 Kirazy
+-- Part of Reskins: Functions's Library
+--     
+-- See LICENSE.md in the project directory for license information.
