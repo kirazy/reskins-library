@@ -251,6 +251,48 @@ function reskins.lib.append_tier_labels(tier, inputs)
     end
 end
 
+function reskins.lib.assign_order(name, inputs)
+    -- Inputs required by this function
+    -- type
+    -- sort_order
+    -- sort_group
+    -- sort_subgroup
+
+    -- Initialize paths
+    local entity
+    if inputs.type then
+        entity = data.raw[inputs.type][name]
+    end
+    local item = data.raw["item"][name]
+    local explosion = data.raw["explosion"][name.."-explosion"]
+    local remnant = data.raw["corpse"][name.."-remnants"]
+
+    if entity then
+        entity.order = inputs.sort_order
+        entity.group = inputs.sort_group
+        entity.subgroup = inputs.sort_subgroup
+    end
+
+    if item then
+        item.order = inputs.sort_order
+        item.group = inputs.sort_group
+        item.subgroup = inputs.sort_subgroup
+    end
+
+    if explosion then
+        explosion.order = inputs.sort_order
+        explosion.group = inputs.sort_group
+        explosion.subgroup = inputs.sort_subgroup
+    end
+
+    if remnant then
+        remnant.order = inputs.sort_order
+        remnant.group = inputs.sort_group
+        remnant.subgroup = inputs.sort_subgroup
+    end
+end
+
+
 function reskins.lib.assign_icons(name, inputs)
     -- Inputs required by this function
     -- type            - Entity type
