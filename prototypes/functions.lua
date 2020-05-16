@@ -17,14 +17,7 @@ function reskins.lib.setup_standard_entity(name, tier, inputs)
     
     -- Create particles and explosions   
     if inputs.make_explosions == true then   
-        -- Create explosions. Big ones. The biggest explosions. Make Michael Bay proud!
-        reskins.lib.create_explosion(name, inputs)
-        
-        -- Create and assign needed particles with appropriate tints
-        for particle, key in pairs(inputs.particles) do 
-            -- Create and assign the particle
-            reskins.lib.create_particle(name, inputs.base_entity, reskins.lib.particle_index[particle], key, inputs.tint) -- reskins.lib.tint_index["tier-"..tier])
-        end
+        reskins.lib.create_explosions_and_particles(name, inputs)
     end
   
     -- Create remnants
@@ -34,12 +27,32 @@ function reskins.lib.setup_standard_entity(name, tier, inputs)
 
     -- Create icons
     if inputs.make_icons == true then
-        reskins.lib.setup_standard_icon(name, tier, inputs)
+        if inputs.make_belt_icon == true then
+            reskins.lib.setup_belt_entity_icon(name, tier, inputs)
+        else
+            reskins.lib.setup_standard_icon(name, tier, inputs)
+        end
     end
 end
 
 function reskins.lib.setup_standard_icon(name, tier, inputs)
-    -- Some entities have identical masks and highlights but variable bases, e.g. assembling machines; handle those
+    -- Inputs required by this function
+    -- group            - Mod/category folder within the graphics/icons folder
+    -- subgroup         - Folder nested within group
+    -- icon_name        - Folder containing the icon files, and the assumed icon file prefix
+
+    -- Optional inputs, used when each entity being fed to this function has unique base or mask images
+    -- icon_base        - Prefix for the icon-base.png file
+    -- icon_mask        - Prefix for the icon-mask.png file
+    -- icon_highlights  - Prefix for the icon-highlights.png file
+
+    -- Handle compatibility
+    local folder_path = inputs.group
+    if inputs.subgroup then
+        folder_path = inputs.group.."/"..inputs.subgroup
+    end
+
+    -- Some entities have variable bases and masks
     local base = inputs.icon_base or inputs.icon_name
     local mask = inputs.icon_mask or inputs.icon_name
     local highlights = inputs.icon_highlights or inputs.icon_name
@@ -48,16 +61,16 @@ function reskins.lib.setup_standard_icon(name, tier, inputs)
     inputs.icon = {        
         -- Base
         {
-            icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..base.."-icon-base.png"
+            icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..base.."-icon-base.png"
         },
         -- Mask
         {
-            icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
+            icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
             tint = inputs.tint
         },
         -- Highlights
         {
-            icon = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..highlights.."-icon-highlights.png",
+            icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..highlights.."-icon-highlights.png",
             tint = {1,1,1,0}
         }
     }
@@ -67,14 +80,14 @@ function reskins.lib.setup_standard_icon(name, tier, inputs)
         layers = {
             -- Base
             {
-                filename = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..base.."-icon-base.png",
+                filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..base.."-icon-base.png",
                 size = inputs.icon_size,
                 mipmaps = inputs.icon_mipmaps,
                 scale = 0.25
             },
             -- Mask
             {
-                filename = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
+                filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
                 size = inputs.icon_size,
                 mipmaps = inputs.icon_mipmaps,
                 scale = 0.25,
@@ -82,7 +95,7 @@ function reskins.lib.setup_standard_icon(name, tier, inputs)
             },
             -- Highlights
             {
-                filename = inputs.directory.."/graphics/icons/"..inputs.mod.."/"..inputs.icon_name.."/"..highlights.."-icon-highlights.png",
+                filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..highlights.."-icon-highlights.png",
                 size = inputs.icon_size,
                 mipmaps = inputs.icon_mipmaps,
                 scale = 0.25,
@@ -111,6 +124,70 @@ function reskins.lib.setup_standard_icon(name, tier, inputs)
     reskins.lib.assign_icons(name, inputs)
 end
 
+-- Tint icons that use base, mask images, typically these are belt-related entities
+function reskins.lib.setup_belt_entity_icon(name, tier, inputs)
+    -- Inputs required by this function
+    -- group            - Folder
+    -- subgroup         - Folder contained within group
+    -- icon_name        - Folder containing the icon files, and the assumed icon file prefix
+
+    -- Optional inputs, used when each entity being fed to this function has unique base or mask images
+    -- icon_base        - Prefix for the icon-base.png file
+    -- icon_mask        - Prefix for the icon-mask.png file
+
+    -- Handle compatibility
+    local folder_path = inputs.group
+    if inputs.subgroup then
+        folder_path = inputs.group.."/"..inputs.subgroup
+    end
+
+    -- Some entities have variable bases and masks
+    local base = inputs.icon_base or inputs.icon_name
+    local mask = inputs.icon_mask or inputs.icon_name
+
+
+    -- Setup standard icon
+    inputs.icon = {        
+        -- Base
+        {
+            icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..base.."-icon-base.png"
+        },
+        -- Mask
+        {
+            icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
+            tint = inputs.tint
+        }
+    }
+    
+    -- Setup item picture
+    inputs.icon_picture = {
+        layers = {
+            -- Base
+            {
+                filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..base.."-icon-base.png",
+                size = inputs.icon_size,
+                mipmaps = inputs.icon_mipmaps,
+                scale = 0.25
+            },
+            -- Mask
+            {
+                filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
+                size = inputs.icon_size,
+                mipmaps = inputs.icon_mipmaps,
+                scale = 0.25,
+                tint = inputs.tint
+            }
+        }
+    }
+
+    -- Append tier labels
+    if settings.startup["reskins-bobs-do-belt-entity-tier-labeling"].value == true then
+        reskins.lib.append_tier_labels(tier, inputs)
+    end
+    
+    -- Assign icons
+    reskins.lib.assign_icons(name, inputs)
+end
 
 -- Parses the main inputs table of parameters
 function reskins.lib.parse_inputs(inputs)
@@ -158,7 +235,12 @@ function reskins.lib.generate_basic_icon(name, icon_tier, type, filename, icon_s
     reskins.lib.assign_icons(name, inputs)
 end
 
+-- Insert tier label icon entries to a given icon definition
 function reskins.lib.append_tier_labels(tier, inputs)
+    -- Inputs required by this function
+    -- icon             - Table containing an icon/icons definition
+    -- icon_size        - Size of icon, e.g. 64
+
     -- Setup icon with tier label
     if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 then
         table.insert(inputs.icon, {icon = reskins.lib.directory.."/graphics/icons/tiers/"..inputs.icon_size.."/tier-"..tier..".png"})
@@ -169,7 +251,6 @@ function reskins.lib.append_tier_labels(tier, inputs)
     end
 end
 
-
 function reskins.lib.assign_icons(name, inputs)
     -- Inputs required by this function
     -- type            - Entity type
@@ -178,7 +259,10 @@ function reskins.lib.assign_icons(name, inputs)
     -- icon_mipmaps    - Number of mipmaps present in the icon image file
 
     -- Initialize paths
-    local entity = data.raw[inputs.type][name]
+    local entity
+    if inputs.type then
+        entity = data.raw[inputs.type][name]
+    end
     local item = data.raw["item"][name]
     local explosion = data.raw["explosion"][name.."-explosion"]
     local remnant = data.raw["corpse"][name.."-remnants"]
@@ -256,9 +340,9 @@ function reskins.lib.assign_icons(name, inputs)
     end
 end
 
--- Create remnant entity; assign filenames after calling this function
+-- Create remnant entity; reskin the remnant after calling this function
 function reskins.lib.create_remnant(name, inputs)
-    -- Inputs expected by this function:
+    -- Inputs required by this function:
     -- base_entity - Entity to copy remnant prototype from
     -- type        - Entity type
 
@@ -271,13 +355,12 @@ function reskins.lib.create_remnant(name, inputs)
     data.raw[inputs.type][name]["corpse"] = remnant.name
 end
 
--- Create explosion; assign particles after calling this function
+-- Create explosion entity; create particles after calling this function
 function reskins.lib.create_explosion(name, inputs)
-    -- Inputs expected by this function:
+    -- Inputs required by this function:
     -- base_entity - Entity to copy explosion prototype from
     -- type        - Entity type
 
-    -- Copy explosion prototype
     local explosion = table.deepcopy(data.raw["explosion"][inputs.base_entity.."-explosion"])
     explosion.name = name.."-explosion"
     data:extend({explosion})
@@ -299,11 +382,30 @@ function reskins.lib.create_particle(name, base_entity, base_particle, key, tint
     data.raw["explosion"][name.."-explosion"]["created_effect"]["action_delivery"]["target_effects"][key].particle_name = particle.name
 end
 
+-- Batch the explosion and particle function together for ease of use
+function reskins.lib.create_explosions_and_particles(name, inputs)
+    -- Inputs required by this function:
+    -- base_entity - Entity to copy explosion prototype from
+    -- type        - Entity type
+    -- tint        - Particle color
+
+    -- Create explosions and related particles
+    reskins.lib.create_explosion(name, inputs)
+        
+    -- Create and assign needed particles with appropriate tints
+    for particle, key in pairs(inputs.particles) do 
+        -- Create and assign the particle
+        reskins.lib.create_particle(name, inputs.base_entity, reskins.lib.particle_index[particle], key, inputs.tint)
+    end
+end
+
+-- Adjust the alpha value of a given tint
 function reskins.lib.adjust_alpha(tint, alpha)
     adjusted_tint = {r = tint.r, g = tint.g, b = tint.b, a = alpha}
     return adjusted_tint
 end
 
+-- Shift the rgb values of a given tint by shift amount, and optionally adjust the alpha value
 function reskins.lib.adjust_tint(tint, shift, alpha)
     local adjusted_tint = {}
     -- alpha = alpha or 1
@@ -328,72 +430,18 @@ function reskins.lib.adjust_tint(tint, shift, alpha)
     return adjusted_tint
 end
 
+-- This function prepares a given tint for entities that use a base and mask layer instead of a base, mask, and highlights layer
+-- Primarily this means belt-related entities
+function reskins.lib.belt_mask_tint(tint)
+    -- Define correction constants
+    local color_shift = 40/255
+    local alpha = 0.82
 
--- function reskins.lib.tint_hex_to_rgb(hex)
---     hex = hex:gsub("#","")
---     tint = {tonumber("0x"..hex:sub(1,2)), tonumber("0x"..hex:sub(3,4)), tonumber("0x"..hex:sub(5,6))}
---     return tint
--- end
+    -- Color correct the tint
+    belt_mask_tint = reskins.lib.adjust_tint(tint, color_shift, alpha)
 
-function reskins.lib.make_4way_animation_from_spritesheet(animation)
-    local function make_animation_layer(idx, anim)
-      local start_frame = (anim.frame_count or 1) * idx
-      local x = 0
-      local y = 0
-      if anim.line_length then
-        y = anim.height * math.floor(start_frame / (anim.line_length or 1))
-      else
-        x = idx * anim.width
-      end
-      return
-      {
-        filename = anim.filename,
-        priority = anim.priority or "high",
-        x = x,
-        y = y,
-        width = anim.width,
-        height = anim.height,
-        frame_count = anim.frame_count or 1,
-        line_length = anim.line_length,
-        repeat_count = anim.repeat_count,
-        shift = anim.shift,
-        draw_as_shadow = anim.draw_as_shadow,
-        force_hr_shadow = anim.force_hr_shadow,
-        apply_runtime_tint = anim.apply_runtime_tint,
-        scale = anim.scale or 1,
-        tint = anim.tint,
-        blend_mode = anim.blend_mode
-      }
-    end
-  
-    local function make_animation_layer_with_hr_version(idx, anim)
-      local anim_parameters = make_animation_layer(idx, anim)
-      if anim.hr_version and anim.hr_version.filename then
-        anim_parameters.hr_version = make_animation_layer(idx, anim.hr_version)
-      end
-      return anim_parameters
-    end
-  
-    local function make_animation(idx)
-      if animation.layers then
-        local tab = { layers = {} }
-        for k,v in ipairs(animation.layers) do
-          table.insert(tab.layers, make_animation_layer_with_hr_version(idx, v))
-        end
-        return tab
-      else
-        return make_animation_layer_with_hr_version(idx, animation)
-      end
-    end
-  
-    return
-    {
-      north = make_animation(0),
-      east = make_animation(1),
-      south = make_animation(2),
-      west = make_animation(3)
-    }
-  end
+    return belt_mask_tint
+end
 
 if settings.startup["reskins-lib-customize-tier-colors"].value == true then
     reskins.lib.tint_index =
