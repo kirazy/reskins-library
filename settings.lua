@@ -27,8 +27,16 @@ data:extend(
         name = "reskins-lib-tier-mapping",
         setting_type = "startup",
         order = "ab",
-        default_value = "name-map",
+        default_value = "ingredients-map",
         allowed_values = {"ingredients-map","name-map"}
+    },
+    {
+        type = "string-setting",
+        name = "reskins-lib-icon-tier-labeling-style",
+        setting_type = "startup",
+        order = "aa",
+        default_value = "rounded-rectangle",
+        allowed_values = {"dots","half-circle","rectangle","rounded-half-circle","rounded-rectangle","teardrop"}
     }
 })
 
