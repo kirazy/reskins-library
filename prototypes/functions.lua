@@ -450,7 +450,6 @@ end
 -- Shift the rgb values of a given tint by shift amount, and optionally adjust the alpha value
 function reskins.lib.adjust_tint(tint, shift, alpha)
     local adjusted_tint = {}
-    -- alpha = alpha or 1
 
     -- Adjust the tint
     adjusted_tint.r = tint.r + shift
@@ -461,12 +460,20 @@ function reskins.lib.adjust_tint(tint, shift, alpha)
     -- Check boundary conditions
     if adjusted_tint.r > 1 then
         adjusted_tint.r = 1
+    elseif adjusted_tint.r < 0 then
+        adjusted_tint.r = 0
     end
+
     if adjusted_tint.g > 1 then
         adjusted_tint.g = 1
+    elseif adjusted_tint.g < 0 then
+        adjusted_tint.g = 0
     end
+
     if adjusted_tint.b > 1 then
         adjusted_tint.b = 1
+    elseif adjusted_tint.b < 0 then
+        adjusted_tint.b = 0
     end
 
     return adjusted_tint
