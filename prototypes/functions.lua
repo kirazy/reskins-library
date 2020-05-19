@@ -234,6 +234,8 @@ function reskins.lib.generate_basic_icon(name, icon_tier, type, filename, icon_s
             inputs.icon = {{ icon = inputs.icon }}
         end
 
+        inputs.tier_labels = true
+
         reskins.lib.append_tier_labels(tier, inputs)
     end
 
