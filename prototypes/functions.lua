@@ -182,8 +182,12 @@ function reskins.lib.setup_belt_entity_icon(name, tier, inputs)
 
     -- Append tier labels
     if settings.startup["reskins-bobs-do-belt-entity-tier-labeling"].value == true then
-        reskins.lib.append_tier_labels(tier, inputs)
+        inputs.tier_labels = true
+    else
+        inputs.tier_labels = false
     end
+
+    reskins.lib.append_tier_labels(tier, inputs)
     
     -- Assign icons
     reskins.lib.assign_icons(name, inputs)
@@ -202,6 +206,7 @@ function reskins.lib.parse_inputs(inputs)
     inputs.make_explosions = (inputs.make_explosions ~= false)  -- Create explosions; default true
     inputs.make_remnants   = (inputs.make_remnants   ~= false)  -- Create remnant; default true
     inputs.make_icons      = (inputs.make_icons      ~= false)  -- Create icons; default true
+    inputs.tier_labels     = (inputs.tier_labels     ~= false)  -- Append tier labels; default true
 
     return inputs
 end
@@ -241,7 +246,7 @@ function reskins.lib.append_tier_labels(tier, inputs)
     -- icon             - Table containing an icon/icons definition
 
     -- Setup icon with tier label
-    if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 then
+    if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 and inputs.tier_labels == true then
         icon_style = settings.startup["reskins-lib-icon-tier-labeling-style"].value
         table.insert(inputs.icon, {icon = reskins.lib.directory.."/graphics/icons/tiers/"..icon_style.."/"..tier..".png"})
         table.insert(inputs.icon, {
