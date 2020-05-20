@@ -322,6 +322,9 @@ function reskins.lib.assign_icons(name, inputs)
         if entity then
             entity.icon = nil        
             entity.icons = inputs.icon
+            if inputs.make_entity_pictures then
+                entity.pictures = inputs.icon_picture
+            end
         end
 
         if item then
