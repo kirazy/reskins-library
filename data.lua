@@ -7,4 +7,4 @@
 require("prototypes.functions")
 
 -- Testing Utilities
--- require("prototypes.target-drone")
+require("prototypes.target-drone")
