@@ -258,6 +258,35 @@ function reskins.lib.append_tier_labels(tier, inputs)
     end
 end
 
+function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
+    -- Inputs required by this function
+    -- type            - Entity type
+
+    -- Prevent cross-contamination
+    local inputs = table.deepcopy(inputs)
+
+    -- Fetch the icon; vanilla icons are strictly an icon definition
+    inputs.icon = {
+        {
+            icon = data.raw["item"][name].icon
+        }
+    }
+
+    reskins.lib.append_tier_labels(tier, inputs)
+
+    inputs.icon_picture = {
+        {
+            filename = data.raw["item"][name].icon,
+            size = 64,
+            scale = 0.25,
+            mipmaps = 4
+        }
+    }
+
+    reskins.lib.assign_icons(name, inputs)
+end
+
+
 function reskins.lib.assign_order(name, inputs)
     -- Inputs required by this function
     -- type
