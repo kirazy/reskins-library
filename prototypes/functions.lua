@@ -27,8 +27,8 @@ function reskins.lib.setup_standard_entity(name, tier, inputs)
 
     -- Create icons
     if inputs.make_icons == true then
-        if inputs.make_belt_icon == true then
-            reskins.lib.setup_belt_entity_icon(name, tier, inputs)
+        if inputs.make_masked_icon == true then
+            reskins.lib.setup_masked_icon(name, tier, inputs)
         else
             reskins.lib.setup_standard_icon(name, tier, inputs)
         end
@@ -124,8 +124,8 @@ function reskins.lib.setup_standard_icon(name, tier, inputs)
     reskins.lib.assign_icons(name, inputs)
 end
 
--- Tint icons that use base, mask images, typically these are belt-related entities
-function reskins.lib.setup_belt_entity_icon(name, tier, inputs)
+-- Tint icons that use a base and a mask
+function reskins.lib.setup_masked_icon(name, tier, inputs)
     -- Inputs required by this function
     -- group            - Folder
     -- subgroup         - Folder contained within group
@@ -182,9 +182,9 @@ function reskins.lib.setup_belt_entity_icon(name, tier, inputs)
 
     -- Append tier labels
     if settings.startup["reskins-bobs-do-belt-entity-tier-labeling"].value == true then
-        inputs.tier_labels = true
+        inputs.tier_labels = (inputs.tier_labels ~= false)
     else
-        inputs.tier_labels = false
+        inputs.tier_labels = inputs.tier_labels or false
     end
 
     reskins.lib.append_tier_labels(tier, inputs)
