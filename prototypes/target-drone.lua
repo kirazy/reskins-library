@@ -8,20 +8,7 @@ target_drone_item = table.deepcopy(data.raw["item"]["logistic-robot"])
 target_drone_item.name = "reskins-target-drone"
 target_drone_item.place_result = "reskins-target-drone"
 target_drone_item.flags = {"hidden"}
-target_drone_item.icons = {
-  {
-    icon = reskins.lib.directory.."/graphics/icons/empty.png",
-    icon_size = 64,
-    icon_mipmaps = 4,
-    scale = 1
-  },
-  {
-    icon = reskins.lib.directory.."/graphics/target-drone/target-drone-icon.png",
-    icon_size = 64,
-    icon_mipmaps = 4,
-    scale = 0.5,
-  }
-}
+target_drone_item.icon = reskins.lib.directory.."/graphics/target-drone/target-drone-icon.png"
 target_drone_item.icon_size = 64
 target_drone_item.icon_mipmaps =  4
 data:extend({target_drone_item})

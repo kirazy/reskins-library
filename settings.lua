@@ -13,15 +13,15 @@ data:extend(
         order = "a",
         default_value = true,
     },
-    {
-        type = "int-setting",
-        name = "reskins-lib-target-drone-health",
-        setting_type = "startup",
-        order = "zzzzzz",
-        default_value = 50000000,
-        maximum_value = 2147483648,
-        minimum_value = 1000
-    },
+    -- {
+    --     type = "int-setting",
+    --     name = "reskins-lib-target-drone-health",
+    --     setting_type = "startup",
+    --     order = "zzzzzz",
+    --     default_value = 50000000,
+    --     maximum_value = 2147483648,
+    --     minimum_value = 1000
+    -- },
     {
         type = "string-setting",
         name = "reskins-lib-tier-mapping",
