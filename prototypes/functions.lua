@@ -265,6 +265,9 @@ function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
     -- Prevent cross-contamination
     local inputs = table.deepcopy(inputs)
 
+    -- Handle required parameters
+    reskins.lib.parse_inputs(inputs)
+
     -- Fetch the icon; vanilla icons are strictly an icon definition
     inputs.icon = {
         {
