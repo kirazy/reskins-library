@@ -193,6 +193,31 @@ function reskins.lib.setup_masked_icon(name, tier, inputs)
     reskins.lib.assign_icons(name, inputs)
 end
 
+function reskins.lib.setup_flat_icon(name, icon_tier, filename, inputs)
+    -- Parse parameters
+    local size = inputs.icon_size or 64
+    local mipmaps = inputs.icon_mipmaps or 4
+
+    -- Setup icon
+    inputs.icon = filename
+    inputs.tier_labels = (inputs.tier_labels ~= false)
+
+    if icon_tier ~= false then
+        local tier
+        if settings.startup["reskins-lib-tier-mapping"].value == "name-map" then 
+            tier = icon_tier[1]
+        else 
+            tier = icon_tier[2]
+            inputs.icon_picture = {filename = filename, size = size, mipmaps = mipmaps, scale = 0.25}
+            inputs.icon = {{ icon = inputs.icon }}
+        end
+
+        reskins.lib.append_tier_labels(tier, inputs)
+    end
+
+    reskins.lib.assign_icons(name, inputs)
+end
+
 -- Parses the main inputs table of parameters
 function reskins.lib.parse_inputs(inputs)
     -- Check that we have a particles table
@@ -209,37 +234,6 @@ function reskins.lib.parse_inputs(inputs)
     inputs.tier_labels     = (inputs.tier_labels     ~= false)  -- Append tier labels; default true
 
     return inputs
-end
-
-function reskins.lib.generate_basic_icon(name, icon_tier, type, filename, icon_size, icon_mipmaps)
-    -- Parse parameters
-    local size = icon_size or 64
-    local mipmaps = icon_mipmaps or 4
-
-    -- Setup inputs
-    local inputs = {
-        type = type,
-        icon = filename,
-        icon_size = size,
-        icon_mipmaps = mipmaps,
-    }
-
-    if icon_tier ~= false then
-        local tier
-        if settings.startup["reskins-lib-tier-mapping"].value == "name-map" then 
-            tier = icon_tier[1]
-        else 
-            tier = icon_tier[2]
-            inputs.icon_picture = {filename = filename, size = size, mipmaps = mipmaps, scale = 0.25}
-            inputs.icon = {{ icon = inputs.icon }}
-        end
-
-        inputs.tier_labels = true
-
-        reskins.lib.append_tier_labels(tier, inputs)
-    end
-
-    reskins.lib.assign_icons(name, inputs)
 end
 
 -- Insert tier label icon entries to a given icon definition
