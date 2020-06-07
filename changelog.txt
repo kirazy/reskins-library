@@ -2,7 +2,7 @@
 Version: 0.00.2
 Date: 2020.06.XX
   Changes:
-    - Something...
+    - Renamed from "Core Library" to "Function Library"
 ---------------------------------------------------------------------------------------------------
 Version: 0.00.1
 Date: 2020.06.06
