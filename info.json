@@ -5,7 +5,7 @@
   "title": "Artisanal Reskins: Core Library",
   "author": "Kirazy",
   "contact": "kirazy@live.com",
-  "description": "Reskins series function library. Part of the Artisanal Reskins series.",
+  "description": "Artisanal Reskins function library. Part of the Artisanal Reskins series.",
   "dependencies": 
   [	
     "base >= 0.18.0"
