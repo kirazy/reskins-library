@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.00.2
-Date: 2020.06.XX
+Date: 2020.06.08
   Changes:
     - Renamed from "Core Library" to "Function Library"
     - Added means to disable icon mask tinting in setup_masked_icon
