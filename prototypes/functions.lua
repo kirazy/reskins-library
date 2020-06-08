@@ -134,6 +134,7 @@ function reskins.lib.setup_masked_icon(name, tier, inputs)
     -- Optional inputs, used when each entity being fed to this function has unique base or mask images
     -- icon_base        - Prefix for the icon-base.png file
     -- icon_mask        - Prefix for the icon-mask.png file
+    -- untinted_icon_mask   - Boolean; determine whether to apply a tint
 
     -- Handle compatibility
     local folder_path = inputs.group
@@ -145,6 +146,11 @@ function reskins.lib.setup_masked_icon(name, tier, inputs)
     local base = inputs.icon_base or inputs.icon_name
     local mask = inputs.icon_mask or inputs.icon_name
 
+    -- Handle mask tinting
+    local icon_tint = inputs.tint
+    if inputs.untinted_icon_mask then
+        icon_tint = nil
+    end
 
     -- Setup standard icon
     inputs.icon = {        
@@ -155,7 +161,7 @@ function reskins.lib.setup_masked_icon(name, tier, inputs)
         -- Mask
         {
             icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
-            tint = inputs.tint
+            tint = icon_tint
         }
     }
     
@@ -175,7 +181,7 @@ function reskins.lib.setup_masked_icon(name, tier, inputs)
                 size = inputs.icon_size,
                 mipmaps = inputs.icon_mipmaps,
                 scale = 0.25,
-                tint = inputs.tint
+                tint = icon_tint
             }
         }
     }
