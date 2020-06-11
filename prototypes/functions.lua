@@ -119,9 +119,9 @@ function reskins.lib.setup_standard_icon(name, tier, inputs)
 
     -- Append tier labels
     reskins.lib.append_tier_labels(tier, inputs)
-    
-    -- Assign icons
-    reskins.lib.assign_icons(name, inputs)
+
+    reskins.lib.store_icons(name, inputs)
+    -- reskins.lib.assign_icons(name, inputs)
 end
 
 -- Tint icons that use a base and a mask
@@ -195,8 +195,8 @@ function reskins.lib.setup_masked_icon(name, tier, inputs)
 
     reskins.lib.append_tier_labels(tier, inputs)
     
-    -- Assign icons
-    reskins.lib.assign_icons(name, inputs)
+    reskins.lib.store_icons(name, inputs)
+    -- reskins.lib.assign_icons(name, inputs)
 end
 
 function reskins.lib.setup_flat_icon(name, icon_tier, filename, inputs)
@@ -221,7 +221,16 @@ function reskins.lib.setup_flat_icon(name, icon_tier, filename, inputs)
         reskins.lib.append_tier_labels(tier, inputs)
     end
 
-    reskins.lib.assign_icons(name, inputs)
+    reskins.lib.store_icons(name, inputs)
+    -- reskins.lib.assign_icons(name, inputs)
+end
+
+-- Function to store icons in a table for the given mod calling the function
+function reskins.lib.store_icons(name, inputs)
+    -- Inputs required by this function
+    -- mod              - Specifies the subtable of reskins where the icons should be stored
+
+    reskins[inputs.mod]["icons"][name] = util.copy(inputs)
 end
 
 -- Parses the main inputs table of parameters
@@ -286,7 +295,8 @@ function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
         }
     }
 
-    reskins.lib.assign_icons(name, inputs)
+    reskins.lib.store_icons(name, inputs)
+    -- reskins.lib.assign_icons(name, inputs)
 end
 
 
