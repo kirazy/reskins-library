@@ -42,7 +42,6 @@ function reskins.lib.construct_technology_icon(name, inputs)
 
     -- Optional inputs, used when each entity being fed to this function has unique base or mask images
     -- subgroup                 - String; Folder nested within group, e.g. group/subgroup
-    -- tier_labels              - Boolean; Used to override appending tier labels
     -- icon_base                - String; Prefix for the icon-base.png file
     -- icon_mask                - String; Prefix for the icon-mask.png file
     -- icon_highlights          - String; Prefix for the icon-highlights.png file
