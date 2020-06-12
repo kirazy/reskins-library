@@ -49,9 +49,6 @@ function reskins.lib.construct_icon(name, tier, inputs)
     -- icon_layers          - Integer, 1-3; Specify the number of layers to make; 3 by defualt
     -- untinted_icon_mask   - Boolean; determine whether to apply a tint
 
-    -- Test this fuckery
-    -- local inputs = util.copy(inputs)
-
     -- Handle compatibility defaults
     local folder_path = inputs.group
     if inputs.subgroup then
@@ -64,8 +61,8 @@ function reskins.lib.construct_icon(name, tier, inputs)
         icon_tint = nil
     end
 
-    -- Handle tier labels defaults
-    inputs.tier_labels = (inputs.tier_labels ~= false)
+    -- Handle inputs defaults
+    reskins.lib.parse_inputs(inputs)
 
     -- Handle icon_layers defaults
     local icon_layers = inputs.icon_layers or 3
@@ -238,6 +235,7 @@ function reskins.lib.parse_inputs(inputs)
     inputs.make_explosions = (inputs.make_explosions ~= false)  -- Create explosions; default true
     inputs.make_remnants   = (inputs.make_remnants   ~= false)  -- Create remnant; default true
     inputs.make_icons      = (inputs.make_icons      ~= false)  -- Create icons; default true
+    inputs.tier_labels     = (inputs.tier_labels     ~= false)  -- Display tier labels; default true
 
     return inputs
 end
@@ -247,6 +245,11 @@ function reskins.lib.append_tier_labels(tier, inputs)
     -- Inputs required by this function
     -- icon             - Table containing an icon/icons definition
     -- tier_labels      - Determines whether tier labels are appended
+
+    -- Ensure inputs.icon is the right format
+    if type(inputs.icon) ~= "table" then
+        inputs.icon = {{icon = inputs.icon}}
+    end
     
     -- Setup icon with tier label
     if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 and inputs.tier_labels == true then
