@@ -4,7 +4,7 @@
 -- See LICENSE.md in the project directory for license information.
 
 -- Create target drone item
-target_drone_item = table.deepcopy(data.raw["item"]["logistic-robot"])
+target_drone_item = util.copy(data.raw["item"]["logistic-robot"])
 target_drone_item.name = "reskins-target-drone"
 target_drone_item.place_result = "reskins-target-drone"
 target_drone_item.flags = {"hidden"}
@@ -14,7 +14,7 @@ target_drone_item.icon_mipmaps =  4
 data:extend({target_drone_item})
 
 -- Create target drone remnant
-target_drone_remnant = table.deepcopy(data.raw["corpse"]["logistic-robot-remnants"])
+target_drone_remnant = util.copy(data.raw["corpse"]["logistic-robot-remnants"])
 target_drone_remnant.name = "reskins-target-drone-remnants"
 target_drone_remnant.icon = reskins.lib.directory.."/graphics/target-drone/target-drone-icon.png"
 target_drone_remnant.icon_size = 64
@@ -47,7 +47,7 @@ target_drone_remnant.animation = make_rotated_animation_variations_from_sheet (3
 data:extend({target_drone_remnant})
 
 -- Create target drone entity
-target_drone = table.deepcopy(data.raw["logistic-robot"]["logistic-robot"])
+target_drone = util.copy(data.raw["logistic-robot"]["logistic-robot"])
 target_drone.name = "reskins-target-drone"
 target_drone.max_health = settings.startup["reskins-lib-target-drone-health"].value
 target_drone.flags = {"placeable-enemy", "placeable-off-grid", "not-on-map", "hidden"}

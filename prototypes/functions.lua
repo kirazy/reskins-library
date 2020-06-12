@@ -35,83 +35,137 @@ function reskins.lib.setup_standard_entity(name, tier, inputs)
     end
 end
 
-function reskins.lib.setup_standard_icon(name, tier, inputs)
+function reskins.lib.construct_icon(name, tier, inputs, layers)
     -- Inputs required by this function
-    -- group            - Mod/category folder within the graphics/icons folder
-    -- subgroup         - Folder nested within group
-    -- icon_name        - Folder containing the icon files, and the assumed icon file prefix
+    -- mod                  - String; Originating mod calling the function, used to determine the subtable to store icon information for later processing
+    -- group                - String; Mod/category folder within the graphics/icons folder
+    -- subgroup             - String; Folder nested within group, e.g. group/subgroup
+    -- icon_name            - String; Folder containing the icon files, and the assumed icon file prefix
 
     -- Optional inputs, used when each entity being fed to this function has unique base or mask images
-    -- icon_base        - Prefix for the icon-base.png file
-    -- icon_mask        - Prefix for the icon-mask.png file
-    -- icon_highlights  - Prefix for the icon-highlights.png file
+    -- tier_labels          - Boolean; Used to override appending tier labels
+    -- icon_filename        - String; Used to provide direct reference to source icon outside of the regular format; requires layers = 1
+    -- icon_base            - String; Prefix for the icon-base.png file
+    -- icon_mask            - String; Prefix for the icon-mask.png file
+    -- icon_highlights      - String; Prefix for the icon-highlights.png file
+    -- untinted_icon_mask   - Boolean; determine whether to apply a tint
 
-    -- Handle compatibility
+    -- Optional parameters
+    -- layers               - Integer, 1-3; Specify the number of layers to make; 3 by defualt
+
+    -- Handle compatibility defaults
     local folder_path = inputs.group
     if inputs.subgroup then
         folder_path = inputs.group.."/"..inputs.subgroup
     end
 
+    -- Handle mask tinting defaults
+    local icon_tint = inputs.tint
+    if inputs.untinted_icon_mask then
+        icon_tint = nil
+    end
+
+    -- Handle tier labels defaults
+    inputs.tier_labels = (inputs.tier_labels ~= false)
+
+    -- Handle layers defaults
+    layers = layers or 3
+
     -- Some entities have variable bases and masks
-    local base = inputs.icon_base or inputs.icon_name
-    local mask = inputs.icon_mask or inputs.icon_name
-    local highlights = inputs.icon_highlights or inputs.icon_name
-    
-    -- Setup standard icon
-    inputs.icon = {        
-        -- Base
-        {
-            icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..base.."-icon-base.png"
-        },
-        -- Mask
-        {
-            icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
-            tint = inputs.tint
-        },
-        -- Highlights
-        {
-            icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..highlights.."-icon-highlights.png",
-            tint = {1,1,1,0}
-        }
-    }
-    
-    -- Setup item picture
-    inputs.icon_picture = {
-        layers = {
-            -- Base
-            {
-                filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..base.."-icon-base.png",
-                size = inputs.icon_size,
-                mipmaps = inputs.icon_mipmaps,
-                scale = 0.25
-            },
-            -- Mask
-            {
-                filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
-                size = inputs.icon_size,
-                mipmaps = inputs.icon_mipmaps,
-                scale = 0.25,
-                tint = inputs.tint
-            },
-            -- Highlights
-            {
-                filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..highlights.."-icon-highlights.png",
-                size = inputs.icon_size,
-                mipmaps = inputs.icon_mipmaps,
-                scale = 0.25,
-                blend_mode = "additive"
-            }
-        }
+    local icon_base = inputs.icon_base or inputs.icon_name
+    local icon_mask = inputs.icon_mask or inputs.icon_name
+    local icon_highlights = inputs.icon_highlights or inputs.icon_name
+
+    -- Setup icon layers
+    local icon_base_layer = {
+        icon = inputs.icon_filename or inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_base.."-icon-base.png"
     }
 
-    -- Extra layers
+    local icon_mask_layer = {
+        icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_mask.."-icon-mask.png",
+        tint = icon_tint
+    }
+
+    local icon_highlights_layer = {
+        icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_highlights.."-icon-highlights.png",
+        tint = {1, 1, 1, 0}
+    }
+
+    -- Setup picture layers
+    local picture_base_layer = {
+        filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_base.."-icon-base.png",
+        size = inputs.icon_size,
+        mipmaps = inputs.icon_mipmaps,
+        scale = 0.25
+    }
+
+    local picture_mask_layer = {
+        filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_mask.."-icon-mask.png",
+        size = inputs.icon_size,
+        mipmaps = inputs.icon_mipmaps,
+        scale = 0.25,
+        tint = icon_tint
+    }
+
+    local picture_highlights_layer = {
+        filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_highlights.."-icon-highlights.png",
+        size = inputs.icon_size,
+        mipmaps = inputs.icon_mipmaps,
+        scale = 0.25,
+        blend_mode = "additive"
+    }
+
+    -- Construct single-layer icons (flat)
+    if layers == 1 then
+        inputs.icon = icon_base_layer
+        inputs.icon_picture = {
+            picture_base_layer
+        }
+    end
+
+    -- Construct double-layer icons
+    if layers > 1 then
+        inputs.icon = {
+            icon_base_layer,
+            icon_mask_layer,
+        }
+        inputs.icon_picture = {
+            layers = {
+                picture_base_layer,
+                picture_mask_layer,
+            }
+        }
+    end
+
+    -- Construct triple-layer icons
+    if layers > 2 then
+        table.insert(inputs.icon, icon_highlights_layer)
+        table.insert(inputs.icon_picture, picture_highlights_layer)
+    end    
+
+    -- Append icon extras as needed
     if inputs.icon_extras then
+        -- If we have one layer, we need to convert to an icons table format
+        if layers == 1 then 
+            inputs.icon = {
+                inputs.icon
+            } 
+        end
+
+        -- Append icon_extras
         for n = 1, #inputs.icon_extras do
             table.insert(inputs.icon, inputs.icon_extras[n])
         end
     end
 
     if inputs.icon_picture_extras then
+        -- If we have one layer, we need to convert to an icons table format
+        if layers == 1 then 
+            inputs.icon = {
+                inputs.icon
+            } 
+        end
+
         for n = 1, #inputs.icon_picture_extras do
             table.insert(inputs.icon_picture.layers, inputs.icon_picture_extras[n])
         end
@@ -120,159 +174,206 @@ function reskins.lib.setup_standard_icon(name, tier, inputs)
     -- Append tier labels
     reskins.lib.append_tier_labels(tier, inputs)
 
+    -- Store the icons
     reskins.lib.store_icons(name, inputs)
-    -- reskins.lib.assign_icons(name, inputs)
 end
+
+-- function reskins.lib.setup_standard_icon(name, tier, inputs)
+--     -- Inputs required by this function
+--     -- group            - Mod/category folder within the graphics/icons folder
+--     -- subgroup         - Folder nested within group
+--     -- icon_name        - Folder containing the icon files, and the assumed icon file prefix
+
+--     -- Optional inputs, used when each entity being fed to this function has unique base or mask images
+--     -- icon_base        - Prefix for the icon-base.png file
+--     -- icon_mask        - Prefix for the icon-mask.png file
+--     -- icon_highlights  - Prefix for the icon-highlights.png file
+
+--     -- Handle compatibility
+--     local folder_path = inputs.group
+--     if inputs.subgroup then
+--         folder_path = inputs.group.."/"..inputs.subgroup
+--     end
+
+--     -- Some entities have variable bases and masks
+--     local base = inputs.icon_base or inputs.icon_name
+--     local mask = inputs.icon_mask or inputs.icon_name
+--     local highlights = inputs.icon_highlights or inputs.icon_name
+    
+--     -- Setup standard icon
+--     inputs.icon = {        
+--         -- Base
+--         {
+--             icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..base.."-icon-base.png"
+--         },
+--         -- Mask
+--         {
+--             icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
+--             tint = inputs.tint
+--         },
+--         -- Highlights
+--         {
+--             icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..highlights.."-icon-highlights.png",
+--             tint = {1,1,1,0}
+--         }
+--     }
+    
+--     -- Setup item picture
+--     inputs.icon_picture = {
+--         layers = {
+--             -- Base
+--             {
+--                 filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..base.."-icon-base.png",
+--                 size = inputs.icon_size,
+--                 mipmaps = inputs.icon_mipmaps,
+--                 scale = 0.25
+--             },
+--             -- Mask
+--             {
+--                 filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
+--                 size = inputs.icon_size,
+--                 mipmaps = inputs.icon_mipmaps,
+--                 scale = 0.25,
+--                 tint = inputs.tint
+--             },
+--             -- Highlights
+--             {
+--                 filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..highlights.."-icon-highlights.png",
+--                 size = inputs.icon_size,
+--                 mipmaps = inputs.icon_mipmaps,
+--                 scale = 0.25,
+--                 blend_mode = "additive"
+--             }
+--         }
+--     }
+
+--     -- Extra layers
+--     if inputs.icon_extras then
+--         for n = 1, #inputs.icon_extras do
+--             table.insert(inputs.icon, inputs.icon_extras[n])
+--         end
+--     end
+
+--     if inputs.icon_picture_extras then
+--         for n = 1, #inputs.icon_picture_extras do
+--             table.insert(inputs.icon_picture.layers, inputs.icon_picture_extras[n])
+--         end
+--     end
+
+--     -- Append tier labels
+--     reskins.lib.append_tier_labels(tier, inputs)
+
+--     reskins.lib.store_icons(name, inputs)
+--     -- reskins.lib.assign_icons(name, inputs)
+-- end
 
 -- Tint icons that use a base and a mask
-function reskins.lib.setup_masked_icon(name, tier, inputs)
-    -- Inputs required by this function
-    -- group            - Folder
-    -- subgroup         - Folder contained within group
-    -- icon_name        - Folder containing the icon files, and the assumed icon file prefix
+-- function reskins.lib.setup_masked_icon(name, tier, inputs)
+--     -- Inputs required by this function
+--     -- group            - Folder
+--     -- subgroup         - Folder contained within group
+--     -- icon_name        - Folder containing the icon files, and the assumed icon file prefix
 
-    -- Optional inputs, used when each entity being fed to this function has unique base or mask images
-    -- icon_base        - Prefix for the icon-base.png file
-    -- icon_mask        - Prefix for the icon-mask.png file
-    -- untinted_icon_mask   - Boolean; determine whether to apply a tint
+--     -- Optional inputs, used when each entity being fed to this function has unique base or mask images
+--     -- icon_base        - Prefix for the icon-base.png file
+--     -- icon_mask        - Prefix for the icon-mask.png file
+--     -- untinted_icon_mask   - Boolean; determine whether to apply a tint
 
-    -- Handle compatibility
-    local folder_path = inputs.group
-    if inputs.subgroup then
-        folder_path = inputs.group.."/"..inputs.subgroup
-    end
+--     -- Handle compatibility
+--     local folder_path = inputs.group
+--     if inputs.subgroup then
+--         folder_path = inputs.group.."/"..inputs.subgroup
+--     end
 
-    -- Some entities have variable bases and masks
-    local base = inputs.icon_base or inputs.icon_name
-    local mask = inputs.icon_mask or inputs.icon_name
+--     -- Some entities have variable bases and masks
+--     local base = inputs.icon_base or inputs.icon_name
+--     local mask = inputs.icon_mask or inputs.icon_name
 
-    -- Handle mask tinting
-    local icon_tint = inputs.tint
-    if inputs.untinted_icon_mask then
-        icon_tint = nil
-    end
+--     -- Handle mask tinting
+--     local icon_tint = inputs.tint
+--     if inputs.untinted_icon_mask then
+--         icon_tint = nil
+--     end
 
-    -- Setup standard icon
-    inputs.icon = {        
-        -- Base
-        {
-            icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..base.."-icon-base.png"
-        },
-        -- Mask
-        {
-            icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
-            tint = icon_tint
-        }
-    }
+--     -- Setup standard icon
+--     inputs.icon = {        
+--         -- Base
+--         {
+--             icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..base.."-icon-base.png"
+--         },
+--         -- Mask
+--         {
+--             icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
+--             tint = icon_tint
+--         }
+--     }
     
-    -- Setup item picture
-    inputs.icon_picture = {
-        layers = {
-            -- Base
-            {
-                filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..base.."-icon-base.png",
-                size = inputs.icon_size,
-                mipmaps = inputs.icon_mipmaps,
-                scale = 0.25
-            },
-            -- Mask
-            {
-                filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
-                size = inputs.icon_size,
-                mipmaps = inputs.icon_mipmaps,
-                scale = 0.25,
-                tint = icon_tint
-            }
-        }
-    }
+--     -- Setup item picture
+--     inputs.icon_picture = {
+--         layers = {
+--             -- Base
+--             {
+--                 filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..base.."-icon-base.png",
+--                 size = inputs.icon_size,
+--                 mipmaps = inputs.icon_mipmaps,
+--                 scale = 0.25
+--             },
+--             -- Mask
+--             {
+--                 filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..mask.."-icon-mask.png",
+--                 size = inputs.icon_size,
+--                 mipmaps = inputs.icon_mipmaps,
+--                 scale = 0.25,
+--                 tint = icon_tint
+--             }
+--         }
+--     }
 
-    -- Append tier labels
-    if settings.startup["reskins-bobs-do-belt-entity-tier-labeling"].value == true then
-        inputs.tier_labels = (inputs.tier_labels ~= false)
-    else
-        inputs.tier_labels = inputs.tier_labels or false
-    end
+--     -- Append tier labels
+--     if settings.startup["reskins-bobs-do-belt-entity-tier-labeling"].value == true then
+--         inputs.tier_labels = (inputs.tier_labels ~= false)
+--     else
+--         inputs.tier_labels = inputs.tier_labels or false
+--     end
 
-    reskins.lib.append_tier_labels(tier, inputs)
+--     reskins.lib.append_tier_labels(tier, inputs)
     
-    reskins.lib.store_icons(name, inputs)
-    -- reskins.lib.assign_icons(name, inputs)
-end
+--     reskins.lib.store_icons(name, inputs)
+--     -- reskins.lib.assign_icons(name, inputs)
+-- end
 
-function reskins.lib.setup_flat_icon(name, icon_tier, filename, inputs)
-    -- Parse parameters
-    local size = inputs.icon_size or 64
-    local mipmaps = inputs.icon_mipmaps or 4
+-- function reskins.lib.setup_flat_icon(name, icon_tier, filename, inputs)
+--     -- Parse parameters
+--     local size = inputs.icon_size or 64
+--     local mipmaps = inputs.icon_mipmaps or 4
 
-    -- Setup icon
-    inputs.icon = filename
-    inputs.tier_labels = (inputs.tier_labels ~= false)
+--     -- Setup icon
+--     inputs.icon = filename
+--     inputs.tier_labels = (inputs.tier_labels ~= false)
 
-    if icon_tier ~= false then
-        local tier
-        if settings.startup["reskins-lib-tier-mapping"].value == "name-map" then 
-            tier = icon_tier[1]
-        else 
-            tier = icon_tier[2]
-            inputs.icon_picture = {filename = filename, size = size, mipmaps = mipmaps, scale = 0.25}
-            inputs.icon = {{ icon = inputs.icon }}
-        end
+--     if icon_tier ~= false then
+--         local tier
+--         if settings.startup["reskins-lib-tier-mapping"].value == "name-map" then 
+--             tier = icon_tier[1]
+--         else 
+--             tier = icon_tier[2]
+--             inputs.icon_picture = {filename = filename, size = size, mipmaps = mipmaps, scale = 0.25}
+--             inputs.icon = {{ icon = inputs.icon }}
+--         end
 
-        reskins.lib.append_tier_labels(tier, inputs)
-    end
+--         reskins.lib.append_tier_labels(tier, inputs)
+--     end
 
-    reskins.lib.store_icons(name, inputs)
-    -- reskins.lib.assign_icons(name, inputs)
-end
-
--- Function to store icons in a table for the given mod calling the function
-function reskins.lib.store_icons(name, inputs)
-    -- Inputs required by this function
-    -- mod              - Specifies the subtable of reskins where the icons should be stored
-
-    reskins[inputs.mod]["icons"][name] = util.copy(inputs)
-end
-
--- Parses the main inputs table of parameters
-function reskins.lib.parse_inputs(inputs)
-    -- Check that we have a particles table
-    if not inputs.particles then
-        inputs.make_explosions = false
-    end
-    
-    -- Constructs defaults for optional input parameters.
-    inputs.icon_size       = inputs.icon_size        or 64      -- Pixel size of icons
-    inputs.icon_mipmaps    = inputs.icon_mipmaps     or 4       -- Number of mipmaps present in the icon image file       
-    inputs.make_explosions = (inputs.make_explosions ~= false)  -- Create explosions; default true
-    inputs.make_remnants   = (inputs.make_remnants   ~= false)  -- Create remnant; default true
-    inputs.make_icons      = (inputs.make_icons      ~= false)  -- Create icons; default true
-    inputs.tier_labels     = (inputs.tier_labels     ~= false)  -- Append tier labels; default true
-
-    return inputs
-end
-
--- Insert tier label icon entries to a given icon definition
-function reskins.lib.append_tier_labels(tier, inputs)
-    -- Inputs required by this function
-    -- icon             - Table containing an icon/icons definition
-
-    -- Setup icon with tier label
-    if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 and inputs.tier_labels == true then
-        icon_style = settings.startup["reskins-lib-icon-tier-labeling-style"].value
-        table.insert(inputs.icon, {icon = reskins.lib.directory.."/graphics/icons/tiers/"..icon_style.."/"..tier..".png"})
-        table.insert(inputs.icon, {
-            icon = reskins.lib.directory.."/graphics/icons/tiers/"..icon_style.."/"..tier..".png",
-            tint = reskins.lib.adjust_alpha(reskins.lib.tint_index["tier-"..tier], 0.75)
-        })
-    end
-end
+--     reskins.lib.store_icons(name, inputs)
+--     -- reskins.lib.assign_icons(name, inputs)
+-- end
 
 function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
     -- Inputs required by this function
     -- type            - Entity type
 
     -- Prevent cross-contamination
-    local inputs = table.deepcopy(inputs)
+    local inputs = util.copy(inputs)
 
     -- Handle required parameters
     reskins.lib.parse_inputs(inputs)
@@ -299,6 +400,47 @@ function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
     -- reskins.lib.assign_icons(name, inputs)
 end
 
+-- Function to store icons in a table for the given mod calling the function
+function reskins.lib.store_icons(name, inputs)
+    -- Inputs required by this function
+    -- mod              - Specifies the subtable of reskins where the icons should be stored
+
+    reskins[inputs.mod]["icons"][name] = util.copy(inputs)
+end
+
+-- Parses the main inputs table of parameters
+function reskins.lib.parse_inputs(inputs)
+    -- Check that we have a particles table
+    if not inputs.particles then
+        inputs.make_explosions = false
+    end
+    
+    -- Constructs defaults for optional input parameters.
+    inputs.icon_size       = inputs.icon_size        or 64      -- Pixel size of icons
+    inputs.icon_mipmaps    = inputs.icon_mipmaps     or 4       -- Number of mipmaps present in the icon image file       
+    inputs.make_explosions = (inputs.make_explosions ~= false)  -- Create explosions; default true
+    inputs.make_remnants   = (inputs.make_remnants   ~= false)  -- Create remnant; default true
+    inputs.make_icons      = (inputs.make_icons      ~= false)  -- Create icons; default true
+
+    return inputs
+end
+
+-- Insert tier label icon entries to a given icon definition
+function reskins.lib.append_tier_labels(tier, inputs)
+    -- Inputs required by this function
+    -- icon             - Table containing an icon/icons definition
+    -- tier_labels      - Determines whether tier labels are appended
+    
+    -- Setup icon with tier label
+    if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 and inputs.tier_labels == true then
+        icon_style = settings.startup["reskins-lib-icon-tier-labeling-style"].value
+        table.insert(inputs.icon, {icon = reskins.lib.directory.."/graphics/icons/tiers/"..icon_style.."/"..tier..".png"})
+        table.insert(inputs.icon, {
+            icon = reskins.lib.directory.."/graphics/icons/tiers/"..icon_style.."/"..tier..".png",
+            tint = reskins.lib.adjust_alpha(reskins.lib.tint_index["tier-"..tier], 0.75)
+        })
+    end
+end
 
 function reskins.lib.assign_order(name, inputs)
     -- Inputs required by this function
@@ -441,7 +583,7 @@ function reskins.lib.create_remnant(name, inputs)
     -- type        - Entity type
 
     -- Copy remnant prototype
-    local remnant = table.deepcopy(data.raw["corpse"][inputs.base_entity.."-remnants"])
+    local remnant = util.copy(data.raw["corpse"][inputs.base_entity.."-remnants"])
     remnant.name = name.."-remnants"
     data:extend({remnant})      
 
@@ -455,7 +597,7 @@ function reskins.lib.create_explosion(name, inputs)
     -- base_entity - Entity to copy explosion prototype from
     -- type        - Entity type
 
-    local explosion = table.deepcopy(data.raw["explosion"][inputs.base_entity.."-explosion"])
+    local explosion = util.copy(data.raw["explosion"][inputs.base_entity.."-explosion"])
     explosion.name = name.."-explosion"
     data:extend({explosion})
 
@@ -466,7 +608,7 @@ end
 -- Create tinted particle
 function reskins.lib.create_particle(name, base_entity, base_particle, key, tint)
     -- Copy the particle prototype
-    local particle = table.deepcopy(data.raw["optimized-particle"][base_entity.."-"..base_particle])
+    local particle = util.copy(data.raw["optimized-particle"][base_entity.."-"..base_particle])
     particle.name = name.."-"..base_particle.."-tinted"
     particle.pictures.sheet.tint = tint
     particle.pictures.sheet.hr_version.tint = tint
@@ -618,7 +760,7 @@ function reskins.lib.scale(object, scale)
     -- Object is a table
     elseif type(object) == "table" then
         -- Break reference, work on local copy
-        object = table.deepcopy(object)
+        object = util.copy(object)
         -- Recursively call scale_subtable
         scale_subtable(object, scale)
         return object
