@@ -31,23 +31,122 @@ function reskins.lib.setup_standard_entity(name, tier, inputs)
     end
 end
 
-function reskins.lib.construct_icon(name, tier, inputs)
+function reskins.lib.construct_technology_icon(name, inputs)
     -- Inputs required by this function
-    -- mod                  - String; Originating mod calling the function, used to determine the subtable to store icon information for later processing
-    -- group                - String; Mod/category folder within the graphics/icons folder
+    -- mod                      - String; Originating mod calling the function, used to determine the subtable to store icon information for later processing
+    -- group                    - String; Mod/category folder within the graphics/icons folder
     
     -- One of the following inputs must be specified; icon_filename being set assumes a flat icon with 1 layer
-    -- icon_filename        - String; Used to provide direct reference to source icon outside of the regular format
-    -- icon_name            - String; Folder containing the icon files, and the assumed icon file prefix
+    -- icon_filename            - String; Used to provide direct reference to source icon outside of the regular format
+    -- icon_name                - String; Folder containing the icon files, and the assumed icon file prefix
 
     -- Optional inputs, used when each entity being fed to this function has unique base or mask images
-    -- subgroup             - String; Folder nested within group, e.g. group/subgroup
-    -- tier_labels          - Boolean; Used to override appending tier labels
-    -- icon_base            - String; Prefix for the icon-base.png file
-    -- icon_mask            - String; Prefix for the icon-mask.png file
-    -- icon_highlights      - String; Prefix for the icon-highlights.png file
-    -- icon_layers          - Integer, 1-3; Specify the number of layers to make; 3 by defualt
-    -- untinted_icon_mask   - Boolean; determine whether to apply a tint
+    -- subgroup                 - String; Folder nested within group, e.g. group/subgroup
+    -- tier_labels              - Boolean; Used to override appending tier labels
+    -- icon_base                - String; Prefix for the icon-base.png file
+    -- icon_mask                - String; Prefix for the icon-mask.png file
+    -- icon_highlights          - String; Prefix for the icon-highlights.png file
+    -- icon_layers              - Integer, 1-3; Specify the number of layers to make; 3 by defualt
+    -- untinted_icon_mask       - Boolean; determine whether to apply a tint
+    -- technology_icon_extras   - Table of additional icon layers to add
+
+    -- Handle compatibility defaults
+    local folder_path = inputs.group
+    if inputs.subgroup then
+        folder_path = inputs.group.."/"..inputs.subgroup
+    end
+
+    -- Handle mask tinting defaults
+    local icon_tint = inputs.tint
+    if inputs.untinted_icon_mask then
+        icon_tint = nil
+    end
+
+    -- Handle icon_layers defaults
+    local icon_layers = inputs.technology_icon_layers or 3
+    if inputs.technology_icon_filename then
+        icon_layers = 1
+    end
+
+    -- Some entities have variable bases and masks
+    local icon_base = inputs.icon_base or inputs.icon_name
+    local icon_mask = inputs.icon_mask or inputs.icon_name
+    local icon_highlights = inputs.icon_highlights or inputs.icon_name
+
+    -- Setup icon layers
+    local icon_base_layer = {
+        icon = inputs.technology_icon_filename or inputs.directory.."/graphics/technology/"..folder_path.."/"..inputs.icon_name.."/"..icon_base.."-technology-base.png"
+    }
+
+    local icon_mask_layer, icon_highlights_layer
+    if icon_layers > 1 then
+        icon_mask_layer = {
+            icon = inputs.directory.."/graphics/technology/"..folder_path.."/"..inputs.icon_name.."/"..icon_mask.."-technology-mask.png",
+            tint = icon_tint
+        }
+
+        icon_highlights_layer = {
+            icon = inputs.directory.."/graphics/technology/"..folder_path.."/"..inputs.icon_name.."/"..icon_highlights.."-technology-highlights.png",
+            tint = {1, 1, 1, 0}
+        }
+    end
+
+    -- Construct single-layer icons (flat)
+    if icon_layers == 1 then
+        inputs.technology_icon = icon_base_layer.icon
+    end
+
+    -- Construct double-layer icons
+    if icon_layers > 1 then
+        inputs.technology_icon = {
+            icon_base_layer,
+            icon_mask_layer,
+        }
+    end
+
+    -- Construct triple-layer icons
+    if icon_layers > 2 then
+        table.insert(inputs.technology_icon, icon_highlights_layer)
+    end    
+
+    -- Append icon extras as needed
+    if inputs.technology_icon_extras then
+        -- If we have one layer, we need to convert to an icons table format
+        if icon_layers == 1 then 
+            inputs.technology_icon = {
+                inputs.technology_icon
+            } 
+        end
+
+        -- Append icon_extras
+        for n = 1, #inputs.technology_icon_extras do
+            table.insert(inputs.technology_icon, inputs.technology_icon_extras[n])
+        end
+    end
+
+    -- Store the icons
+    reskins.lib.store_icons(name, inputs, "technology")
+end
+
+function reskins.lib.construct_icon(name, tier, inputs)
+    -- Inputs required by this function
+    -- mod                      - String; Originating mod calling the function, used to determine the subtable to store icon information for later processing
+    -- group                    - String; Mod/category folder within the graphics/icons folder
+    
+    -- One of the following inputs must be specified; technology_icon_filename being set assumes a flat icon with 1 layer
+    -- icon_filename            - String; Used to provide direct reference to source icon outside of the regular format
+    -- icon_name                - String; Folder containing the icon files, and the assumed icon file prefix
+
+    -- Optional inputs, used when each entity being fed to this function has unique base or mask images
+    -- subgroup                 - String; Folder nested within group, e.g. group/subgroup
+    -- tier_labels              - Boolean; Used to override appending tier labels
+    -- icon_base                - String; Prefix for the icon-base.png file
+    -- icon_mask                - String; Prefix for the icon-mask.png file
+    -- icon_highlights          - String; Prefix for the icon-highlights.png file
+    -- icon_layers              - Integer, 1-3; Specify the number of layers to make; 3 by defualt
+    -- untinted_icon_mask       - Boolean; determine whether to apply a tint
+    -- icon_extras              - Table of additional icon layers to add
+    -- icon_picture_extras      - Table of additional icon layers to add for on-the-ground items
 
     -- Handle compatibility defaults
     local folder_path = inputs.group
@@ -215,11 +314,13 @@ function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
 end
 
 -- Function to store icons in a table for the given mod calling the function
-function reskins.lib.store_icons(name, inputs)
+function reskins.lib.store_icons(name, inputs, storage)
     -- Inputs required by this function
     -- mod              - Specifies the subtable of reskins where the icons should be stored
 
-    reskins[inputs.mod]["icons"][name] = util.copy(inputs)
+    local storage = storage or "icons"
+
+    reskins[inputs.mod][storage][name] = util.copy(inputs)
 end
 
 -- Parses the main inputs table of parameters
@@ -303,6 +404,28 @@ function reskins.lib.assign_order(name, inputs)
     end
 end
 
+function reskins.lib.assign_technology_icons(name, inputs)
+    -- Inputs required by this function
+    -- technology_icon  - Table or string defining technology icon
+
+    -- Initialize paths
+    technology = data.raw["technology"][name]
+
+    -- Ensure the technology in question exists
+    if technology then
+        -- Check whether icon or icons, ensure the key we're not using is erased
+        if type(inputs.technology_icon) == "table" then
+            technology.icon = nil
+            technology.icons = inputs.technology_icon
+        else
+            technology.icon = inputs.technology_icon
+            technology.icons = nil
+        end
+
+        -- Make assignments common to all cases
+        technology.icon_size = 128
+    end
+end
 
 function reskins.lib.assign_icons(name, inputs)
     -- Inputs required by this function

@@ -1,15 +1,19 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.00.4
 Date: 2020.06.11
+  Features:
+    - Added functions "construct_technology_icon" and "assign_technology_icon"
   Changes:
     - Set minimum version for Base to 0.18.31
     - Consolidated setup_masked_icon, setup_flat_icon, setup_standard_icon into construct_icon
+    - Added "storage" parameter to function "store_icons" to allow for more control over where icons are stored
 ---------------------------------------------------------------------------------------------------
 Version: 0.00.3
 Date: 2020.06.11
+  Features:
+    - Added function "store_icons" to collate icon setup parameters for later assignment in data-final-fixes by originating mod
   Changes:
     - Added "homepage" property to info.json
-    - Added function "store_icons" to collate icon setup parameters for later assignment in data-final-fixes by originating mod
 ---------------------------------------------------------------------------------------------------
 Version: 0.00.2
 Date: 2020.06.08
