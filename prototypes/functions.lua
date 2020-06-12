@@ -246,13 +246,13 @@ function reskins.lib.append_tier_labels(tier, inputs)
     -- icon             - Table containing an icon/icons definition
     -- tier_labels      - Determines whether tier labels are appended
 
-    -- Ensure inputs.icon is the right format
-    if type(inputs.icon) ~= "table" then
-        inputs.icon = {{icon = inputs.icon}}
-    end
-    
-    -- Setup icon with tier label
     if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 and inputs.tier_labels == true then
+        -- Ensure inputs.icon is the right format
+        if type(inputs.icon) ~= "table" then
+            inputs.icon = {{icon = inputs.icon}}
+        end
+
+        -- Append the tier labels
         icon_style = settings.startup["reskins-lib-icon-tier-labeling-style"].value
         table.insert(inputs.icon, {icon = reskins.lib.directory.."/graphics/icons/tiers/"..icon_style.."/"..tier..".png"})
         table.insert(inputs.icon, {
