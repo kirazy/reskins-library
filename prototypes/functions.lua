@@ -274,6 +274,13 @@ function reskins.lib.construct_icon(name, tier, inputs)
         end
     end
 
+    -- Insert icon background if necessary
+    if inputs.icon_background then
+        table.insert(inputs.icon, 1, {
+            icon = reskins.lib.directory.."/graphics/icons/backgrounds/"..inputs.icon_background.."-icon-background.png"
+        })
+    end
+
     -- Append tier labels
     reskins.lib.append_tier_labels(tier, inputs)
 
@@ -439,6 +446,7 @@ function reskins.lib.assign_icons(name, inputs)
         entity = data.raw[inputs.type][name]
     end
     local item = data.raw["item"][name]
+    local item_with_data = data.raw["item-with-entity-data"][name]
     local explosion = data.raw["explosion"][name.."-explosion"]
     local remnant = data.raw["corpse"][name.."-remnants"]
 
@@ -458,6 +466,14 @@ function reskins.lib.assign_icons(name, inputs)
             item.icons = inputs.icon
             if inputs.icon_picture then
                 item.pictures = inputs.icon_picture
+            end
+        end
+
+        if item_with_data then
+            item_with_data.icon = nil
+            item_with_data.icons = inputs.icon
+            if inputs.icon_picture then
+                item_with_data.pictures = inputs.icon_picture
             end
         end
 
@@ -485,6 +501,14 @@ function reskins.lib.assign_icons(name, inputs)
             end
         end
 
+        if item_with_data then
+            item_with_data.icons = nil        
+            item_with_data.icon = inputs.icon
+            if inputs.icon_picture then
+                item_with_data.pictures = inputs.icon_picture
+            end
+        end
+
         if explosion then
             explosion.icons = nil        
             explosion.icon = inputs.icon
@@ -505,6 +529,11 @@ function reskins.lib.assign_icons(name, inputs)
     if item then
         item.icon_size = inputs.icon_size
         item.icon_mipmaps = inputs.icon_mipmaps 
+    end
+
+    if item_with_data then
+        item_with_data.icon_size = inputs.icon_size
+        item_with_data.icon_mipmaps = inputs.icon_mipmaps 
     end
 
     if explosion then
