@@ -5,7 +5,9 @@ Date: 2020.06.XX
     - Added functions "construct_technology_icon" and "assign_technology_icon"
   Changes:
     - Set minimum version for Base to 0.18.31
-    - Consolidated setup_masked_icon, setup_flat_icon, setup_standard_icon into construct_icon
+    - Consolidated "setup_masked_icon", "setup_flat_icon", "setup_standard_icon" into "construct_icon"
+    - Added support for "inputs.icon_background" in "construct_icon"
+    - Added support for "item-with-entity-data" to "assign_icons"
     - Added "storage" parameter to function "store_icons" to allow for more control over where icons are stored
 ---------------------------------------------------------------------------------------------------
 Version: 0.00.3
