@@ -3,6 +3,8 @@ Version: 0.00.5
 Date: 2020.06.XX
   Features:
     - Added function "startup_setting" to handle validation of startup settings
+  Changes:
+    - Moved icon assignments to occur immediately, with method to re-apply if necessary
 ---------------------------------------------------------------------------------------------------
 Version: 0.00.4
 Date: 2020.06.18

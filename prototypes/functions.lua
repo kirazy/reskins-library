@@ -123,8 +123,12 @@ function reskins.lib.construct_technology_icon(name, inputs)
         end
     end
 
-    -- Store the icons
-    reskins.lib.store_icons(name, inputs, "technology")
+    -- It may be necessary to put icons back in final fixes, allow for that
+    if inputs.reassign_in_final_fixes then
+        reskins.lib.store_icons(name, inputs, "technology")
+    end
+
+    reskins.lib.assign_technology_icons(name, inputs)
 end
 
 function reskins.lib.construct_icon(name, tier, inputs)
@@ -284,8 +288,12 @@ function reskins.lib.construct_icon(name, tier, inputs)
     -- Append tier labels
     reskins.lib.append_tier_labels(tier, inputs)
 
-    -- Store the icons
-    reskins.lib.store_icons(name, inputs)
+    -- It may be necessary to put icons back in final fixes, allow for that
+    if inputs.reassign_in_final_fixes then
+        reskins.lib.store_icons(name, inputs)
+    end
+
+    reskins.lib.assign_icons(name, inputs)
 end
 
 function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
@@ -316,7 +324,12 @@ function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
         }
     }
 
-    reskins.lib.store_icons(name, inputs)
+    -- It may be necessary to put icons back in final fixes, allow for that
+    if inputs.reassign_in_final_fixes then
+        reskins.lib.store_icons(name, inputs)
+    end
+
+    reskins.lib.assign_icons(name, inputs)
 end
 
 -- Function to store icons in a table for the given mod calling the function
