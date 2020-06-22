@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.00.5
-Date: 2020.06.XX
+Date: 2020.06.22
   Features:
     - Added function "startup_setting" to handle validation of startup settings
   Changes:
