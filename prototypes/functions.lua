@@ -776,3 +776,15 @@ function reskins.lib.rescale_entity(entity, scalar)
         ::continue::
     end
 end
+
+-- Check if a startup setting exists, and if it does, return its value
+function reskins.lib.setting(name)
+    local startup_setting
+    if settings.startup[name] then
+        startup_setting = settings.startup[name].value
+    else
+        startup_setting = nil
+    end
+
+    return startup_setting
+end
