@@ -434,7 +434,7 @@ function reskins.lib.assign_technology_icons(name, inputs)
     if technology then
         -- Check whether icon or icons, ensure the key we're not using is erased
         if type(inputs.technology_icon) == "table" then
-            technology.icon = nil
+            -- technology.icon = nil
             technology.icons = inputs.technology_icon
         else
             technology.icon = inputs.technology_icon
@@ -467,7 +467,7 @@ function reskins.lib.assign_icons(name, inputs)
     if type(inputs.icon) == "table" then
         -- Create icons that have multiple layers
         if entity then
-            entity.icon = nil        
+            -- entity.icon = nil        
             entity.icons = inputs.icon
             if inputs.make_entity_pictures then
                 entity.pictures = inputs.icon_picture
@@ -475,7 +475,7 @@ function reskins.lib.assign_icons(name, inputs)
         end
 
         if item then
-            item.icon = nil
+            -- item.icon = nil
             item.icons = inputs.icon
             if inputs.icon_picture then
                 item.pictures = inputs.icon_picture
@@ -483,7 +483,7 @@ function reskins.lib.assign_icons(name, inputs)
         end
 
         if item_with_data then
-            item_with_data.icon = nil
+            -- item_with_data.icon = nil
             item_with_data.icons = inputs.icon
             if inputs.icon_picture then
                 item_with_data.pictures = inputs.icon_picture
@@ -491,12 +491,12 @@ function reskins.lib.assign_icons(name, inputs)
         end
 
         if explosion then 
-            explosion.icon = nil        
+            -- explosion.icon = nil        
             explosion.icons = inputs.icon
         end
 
         if remnant then
-            remnant.icon = nil
+            -- remnant.icon = nil
             remnant.icons = inputs.icon
         end
     else
