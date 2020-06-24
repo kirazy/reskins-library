@@ -423,6 +423,10 @@ function reskins.lib.assign_order(name, inputs)
     end
 end
 
+function reskins.lib.set_icon_size(inputs)
+    
+end
+
 function reskins.lib.assign_technology_icons(name, inputs)
     -- Inputs required by this function
     -- technology_icon  - Table or string defining technology icon
@@ -434,14 +438,21 @@ function reskins.lib.assign_technology_icons(name, inputs)
     if technology then
         -- Check whether icon or icons, ensure the key we're not using is erased
         if type(inputs.technology_icon) == "table" then
-            -- technology.icon = nil
+            -- Set icon_size and icon_mipmaps per icons specification
+            for n = 1, #inputs.technology_icon do
+                if not inputs.technology_icon[n].icon_size then
+                    inputs.technology_icon[n].icon_size = 128
+                end
+            end
+
+            technology.icon = nil
             technology.icons = inputs.technology_icon
         else
             technology.icon = inputs.technology_icon
             technology.icons = nil
         end
 
-        -- Make assignments common to all cases
+        -- Set top-level icon_size
         technology.icon_size = 128
     end
 end
@@ -465,9 +476,20 @@ function reskins.lib.assign_icons(name, inputs)
 
     -- Check whether icon or icons, ensure the key we're not using is erased
     if type(inputs.icon) == "table" then
+        -- Set icon_size and icon_mipmaps per icons specification
+        for n = 1, #inputs.icon do
+            if not inputs.icon[n].icon_size then
+                inputs.icon[n].icon_size = inputs.icon_size
+            end
+    
+            if not inputs.icon[n].icon_mipmaps then
+                inputs.icon[n].icon_mipmaps = inputs.icon_mipmaps
+            end
+        end
+
         -- Create icons that have multiple layers
         if entity then
-            -- entity.icon = nil        
+            entity.icon = nil        
             entity.icons = inputs.icon
             if inputs.make_entity_pictures then
                 entity.pictures = inputs.icon_picture
@@ -475,7 +497,7 @@ function reskins.lib.assign_icons(name, inputs)
         end
 
         if item then
-            -- item.icon = nil
+            item.icon = nil
             item.icons = inputs.icon
             if inputs.icon_picture then
                 item.pictures = inputs.icon_picture
@@ -483,7 +505,7 @@ function reskins.lib.assign_icons(name, inputs)
         end
 
         if item_with_data then
-            -- item_with_data.icon = nil
+            item_with_data.icon = nil
             item_with_data.icons = inputs.icon
             if inputs.icon_picture then
                 item_with_data.pictures = inputs.icon_picture
@@ -491,12 +513,12 @@ function reskins.lib.assign_icons(name, inputs)
         end
 
         if explosion then 
-            -- explosion.icon = nil        
+            explosion.icon = nil        
             explosion.icons = inputs.icon
         end
 
         if remnant then
-            -- remnant.icon = nil
+            remnant.icon = nil
             remnant.icons = inputs.icon
         end
     else
@@ -533,7 +555,7 @@ function reskins.lib.assign_icons(name, inputs)
         end
     end
 
-    -- Make assignments common to all cases
+    -- Set top-level icon_size and icon_mipmaps
     if entity then
         entity.icon_size = inputs.icon_size
         entity.icon_mipmaps = inputs.icon_mipmaps          
