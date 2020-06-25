@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.00.7
-Date: 2020.06.XX
+Date: 2020.06.24
   Changes:
     - Reverted previous change in 0.00.6
     - Sets icon_size and icon_mipmaps at every entry within an icons table when icons are assigned
