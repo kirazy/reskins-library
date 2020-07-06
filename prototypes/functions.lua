@@ -823,3 +823,25 @@ function reskins.lib.setting(name)
 
     return startup_setting
 end
+
+-- Rescale remnant entities
+function reskins.lib.rescale_remnant(entity, scale)
+    -- Check the entity exists
+    if not entity then return end
+
+    -- Fetch remnant
+    local remnant_name = entity.corpse
+
+    -- Create, rescale, and assign rescaled remnant
+    if remnant_name then
+        local remnant = data.raw.corpse[remnant_name]
+
+        if remnant then
+            rescaled_remnant = util.copy(remnant)
+            rescaled_remnant.name = "rescaled-"..rescaled_remnant.name
+            reskins.lib.rescale_entity(rescaled_remnant, scale)
+            data:extend({rescaled_remnant})
+            entity.corpse = rescaled_remnant.name
+        end
+    end
+end
