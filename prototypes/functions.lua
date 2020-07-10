@@ -373,7 +373,7 @@ function reskins.lib.append_tier_labels(tier, inputs)
         end
 
         -- Append the tier labels
-        icon_style = settings.startup["reskins-lib-icon-tier-labeling-style"].value
+        local icon_style = settings.startup["reskins-lib-icon-tier-labeling-style"].value
         table.insert(inputs.icon, {icon = reskins.lib.directory.."/graphics/icons/tiers/"..icon_style.."/"..tier..".png"})
         table.insert(inputs.icon, {
             icon = reskins.lib.directory.."/graphics/icons/tiers/"..icon_style.."/"..tier..".png",
@@ -432,7 +432,7 @@ function reskins.lib.assign_technology_icons(name, inputs)
     -- technology_icon  - Table or string defining technology icon
 
     -- Initialize paths
-    technology = data.raw["technology"][name]
+    local technology = data.raw["technology"][name]
 
     -- Ensure the technology in question exists
     if technology then
@@ -643,7 +643,7 @@ end
 
 -- Adjust the alpha value of a given tint
 function reskins.lib.adjust_alpha(tint, alpha)
-    adjusted_tint = {r = tint.r, g = tint.g, b = tint.b, a = alpha}
+    local adjusted_tint = {r = tint.r, g = tint.g, b = tint.b, a = alpha}
     return adjusted_tint
 end
 
@@ -687,7 +687,7 @@ function reskins.lib.belt_mask_tint(tint)
     local alpha = 0.82
 
     -- Color correct the tint
-    belt_mask_tint = reskins.lib.adjust_tint(tint, color_shift, alpha)
+    local belt_mask_tint = reskins.lib.adjust_tint(tint, color_shift, alpha)
 
     return belt_mask_tint
 end
@@ -837,7 +837,7 @@ function reskins.lib.rescale_remnant(entity, scale)
         local remnant = data.raw.corpse[remnant_name]
 
         if remnant then
-            rescaled_remnant = util.copy(remnant)
+            local rescaled_remnant = util.copy(remnant)
             rescaled_remnant.name = "rescaled-"..rescaled_remnant.name
             reskins.lib.rescale_entity(rescaled_remnant, scale)
             data:extend({rescaled_remnant})
