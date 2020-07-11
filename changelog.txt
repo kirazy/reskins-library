@@ -1,8 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.9
-Date: 2020.07.XX
+Date: 2020.07.11
   Changes:
     - Code improvements; ensured variables are locally defined
+    - Tier labels now have borders on the left
+    - Tier labels have been improved at 16x and 8x pixel sizes for clarity
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.8
 Date: 2020.07.06
