@@ -92,11 +92,11 @@ data:extend(
         order = "yy",
         default_value = "23de55",
     },
-    -- {
-    --     type = "string-setting",
-    --     name = "reskins-lib-custom-colors-tier-6",
-    --     setting_type ="startup",
-    --     order = "yy",
-    --     default_value = "999999"
-    -- }
+    {
+        type = "string-setting",
+        name = "reskins-lib-custom-colors-tier-6",
+        setting_type ="startup",
+        order = "yy",
+        default_value = "b3b3b3"
+    }
 })

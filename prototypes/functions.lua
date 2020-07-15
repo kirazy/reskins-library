@@ -151,6 +151,21 @@ function reskins.lib.construct_icon(name, tier, inputs)
     -- icon_extras              - Table of additional icon layers to add
     -- icon_picture_extras      - Table of additional icon layers to add for on-the-ground items
 
+    local function equipment_background(category)
+        local tints = {
+            ["offense"] = util.color("e62c2c"),
+            ["defense"] = util.color("3282d1"),
+            ["energy"] = util.color("32d167"),
+            ["logistic"] = util.color("4d4d4d"),
+        }
+    
+        return
+        {
+            icon = reskins.lib.directory.."/graphics/icons/backgrounds/equipment-background.png",
+            tint = tints[category],
+        }
+    end
+
     -- Handle compatibility defaults
     local folder_path = inputs.group
     if inputs.subgroup then
@@ -279,10 +294,8 @@ function reskins.lib.construct_icon(name, tier, inputs)
     end
 
     -- Insert icon background if necessary
-    if inputs.icon_background then
-        table.insert(inputs.icon, 1, {
-            icon = reskins.lib.directory.."/graphics/icons/backgrounds/"..inputs.icon_background.."-icon-background.png"
-        })
+    if inputs.equipment_category then
+        table.insert(inputs.icon, 1, equipment_background(inputs.equipment_category))
     end
 
     -- Append tier labels
@@ -712,7 +725,7 @@ else
         ["tier-3"] = util.color("1b87c2"),
         ["tier-4"] = util.color("a600bf"),
         ["tier-5"] = util.color("23de55"),
-        -- ["tier-6"] = util.color("999999"),
+        ["tier-6"] = util.color("b3b3b3"),
     }
 end
 

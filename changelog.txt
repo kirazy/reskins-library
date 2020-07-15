@@ -3,6 +3,9 @@ Version: 0.0.11
 Date: 2020.07.XX
   Changes:
     - Revised tier label icons, 32px is now more clear
+    - Revised how equipment icon backgrounds are handled
+    - Added a 6th tier for use with ingredient-based tiering
+    - Removed files and code relating to target drone utility
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.10
 Date: 2020.07.13

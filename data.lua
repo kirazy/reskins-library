@@ -5,6 +5,3 @@
 
 -- Core functions
 require("prototypes.functions")
-
--- Testing Utilities
--- require("prototypes.target-drone")
