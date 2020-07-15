@@ -725,7 +725,7 @@ else
         ["tier-3"] = util.color("1b87c2"),
         ["tier-4"] = util.color("a600bf"),
         ["tier-5"] = util.color("23de55"),
-        ["tier-6"] = util.color("b3b3b3"),
+        ["tier-6"] = util.color("e5e5e5"),
     }
 end
 
