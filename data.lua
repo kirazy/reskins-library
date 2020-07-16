@@ -5,3 +5,4 @@
 
 -- Core functions
 require("prototypes.functions")
+require("prototypes.label-items")

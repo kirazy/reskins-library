@@ -5,6 +5,8 @@ Date: 2020.07.XX
     - Revised tier label icons, 32px is now more clear
     - Revised how equipment icon backgrounds are handled
     - Added support for a 6th tier, currently disabled
+    - Enhanced mod setting names and descriptions with rich text; tier labels are now displayed next to their respective option
+    - Renamed "ingredients"-based tier mapping to "progression"-based tier mapping, and improved the clarity of the setting description
     - Removed files and code relating to target drone utility
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.10
