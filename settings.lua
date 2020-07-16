@@ -13,22 +13,13 @@ data:extend(
         order = "a",
         default_value = true,
     },
-    -- {
-    --     type = "int-setting",
-    --     name = "reskins-lib-target-drone-health",
-    --     setting_type = "startup",
-    --     order = "zzzzzz",
-    --     default_value = 50000000,
-    --     maximum_value = 2147483648,
-    --     minimum_value = 1000
-    -- },
     {
         type = "string-setting",
         name = "reskins-lib-tier-mapping",
         setting_type = "startup",
         order = "ab",
-        default_value = "ingredients-map",
-        allowed_values = {"ingredients-map","name-map"}
+        default_value = "progression-map",
+        allowed_values = {"progression-map","name-map"}
     },
     {
         type = "string-setting",
@@ -96,7 +87,8 @@ data:extend(
         type = "string-setting",
         name = "reskins-lib-custom-colors-tier-6",
         setting_type ="startup",
+        hidden = true, -- We're not using this yet
         order = "yy",
-        default_value = "b3b3b3"
+        default_value = "4d4cff"
     }
 })

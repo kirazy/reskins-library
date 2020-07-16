@@ -714,7 +714,7 @@ if settings.startup["reskins-lib-customize-tier-colors"].value == true then
         ["tier-3"] = util.color(settings.startup["reskins-lib-custom-colors-tier-3"].value),
         ["tier-4"] = util.color(settings.startup["reskins-lib-custom-colors-tier-4"].value),
         ["tier-5"] = util.color(settings.startup["reskins-lib-custom-colors-tier-5"].value),
-        ["tier-6"] = util.color(settings.startup["reskins-lib-custom-colors-tier-5"].value),
+        ["tier-6"] = util.color(settings.startup["reskins-lib-custom-colors-tier-6"].value),
     }
 else
     reskins.lib.tint_index =
@@ -725,7 +725,7 @@ else
         ["tier-3"] = util.color("1b87c2"),
         ["tier-4"] = util.color("a600bf"),
         ["tier-5"] = util.color("23de55"),
-        ["tier-6"] = util.color("e5e5e5"),
+        ["tier-6"] = util.color("4d4cff"),
     }
 end
 
