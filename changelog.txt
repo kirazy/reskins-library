@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.11
-Date: 2020.07.XX
+Date: 2020.07.15
   Changes:
     - Revised tier label icons, 32px is now more clear
     - Revised how equipment icon backgrounds are handled
