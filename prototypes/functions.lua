@@ -593,6 +593,29 @@ function reskins.lib.assign_icons(name, inputs)
         remnant.icon_size = inputs.icon_size
         remnant.icon_mipmaps = inputs.icon_mipmaps
     end
+
+    -- Clear out recipe so that icon is inherited properly
+    if inputs.type ~= "recipe" then
+        reskins.lib.clear_icon_specification(name, "recipe")
+    end
+
+end
+
+-- Clear out icon properties for a given entity
+function reskins.lib.clear_icon_specification(name, type)
+    -- Inputs required by this function:
+    -- type        - Entity type
+
+    -- Fetch entity
+    local entity = data.raw[type][name]
+
+    -- If the entity exists, clear the icon specification
+    if entity then
+        entity.icon = nil
+        entity.icons = nil
+        entity.icon_size = nil
+        entity.icon_mipmaps = nil
+    end
 end
 
 -- Create remnant entity; reskin the remnant after calling this function
