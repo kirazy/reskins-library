@@ -968,3 +968,35 @@ function reskins.lib.make_4way_animation_from_spritesheet(animation)
         west = make_animation(3)
     }
 end
+
+function reskins.lib.create_icons_from_list(table, inputs, is_tech_icon)
+    for name, map in pairs(table) do
+        -- Fetch icon
+        local icon_type = inputs.type or map.type or "item"
+        icon = data.raw[icon_type][name]
+
+        -- Work with local copy of inputs
+        local inputs = util.copy(inputs)
+    
+        -- Check if icon exists, if not, skip this iteration
+        if not icon then goto continue end
+   
+        -- Parse map
+        local image = map.image or name
+        local folder = map.folder or inputs.group
+        inputs.type = map.type or nil
+        inputs.defer_to_data_updates = map.defer_to_data_updates or nil
+        inputs.defer_to_data_final_fixes = map.defer_to_data_final_fixes or nil
+
+        if is_tech_icon == true then
+            inputs.technology_icon_filename = inputs.directory.."/graphics/technology/"..folder.."/"..map.subfolder.."/"..image..".png"
+            reskins.lib.construct_technology_icon(name, inputs)
+        else
+            inputs.icon_filename = inputs.directory.."/graphics/icons/"..folder.."/"..map.subfolder.."/"..image..".png"
+            reskins.lib.construct_icon(name, 0, inputs)
+        end
+    
+    -- Label to skip to next iteration
+        ::continue::
+    end
+end
