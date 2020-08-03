@@ -358,6 +358,9 @@ function reskins.lib.store_icons(name, inputs, storage)
         data_stage = "data-final-fixes"
     elseif inputs.defer_to_data_updates then
         data_stage = "data-updates"
+    else
+        log(name.." was improperly stored for deferred icon assignment.")
+        return -- Fail quietly; should never get here
     end
 
     -- Initialize the arrays
