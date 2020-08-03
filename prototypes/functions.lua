@@ -126,6 +126,7 @@ function reskins.lib.construct_technology_icon(name, inputs)
     -- It may be necessary to put icons back in final fixes, allow for that
     if inputs.defer_to_data_final_fixes or inputs.defer_to_data_updates then
         reskins.lib.store_icons(name, inputs, "technology")
+        return
     end
 
     reskins.lib.assign_technology_icons(name, inputs)
@@ -304,6 +305,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
     -- It may be necessary to put icons back in final fixes, allow for that
     if inputs.defer_to_data_final_fixes or inputs.defer_to_data_updates then
         reskins.lib.store_icons(name, inputs)
+        return
     end
 
     reskins.lib.assign_icons(name, inputs)
@@ -340,6 +342,7 @@ function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
     -- It may be necessary to put icons back in final fixes, allow for that
     if inputs.defer_to_data_final_fixes or inputs.defer_to_data_updates then
         reskins.lib.store_icons(name, inputs)
+        return
     end
 
     reskins.lib.assign_icons(name, inputs)
@@ -985,8 +988,9 @@ function reskins.lib.create_icons_from_list(table, inputs, is_tech_icon)
         local image = map.image or name
         local folder = map.folder or inputs.group
         inputs.type = map.type or nil
-        inputs.defer_to_data_updates = map.defer_to_data_updates or nil
-        inputs.defer_to_data_final_fixes = map.defer_to_data_final_fixes or nil
+        
+        inputs.defer_to_data_updates = inputs.defer_to_data_updates or map.defer_to_data_updates or nil
+        inputs.defer_to_data_final_fixes = inputs.defer_to_data_final_fixes or map.defer_to_data_final_fixes or nil
 
         if is_tech_icon == true then
             inputs.technology_icon_filename = inputs.directory.."/graphics/technology/"..folder.."/"..map.subfolder.."/"..image..".png"
