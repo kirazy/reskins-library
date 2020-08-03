@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.12
-Date: 2020.07.XX
+Date: 2020.08.03
   Features:
     - Added function "clear_icon_specification"
     - Added function "create_icons_from_list"
