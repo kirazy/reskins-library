@@ -3,6 +3,8 @@ Version: 0.0.12
 Date: 2020.07.XX
   Features:
     - Added function "clear_icon_specification"
+  Changes:
+    - Modifed function "store_icon" to handle data-updates as well
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.11
 Date: 2020.07.15

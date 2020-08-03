@@ -124,7 +124,7 @@ function reskins.lib.construct_technology_icon(name, inputs)
     end
 
     -- It may be necessary to put icons back in final fixes, allow for that
-    if inputs.reassign_in_final_fixes then
+    if inputs.defer_to_data_final_fixes or inputs.defer_to_data_updates then
         reskins.lib.store_icons(name, inputs, "technology")
     end
 
@@ -302,7 +302,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
     reskins.lib.append_tier_labels(tier, inputs)
 
     -- It may be necessary to put icons back in final fixes, allow for that
-    if inputs.reassign_in_final_fixes then
+    if inputs.defer_to_data_final_fixes or inputs.defer_to_data_updates then
         reskins.lib.store_icons(name, inputs)
     end
 
@@ -338,7 +338,7 @@ function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
     }
 
     -- It may be necessary to put icons back in final fixes, allow for that
-    if inputs.reassign_in_final_fixes then
+    if inputs.defer_to_data_final_fixes or inputs.defer_to_data_updates then
         reskins.lib.store_icons(name, inputs)
     end
 
@@ -352,7 +352,25 @@ function reskins.lib.store_icons(name, inputs, storage)
 
     local storage = storage or "icons"
 
-    reskins[inputs.mod][storage][name] = util.copy(inputs)
+    -- Which stage are we deferring to
+    local data_stage
+    if inputs.defer_to_data_final_fixes then
+        data_stage = "data-final-fixes"
+    elseif inputs.defer_to_data_updates then
+        data_stage = "data-updates"
+    end
+
+    -- Initialize the arrays
+    if not reskins[inputs.mod][storage] then
+        reskins[inputs.mod][storage] = {}
+    end
+
+    if not reskins[inputs.mod][storage][data_stage] then
+        reskins[inputs.mod][storage][data_stage] = {}
+    end
+
+    -- Store the icon
+    reskins[inputs.mod][storage][data_stage][name] = util.copy(inputs)
 end
 
 -- Parses the main inputs table of parameters
