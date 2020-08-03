@@ -387,12 +387,13 @@ function reskins.lib.parse_inputs(inputs)
     end
     
     -- Constructs defaults for optional input parameters.
-    inputs.icon_size       = inputs.icon_size        or 64      -- Pixel size of icons
-    inputs.icon_mipmaps    = inputs.icon_mipmaps     or 4       -- Number of mipmaps present in the icon image file       
-    inputs.make_explosions = (inputs.make_explosions ~= false)  -- Create explosions; default true
-    inputs.make_remnants   = (inputs.make_remnants   ~= false)  -- Create remnant; default true
-    inputs.make_icons      = (inputs.make_icons      ~= false)  -- Create icons; default true
-    inputs.tier_labels     = (inputs.tier_labels     ~= false)  -- Display tier labels; default true
+    inputs.icon_size            = inputs.icon_size or 64                -- Pixel size of icons
+    inputs.icon_mipmaps         = inputs.icon_mipmaps or 4              -- Number of mipmaps present in the icon image file       
+    inputs.make_explosions      = (inputs.make_explosions ~= false)     -- Create explosions; default true
+    inputs.make_remnants        = (inputs.make_remnants ~= false)       -- Create remnant; default true
+    inputs.make_icons           = (inputs.make_icons ~= false)          -- Create icons; default true
+    inputs.tier_labels          = (inputs.tier_labels ~= false)         -- Display tier labels; default true
+    inputs.make_icon_pictures   = (inputs.make_icon_pictures ~= false)  -- Define the pictures icon field when possible
 
     return inputs
 end
@@ -528,25 +529,16 @@ function reskins.lib.assign_icons(name, inputs)
         if entity then
             entity.icon = nil        
             entity.icons = inputs.icon
-            if inputs.make_entity_pictures then
-                entity.pictures = inputs.icon_picture
-            end
         end
 
         if item then
             item.icon = nil
             item.icons = inputs.icon
-            if inputs.icon_picture then
-                item.pictures = inputs.icon_picture
-            end
         end
 
         if item_with_data then
             item_with_data.icon = nil
             item_with_data.icons = inputs.icon
-            if inputs.icon_picture then
-                item_with_data.pictures = inputs.icon_picture
-            end
         end
 
         if explosion then 
@@ -568,17 +560,11 @@ function reskins.lib.assign_icons(name, inputs)
         if item then
             item.icons = nil        
             item.icon = inputs.icon
-            if inputs.icon_picture then
-                item.pictures = inputs.icon_picture
-            end
         end
 
         if item_with_data then
             item_with_data.icons = nil        
             item_with_data.icon = inputs.icon
-            if inputs.icon_picture then
-                item_with_data.pictures = inputs.icon_picture
-            end
         end
 
         if explosion then
@@ -595,17 +581,32 @@ function reskins.lib.assign_icons(name, inputs)
     -- Set top-level icon_size and icon_mipmaps
     if entity then
         entity.icon_size = inputs.icon_size
-        entity.icon_mipmaps = inputs.icon_mipmaps          
+        entity.icon_mipmaps = inputs.icon_mipmaps
+
+        -- Add picture definitions
+        if inputs.icon_picture and inputs.make_entity_pictures then
+            entity.pictures = inputs.icon_picture
+        end
     end
 
     if item then
         item.icon_size = inputs.icon_size
-        item.icon_mipmaps = inputs.icon_mipmaps 
+        item.icon_mipmaps = inputs.icon_mipmaps
+
+        -- Add picture definitions
+        if inputs.icon_picture and inputs.make_icon_pictures  then
+            item.pictures = inputs.icon_picture
+        end
     end
 
     if item_with_data then
         item_with_data.icon_size = inputs.icon_size
-        item_with_data.icon_mipmaps = inputs.icon_mipmaps 
+        item_with_data.icon_mipmaps = inputs.icon_mipmaps
+        
+        -- Add picture definitions
+        if inputs.icon_picture and inputs.make_icon_pictures then
+            item_with_data.pictures = inputs.icon_picture
+        end
     end
 
     if explosion then
