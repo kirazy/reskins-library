@@ -253,7 +253,6 @@ reskins.lib.particle_index = {
 
 }
 
-
 -- Check if a startup setting exists, and if it does, return its value
 function reskins.lib.setting(name)
     local startup_setting
