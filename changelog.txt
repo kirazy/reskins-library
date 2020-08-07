@@ -1,6 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.14
 Date: 2020.08.XX
+  Features:
+    - Added function "assign_deferred_icons"
   Changes:
     - Moved relevant visual assets and code for oil refineries into this mod
     - Revised icon assignment to optionally define "pictures"
