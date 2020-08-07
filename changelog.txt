@@ -7,6 +7,7 @@ Date: 2020.08.07
     - Moved sprites, icons and code for oil refineries into this mod
     - Revised icon assignment to optionally define `pictures`
     - Increased scope of `create_icons_from_list` to handle all item/technology icon setups
+    - Changed how tier label setting icons were created and referenced; now uses sprite prototype
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.13
 Date: 2020.08.03

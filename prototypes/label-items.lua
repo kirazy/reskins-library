@@ -1,13 +1,12 @@
-local function create_label_item(label)
+local function create_label_sprite(label)
     data:extend({
         {
-            type = "item",
+            type = "sprite",
             name = "reskins-lib-"..label.."-tier-label",
-            icon = reskins.lib.directory.."/graphics/icons/icon-"..label..".png",
-            icon_size = 40, icon_mipmaps = 2,
-            flags = { "hidden" },
-            order = "zzz-reskins-tier-icons",
-            stack_size = 10
+            filename = reskins.lib.directory.."/graphics/icons/icon-"..label..".png",
+            size = 40,
+            mipmap_count = 2,
+            flags = {"gui-icon"}
         }
     })
 end
@@ -22,5 +21,5 @@ local icons = {
 }
 
 for _, v in pairs(icons) do
-    create_label_item(v)
+    create_label_sprite(v)
 end
