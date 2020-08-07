@@ -658,3 +658,19 @@ function reskins.lib.create_icons_from_list(table, inputs)
         ::continue::
     end
 end
+
+function reskins.lib.assign_deferred_icons(mod, data_stage)
+    -- Item Icons
+    if reskins[mod].icons and reskins[mod].icons[data_stage] then
+        for name, inputs in pairs(reskins[mod].icons[data_stage]) do
+            reskins.lib.assign_icons(name, inputs)
+        end
+    end
+
+    -- Technology Icons
+    if reskins[mod].technology and reskins[mod].technology[data_stage] then
+        for name, inputs in pairs(reskins[mod].technology[data_stage]) do
+            reskins.lib.assign_technology_icons(name, inputs)
+        end
+    end
+end

@@ -1,5 +1,5 @@
 -- Copyright (c) 2020 Kirazy
--- Part of Artisanal Reskins: Core Library
+-- Part of Artisanal Reskins: Function Library
 --     
 -- See LICENSE.md in the project directory for license information.
 

@@ -2,9 +2,9 @@
 Version: 0.0.14
 Date: 2020.08.XX
   Changes:
-    - Moved relevant visual assets and code for belts and refineries into this mod
-    - Moved compatibility for Mini-machines, Loader Redux, Vanilla Loaders HD and Deadlock's Stacking Beltboxes and Crating into this mod
+    - Moved relevant visual assets and code for oil refineries into this mod
     - Revised icon assignment to optionally define "pictures"
+    - Increased scope of "create_icons_from_list" to handle all item/technology icon setups
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.13
 Date: 2020.08.03

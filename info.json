@@ -8,6 +8,9 @@
   "homepage": "https://forums.factorio.com/viewtopic.php?f=51&t=85707",
   "dependencies": 
   [	
-    "base >= 0.18.36"
+    "base >= 0.18.36",
+    "(?) vanilla-loaders-hd",
+    "(?) ShinyBobGFX",
+    "(?) ShinyAngelGFX"
   ]
 }
