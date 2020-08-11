@@ -10,6 +10,18 @@ if not reskins.lib then reskins.lib = {} end
 -- Library directory
 reskins.lib.directory = "__reskins-library__"
 
+-- Check if a startup setting exists, and if it does, return its value
+function reskins.lib.setting(name)
+    local startup_setting
+    if settings.startup[name] then
+        startup_setting = settings.startup[name].value
+    else
+        startup_setting = nil
+    end
+
+    return startup_setting
+end
+
 -- Most entities have a common process for reskinning, so consolidate the other functions under one superfunction for ease of use
 function reskins.lib.setup_standard_entity(name, tier, inputs)
     -- Parse inputs
@@ -252,18 +264,6 @@ reskins.lib.particle_index = {
     ["big-tint"] = "metal-particle-big-tint",
 
 }
-
--- Check if a startup setting exists, and if it does, return its value
-function reskins.lib.setting(name)
-    local startup_setting
-    if settings.startup[name] then
-        startup_setting = settings.startup[name].value
-    else
-        startup_setting = nil
-    end
-
-    return startup_setting
-end
 
 function reskins.lib.make_4way_animation_from_spritesheet(animation)
     local function make_animation_layer(idx, anim)

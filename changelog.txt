@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.15
+Date: 2020.08.11
+  Changes:
+    - Updated thumbnail
+  Bugfixes:
+    - Fixed startup error when starting without any of Bob's mods; calling a function that hadn't been defined yet
+---------------------------------------------------------------------------------------------------
 Version: 0.0.14
 Date: 2020.08.07
   Features:
