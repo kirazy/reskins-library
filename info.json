@@ -1,14 +1,14 @@
 {
   "name": "reskins-library",
-  "version": "0.0.16",
-  "factorio_version": "0.18",
+  "version": "1.0.1",
+  "factorio_version": "1.0",
   "title": "Artisanal Reskins: Library",
   "author": "Kirazy",
   "contact": "kirazy@live.com",
   "homepage": "https://forums.factorio.com/viewtopic.php?f=51&t=85707",
   "dependencies": 
   [	
-    "base >= 0.18.46",
+    "base >= 1.0.0",
     "(?) vanilla-loaders-hd",
     "(?) ShinyBobGFX",
     "(?) ShinyAngelGFX"
