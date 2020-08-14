@@ -66,6 +66,66 @@ function reskins.lib.rescale_minimachine(table, type, pattern, replacement, scal
     end
 end
 
+-- Rescale a given technology added by Mini Machines mod
+function reskins.lib.rescale_minimachine_technology(name, source_name)
+    -- Setup source and destination locals
+    local source = data.raw["technology"][source_name]
+    local destination = data.raw["technology"][name]
+
+    -- Ensure work is possible
+    if not destination then return end
+    if not source then return end
+
+    -- Setup inputs
+    local technology_icon = {
+        {
+            icon = reskins.lib.directory.."/graphics/technology/mini-machine-underlay.png",
+            icon_size = 256,
+            icon_mipmaps = 1,
+            scale = 1,
+        }
+    }
+
+    -- Transcribe icon or icons
+    if source.icons then
+        local source_technology_icon = util.copy(source.icons)
+
+        -- Iterate and ensure icon_size/icon_mipmaps/scale are set
+        for n = 1, #source_technology_icon do
+            source_technology_icon[n].icon_size = source_technology_icon[n].icon_size or source.icon_size or 128
+            source_technology_icon[n].icon_mipmaps = source_technology_icon[n].icon_mipmaps or source.icon_mipmaps or 1
+            
+            -- Normalize scale to 80%
+            if source_technology_icon[n].scale then
+                source_technology_icon[n].scale = 0.8 * source_technology_icon[n].scale
+            else
+                source_technology_icon[n].scale = 0.8 * (256 / source_technology_icon[n].icon_size)
+            end
+
+            -- Insert each entry into the mini tech icon table
+            table.insert(technology_icon, source_technology_icon[n])
+        end
+    else
+        table.insert(technology_icon, {
+            icon = source.icon,
+            icon_size = source.icon_size,
+            icon_mipmaps = source.icon_mipmaps,
+            scale = 0.8 * (256 / source.icon_size),
+        })
+    end
+
+    -- Add the mini machine icon
+    table.insert(technology_icon, {
+        icon = reskins.lib.directory.."/graphics/technology/mini-machine-overlay.png",
+        icon_size = 256,
+        icon_mipmaps = 3,
+        scale = 1,
+    })
+
+    -- Assign icon
+    reskins.lib.assign_technology_icons(name, {technology_icon = technology_icon})
+end
+
 -- Filtering tables for rescale_entity
 local fields = {
     "shift", 

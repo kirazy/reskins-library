@@ -109,7 +109,11 @@ end
 
 function reskins.lib.assign_technology_icons(name, inputs)
     -- Inputs required by this function
-    -- technology_icon  - Table or string defining technology icon
+    -- technology_icon          - Table or string defining technology icon
+
+    -- Optional inputs (required if making a flat icon)
+    -- technology_icon_size     - Pixel size of icons
+    -- technology_icon_mipmaps  - Number of mipmaps present in the icon image file
 
     -- Initialize paths
     local technology = data.raw["technology"][name]
@@ -131,14 +135,14 @@ function reskins.lib.assign_technology_icons(name, inputs)
 
             technology.icon = nil
             technology.icons = inputs.technology_icon
+            technology.icon_size = nil
+            technology.icon_mipmaps = nil
         else
             technology.icon = inputs.technology_icon
             technology.icons = nil
+            technology.icon_size = inputs.technology_icon_size
+            technology.icon_mipmaps = inputs.technology_icon_mipmaps
         end
-
-        -- Set top-level icon_size
-        technology.icon_size = inputs.technology_icon_size
-        technology.icon_mipmaps = inputs.technology_icon_mipmaps
     end
 end
 
@@ -388,101 +392,98 @@ function reskins.lib.assign_icons(name, inputs)
         if entity then
             entity.icon = nil        
             entity.icons = inputs.icon
+            entity.icon_size = nil
+            entity.icon_mipmaps = nil
         end
 
         if item then
             item.icon = nil
             item.icons = inputs.icon
+            item.icon_size = nil
+            item.icon_mipmaps = nil
         end
 
         if item_with_data then
             item_with_data.icon = nil
             item_with_data.icons = inputs.icon
+            item_with_data.icon_size = nil
+            item_with_data.icon_mipmaps = nil
         end
 
         if explosion then 
             explosion.icon = nil        
             explosion.icons = inputs.icon
+            explosion.icon_size = nil
+            explosion.icon_mipmaps = nil
         end
 
         if remnant then
             remnant.icon = nil
             remnant.icons = inputs.icon
+            remnant.icon_size = nil
+            remnant.icon_mipmaps = nil
         end
     else
         -- Create icons that do not have multiple layers
         if entity then
             entity.icons = nil
             entity.icon = inputs.icon
+            entity.icon_size = inputs.icon_size
+            entity.icon_mipmaps = inputs.icon_mipmaps
         end
 
         if item then
             item.icons = nil        
             item.icon = inputs.icon
+            item.icon_size = inputs.icon_size
+            item.icon_mipmaps = inputs.icon_mipmaps
         end
 
         if item_with_data then
             item_with_data.icons = nil        
             item_with_data.icon = inputs.icon
+            item_with_data.icon_size = inputs.icon_size
+            item_with_data.icon_mipmaps = inputs.icon_mipmaps
         end
 
         if explosion then
             explosion.icons = nil        
             explosion.icon = inputs.icon
+            explosion.icon_size = inputs.icon_size
+            explosion.icon_mipmaps = inputs.icon_mipmaps
         end
 
         if remnant then
             remnant.icons = nil
             remnant.icon = inputs.icon
+            remnant.icon_size = inputs.icon_size
+            remnant.icon_mipmaps = inputs.icon_mipmaps
         end
     end
 
-    -- Set top-level icon_size and icon_mipmaps
+    -- Handle picture definitions
     if entity then
-        entity.icon_size = inputs.icon_size
-        entity.icon_mipmaps = inputs.icon_mipmaps
-
-        -- Add picture definitions
         if inputs.icon_picture and inputs.make_entity_pictures then
             entity.pictures = inputs.icon_picture
         end
     end
 
     if item then
-        item.icon_size = inputs.icon_size
-        item.icon_mipmaps = inputs.icon_mipmaps
-
-        -- Add picture definitions
         if inputs.icon_picture and inputs.make_icon_pictures  then
             item.pictures = inputs.icon_picture
         end
     end
 
-    if item_with_data then
-        item_with_data.icon_size = inputs.icon_size
-        item_with_data.icon_mipmaps = inputs.icon_mipmaps
-        
-        -- Add picture definitions
+    if item_with_data then        
         if inputs.icon_picture and inputs.make_icon_pictures then
             item_with_data.pictures = inputs.icon_picture
         end
-    end
-
-    if explosion then
-        explosion.icon_size = inputs.icon_size
-        explosion.icon_mipmaps = inputs.icon_mipmaps
-    end
-    
-    if remnant then
-        remnant.icon_size = inputs.icon_size
-        remnant.icon_mipmaps = inputs.icon_mipmaps
     end
 
     -- Clear out recipe so that icon is inherited properly
     if inputs.type ~= "recipe" then
         reskins.lib.clear_icon_specification(name, "recipe")
     end
-
 end
 
 function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)

@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.16
+Date: 2020.08.XX
+  Features:
+    - Added function `rescale_minimachine_technology`
+  Changes:
+    - `icon_size` and `icon_mipmaps` are now set to `nil` when `icons` is defined, and they are defined per-entry within `icons`
+---------------------------------------------------------------------------------------------------
 Version: 0.0.15
 Date: 2020.08.11
   Changes:
