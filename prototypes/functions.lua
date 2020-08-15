@@ -246,10 +246,10 @@ if settings.startup["reskins-lib-customize-tier-colors"].value == true then
         ["tier-5"] = util.color(settings.startup["reskins-lib-custom-colors-tier-5"].value),
         ["tier-6"] = util.color(settings.startup["reskins-lib-custom-colors-tier-6"].value),
     }
-elseif mods["boblibrary"] then
-    reskins.lib.tint_index = reskins.lib.tint_defaults.bobs
 elseif reskins.lib.setting("reskins-angels-use-angels-tier-colors") then
     reskins.lib.tint_index = reskins.lib.tint_defaults.angels
+else
+    reskins.lib.tint_index = reskins.lib.tint_defaults.bobs
 end
 
 reskins.lib.particle_index = {
