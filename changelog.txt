@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------------
-Version: 0.0.16
+Version: 1.0.1
 Date: 2020.08.15
   Features:
     - Added function `rescale_minimachine_technology`
