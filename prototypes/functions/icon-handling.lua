@@ -632,6 +632,12 @@ function reskins.lib.create_icons_from_list(table, inputs)
                 reskins.lib.construct_icon(name, 0, inputs)
             end
         else
+            -- Transcribe icon properties
+            inputs.technology_icon_layers = map.technology_icon_layers or inputs.technology_icon_layers or nil
+            inputs.icon_layers = map.icon_layers or inputs.icon_layers or nil
+            inputs.technology_icon_extras = map.technology_icon_extras or inputs.technology_icon_extras or nil
+            inputs.icon_extras = map.icon_extras or inputs.icon_extras or nil
+
             -- Handle tier
             local tier = map.tier or 0
             if reskins.lib.setting("reskins-lib-tier-mapping") == "progression-map" then
@@ -640,6 +646,11 @@ function reskins.lib.create_icons_from_list(table, inputs)
 
             -- Handle tints
             inputs.tint = map.tint or inputs.tint or reskins.lib.tint_index["tier-"..tier]
+
+            -- Adjust tint to belt-type if necessary
+            if map.uses_belt_mask == true then
+                inputs.tint = reskins.lib.belt_mask_tint(inputs.tint)
+            end
 
             -- Handle icon_name and related parameters
             inputs.icon_name = map.icon_name or inputs.icon_name
