@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.2
-Date: 2020.08.16
+Date: 2020.08.XX
   Changes:
     - Added functionality to `create_icons_from_list` to be able to specify belt-type masks
     - Adjusted bright spot in oil refinery highlight
