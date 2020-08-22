@@ -72,14 +72,14 @@ for name, map in pairs(tier_map) do
                 direction_count = 1,
                 shift = util.by_pixel(0, 0), --moved from -8.5 to -4.5
                 hr_version = {
-                  filename = "__base__/graphics/entity/oil-refinery/remnants/hr-refinery-remnants.png",
-                  line_length = 1,
-                  width = 467,
-                  height = 415,
-                  frame_count = 1,
-                  direction_count = 1,
-                  shift = util.by_pixel(-0.25, -0.25), --moved from -8.5 to -4.5
-                  scale = 0.5,
+                    filename = "__base__/graphics/entity/oil-refinery/remnants/hr-refinery-remnants.png",
+                    line_length = 1,
+                    width = 467,
+                    height = 415,
+                    frame_count = 1,
+                    direction_count = 1,
+                    shift = util.by_pixel(-0.25, -0.25), --moved from -8.5 to -4.5
+                    scale = 0.5,
                 }
             },
             -- Mask
