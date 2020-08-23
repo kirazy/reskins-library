@@ -1,9 +1,12 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.2
 Date: 2020.08.XX
+  Features:
+    - Added localization support for German
   Changes:
     - Added functionality to `create_icons_from_list` to be able to specify belt-type masks
     - Adjusted bright spot in oil refinery highlight
+    - Added Bob's Assembling Machines and Angel's Petrochem as hidden dependencies to fix Oil Refinery reskinning issues
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 2020.08.15

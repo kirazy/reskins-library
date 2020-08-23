@@ -9,7 +9,8 @@
   "dependencies": 
   [	
     "base >= 1.0.0",
-    "(?) vanilla-loaders-hd",
+    "(?) bobassembly",
+    "(?) angelspetrochem",
     "(?) ShinyBobGFX",
     "(?) ShinyAngelGFX"
   ]
