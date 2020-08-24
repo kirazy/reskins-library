@@ -135,8 +135,6 @@ function reskins.lib.assign_technology_icons(name, inputs)
 
             technology.icon = nil
             technology.icons = inputs.technology_icon
-            technology.icon_size = nil
-            technology.icon_mipmaps = nil
         else
             technology.icon = inputs.technology_icon
             technology.icons = nil
@@ -390,38 +388,28 @@ function reskins.lib.assign_icons(name, inputs)
 
         -- Create icons that have multiple layers
         if entity then
-            entity.icon = nil        
+            entity.icon = nil
             entity.icons = inputs.icon
-            entity.icon_size = nil
-            entity.icon_mipmaps = nil
         end
 
         if item then
             item.icon = nil
             item.icons = inputs.icon
-            item.icon_size = nil
-            item.icon_mipmaps = nil
         end
 
         if item_with_data then
             item_with_data.icon = nil
             item_with_data.icons = inputs.icon
-            item_with_data.icon_size = nil
-            item_with_data.icon_mipmaps = nil
         end
 
         if explosion then 
             explosion.icon = nil        
             explosion.icons = inputs.icon
-            explosion.icon_size = nil
-            explosion.icon_mipmaps = nil
         end
 
         if remnant then
             remnant.icon = nil
             remnant.icons = inputs.icon
-            remnant.icon_size = nil
-            remnant.icon_mipmaps = nil
         end
     else
         -- Create icons that do not have multiple layers
