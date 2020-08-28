@@ -2,7 +2,7 @@
 Version: 1.0.4
 Date: 2020.08.XX
   Features:
-    - Added setting 'Color intensity' allowing customization of highlight blend-mode property
+    - Added setting `Color intensity`, affecting how bright structures, vehicles and robots appear in-world
   Changes:
     - Improved clarity of tier labels at 16px; removed tier labels for 6th tier
 ---------------------------------------------------------------------------------------------------
