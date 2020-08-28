@@ -1,6 +1,6 @@
 -- Copyright (c) 2020 Kirazy
 -- Part of Artisanal Reskins: Library
---     
+--
 -- See LICENSE.md in the project directory for license information.
 
 -- Make our function host
