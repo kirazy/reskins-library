@@ -28,7 +28,15 @@ data:extend(
         order = "aa",
         default_value = "rounded-rectangle",
         allowed_values = {"dots","half-circle","rectangle","rounded-half-circle","rounded-rectangle","teardrop"}
-    }
+    },
+    {
+        type = "string-setting",
+        name = "reskins-lib-blend-mode",
+        setting_type = "startup",
+        order = "b",
+        default_value = "additive",
+        allowed_values = {"additive","additive-soft"}
+    },
 })
 
 -- Customize tier coloring settings

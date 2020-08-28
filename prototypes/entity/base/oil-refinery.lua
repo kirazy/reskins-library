@@ -113,7 +113,7 @@ for name, map in pairs(tier_map) do
                 frame_count = 1,
                 direction_count = 1,
                 shift = util.by_pixel(0, 0),
-                blend_mode = "additive",
+                blend_mode = reskins.lib.blend_mode,
                 hr_version = {
                     filename = inputs.directory.."/graphics/entity/base/oil-refinery/remnants/hr-refinery-remnants-highlights.png",
                     line_length = 1,
@@ -122,7 +122,7 @@ for name, map in pairs(tier_map) do
                     frame_count = 1,
                     direction_count = 1,
                     shift = util.by_pixel(-0.25, -0.25),
-                    blend_mode = "additive",
+                    blend_mode = reskins.lib.blend_mode,
                     scale = 0.5,
                 }
             }
@@ -173,14 +173,14 @@ for name, map in pairs(tier_map) do
                 height = 255,
                 frame_count = 1,
                 shift = {2.515625, 0.484375},
-                blend_mode = "additive",
+                blend_mode = reskins.lib.blend_mode,
                 hr_version = {
                 filename = inputs.directory.."/graphics/entity/base/oil-refinery/hr-oil-refinery-highlights.png",
                 width = 386,
                 height = 430,
                 frame_count = 1,
                 shift = util.by_pixel(0, -7.5),
-                blend_mode = "additive",
+                blend_mode = reskins.lib.blend_mode,
                 scale = 0.5
                 }
             },

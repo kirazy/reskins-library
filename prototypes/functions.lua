@@ -22,6 +22,9 @@ function reskins.lib.setting(name)
     return startup_setting
 end
 
+-- Fetch blend mode
+reskins.lib.blend_mode = reskins.lib.setting("reskins-lib-blend-mode")
+
 -- Most entities have a common process for reskinning, so consolidate the other functions under one superfunction for ease of use
 function reskins.lib.setup_standard_entity(name, tier, inputs)
     -- Parse inputs
