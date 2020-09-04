@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.4
-Date: 2020.08.XX
+Date: 2020.09.XX
   Features:
     - Added setting `Color intensity`, affecting how bright structures, vehicles and robots appear in-world
   Changes:
@@ -13,12 +13,12 @@ Date: 2020.08.24
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.2
 Date: 2020.08.24
-  Features:
-    - Added localization support for German
   Changes:
     - Added functionality to `create_icons_from_list` to be able to specify belt-type masks
     - Adjusted bright spot in oil refinery highlight
     - Added Bob's Assembling Machines and Angel's Petrochem as hidden dependencies to fix Oil Refinery reskinning issues
+  Locale:
+    - Added localization support for German
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 2020.08.15
