@@ -1,3 +1,8 @@
+-- Copyright (c) 2020 Kirazy
+-- Part of Artisanal Reskins: Library
+--
+-- See LICENSE.md in the project directory for license information.
+
 local function create_label_sprite(label)
     data:extend({
         {

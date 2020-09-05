@@ -10,7 +10,7 @@ function reskins.lib.construct_technology_icon(name, inputs)
     -- Inputs required by this function
     -- mod                      - String; Originating mod calling the function, used to determine the subtable to store icon information for later processing
     -- group                    - String; Mod/category folder within the graphics/icons folder
-    
+
     -- One of the following inputs must be specified; icon_filename being set assumes a flat icon with 1 layer
     -- icon_filename            - String; Used to provide direct reference to source icon outside of the regular format
     -- icon_name                - String; Folder containing the icon files, and the assumed icon file prefix
@@ -81,15 +81,15 @@ function reskins.lib.construct_technology_icon(name, inputs)
     -- Construct triple-layer icons
     if icon_layers > 2 then
         table.insert(inputs.technology_icon, icon_highlights_layer)
-    end    
+    end
 
     -- Append icon extras as needed
     if inputs.technology_icon_extras then
         -- If we have one layer, we need to convert to an icons table format
-        if icon_layers == 1 then 
+        if icon_layers == 1 then
             inputs.technology_icon = {
                 inputs.technology_icon
-            } 
+            }
         end
 
         -- Append icon_extras
@@ -151,7 +151,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
     -- Inputs required by this function
     -- mod                      - String; Originating mod calling the function, used to determine the subtable to store icon information for later processing
     -- group                    - String; Mod/category folder within the graphics/icons folder
-    
+
     -- One of the following inputs must be specified; technology_icon_filename being set assumes a flat icon with 1 layer
     -- icon_filename            - String; Used to provide direct reference to source icon outside of the regular format
     -- icon_name                - String; Folder containing the icon files, and the assumed icon file prefix
@@ -174,7 +174,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
             ["energy"] = util.color("32d167"),
             ["logistic"] = util.color("4d4d4d"),
         }
-    
+
         return
         {
             icon = reskins.lib.directory.."/graphics/icons/backgrounds/equipment-background.png",
@@ -202,7 +202,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
     if inputs.icon_filename then
         icon_layers = 1
     end
-    
+
     -- Some entities have variable bases and masks
     local icon_base = inputs.icon_base or inputs.icon_name
     local icon_mask = inputs.icon_mask or inputs.icon_name
@@ -279,15 +279,15 @@ function reskins.lib.construct_icon(name, tier, inputs)
     if icon_layers > 2 then
         table.insert(inputs.icon, icon_highlights_layer)
         table.insert(inputs.icon_picture.layers, picture_highlights_layer)
-    end    
+    end
 
     -- Append icon extras as needed
     if inputs.icon_extras then
         -- If we have one layer, we need to convert to an icons table format
-        if icon_layers == 1 then 
+        if icon_layers == 1 then
             inputs.icon = {
                 inputs.icon
-            } 
+            }
         end
 
         -- Append icon_extras
@@ -298,10 +298,10 @@ function reskins.lib.construct_icon(name, tier, inputs)
 
     if inputs.icon_picture_extras then
         -- If we have one layer, we need to convert to an icons table format
-        if icon_layers == 1 then 
+        if icon_layers == 1 then
             inputs.icon = {
                 inputs.icon
-            } 
+            }
         end
 
         for n = 1, #inputs.icon_picture_extras do
@@ -380,7 +380,7 @@ function reskins.lib.assign_icons(name, inputs)
             if not inputs.icon[n].icon_size then
                 inputs.icon[n].icon_size = inputs.icon_size
             end
-    
+
             if not inputs.icon[n].icon_mipmaps then
                 inputs.icon[n].icon_mipmaps = inputs.icon_mipmaps
             end
@@ -402,8 +402,8 @@ function reskins.lib.assign_icons(name, inputs)
             item_with_data.icons = inputs.icon
         end
 
-        if explosion then 
-            explosion.icon = nil        
+        if explosion then
+            explosion.icon = nil
             explosion.icons = inputs.icon
         end
 
@@ -421,21 +421,21 @@ function reskins.lib.assign_icons(name, inputs)
         end
 
         if item then
-            item.icons = nil        
+            item.icons = nil
             item.icon = inputs.icon
             item.icon_size = inputs.icon_size
             item.icon_mipmaps = inputs.icon_mipmaps
         end
 
         if item_with_data then
-            item_with_data.icons = nil        
+            item_with_data.icons = nil
             item_with_data.icon = inputs.icon
             item_with_data.icon_size = inputs.icon_size
             item_with_data.icon_mipmaps = inputs.icon_mipmaps
         end
 
         if explosion then
-            explosion.icons = nil        
+            explosion.icons = nil
             explosion.icon = inputs.icon
             explosion.icon_size = inputs.icon_size
             explosion.icon_mipmaps = inputs.icon_mipmaps
@@ -462,7 +462,7 @@ function reskins.lib.assign_icons(name, inputs)
         end
     end
 
-    if item_with_data then        
+    if item_with_data then
         if inputs.icon_picture and inputs.make_icon_pictures then
             item_with_data.pictures = inputs.icon_picture
         end
@@ -565,7 +565,7 @@ function reskins.lib.create_icons_from_list(table, inputs)
 
         -- Work on a local copy of inputs
         local inputs = util.copy(inputs)
-        
+
         -- Handle input parameters
         inputs.type = map.type or inputs.type or nil
         inputs.group = map.group or inputs.group
@@ -625,6 +625,7 @@ function reskins.lib.create_icons_from_list(table, inputs)
             inputs.icon_layers = map.icon_layers or inputs.icon_layers or nil
             inputs.technology_icon_extras = map.technology_icon_extras or inputs.technology_icon_extras or nil
             inputs.icon_extras = map.icon_extras or inputs.icon_extras or nil
+            inputs.icon_picture_extras = map.icon_picture_extras or inputs.icon_picture_extras or nil
 
             -- Handle tier
             local tier = map.tier or 0
@@ -653,7 +654,7 @@ function reskins.lib.create_icons_from_list(table, inputs)
                 reskins.lib.construct_icon(name, tier, inputs)
             end
         end
-    
+
         -- Label to skip to next iteration
         ::continue::
     end

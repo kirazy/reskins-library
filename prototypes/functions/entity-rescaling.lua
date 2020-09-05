@@ -14,7 +14,7 @@ local function switch_icon_to_mini(name, source_name, pattern, replacement, inpu
     if not source then return end -- Source isn't there
 
     -- Find and copy the active icon field, ensure it's ours
-    if source.icon then 
+    if source.icon then
         inputs.icon = util.copy(source.icon)
         if not string.find(source.icon, "reskin") then return end -- Not our icon
     elseif source.icons then
@@ -22,7 +22,7 @@ local function switch_icon_to_mini(name, source_name, pattern, replacement, inpu
         if not string.find(source.icons[1].icon, "reskin") then return end -- Not our icon
     else
         return
-    end    
+    end
 
     -- Transcribe icons and pictures
     inputs.icon_picture = util.copy(source.pictures)
@@ -94,7 +94,7 @@ function reskins.lib.rescale_minimachine_technology(name, source_name)
         for n = 1, #source_technology_icon do
             source_technology_icon[n].icon_size = source_technology_icon[n].icon_size or source.icon_size or 128
             source_technology_icon[n].icon_mipmaps = source_technology_icon[n].icon_mipmaps or source.icon_mipmaps or 1
-            
+
             -- Normalize scale to 80%
             if source_technology_icon[n].scale then
                 source_technology_icon[n].scale = 0.8 * source_technology_icon[n].scale
@@ -128,13 +128,13 @@ end
 
 -- Filtering tables for rescale_entity
 local fields = {
-    "shift", 
-    "scale", 
+    "shift",
+    "scale",
     "collision_box",
     "selection_box",
-    "north_position", 
-    "south_position", 
-    "east_position", 
+    "north_position",
+    "south_position",
+    "east_position",
     "west_position",
     "window_bounding_box",
     "circuit_wire_connection_points",

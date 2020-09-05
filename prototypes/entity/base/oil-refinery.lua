@@ -53,7 +53,7 @@ for name, map in pairs(tier_map) do
 
     -- Determine what tint we're using
     inputs.tint = reskins.lib.tint_index["tier-"..tier]
-    
+
     reskins.lib.setup_standard_entity(name, tier, inputs)
 
     -- Fetch remnant
