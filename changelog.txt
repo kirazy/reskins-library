@@ -1,11 +1,14 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.4
-Date: 2020.09.XX
+Date: 2020.09.06
   Features:
     - Added setting `Color intensity`, affecting how bright structures, vehicles and robots appear in-world
   Changes:
     - Improved clarity of tier labels at 16px; removed tier labels for 6th tier
     - Added support for `icon_picture_extras` in function `create_icons_from_list`
+  Locale:
+    - Added localization support for Czech
+    - Updated German localization
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.3
 Date: 2020.08.24
