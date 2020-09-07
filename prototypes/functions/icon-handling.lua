@@ -88,7 +88,7 @@ function reskins.lib.construct_technology_icon(name, inputs)
         -- If we have one layer, we need to convert to an icons table format
         if icon_layers == 1 then
             inputs.technology_icon = {
-                inputs.technology_icon
+                { icon = inputs.technology_icon }
             }
         end
 
@@ -286,7 +286,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
         -- If we have one layer, we need to convert to an icons table format
         if icon_layers == 1 then
             inputs.icon = {
-                inputs.icon
+                { icon = inputs.icon }
             }
         end
 
@@ -368,10 +368,15 @@ function reskins.lib.assign_icons(name, inputs)
     if inputs.type then
         entity = data.raw[inputs.type][name]
     end
-    local item = data.raw["item"][name]
-    local item_with_data = data.raw["item-with-entity-data"][name]
-    local explosion = data.raw["explosion"][name.."-explosion"]
-    local remnant = data.raw["corpse"][name.."-remnants"]
+
+    -- Recipes are exceptions to the usual pattern
+    local item, item_with_data, explosion, remnant
+    if inputs.type ~= "recipe" then
+        item = data.raw["item"][name]
+        item_with_data = data.raw["item-with-entity-data"][name]
+        explosion = data.raw["explosion"][name.."-explosion"]
+        remnant = data.raw["corpse"][name.."-remnants"]
+    end
 
     -- Check whether icon or icons, ensure the key we're not using is erased
     if type(inputs.icon) == "table" then
@@ -563,14 +568,25 @@ function reskins.lib.create_icons_from_list(table, inputs)
         -- Check if icon exists, if not, skip this iteration
         if not icon then goto continue end
 
-        -- Work on a local copy of inputs
+        -- Work with a local copy of inputs
         local inputs = util.copy(inputs)
 
         -- Handle input parameters
         inputs.type = map.type or inputs.type or nil
         inputs.mod = map.mod or inputs.mod
         inputs.group = map.group or inputs.group
+        inputs.icon_size = map.icon_size or inputs.icon_size
+        inputs.icon_mipmaps = map.icon_mipmaps or inputs.icon_mipmaps
+        inputs.technology_icon_size = map.technology_icon_size or inputs.technology_icon_size
+        inputs.technology_icon_mipmaps = map.technology_icon_mipmaps or inputs.technology_icon_mipmaps
         inputs.subgroup = map.subgroup or inputs.subgroup or nil
+
+        -- Transcribe icon properties
+        inputs.technology_icon_layers = map.technology_icon_layers or inputs.technology_icon_layers or nil
+        inputs.icon_layers = map.icon_layers or inputs.icon_layers or nil
+        inputs.technology_icon_extras = map.technology_icon_extras or inputs.technology_icon_extras or nil
+        inputs.icon_extras = map.icon_extras or inputs.icon_extras or nil
+        inputs.icon_picture_extras = map.icon_picture_extras or inputs.icon_picture_extras or nil
 
         -- Handle all the boolean overrides
         if map.make_icon_pictures == false then
@@ -612,20 +628,13 @@ function reskins.lib.create_icons_from_list(table, inputs)
 
             -- Make the icon
             if inputs.type == "technology" then
-                inputs.technology_icon_filename = reskins[inputs.mod].directory.."/graphics/technology/"..path.."/"..image..".png"
+                inputs.technology_icon_filename = map.technology_icon_filename or inputs.technology_icon_filename or reskins[inputs.mod].directory.."/graphics/technology/"..path.."/"..image..".png"
                 reskins.lib.construct_technology_icon(name, inputs)
             else
-                inputs.icon_filename = reskins[inputs.mod].directory.."/graphics/icons/"..path.."/"..image..".png"
+                inputs.icon_filename = map.icon_filename or inputs.icon_filename or reskins[inputs.mod].directory.."/graphics/icons/"..path.."/"..image..".png"
                 reskins.lib.construct_icon(name, 0, inputs)
             end
         else
-            -- Transcribe icon properties
-            inputs.technology_icon_layers = map.technology_icon_layers or inputs.technology_icon_layers or nil
-            inputs.icon_layers = map.icon_layers or inputs.icon_layers or nil
-            inputs.technology_icon_extras = map.technology_icon_extras or inputs.technology_icon_extras or nil
-            inputs.icon_extras = map.icon_extras or inputs.icon_extras or nil
-            inputs.icon_picture_extras = map.icon_picture_extras or inputs.icon_picture_extras or nil
-
             -- Handle tier
             local tier = map.tier or 0
             if reskins.lib.setting("reskins-lib-tier-mapping") == "progression-map" then
@@ -690,8 +699,12 @@ function reskins.lib.composite_existing_icons(target_name, target_type, icons)
     for name, properties in pairs(icons) do
         -- Check to ensure the object is available to copy from; abort if not
         local prototype = properties.type or "item"
-        local object = data.raw[prototype][name]
-        if not object then return end
+        local object
+        if data.raw[prototype][name] then
+            object = util.copy(data.raw[prototype][name])
+        else
+            return
+        end
 
         -- Only determing the reference value on the first iteration of the loop
         if not reference_icon_size then
@@ -711,7 +724,7 @@ function reskins.lib.composite_existing_icons(target_name, target_type, icons)
         -- Retrieve the icons/icon table
         local object_icon
         if object.icons then
-            object_icon = util.copy(object.icons)
+            object_icon = object.icons
         else
             object_icon = object.icon
         end
