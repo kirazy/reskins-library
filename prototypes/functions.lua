@@ -28,13 +28,13 @@ reskins.lib.blend_mode = reskins.lib.setting("reskins-lib-blend-mode")
 -- Most entities have a common process for reskinning, so consolidate the other functions under one superfunction for ease of use
 function reskins.lib.setup_standard_entity(name, tier, inputs)
     -- Parse inputs
-    reskins.lib.parse_inputs(inputs)    
-    
-    -- Create particles and explosions   
-    if inputs.make_explosions then   
+    reskins.lib.parse_inputs(inputs)
+
+    -- Create particles and explosions
+    if inputs.make_explosions then
         reskins.lib.create_explosions_and_particles(name, inputs)
     end
-  
+
     -- Create remnants
     if inputs.make_remnants then
         reskins.lib.create_remnant(name, inputs)
@@ -52,12 +52,12 @@ function reskins.lib.parse_inputs(inputs)
     if not inputs.particles then
         inputs.make_explosions = false
     end
-    
+
     -- Constructs defaults for optional input parameters.
     inputs.icon_size = inputs.icon_size or 64 -- Pixel size of icons
-    inputs.icon_mipmaps = inputs.icon_mipmaps or 4 -- Number of mipmaps present in the icon image file       
+    inputs.icon_mipmaps = inputs.icon_mipmaps or 4 -- Number of mipmaps present in the icon image file
     inputs.technology_icon_size = inputs.technology_icon_size or 128 -- Pixel size of technology icons
-    inputs.technology_icon_mipmaps = inputs.technology_icon_mipmaps or 1 -- Number of mipmaps present in the technology icon image file       
+    inputs.technology_icon_mipmaps = inputs.technology_icon_mipmaps or 1 -- Number of mipmaps present in the technology icon image file
     inputs.make_explosions = (inputs.make_explosions ~= false) -- Create explosions; default true
     inputs.make_remnants = (inputs.make_remnants ~= false) -- Create remnant; default true
     inputs.make_icons = (inputs.make_icons ~= false) -- Create icons; default true
@@ -117,7 +117,7 @@ function reskins.lib.create_remnant(name, inputs)
     -- Copy remnant prototype
     local remnant = util.copy(data.raw["corpse"][inputs.base_entity.."-remnants"])
     remnant.name = name.."-remnants"
-    data:extend({remnant})      
+    data:extend({remnant})
 
     -- Assign corpse to originating entity
     data.raw[inputs.type][name]["corpse"] = remnant.name
@@ -159,9 +159,9 @@ function reskins.lib.create_explosions_and_particles(name, inputs)
 
     -- Create explosions and related particles
     reskins.lib.create_explosion(name, inputs)
-        
+
     -- Create and assign needed particles with appropriate tints
-    for particle, key in pairs(inputs.particles) do 
+    for particle, key in pairs(inputs.particles) do
         -- Create and assign the particle
         reskins.lib.create_particle(name, inputs.base_entity, reskins.lib.particle_index[particle], key, inputs.tint)
     end
@@ -249,8 +249,8 @@ if settings.startup["reskins-lib-customize-tier-colors"].value == true then
         ["tier-5"] = util.color(settings.startup["reskins-lib-custom-colors-tier-5"].value),
         ["tier-6"] = util.color(settings.startup["reskins-lib-custom-colors-tier-6"].value),
     }
-elseif reskins.lib.setting("reskins-angels-use-angels-tier-colors") then
-    reskins.lib.tint_index = reskins.lib.tint_defaults.angels
+-- elseif reskins.lib.setting("reskins-angels-use-angels-tier-colors") then
+--     reskins.lib.tint_index = reskins.lib.tint_defaults.angels
 else
     reskins.lib.tint_index = reskins.lib.tint_defaults.bobs
 end
@@ -302,7 +302,7 @@ function reskins.lib.make_4way_animation_from_spritesheet(animation)
             blend_mode = anim.blend_mode
         }
     end
-  
+
     local function make_animation_layer_with_hr_version(idx, anim)
         local anim_parameters = make_animation_layer(idx, anim)
         if anim.hr_version and anim.hr_version.filename then
@@ -310,7 +310,7 @@ function reskins.lib.make_4way_animation_from_spritesheet(animation)
         end
         return anim_parameters
     end
-  
+
     local function make_animation(idx)
         if animation.layers then
             local tab = { layers = {} }
@@ -322,7 +322,7 @@ function reskins.lib.make_4way_animation_from_spritesheet(animation)
             return make_animation_layer_with_hr_version(idx, animation)
         end
     end
-  
+
     return
     {
         north = make_animation(0),

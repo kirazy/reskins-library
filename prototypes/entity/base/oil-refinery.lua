@@ -13,7 +13,6 @@ local inputs = {
     type = "assembling-machine",
     icon_name = "oil-refinery",
     base_entity = "oil-refinery",
-    directory = reskins.lib.directory,
     mod = "lib",
     group = "base",
     particles = {["big-tint"] = 5, ["medium"] = 2},
@@ -84,7 +83,7 @@ for name, map in pairs(tier_map) do
             },
             -- Mask
             {
-                filename = inputs.directory.."/graphics/entity/base/oil-refinery/remnants/refinery-remnants-mask.png",
+                filename = reskins.lib.directory.."/graphics/entity/base/oil-refinery/remnants/refinery-remnants-mask.png",
                 line_length = 1,
                 width = 234,
                 height = 200,
@@ -93,7 +92,7 @@ for name, map in pairs(tier_map) do
                 shift = util.by_pixel(0, 0),
                 tint = inputs.tint,
                 hr_version = {
-                    filename = inputs.directory.."/graphics/entity/base/oil-refinery/remnants/hr-refinery-remnants-mask.png",
+                    filename = reskins.lib.directory.."/graphics/entity/base/oil-refinery/remnants/hr-refinery-remnants-mask.png",
                     line_length = 1,
                     width = 467,
                     height = 415,
@@ -106,7 +105,7 @@ for name, map in pairs(tier_map) do
             },
             -- Highlights
             {
-                filename = inputs.directory.."/graphics/entity/base/oil-refinery/remnants/refinery-remnants-highlights.png",
+                filename = reskins.lib.directory.."/graphics/entity/base/oil-refinery/remnants/refinery-remnants-highlights.png",
                 line_length = 1,
                 width = 234,
                 height = 200,
@@ -115,7 +114,7 @@ for name, map in pairs(tier_map) do
                 shift = util.by_pixel(0, 0),
                 blend_mode = reskins.lib.blend_mode,
                 hr_version = {
-                    filename = inputs.directory.."/graphics/entity/base/oil-refinery/remnants/hr-refinery-remnants-highlights.png",
+                    filename = reskins.lib.directory.."/graphics/entity/base/oil-refinery/remnants/hr-refinery-remnants-highlights.png",
                     line_length = 1,
                     width = 467,
                     height = 415,
@@ -150,14 +149,14 @@ for name, map in pairs(tier_map) do
             },
             -- Mask
             {
-                filename = inputs.directory.."/graphics/entity/base/oil-refinery/oil-refinery-mask.png",
+                filename = reskins.lib.directory.."/graphics/entity/base/oil-refinery/oil-refinery-mask.png",
                 width = 337,
                 height = 255,
                 frame_count = 1,
                 shift = {2.515625, 0.484375},
                 tint = inputs.tint,
                 hr_version = {
-                filename = inputs.directory.."/graphics/entity/base/oil-refinery/hr-oil-refinery-mask.png",
+                filename = reskins.lib.directory.."/graphics/entity/base/oil-refinery/hr-oil-refinery-mask.png",
                 width = 386,
                 height = 430,
                 frame_count = 1,
@@ -168,14 +167,14 @@ for name, map in pairs(tier_map) do
             },
             -- Highlights
             {
-                filename = inputs.directory.."/graphics/entity/base/oil-refinery/oil-refinery-highlights.png",
+                filename = reskins.lib.directory.."/graphics/entity/base/oil-refinery/oil-refinery-highlights.png",
                 width = 337,
                 height = 255,
                 frame_count = 1,
                 shift = {2.515625, 0.484375},
                 blend_mode = reskins.lib.blend_mode,
                 hr_version = {
-                filename = inputs.directory.."/graphics/entity/base/oil-refinery/hr-oil-refinery-highlights.png",
+                filename = reskins.lib.directory.."/graphics/entity/base/oil-refinery/hr-oil-refinery-highlights.png",
                 width = 386,
                 height = 430,
                 frame_count = 1,

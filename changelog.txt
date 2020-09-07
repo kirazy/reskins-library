@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.5
+Date: 2020.09.XX
+  Features:
+    - Added function `composite_existing_icons`
+  Changes:
+    - Directories are now handled via the `mod` field of the `inputs` table, instead of the `directory` field
+    - Function `create_icons_from_list` can now handle the `mod` field of the `inputs` table
+---------------------------------------------------------------------------------------------------
 Version: 1.0.4
 Date: 2020.09.06
   Features:

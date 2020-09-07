@@ -49,18 +49,18 @@ function reskins.lib.construct_technology_icon(name, inputs)
 
     -- Setup icon layers
     local icon_base_layer = {
-        icon = inputs.technology_icon_filename or inputs.directory.."/graphics/technology/"..folder_path.."/"..inputs.icon_name.."/"..icon_base.."-technology-base.png"
+        icon = inputs.technology_icon_filename or reskins[inputs.mod].directory.."/graphics/technology/"..folder_path.."/"..inputs.icon_name.."/"..icon_base.."-technology-base.png"
     }
 
     local icon_mask_layer, icon_highlights_layer
     if icon_layers > 1 then
         icon_mask_layer = {
-            icon = inputs.directory.."/graphics/technology/"..folder_path.."/"..inputs.icon_name.."/"..icon_mask.."-technology-mask.png",
+            icon = reskins[inputs.mod].directory.."/graphics/technology/"..folder_path.."/"..inputs.icon_name.."/"..icon_mask.."-technology-mask.png",
             tint = icon_tint
         }
 
         icon_highlights_layer = {
-            icon = inputs.directory.."/graphics/technology/"..folder_path.."/"..inputs.icon_name.."/"..icon_highlights.."-technology-highlights.png",
+            icon = reskins[inputs.mod].directory.."/graphics/technology/"..folder_path.."/"..inputs.icon_name.."/"..icon_highlights.."-technology-highlights.png",
             tint = {1, 1, 1, 0}
         }
     end
@@ -210,25 +210,25 @@ function reskins.lib.construct_icon(name, tier, inputs)
 
     -- Setup icon layers
     local icon_base_layer = {
-        icon = inputs.icon_filename or inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_base.."-icon-base.png"
+        icon = inputs.icon_filename or reskins[inputs.mod].directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_base.."-icon-base.png"
     }
 
     local icon_mask_layer, icon_highlights_layer
     if icon_layers > 1 then
         icon_mask_layer = {
-            icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_mask.."-icon-mask.png",
+            icon = reskins[inputs.mod].directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_mask.."-icon-mask.png",
             tint = icon_tint
         }
 
         icon_highlights_layer = {
-            icon = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_highlights.."-icon-highlights.png",
+            icon = reskins[inputs.mod].directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_highlights.."-icon-highlights.png",
             tint = {1, 1, 1, 0}
         }
     end
 
     -- Setup picture layers
     local picture_base_layer = {
-        filename = inputs.icon_filename or inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_base.."-icon-base.png",
+        filename = inputs.icon_filename or reskins[inputs.mod].directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_base.."-icon-base.png",
         size = inputs.icon_size,
         mipmaps = inputs.icon_mipmaps,
         scale = 0.25
@@ -237,7 +237,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
     local picture_mask_layer, picture_highlights_layer
     if icon_layers > 1 then
         picture_mask_layer = {
-            filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_mask.."-icon-mask.png",
+            filename = reskins[inputs.mod].directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_mask.."-icon-mask.png",
             size = inputs.icon_size,
             mipmaps = inputs.icon_mipmaps,
             scale = 0.25,
@@ -245,7 +245,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
         }
 
         picture_highlights_layer = {
-            filename = inputs.directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_highlights.."-icon-highlights.png",
+            filename = reskins[inputs.mod].directory.."/graphics/icons/"..folder_path.."/"..inputs.icon_name.."/"..icon_highlights.."-icon-highlights.png",
             size = inputs.icon_size,
             mipmaps = inputs.icon_mipmaps,
             scale = 0.25,
@@ -568,6 +568,7 @@ function reskins.lib.create_icons_from_list(table, inputs)
 
         -- Handle input parameters
         inputs.type = map.type or inputs.type or nil
+        inputs.mod = map.mod or inputs.mod
         inputs.group = map.group or inputs.group
         inputs.subgroup = map.subgroup or inputs.subgroup or nil
 
@@ -604,19 +605,17 @@ function reskins.lib.create_icons_from_list(table, inputs)
         if flat_icon then
             -- Setup filename details
             local image = map.image or name
-            local path
+            local path = inputs.group
             if inputs.subgroup then
                 path = inputs.group.."/"..inputs.subgroup
-            else
-                path = inputs.group
             end
 
             -- Make the icon
             if inputs.type == "technology" then
-                inputs.technology_icon_filename = inputs.directory.."/graphics/technology/"..path.."/"..image..".png"
+                inputs.technology_icon_filename = reskins[inputs.mod].directory.."/graphics/technology/"..path.."/"..image..".png"
                 reskins.lib.construct_technology_icon(name, inputs)
             else
-                inputs.icon_filename = inputs.directory.."/graphics/icons/"..path.."/"..image..".png"
+                inputs.icon_filename = reskins[inputs.mod].directory.."/graphics/icons/"..path.."/"..image..".png"
                 reskins.lib.construct_icon(name, 0, inputs)
             end
         else
@@ -674,4 +673,78 @@ function reskins.lib.assign_deferred_icons(mod, data_stage)
             reskins.lib.assign_technology_icons(name, inputs)
         end
     end
+end
+
+function reskins.lib.composite_existing_icons(target_name, target_type, icons)
+    -- icons = table of ["name"] = {type, shift, scale}, where type, shift, and scale are optional
+
+    -- Check to ensure the target is available
+    local target = data.raw[target_type][target_name]
+    if not target then return end
+
+    -- Initialize the icons table
+    local composite_icon = {}
+
+    -- Iterate through the list of icons to composite
+    local reference_icon_size
+    for name, properties in pairs(icons) do
+        -- Check to ensure the object is available to copy from; abort if not
+        local prototype = properties.type or "item"
+        local object = data.raw[prototype][name]
+        if not object then return end
+
+        -- Only determing the reference value on the first iteration of the loop
+        if not reference_icon_size then
+            if object.icons then
+                reference_icon_size = object.icons[1].icon_size or object.icon_size
+            else
+                reference_icon_size = object.icon_size
+            end
+        end
+
+        -- Set scale and normalize it to a 64px reference.
+        local scale = (64/reference_icon_size)
+        if properties.scale then
+            scale = properties.scale * (64/reference_icon_size)
+        end
+
+        -- Retrieve the icons/icon table
+        local object_icon
+        if object.icons then
+            object_icon = util.copy(object.icons)
+        else
+            object_icon = object.icon
+        end
+
+        -- Build the composite_icon
+        if type(object_icon) == "table" then
+            -- Iterate over each entry and transcribe it to our layers table
+            for _, icon_specification in pairs(object_icon) do
+                -- Fetch icon_size for this layer
+                local current_icon_size = icon_specification.icon_size or object.icon_size
+
+                -- Create the IconData
+                table.insert(composite_icon, {
+                    icon = icon_specification.icon,
+                    icon_size = current_icon_size,
+                    icon_mipmaps = icon_specification.icon_mipmaps or object.icon_mipmaps or 1,
+                    tint = icon_specification.tint,
+                    scale = scale * (reference_icon_size / current_icon_size),
+                    shift = properties.shift
+                })
+            end
+        elseif type(object_icon) == "string" then
+            -- Create the IconData
+            table.insert(composite_icon, {
+                icon = object_icon,
+                icon_size = object.icon_size,
+                icon_mipmaps = object.icon_mipmaps or 1,
+                scale = scale * (reference_icon_size / object.icon_size),
+                shift = properties.shift
+            })
+        end
+    end
+
+    -- Assign the composite icon
+    reskins.lib.assign_icons(target_name, {type = target_type, icon = composite_icon})
 end
