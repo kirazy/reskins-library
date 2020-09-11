@@ -7,6 +7,7 @@ Date: 2020.09.XX
     - Directories are now handled via the `mod` field of the `inputs` table, instead of the `directory` field
     - Function `create_icons_from_list` can now handle the `mod` field of the `inputs` table
     - Modified `create_icons_from_list` to allow specification of `icon_filename` directly
+    - Renamed tier-mapping style "Name" to "Traditional", update description of the setting "Tier mapping" for clarity.
   Bugfixes:
     - Fixed that assigning an icon to a recipe that shared a name with an item would overwrite the item icon
     - Fixed that `construct_icon` and `construct_technology_icon` were not properly porting an icon into an icons definition

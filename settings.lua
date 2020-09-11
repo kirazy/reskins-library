@@ -19,7 +19,7 @@ data:extend(
         setting_type = "startup",
         order = "ab",
         default_value = "progression-map",
-        allowed_values = {"progression-map","name-map"}
+        allowed_values = {"progression-map","traditional-map"}
     },
     {
         type = "string-setting",
