@@ -7,6 +7,7 @@
 require("prototypes.functions")
 require("prototypes.functions.entity-rescaling")
 require("prototypes.functions.icon-handling")
+require("prototypes.functions.pipe-pictures")
 require("prototypes.label-items")
 
 -- Compatibility with ShinyBobGFX/ShinyAngelGFX (requires must be done in data-updates)
