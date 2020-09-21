@@ -1,16 +1,20 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.5
-Date: 2020.09.XX
+Date: 2020.09.21
   Features:
     - Added function `composite_existing_icons`
+    - Added functions `pipe_pictures`, `underground_pipe_pictures` and `pipe_covers`
   Changes:
     - Directories are now handled via the `mod` field of the `inputs` table, instead of the `directory` field
     - Function `create_icons_from_list` can now handle the `mod` field of the `inputs` table
     - Modified `create_icons_from_list` to allow specification of `icon_filename` directly
-    - Renamed tier-mapping style "Name" to "Traditional", update description of the setting "Tier mapping" for clarity.
+    - Renamed tier-mapping style "Name" to "Traditional", updated description of the setting "Tier mapping" for clarity.
+    - Moved several item icons from Artisanal Reskins: Bob's Mods to this mod
   Bugfixes:
     - Fixed that assigning an icon to a recipe that shared a name with an item would overwrite the item icon
     - Fixed that `construct_icon` and `construct_technology_icon` were not properly porting an icon into an icons definition
+  Locale:
+    - Updated Czech and German localizations
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.4
 Date: 2020.09.06
