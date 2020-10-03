@@ -695,65 +695,43 @@ function reskins.lib.composite_existing_icons(target_name, target_type, icons)
     local composite_icon = {}
 
     -- Iterate through the list of icons to composite
-    local reference_icon_size
-    for name, properties in pairs(icons) do
+    for name, params in pairs(icons) do
         -- Check to ensure the object is available to copy from; abort if not
-        local prototype = properties.type or "item"
-        local object
-        if data.raw[prototype][name] then
-            object = util.copy(data.raw[prototype][name])
-        else
-            return
-        end
+        local source_type = params.type or "item"
 
-        -- Only determing the reference value on the first iteration of the loop
-        if not reference_icon_size then
-            if object.icons then
-                reference_icon_size = object.icons[1].icon_size or object.icon_size
-            else
-                reference_icon_size = object.icon_size
-            end
-        end
+        -- Copy the current entity, return if it doesn't exist
+        if not data.raw[source_type][name] then return end
+        local entity = util.copy(data.raw[source_type][name])
 
-        -- Set scale and normalize it to a 64px reference.
-        local scale = (64/reference_icon_size)
-        if properties.scale then
-            scale = properties.scale * (64/reference_icon_size)
-        end
-
-        -- Retrieve the icons/icon table
-        local object_icon
-        if object.icons then
-            object_icon = object.icons
-        else
-            object_icon = object.icon
-        end
-
-        -- Build the composite_icon
-        if type(object_icon) == "table" then
-            -- Iterate over each entry and transcribe it to our layers table
-            for _, icon_specification in pairs(object_icon) do
-                -- Fetch icon_size for this layer
-                local current_icon_size = icon_specification.icon_size or object.icon_size
-
-                -- Create the IconData
+        -- Check for icons definition
+        if entity.icons then
+            -- Transcribe layers to the composite_icon table
+            for _, layer in pairs(entity.icons) do
+                local icon_size = layer.icon_size or entity.icon_size
                 table.insert(composite_icon, {
-                    icon = icon_specification.icon,
-                    icon_size = current_icon_size,
-                    icon_mipmaps = icon_specification.icon_mipmaps or object.icon_mipmaps or 1,
-                    tint = icon_specification.tint,
-                    scale = scale * (reference_icon_size / current_icon_size),
-                    shift = properties.shift
+                    icon = layer.icon,
+                    icon_size = icon_size,
+                    icon_mipmaps = layer.icon_mipmaps or entity.icon_mipmaps,
+                    tint = layer.tint,
+                    scale = layer.scale or (32 / icon_size) * (params.scale or 1),
+                    shift = {
+                        (layer.shift and (layer.shift[1] or layer.shift.x) or 0) * (params.scale or 1) + (params.shift and (params.shift[1] or params.shift.x) or 0),
+                        (layer.shift and (layer.shift[2] or layer.shift.y) or 0) * (params.scale or 1) + (params.shift and (params.shift[2] or params.shift.y) or 0),
+                    }
                 })
             end
-        elseif type(object_icon) == "string" then
-            -- Create the IconData
+        -- Standard icon
+        else
+            -- Fully define an icons layer
             table.insert(composite_icon, {
-                icon = object_icon,
-                icon_size = object.icon_size,
-                icon_mipmaps = object.icon_mipmaps or 1,
-                scale = scale * (reference_icon_size / object.icon_size),
-                shift = properties.shift
+                icon = entity.icon,
+                icon_size = entity.icon_size,
+                icon_mipmaps = entity.icon_mipmaps,
+                scale = params.scale and (params.scale * 32 / entity.icon_size) or (32 / entity.icon_size),
+                shift = {
+                    (params.shift and (params.shift[1] or params.shift.x) or 0),
+                    (params.shift and (params.shift[2] or params.shift.y) or 0),
+                }
             })
         end
     end
