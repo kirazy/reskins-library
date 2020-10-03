@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.6
+Date: 2020.10.04
+  Changes:
+    - Improved robustness of `composite_existiing_icons` function
+    - Added ability to direct-insert `icon`/`icons` specifications using `composite_existing_icons`
+  Bugfixes:
+    - Fixed that the function `composite_existing_icons` produced icons in alt-view that were twice as large as intended
+---------------------------------------------------------------------------------------------------
 Version: 1.0.5
 Date: 2020.09.21
   Features:
