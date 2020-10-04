@@ -1,6 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.6
 Date: 2020.10.04
+  Features:
+    - Added function `ore_icon_pictures`
   Changes:
     - Improved robustness of `composite_existiing_icons` function
     - Added ability to direct-insert `icon`/`icons` specifications using `composite_existing_icons`
