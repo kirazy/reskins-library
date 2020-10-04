@@ -698,10 +698,24 @@ function reskins.lib.composite_existing_icons(target_name, target_type, icons)
     for name, params in pairs(icons) do
         if params.icons then
             for _, layer in pairs(params.icons) do
-                table.insert(composite_icon, layer)
+                table.insert(composite_icon, {
+                    icon = layer.icon,
+                    icon_size = layer.icon_size,
+                    icon_mipmaps = layer.icon_mipmaps,
+                    scale = layer.scale or (32 / layer.icon_size),
+                    shift = layer.shift,
+                    tint = layer.tint,
+                })
             end
         elseif params.icon then
-            table.insert(composite_icon, params.icon)
+            table.insert(composite_icon, {
+                icon = params.icon.icon,
+                icon_size = params.icon.icon_size,
+                icon_mipmaps = params.icon.icon_mipmaps,
+                scale = params.icon.scale or (32 / params.icon.icon_size),
+                shift = params.icon.shift,
+                tint = params.icon.tint,
+            })
         else
             -- Check to ensure the object is available to copy from; abort if not
             local source_type = params.type or "item"
@@ -746,4 +760,23 @@ function reskins.lib.composite_existing_icons(target_name, target_type, icons)
 
     -- Assign the composite icon
     reskins.lib.assign_icons(target_name, {type = target_type, icon = composite_icon})
+end
+
+function reskins.lib.ore_icon_pictures(mod, group, name, variations)
+    local icon_picture = {}
+    for n = 1, variations do
+        local suffix = ".png"
+        if n > 1 then
+            suffix = "-"..(n-1)..".png"
+        end
+
+        table.insert(icon_picture, {
+            filename = reskins[mod].directory.."/graphics/icons/"..group.."/ores/"..name.."/"..name..suffix,
+            size = 64,
+            scale = 0.25,
+            mipmap_count = 4
+        })
+    end
+
+    return icon_picture
 end
