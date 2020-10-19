@@ -13,7 +13,7 @@ Date: 2020.10.04
   Features:
     - Added function `ore_icon_pictures`
   Changes:
-    - Improved robustness of `composite_existiing_icons` function
+    - Improved robustness of `composite_existing_icons` function
     - Added ability to direct-insert `icon`/`icons` specifications using `composite_existing_icons`
   Bugfixes:
     - Fixed that the function `composite_existing_icons` produced icons in alt-view that were twice as large as intended
@@ -97,7 +97,7 @@ Date: 2020.08.03
     - Added function `clear_icon_specification`
     - Added function `create_icons_from_list`
   Changes:
-    - Modifed function `store_icon` to handle data-updates as well
+    - Modified function `store_icon` to handle data-updates as well
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.11
 Date: 2020.07.15
