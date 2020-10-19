@@ -273,10 +273,18 @@ function reskins.lib.make_4way_animation_from_spritesheet(animation)
         local start_frame = (anim.frame_count or 1) * idx
         local x = 0
         local y = 0
-        if anim.line_length then
-            y = anim.height * math.floor(start_frame / (anim.line_length or 1))
+        if anim.vertically_oriented then
+            if anim.line_length then
+                y = idx * anim.height * math.floor(start_frame / (anim.line_length or 1))
+            else
+                y = idx * anim.height
+            end
         else
-            x = idx * anim.width
+            if anim.line_length then
+                y = anim.height * math.floor(start_frame / (anim.line_length or 1))
+            else
+                x = idx * anim.width
+            end
         end
         return
         {
