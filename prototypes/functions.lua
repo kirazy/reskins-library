@@ -226,7 +226,7 @@ reskins.lib.tint_defaults = {
         ["tier-3"] = util.color("1b87c2"),
         ["tier-4"] = util.color("a600bf"),
         ["tier-5"] = util.color("23de55"),
-        ["tier-6"] = util.color("4d4cff"),
+        ["tier-6"] = util.color("ff7700"),
     },
     angels = {
         ["tier-0"] = util.color("262626"),
@@ -235,7 +235,7 @@ reskins.lib.tint_defaults = {
         ["tier-3"] = util.color("cc2929"),
         ["tier-4"] = util.color("ccae29"),
         ["tier-5"] = util.color("23de55"),
-        ["tier-6"] = util.color("4d4cff"),
+        ["tier-6"] = util.color("ff7700"),
     }
 }
 

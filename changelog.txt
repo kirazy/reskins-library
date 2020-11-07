@@ -5,6 +5,8 @@ Date: 2020.11.XX
     - Changed how default indicators for true/false setting descriptions are handled internally
     - Added handling of custom Types/Animation parameter `vertically_oriented` to `make_4way_animation_from_spritesheet`
     - Restored 6th tier labels in a temporary state, pending finalization on how pseudo-6th tier entities will be handled
+    - Changed 6th tier color from a pale violet to orange
+    - Moved item icons for lead and tin ores into this mod from Artisanal Reskins: Bob's Mods
   Locale:
     - Updated Czech and German localizations
 ---------------------------------------------------------------------------------------------------

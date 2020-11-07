@@ -97,6 +97,6 @@ data:extend(
         setting_type ="startup",
         hidden = true, -- We're not using this yet
         order = "yy",
-        default_value = "4d4cff"
+        default_value = "ff7700"
     }
 })
