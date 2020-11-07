@@ -8,6 +8,7 @@ Date: 2020.11.XX
     - Changed 6th tier color from a pale violet to orange
     - Moved item icons for lead and tin ores into this mod from Artisanal Reskins: Bob's Mods
   Locale:
+    - Modified setting names and descriptions for consistency
     - Updated Czech and German localizations
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.6
