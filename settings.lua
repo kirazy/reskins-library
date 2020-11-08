@@ -95,7 +95,6 @@ data:extend(
         type = "string-setting",
         name = "reskins-lib-custom-colors-tier-6",
         setting_type ="startup",
-        hidden = true, -- We're not using this yet
         order = "yy",
         default_value = "ff7700"
     }
