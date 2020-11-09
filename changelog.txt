@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.8
+Date: 2020.11.09
+  Bugfixes:
+    - Fixed that functions `append_tier_labels` and `append_tier_labels_to_vanilla_items` did not specify `icon_size` and `icon_mipmaps`
+---------------------------------------------------------------------------------------------------
 Version: 1.0.7
 Date: 2020.11.08
   Changes:

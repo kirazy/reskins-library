@@ -485,6 +485,7 @@ function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
 
     -- Prevent cross-contamination
     local inputs = util.copy(inputs)
+    local type = inputs.type or "item"
 
     -- Handle required parameters
     reskins.lib.parse_inputs(inputs)
@@ -492,7 +493,9 @@ function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
     -- Fetch the icon; vanilla icons are strictly an icon definition
     inputs.icon = {
         {
-            icon = data.raw["item"][name].icon
+            icon = data.raw[type][name].icon,
+            icon_size = data.raw[type][name].icon_size,
+            icon_mipmaps = data.raw[type][name].icon_mipmaps,
         }
     }
 
@@ -500,10 +503,10 @@ function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
 
     inputs.icon_picture = {
         {
-            filename = data.raw["item"][name].icon,
-            size = 64,
+            filename = data.raw[type][name].icon,
+            size = data.raw[type][name].icon_size,
             scale = 0.25,
-            mipmaps = 4
+            mipmaps = data.raw[type][name].icon_mipmaps,
         }
     }
 
@@ -529,9 +532,16 @@ function reskins.lib.append_tier_labels(tier, inputs)
 
         -- Append the tier labels
         local icon_style = settings.startup["reskins-lib-icon-tier-labeling-style"].value
-        table.insert(inputs.icon, {icon = reskins.lib.directory.."/graphics/icons/tiers/"..icon_style.."/"..tier..".png"})
         table.insert(inputs.icon, {
             icon = reskins.lib.directory.."/graphics/icons/tiers/"..icon_style.."/"..tier..".png",
+            icon_size = 64,
+            icon_mipmaps = 4,
+        }
+    )
+        table.insert(inputs.icon, {
+            icon = reskins.lib.directory.."/graphics/icons/tiers/"..icon_style.."/"..tier..".png",
+            icon_size = 64,
+            icon_mipmaps = 4,
             tint = reskins.lib.adjust_alpha(reskins.lib.tint_index["tier-"..tier], 0.75)
         })
     end
