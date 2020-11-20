@@ -387,7 +387,7 @@ function reskins.lib.assign_icons(name, inputs)
             end
 
             if not inputs.icon[n].icon_mipmaps then
-                inputs.icon[n].icon_mipmaps = inputs.icon_mipmaps
+                inputs.icon[n].icon_mipmaps = inputs.icon_mipmaps or 1
             end
         end
 
@@ -490,25 +490,50 @@ function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
     -- Handle required parameters
     reskins.lib.parse_inputs(inputs)
 
-    -- Fetch the icon; vanilla icons are strictly an icon definition
-    inputs.icon = {
-        {
-            icon = data.raw[type][name].icon,
-            icon_size = data.raw[type][name].icon_size,
-            icon_mipmaps = data.raw[type][name].icon_mipmaps,
+    -- Extact the icon
+    if data.raw[type][name].icons then
+        inputs.icon = util.copy(data.raw[type][name].icons)
+
+        -- Set icon_size and icon_mipmaps per icons specification, setup icon_picture
+        inputs.icon_picture = {}
+        for n = 1, #inputs.icon do
+            if not inputs.icon[n].icon_size then
+                inputs.icon[n].icon_size = data.raw[type][name].icon_size
+            end
+
+            if not inputs.icon[n].icon_mipmaps then
+                inputs.icon[n].icon_mipmaps = data.raw[type][name].icon_mipmaps or 1
+            end
+
+            inputs.icon_picture[n] = {
+                filename = inputs.icon[n].icon,
+                size = inputs.icon[n].icon_size,
+                tint = inputs.icon[n].tint,
+                shift = inputs.icon[n].shift,
+                scale = 0.25*(inputs.icon[n].scale or 1),
+                mipmaps = inputs.icon[n].icon_mipmaps or 1,
+            }
+        end
+    else
+        inputs.icon = {
+            {
+                icon = data.raw[type][name].icon,
+                icon_size = data.raw[type][name].icon_size,
+                icon_mipmaps = data.raw[type][name].icon_mipmaps,
+            }
         }
-    }
+
+        inputs.icon_picture = {
+            {
+                filename = data.raw[type][name].icon,
+                size = data.raw[type][name].icon_size,
+                scale = 0.25,
+                mipmaps = data.raw[type][name].icon_mipmaps,
+            }
+        }
+    end
 
     reskins.lib.append_tier_labels(tier, inputs)
-
-    inputs.icon_picture = {
-        {
-            filename = data.raw[type][name].icon,
-            size = data.raw[type][name].icon_size,
-            scale = 0.25,
-            mipmaps = data.raw[type][name].icon_mipmaps,
-        }
-    }
 
     -- It may be necessary to put icons back in final fixes, allow for that
     if inputs.defer_to_data_final_fixes or inputs.defer_to_data_updates then

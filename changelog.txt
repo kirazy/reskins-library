@@ -1,7 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.9
-Date: 2020.12.XX
-  Features:
+Date: 2020.11.20
+  Bugfixes:
+    - Fixed that `append_tier_labels_to_vanilla_items` did not allow for non-vanilla icon definitions
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.8
 Date: 2020.11.09
