@@ -6,7 +6,6 @@
 -- Make our function host
 if not reskins then reskins = {} end
 if not reskins.lib then reskins.lib = {} end
-if not reskins.triggers then reskins.triggers = {} end
 
 -- Library directory
 reskins.lib.directory = "__reskins-library__"
