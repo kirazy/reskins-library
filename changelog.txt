@@ -3,6 +3,8 @@ Version: 1.0.9
 Date: 2020.11.20
   Bugfixes:
     - Fixed that `append_tier_labels_to_vanilla_items` did not allow for non-vanilla icon definitions
+  Locale:
+    - Updated Brazilian Portuguese, Czech and German localizations
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.8
 Date: 2020.11.09
