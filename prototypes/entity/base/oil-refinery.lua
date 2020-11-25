@@ -19,19 +19,11 @@ local inputs = {
 }
 
 local tier_map = {
-    ["oil-refinery"] = {tier = 1},
-    ["oil-refinery-2"] = {tier = 2},
-    ["oil-refinery-3"] = {tier = 3},
-    ["oil-refinery-4"] = {tier = 4},
+    ["oil-refinery"] = {tier = 1, prog_tier = 2},
+    ["oil-refinery-2"] = {tier = 2, prog_tier = 3},
+    ["oil-refinery-3"] = {tier = 3, prog_tier = 4},
+    ["oil-refinery-4"] = {tier = 4, prog_tier = 5},
 }
-
--- Bob's mods use 5 tiers
-if reskins.lib.setting("reskins-bobs-do-bobassembly") then
-    tier_map["oil-refinery"].prog_tier = 2
-    tier_map["oil-refinery-2"].prog_tier = 3
-    tier_map["oil-refinery-3"].prog_tier = 4
-    tier_map["oil-refinery-4"].prog_tier = 5
-end
 
 -- Reskin entities, create and assign extra details
 for name, map in pairs(tier_map) do
