@@ -302,6 +302,8 @@ function reskins.lib.make_4way_animation_from_spritesheet(animation)
             frame_sequence = anim.frame_sequence,
             shift = anim.shift,
             draw_as_shadow = anim.draw_as_shadow,
+            draw_as_light = anim.draw_as_light,
+            draw_as_glow = anim.draw_as_glow,
             force_hr_shadow = anim.force_hr_shadow,
             apply_runtime_tint = anim.apply_runtime_tint,
             animation_speed = anim.animation_speed,

@@ -299,8 +299,8 @@ function reskins.lib.construct_icon(name, tier, inputs)
     if inputs.icon_picture_extras then
         -- If we have one layer, we need to convert to an icons table format
         if icon_layers == 1 then
-            inputs.icon = {
-                inputs.icon
+            inputs.icon_picture = {
+                layers = inputs.icon_picture
             }
         end
 
