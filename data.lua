@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
--- Core functions
+----------------------------------------------------------------------------------------------------
+-- CORE FUNCTIONS
+----------------------------------------------------------------------------------------------------
 require("prototypes.functions")
 require("prototypes.functions.entity-rescaling")
 require("prototypes.functions.icon-handling")
