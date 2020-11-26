@@ -630,6 +630,12 @@ function reskins.lib.create_icons_from_list(table, inputs)
             inputs.make_icon_pictures = map.make_icon_pictures or inputs.make_icon_pictures
         end
 
+        if map.make_entity_pictures == false then
+            inputs.make_entity_pictures = false
+        else
+            inputs.make_entity_pictures = map.make_entity_pictures or inputs.make_entity_pictures
+        end
+
         if map.defer_to_data_updates == false then
             inputs.defer_to_data_updates = false
         else
@@ -797,7 +803,7 @@ function reskins.lib.composite_existing_icons(target_name, target_type, icons)
     reskins.lib.assign_icons(target_name, {type = target_type, icon = composite_icon})
 end
 
-function reskins.lib.ore_icon_pictures(mod, group, name, variations)
+function reskins.lib.ore_icon_pictures(mod, group, name, variations, make_glow)
     local icon_picture = {}
     for n = 1, variations do
         local suffix = ".png"
@@ -805,13 +811,47 @@ function reskins.lib.ore_icon_pictures(mod, group, name, variations)
             suffix = "-"..(n-1)..".png"
         end
 
-        table.insert(icon_picture, {
-            filename = reskins[mod].directory.."/graphics/icons/"..group.."/ores/"..name.."/"..name..suffix,
-            size = 64,
-            scale = 0.25,
-            mipmap_count = 4
-        })
+        if make_glow then
+            table.insert(icon_picture, {
+                layers = {
+                    {
+                        filename = reskins[mod].directory.."/graphics/icons/"..group.."/ores/"..name.."/"..name..suffix,
+                        size = 64,
+                        scale = 0.25,
+                        mipmap_count = 4
+                    },
+                    {
+                        filename = reskins[mod].directory.."/graphics/icons/"..group.."/ores/"..name.."/"..name..suffix,
+                        blend_mode = "additive",
+                        draw_as_light = true,
+                        tint = {r = 0.3, g = 0.3, b = 0.3, a = 0.3},
+                        size = 64,
+                        scale = 0.25,
+                        mipmap_count = 4
+                    }
+                }
+            })
+        else
+            table.insert(icon_picture, {
+                filename = reskins[mod].directory.."/graphics/icons/"..group.."/ores/"..name.."/"..name..suffix,
+                size = 64,
+                scale = 0.25,
+                mipmap_count = 4
+            })
+        end
     end
 
     return icon_picture
+end
+
+function reskins.lib.lit_icon_pictures_layer(mod, light, tint)
+    return {
+        filename = reskins[mod].directory.."/graphics/icons/lights/"..light.."-light.png",
+        draw_as_light = true,
+        flags = {"light"},
+        tint = tint,
+        size = 64,
+        scale = 0.25,
+        mipmap_count = 4,
+    }
 end

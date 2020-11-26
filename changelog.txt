@@ -1,11 +1,12 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.0
-Date: 2020.11.XX
+Date: 2020.11.26
   Features:
     - Moved to Factorio 1.1
   Changes:
     - Added transcription of `draw_as_light` and `draw_as_glow` fields to `make_4way_animation_from_spritesheet`
     - Added support for progression-based tier coloring for the oil refinery when playing with pure Angel's mods
+    - Added `make_glow` boolean to function `ore_icon_pictures` to generate lit ores
   Bugfixes:
     - Fixed that `icon_picture_extras` for icons with single layers was not properly handled by `construct_icon`
 ---------------------------------------------------------------------------------------------------
