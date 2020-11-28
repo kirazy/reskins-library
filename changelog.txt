@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.1
+Date: 2020.12.XX
+  Features:
+    - Added function `vertical_pipe_shadow` to place shadows at appropriate tile locations for pipes
+---------------------------------------------------------------------------------------------------
 Version: 1.1.0
 Date: 2020.11.26
   Features:
