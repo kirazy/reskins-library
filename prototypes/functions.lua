@@ -49,9 +49,9 @@ end
 -- Parses the main inputs table of parameters
 function reskins.lib.parse_inputs(inputs)
     -- Check that we have a particles table
-    if not inputs.particles then
-        inputs.make_explosions = false
-    end
+    -- if not inputs.particles then
+    --     inputs.make_explosions = false
+    -- end
 
     -- Constructs defaults for optional input parameters.
     inputs.icon_size = inputs.icon_size or 64 -- Pixel size of icons
@@ -156,14 +156,17 @@ function reskins.lib.create_explosions_and_particles(name, inputs)
     -- base_entity - Entity to copy explosion prototype from
     -- type        - Entity type
     -- tint        - Particle color
+    -- particles   - Optional; specify which particle to receive a tint
 
     -- Create explosions and related particles
     reskins.lib.create_explosion(name, inputs)
 
     -- Create and assign needed particles with appropriate tints
-    for particle, key in pairs(inputs.particles) do
-        -- Create and assign the particle
-        reskins.lib.create_particle(name, inputs.base_entity, reskins.lib.particle_index[particle], key, inputs.tint)
+    if inputs.particles then
+        for particle, key in pairs(inputs.particles) do
+            -- Create and assign the particle
+            reskins.lib.create_particle(name, inputs.base_entity, reskins.lib.particle_index[particle], key, inputs.tint)
+        end
     end
 end
 
@@ -223,7 +226,7 @@ reskins.lib.tint_defaults = {
         ["tier-0"] = util.color("4d4d4d"),
         ["tier-1"] = util.color("de9400"),
         ["tier-2"] = util.color("c20600"),
-        ["tier-3"] = util.color("1b87c2"),
+        ["tier-3"] = util.color("0099ff"), -- 1b87c2
         ["tier-4"] = util.color("a600bf"),
         ["tier-5"] = util.color("23de55"),
         ["tier-6"] = util.color("ff7700"),
