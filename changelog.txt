@@ -3,6 +3,11 @@ Version: 1.1.1
 Date: 2020.12.XX
   Features:
     - Added function `vertical_pipe_shadow` to place shadows at appropriate tile locations for pipes
+    - Added item icon for solder and silicon wafer, credit to Vigil for the sprites
+    - Added function `technology_equipment_overlay` for technology icons
+  Changes:
+    - Adjusted the default color blue for tier 3 to better match the vanilla fast inserter
+    - Revised function `create_explosions_and_particles' such that `inputs.particles` is optional
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.0
 Date: 2020.11.26

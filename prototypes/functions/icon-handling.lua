@@ -144,6 +144,24 @@ function reskins.lib.assign_technology_icons(name, inputs)
     end
 end
 
+function reskins.lib.technology_equipment_overlay(parameters)
+    local equipment = "personal"
+    local scale = 0.5
+    if parameters then
+        if parameters.is_vehicle then equipment = "vehicle" end
+        if parameters.scale then scale = parameters.scale end
+    end
+
+    return
+    {
+        icon = reskins.lib.directory.."/graphics/technology/"..equipment.."-equipment-overlay.png",
+        icon_size = 128,
+        icon_mipmaps = 3,
+        shift = {64*scale, 100*scale},
+        scale = scale,
+    }
+end
+
 ----------------------------------------------------------------------------------------------------
 -- STANDARD ICON FUNCTIONS
 ----------------------------------------------------------------------------------------------------
