@@ -75,7 +75,7 @@ data:extend(
         name = "reskins-lib-custom-colors-tier-3",
         setting_type ="startup",
         order = "yy",
-        default_value = "1b87c2",
+        default_value = "0099ff",
     },
     {
         type = "string-setting",
