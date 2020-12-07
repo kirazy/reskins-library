@@ -190,12 +190,14 @@ function reskins.lib.construct_icon(name, tier, inputs)
             ["offense"] = util.color("e62c2c"),
             ["defense"] = util.color("3282d1"),
             ["energy"] = util.color("32d167"),
-            ["logistic"] = util.color("4d4d4d"),
+            ["utility"] = util.color("cccccc"),
         }
 
         return
         {
             icon = reskins.lib.directory.."/graphics/icons/backgrounds/equipment-background.png",
+            icon_size = 64,
+            icon_mipmaps = 4,
             tint = tints[category],
         }
     end
@@ -329,6 +331,14 @@ function reskins.lib.construct_icon(name, tier, inputs)
 
     -- Insert icon background if necessary
     if inputs.equipment_category then
+        -- If we have one layer, we need to convert to an icons table format
+        if icon_layers == 1 then
+            inputs.icon = {
+                { icon = inputs.icon }
+            }
+        end
+
+        -- Insert the equipment background
         table.insert(inputs.icon, 1, equipment_background(inputs.equipment_category))
     end
 

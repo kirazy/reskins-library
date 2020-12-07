@@ -8,6 +8,9 @@ Date: 2020.12.XX
   Changes:
     - Adjusted the default color blue for tier 3 to better match the vanilla fast inserter
     - Revised function `create_explosions_and_particles' such that `inputs.particles` is optional
+    - Equipment technology icons now align with Bob's mods and vanilla Factorio's overlay
+  Bugfixes:
+    - Fixed that inserting an equipment background into a single-layer icon did not properly transcribe the single-layer icon to an icons definition
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.0
 Date: 2020.11.26
