@@ -495,6 +495,8 @@ function reskins.lib.assign_icons(name, inputs)
         end
     end
 
+    -- item-with-entity-data prototypes ignore pictures field as of 1.0
+    -- this has been left active in the hopes the default behavior is adjusted
     if item_with_data then
         if inputs.icon_picture and inputs.make_icon_pictures then
             item_with_data.pictures = inputs.icon_picture
