@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.1
-Date: 2020.12.XX
+Date: 2020.12.25
   Features:
     - Added function `vertical_pipe_shadow` to place shadows at appropriate tile locations for pipes
     - Added item icon for solder and silicon wafer, credit to Vigil for the sprites
