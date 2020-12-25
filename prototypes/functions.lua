@@ -10,6 +10,9 @@ if not reskins.lib then reskins.lib = {} end
 -- Library directory
 reskins.lib.directory = "__reskins-library__"
 
+-- FLIB Requires
+reskins.lib.migration = require("__flib__.migration")
+
 -- Check if a startup setting exists, and if it does, return its value
 function reskins.lib.setting(name)
     local startup_setting

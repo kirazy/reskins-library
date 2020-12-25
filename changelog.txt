@@ -5,6 +5,7 @@ Date: 2020.12.XX
     - Added function `vertical_pipe_shadow` to place shadows at appropriate tile locations for pipes
     - Added item icon for solder and silicon wafer, credit to Vigil for the sprites
     - Added function `technology_equipment_overlay` for technology icons
+    - Now requires Factorio Library as a dependency
   Changes:
     - Adjusted the default color blue for tier 3 to better match the vanilla fast inserter
     - Revised function `create_explosions_and_particles' such that `inputs.particles` is optional
