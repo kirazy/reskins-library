@@ -11,3 +11,13 @@
 
 -- Base
 require("prototypes.entity.base.oil-refinery")
+require("prototypes.entity.base.splitter")
+require("prototypes.entity.base.transport-belt")
+require("prototypes.entity.base.underground-belt")
+
+----------------------------------------------------------------------------------------------------
+-- TECHNOLOGIES
+----------------------------------------------------------------------------------------------------
+
+-- Base
+require("prototypes.technology.base.logistics")

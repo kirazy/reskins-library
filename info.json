@@ -9,8 +9,8 @@
   "dependencies":
   [
     "base",
-    "flib",
     "(?) bobassembly",
+    "(?) boblogistics",
     "(?) angelspetrochem",
     "(?) angelsindustries",
     "(?) ShinyBobGFX",

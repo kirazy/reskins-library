@@ -43,7 +43,7 @@ for name, map in pairs(tier_map) do
     inputs.defer_to_data_final_fixes = true
 
     -- Determine what tint we're using
-    inputs.tint = reskins.lib.tint_index["tier-"..tier]
+    inputs.tint = reskins.lib.tint_index[tier]
 
     reskins.lib.setup_standard_entity(name, tier, inputs)
 

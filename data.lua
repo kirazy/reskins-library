@@ -7,6 +7,7 @@
 -- CORE FUNCTIONS
 ----------------------------------------------------------------------------------------------------
 require("prototypes.functions")
+require("prototypes.functions.tints")
 require("prototypes.functions.entity-rescaling")
 require("prototypes.functions.icon-handling")
 require("prototypes.functions.pipe-pictures")

@@ -10,8 +10,8 @@ if not reskins.lib then reskins.lib = {} end
 -- Library directory
 reskins.lib.directory = "__reskins-library__"
 
--- FLIB Requires
-reskins.lib.migration = require("__flib__.migration")
+-- FLIB Requires (DEPRECATED)
+-- reskins.lib.migration = require("__flib__.migration")
 
 -- Check if a startup setting exists, and if it does, return its value
 function reskins.lib.setting(name)
@@ -173,94 +173,6 @@ function reskins.lib.create_explosions_and_particles(name, inputs)
     end
 end
 
--- Adjust the alpha value of a given tint
-function reskins.lib.adjust_alpha(tint, alpha)
-    local adjusted_tint = {r = tint.r, g = tint.g, b = tint.b, a = alpha}
-    return adjusted_tint
-end
-
--- Shift the rgb values of a given tint by shift amount, and optionally adjust the alpha value
-function reskins.lib.adjust_tint(tint, shift, alpha)
-    local adjusted_tint = {}
-
-    -- Adjust the tint
-    adjusted_tint.r = tint.r + shift
-    adjusted_tint.g = tint.g + shift
-    adjusted_tint.b = tint.b + shift
-    adjusted_tint.a = alpha or tint.a
-
-    -- Check boundary conditions
-    if adjusted_tint.r > 1 then
-        adjusted_tint.r = 1
-    elseif adjusted_tint.r < 0 then
-        adjusted_tint.r = 0
-    end
-
-    if adjusted_tint.g > 1 then
-        adjusted_tint.g = 1
-    elseif adjusted_tint.g < 0 then
-        adjusted_tint.g = 0
-    end
-
-    if adjusted_tint.b > 1 then
-        adjusted_tint.b = 1
-    elseif adjusted_tint.b < 0 then
-        adjusted_tint.b = 0
-    end
-
-    return adjusted_tint
-end
-
--- This function prepares a given tint for entities that use a base and mask layer instead of a base, mask, and highlights layer
--- Primarily this means belt-related entities
-function reskins.lib.belt_mask_tint(tint)
-    -- Define correction constants
-    local color_shift = 40/255
-    local alpha = 0.82
-
-    -- Color correct the tint
-    local belt_mask_tint = reskins.lib.adjust_tint(tint, color_shift, alpha)
-
-    return belt_mask_tint
-end
-
-reskins.lib.tint_defaults = {
-    bobs = {
-        ["tier-0"] = util.color("4d4d4d"),
-        ["tier-1"] = util.color("de9400"),
-        ["tier-2"] = util.color("c20600"),
-        ["tier-3"] = util.color("0099ff"), -- 1b87c2
-        ["tier-4"] = util.color("a600bf"),
-        ["tier-5"] = util.color("23de55"),
-        ["tier-6"] = util.color("ff7700"),
-    },
-    angels = {
-        ["tier-0"] = util.color("262626"),
-        ["tier-1"] = util.color("595959"),
-        ["tier-2"] = util.color("2957cc"),
-        ["tier-3"] = util.color("cc2929"),
-        ["tier-4"] = util.color("ccae29"),
-        ["tier-5"] = util.color("23de55"),
-        ["tier-6"] = util.color("ff7700"),
-    }
-}
-
-if settings.startup["reskins-lib-customize-tier-colors"].value == true then
-    reskins.lib.tint_index = {
-        ["tier-0"] = util.color(settings.startup["reskins-lib-custom-colors-tier-0"].value),
-        ["tier-1"] = util.color(settings.startup["reskins-lib-custom-colors-tier-1"].value),
-        ["tier-2"] = util.color(settings.startup["reskins-lib-custom-colors-tier-2"].value),
-        ["tier-3"] = util.color(settings.startup["reskins-lib-custom-colors-tier-3"].value),
-        ["tier-4"] = util.color(settings.startup["reskins-lib-custom-colors-tier-4"].value),
-        ["tier-5"] = util.color(settings.startup["reskins-lib-custom-colors-tier-5"].value),
-        ["tier-6"] = util.color(settings.startup["reskins-lib-custom-colors-tier-6"].value),
-    }
--- elseif reskins.lib.setting("reskins-angels-use-angels-tier-colors") then
---     reskins.lib.tint_index = reskins.lib.tint_defaults.angels
-else
-    reskins.lib.tint_index = reskins.lib.tint_defaults.bobs
-end
-
 reskins.lib.particle_index = {
     ["tiny-stone"] = "stone-particle-tiny",
     ["small"] = "metal-particle-small",
@@ -370,4 +282,101 @@ function reskins.lib.vertical_pipe_shadow(shift)
             scale = 0.5,
         }
     }
+end
+
+-- TRANSPORT BELT PICTURES
+function reskins.lib.transport_belt_animation_set(tint, variant)
+    local transport_belt_animation_set
+    if variant == 1 then
+        transport_belt_animation_set = {
+            animation_set = {
+                layers = {
+                    -- Base
+                    {
+                        filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/transport-belt-1-base.png",
+                        priority = "extra-high",
+                        width = 64,
+                        height = 64,
+                        frame_count = 16,
+                        direction_count = 20,
+                        hr_version = {
+                            filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/hr-transport-belt-1-base.png",
+                            priority = "extra-high",
+                            width = 128,
+                            height = 128,
+                            scale = 0.5,
+                            frame_count = 16,
+                            direction_count = 20
+                        }
+                    },
+                    -- Mask
+                    {
+                        filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/transport-belt-1-mask.png",
+                        priority = "extra-high",
+                        width = 64,
+                        height = 64,
+                        frame_count = 16,
+                        tint = tint,
+                        direction_count = 20,
+                        hr_version = {
+                            filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/hr-transport-belt-1-mask.png",
+                            priority = "extra-high",
+                            width = 128,
+                            height = 128,
+                            scale = 0.5,
+                            frame_count = 16,
+                            tint = tint,
+                            direction_count = 20
+                        }
+                    },
+                }
+            }
+        }
+    else
+        transport_belt_animation_set = {
+            animation_set = {
+                layers = {
+                    -- Base
+                    {
+                        filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/transport-belt-2-base.png",
+                        priority = "extra-high",
+                        width = 64,
+                        height = 64,
+                        frame_count = 32,
+                        direction_count = 20,
+                        hr_version = {
+                            filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/hr-transport-belt-2-base.png",
+                            priority = "extra-high",
+                            width = 128,
+                            height = 128,
+                            scale = 0.5,
+                            frame_count = 32,
+                            direction_count = 20
+                        }
+                    },
+                    -- Mask
+                    {
+                        filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/transport-belt-2-mask.png",
+                        priority = "extra-high",
+                        width = 64,
+                        height = 64,
+                        frame_count = 32,
+                        tint = tint,
+                        direction_count = 20,
+                        hr_version = {
+                            filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/hr-transport-belt-2-mask.png",
+                            priority = "extra-high",
+                            width = 128,
+                            height = 128,
+                            scale = 0.5,
+                            frame_count = 32,
+                            tint = tint,
+                            direction_count = 20
+                        }
+                    },
+                }
+            }
+        }
+    end
+    return transport_belt_animation_set
 end

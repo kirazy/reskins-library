@@ -597,7 +597,7 @@ function reskins.lib.append_tier_labels(tier, inputs)
             icon = reskins.lib.directory.."/graphics/icons/tiers/"..icon_style.."/"..tier..".png",
             icon_size = 64,
             icon_mipmaps = 4,
-            tint = reskins.lib.adjust_alpha(reskins.lib.tint_index["tier-"..tier], 0.75)
+            tint = reskins.lib.adjust_alpha(reskins.lib.tint_index[tier], 0.75)
         })
     end
 end
@@ -713,11 +713,11 @@ function reskins.lib.create_icons_from_list(table, inputs)
             end
 
             -- Handle tints
-            inputs.tint = map.tint or inputs.tint or reskins.lib.tint_index["tier-"..tier]
+            inputs.tint = map.tint or inputs.tint or reskins.lib.tint_index[tier]
 
             -- Adjust tint to belt-type if necessary
             if map.uses_belt_mask == true then
-                inputs.tint = reskins.lib.belt_mask_tint(inputs.tint)
+                inputs.tint = reskins.lib.belt_tint_index[tier]
             end
 
             -- Handle icon_name and related parameters
