@@ -4,18 +4,13 @@
 -- See LICENSE.md in the project directory for license information.
 
 -- Concatenate the mod description string with the default description string for boolean settings
+-- Note that an empty mod setting description is possible, but cannot be detected, and so blank newlines will be present for such settings
 local function concatenate_bool(setting)
-    if setting.default then
-        string_default = "true"
-    else
-        string_default = "false"
-    end
-
     -- Check for an already set localised_description
     if setting.localised_description then
-        return {"", setting.localised_description, {"reskins-defaults."..string_default}}
+        return {"", setting.localised_description, {"reskins-defaults."..tostring(setting.default_value)}}
     else
-        return {"", {"mod-setting-description."..setting.name}, {"reskins-defaults."..string_default}}
+        return {"", {"mod-setting-description."..setting.name}, {"reskins-defaults."..tostring(setting.default_value)}}
     end
 end
 

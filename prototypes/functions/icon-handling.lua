@@ -490,7 +490,7 @@ function reskins.lib.assign_icons(name, inputs)
     end
 
     if item then
-        if inputs.icon_picture and inputs.make_icon_pictures  then
+        if inputs.icon_picture and inputs.make_icon_pictures then
             item.pictures = inputs.icon_picture
         end
     end
