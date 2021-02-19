@@ -3,6 +3,40 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
+-- Make our function host
+if not reskins then reskins = {} end
+if not reskins.lib then reskins.lib = {} end
+
+-- Set the hidden flag to true and optionally override the default value
+function reskins.lib.setting_override(setting_type, setting_name, override_value)
+    if data.raw[setting_type] and data.raw[setting_type][setting_name] then
+        -- Fetch the setting, and hide it
+        local setting = data.raw[setting_type][setting_name]
+        setting.hidden = true
+
+        -- Override the current value
+        if override_value then
+            if setting_type == "bool-setting" then
+                setting.forced_value = override_value
+            else
+                setting.default_value = override_value
+                setting.allowed_values = {override_value}
+            end
+        end
+    end
+end
+
+-- Concatenate the mod description string with the default description string for boolean settings
+-- Note that an empty mod setting description is possible, but cannot be detected, and so blank newlines will be present for such settings
+function reskins.lib.concatenate_setting_description(setting)
+    -- Check for an already set localised_description
+    if setting.localised_description then
+        return {"", setting.localised_description, {"reskins-defaults."..tostring(setting.default_value)}}
+    else
+        return {"", {"mod-setting-description."..setting.name}, {"reskins-defaults."..tostring(setting.default_value)}}
+    end
+end
+
 -- Core reskins-lib series settings
 data:extend(
 {
