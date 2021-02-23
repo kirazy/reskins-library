@@ -7,8 +7,11 @@ Date: 2021.02.XX
     - Revised tint handling, separated transport belt tints into their own table, `reskins.lib.belt_tint_index`
     - Revised how tints are indexed, allowing for direct reference by tier-number instead of a string
     - Revised transport belt mask sprites to improve mask precision and color
+    - Consolidated settings-stage functions into `reskins.lib` global function host
   Bugfixes:
     - Fixed that the concatenation routine to append the defaults for boolean settings did not handle LocalisedStrings properly
+  Locale:
+    - Added partial localization for Polish
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.2
 Date: 2021.01.31
