@@ -25,6 +25,22 @@ function reskins.lib.setting(name)
     return startup_setting
 end
 
+-- Checks to see if the reskin-toggle is enabled for a given setting, and if it is, checks if the given scope is also enabled
+-- Returns true if both are true, returns false if one is false, and nil otherwise
+function reskins.lib.check_scope(scope, mod, setting)
+    if reskins.lib.setting("reskins-"..mod.."-do-"..setting) == true then
+        if reskins.lib.setting("reskins-lib-scope-"..scope) == true then
+            return true
+        else
+            return false
+        end
+    elseif reskins.lib.setting("reskins-"..mod.."-do-"..setting) == false then
+        return false
+    else
+        return nil
+    end
+end
+
 -- Fetch blend mode
 reskins.lib.blend_mode = reskins.lib.setting("reskins-lib-blend-mode")
 

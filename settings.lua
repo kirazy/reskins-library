@@ -71,6 +71,36 @@ data:extend(
         default_value = "additive",
         allowed_values = {"additive","additive-soft"}
     },
+
+    -- Reskin scope settings
+    {
+        type = "bool-setting",
+        name = "reskins-lib-scope-entities",
+        setting_type = "startup",
+        order = "da",
+        default_value = true,
+    },
+    {
+        type = "bool-setting",
+        name = "reskins-lib-scope-equipment",
+        setting_type = "startup",
+        order = "da",
+        default_value = true,
+    },
+    {
+        type = "bool-setting",
+        name = "reskins-lib-scope-items-and-fluids",
+        setting_type = "startup",
+        order = "db",
+        default_value = true,
+    },
+    {
+        type = "bool-setting",
+        name = "reskins-lib-scope-technologies",
+        setting_type = "startup",
+        order = "dc",
+        default_value = true,
+    },
 })
 
 -- Customize tier coloring settings

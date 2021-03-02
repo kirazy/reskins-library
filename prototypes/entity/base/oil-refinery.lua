@@ -5,8 +5,8 @@
 
 -- Check to see if reskinning needs to be done.
 if not data.raw["assembling-machine"]["oil-refinery-2"] then return end
-if reskins.lib.setting("reskins-bobs-do-bobassembly") == false then return end
-if reskins.lib.setting("reskins-angels-do-angelspetrochem") == false then return end
+if reskins.lib.check_scope("entities", "bobs", "bobassembly") == false then return end
+if reskins.lib.check_scope("entities", "angels", "angelspetrochem") == false then return end
 
 -- Set input parameters
 local inputs = {
