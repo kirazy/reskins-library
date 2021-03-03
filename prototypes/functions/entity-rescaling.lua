@@ -33,9 +33,16 @@ local function switch_icon_to_mini(name, source_name, pattern, replacement, inpu
             inputs.icon[n].icon = string.gsub(inputs.icon[n].icon, "/"..pattern.."/", "/"..replacement.."/mini-")
         end
     else
-        inputs.icon = string.gsub(inputs.icon, "/"..pattern.."/", "/"..replacement.."/mini-")
+        -- Convert to icons table
+        inputs.icon = {{ icon = string.gsub(inputs.icon, "/"..pattern.."/", "/"..replacement.."/mini-") }}
     end
 
+    -- Overlay the mini-machine symbol
+    table.insert(inputs.icon, {
+        icon = reskins.lib.directory.."/graphics/icons/mini-machine-overlay.png",
+        icon_size = 64,
+        icon_mipmaps = 2,
+    })
 
     if inputs.icon_picture.layers then
         for n = 1, #inputs.icon_picture.layers do
