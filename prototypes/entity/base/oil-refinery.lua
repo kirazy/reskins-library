@@ -5,8 +5,11 @@
 
 -- Check to see if reskinning needs to be done.
 if not data.raw["assembling-machine"]["oil-refinery-2"] then return end
-if reskins.lib.check_scope("entities", "bobs", "bobassembly") == false then return end
-if reskins.lib.check_scope("entities", "angels", "angelspetrochem") == false then return end
+if reskins.bobs and (reskins.bobs.triggers.assembly.entities == false) then return end
+if reskins.angels and (reskins.angels.triggers.petrochem.entities == false) then return end
+
+-- Flag available for Mini-Machines compatibility pass
+if reskins.compatibility then reskins.compatibility.triggers.minimachines.refineries = true end
 
 -- Set input parameters
 local inputs = {

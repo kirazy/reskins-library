@@ -4,7 +4,7 @@
 -- See LICENSE in the project directory for license information.
 
 -- Check if reskinning needs to be done
-if reskins.lib.check_scope("entities", "bobs", "boblogistics") == false then return end
+if reskins.bobs and (reskins.bobs.triggers.logistics.entities == false) then return end
 
 -- We reskin the base entities only if we're doing custom colors
 local use_custom_colors = reskins.lib.setting("reskins-lib-customize-tier-colors")
