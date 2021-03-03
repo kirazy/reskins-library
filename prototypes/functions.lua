@@ -10,6 +10,9 @@ if not reskins.lib then reskins.lib = {} end
 -- Library directory
 reskins.lib.directory = "__reskins-library__"
 
+-- Setup reskin logging TODO: Actually log things...
+reskins.lib.status = {}
+
 -- FLIB Requires
 reskins.lib.migration = require("__flib__.migration")
 
@@ -39,6 +42,25 @@ function reskins.lib.check_scope(scope, mod, setting)
     else
         return nil
     end
+end
+
+-- Setup pack function hosts and import triggers
+if mods["reskins-angels"] then
+    reskins.angels = {
+    triggers = require("__reskins-angels__/prototypes/functions/triggers")
+}
+end
+
+if mods["reskins-bobs"] then
+    reskins.bobs = {
+    triggers = require("__reskins-bobs__/prototypes/functions/triggers")
+}
+end
+
+if mods["reskins-compatibility"] then
+    reskins.compatibility = {
+        triggers = require("__reskins-compatibility__/prototypes/functions/triggers")
+    }
 end
 
 -- Fetch blend mode
