@@ -126,23 +126,25 @@ local function notify(data)
     -- Check for supported mods for which a reskin mod is missing, and notify
     for _, player in pairs(game.connected_players) do
         if player.admin then
-            check_for_missing_reskin(player)
+            if player.mod_settings["reskins-lib-display-notifications"].value == true then
+                check_for_missing_reskin(player)
 
-            -- Notify of changes when updated in a save we were already present in
-            if data.mod_changes and data.mod_changes["reskins-library"] and data.mod_changes["reskins-library"].old_version then
-                -- 1.0.4 update
-                if not migration.is_newer_version("1.0.3", data.mod_changes["reskins-library"].old_version) then
-                    player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-0-4-update", {"mod-setting-name.reskins-lib-blend-mode"}}})
-                end
-
-                -- 1.1.3 update
-                if not migration.is_newer_version("1.1.2", data.mod_changes["reskins-library"].old_version) then
-                    if game.active_mods["reskins-bobs"] and not game.active_mods["reskins-compatibility"] then
-                        player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-1-3-update-bobs", {"", "[color="..message_color.."]", {"reskins-library.reskins-compatibility-mod-name"}, "[/color]"}}})
+                -- Notify of changes when updated in a save we were already present in
+                if data.mod_changes and data.mod_changes["reskins-library"] and data.mod_changes["reskins-library"].old_version then
+                    -- 1.0.4 update
+                    if not migration.is_newer_version("1.0.3", data.mod_changes["reskins-library"].old_version) then
+                        player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-0-4-update", {"mod-setting-name.reskins-lib-blend-mode"}}})
                     end
 
-                    if game.active_mods["reskins-angels"] and not game.active_mods["reskins-compatibility"] then
-                        player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-1-3-update-angels", {"", "[color="..message_color.."]", {"reskins-library.reskins-compatibility-mod-name"}, "[/color]"}}})
+                    -- 1.1.3 update
+                    if not migration.is_newer_version("1.1.2", data.mod_changes["reskins-library"].old_version) then
+                        if game.active_mods["reskins-bobs"] and not game.active_mods["reskins-compatibility"] then
+                            player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-1-3-update-bobs", {"", "[color="..message_color.."]", {"reskins-library.reskins-compatibility-mod-name"}, "[/color]"}}})
+                        end
+
+                        if game.active_mods["reskins-angels"] and not game.active_mods["reskins-compatibility"] then
+                            player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-1-3-update-angels", {"", "[color="..message_color.."]", {"reskins-library.reskins-compatibility-mod-name"}, "[/color]"}}})
+                        end
                     end
                 end
             end
@@ -156,7 +158,10 @@ script.on_configuration_changed(notify)
 -- RUNTIME
 ----------------------------------------------------------------------------------------------------
 script.on_event(defines.events.on_player_joined_game, function(event)
-    if game.get_player(event.player_index).admin then
-        check_for_missing_reskin(game.get_player(event.player_index))
+    local player = game.get_player(event.player_index)
+    if player.admin then
+        if player.mod_settings["reskins-lib-display-notifications"].value == true then
+            check_for_missing_reskin(player)
+        end
     end
 end)

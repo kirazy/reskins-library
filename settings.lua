@@ -40,6 +40,7 @@ end
 -- Core reskins-lib series settings
 data:extend(
 {
+    -- Startup settings
     {
         type = "bool-setting",
         name = "reskins-lib-icon-tier-labeling",
@@ -101,6 +102,14 @@ data:extend(
         order = "ad",
         default_value = true,
     },
+
+    -- Runtime settings
+    {
+        type = "bool-setting",
+        name = "reskins-lib-display-notifications",
+        setting_type = "runtime-per-user",
+        default_value = true,
+    }
 })
 
 -- Customize tier coloring settings

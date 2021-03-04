@@ -6,6 +6,7 @@ Date: 2021.03.XX
     - Added startup settings "Reskin entities", "Reskin equipment", "Reskin items and fluids" and "Reskin technologies" to control the scope of the various mod reskin toggles; by default the complete scope is enabled
     - Added function `check_scope` to check the enabled scope and the given toggle setting and return the appropriate boolean or nil
     - Added control logic to check for missing Artisanal Reskins mods and notify players once per save
+    - Added a setting "Display notifications" under Player settings to control whether update notifications display
   Changes:
     - Revised tint handling, separated transport belt tints into their own table, `reskins.lib.belt_tint_index`
     - Revised how tints are indexed, allowing for direct reference by tier-number instead of a string
