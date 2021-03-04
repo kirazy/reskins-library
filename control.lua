@@ -49,6 +49,8 @@ function check_for_missing_reskin(player)
             "DeadlockCrating",
             "mini-machines",
             "CircuitProcessing",
+            "angels-smelting-extended",
+            "Clowns-Processing",
             "classic-beacon",
             "classic-mining-drill",
             "semi-classic-mining-drill",
@@ -133,10 +135,14 @@ local function notify(data)
                     player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-0-4-update", {"mod-setting-name.reskins-lib-blend-mode"}}})
                 end
 
-                -- 1.0.3 update
+                -- 1.1.3 update
                 if not migration.is_newer_version("1.1.2", data.mod_changes["reskins-library"].old_version) then
                     if game.active_mods["reskins-bobs"] then
-                        player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-1-3-update", {"reskins-library.reskins-compatibility-mod-name"}}})
+                        player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-1-3-update-bobs", {"reskins-library.reskins-compatibility-mod-name"}}})
+                    end
+
+                    if game.active_mods["reskins-angels"] then
+                        player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-1-3-update-angels", {"reskins-library.reskins-compatibility-mod-name"}}})
                     end
                 end
             end
