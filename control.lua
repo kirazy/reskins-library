@@ -137,12 +137,12 @@ local function notify(data)
 
                 -- 1.1.3 update
                 if not migration.is_newer_version("1.1.2", data.mod_changes["reskins-library"].old_version) then
-                    if game.active_mods["reskins-bobs"] then
-                        player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-1-3-update-bobs", {"reskins-library.reskins-compatibility-mod-name"}}})
+                    if game.active_mods["reskins-bobs"] and not game.active_mods["reskins-compatibility"] then
+                        player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-1-3-update-bobs", {"", "[color="..message_color.."]", {"reskins-library.reskins-compatibility-mod-name"}, "[/color]"}}})
                     end
 
-                    if game.active_mods["reskins-angels"] then
-                        player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-1-3-update-angels", {"reskins-library.reskins-compatibility-mod-name"}}})
+                    if game.active_mods["reskins-angels"] and not game.active_mods["reskins-compatibility"] then
+                        player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-1-3-update-angels", {"", "[color="..message_color.."]", {"reskins-library.reskins-compatibility-mod-name"}, "[/color]"}}})
                     end
                 end
             end
