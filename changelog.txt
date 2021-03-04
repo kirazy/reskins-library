@@ -5,12 +5,14 @@ Date: 2021.03.XX
     - Moved handling for transport belts, splitters, and underground belts into this mod
     - Added startup settings "Reskin entities", "Reskin equipment", "Reskin items and fluids" and "Reskin technologies" to control the scope of the various mod reskin toggles; by default the complete scope is enabled
     - Added function `check_scope` to check the enabled scope and the given toggle setting and return the appropriate boolean or nil
+    - Added control logic to check for missing Artisanal Reskins mods and notify players once per save
   Changes:
     - Revised tint handling, separated transport belt tints into their own table, `reskins.lib.belt_tint_index`
     - Revised how tints are indexed, allowing for direct reference by tier-number instead of a string
     - Revised transport belt mask sprites to improve mask precision and color
     - Consolidated settings-stage functions into `reskins.lib` global function host
     - Internal code revisions such that reskinning is trigger-based
+    - Revised update notification handling; messages sent by this mod will be sent to admins only (since only they can make mod changes)
   Bugfixes:
     - Fixed that the concatenation routine to append the defaults for boolean settings did not handle LocalisedStrings properly
   Locale:
