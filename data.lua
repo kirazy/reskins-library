@@ -6,12 +6,12 @@
 ----------------------------------------------------------------------------------------------------
 -- CORE FUNCTIONS
 ----------------------------------------------------------------------------------------------------
-require("prototypes.functions")
+require("prototypes.functions.functions")
 require("prototypes.functions.tints")
 require("prototypes.functions.entity-rescaling")
 require("prototypes.functions.icon-handling")
 require("prototypes.functions.pipe-pictures")
-require("prototypes.label-items")
+require("prototypes.functions.label-items")
 
 -- Compatibility with ShinyBobGFX/ShinyAngelGFX (requires must be done in data-updates)
 if mods["ShinyBobGFX"] or mods["ShinyAngelGFX"] then return end
