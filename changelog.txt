@@ -14,6 +14,7 @@ Date: 2021.03.04
     - Consolidated settings-stage functions into `reskins.lib` global function host
     - Internal code revisions such that reskinning is trigger-based
     - Revised update notification handling; messages sent by this mod will be sent to admins only (since only they can make mod changes)
+    - Images are now losslessly compressed, instead of lossy; there is a modest increase in filesize
   Bugfixes:
     - Fixed that the concatenation routine to append the defaults for boolean settings did not handle LocalisedStrings properly
   Locale:
