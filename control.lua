@@ -123,10 +123,10 @@ script.on_init(on_init)
 -- ON CONFIGURATION CHANGED
 ----------------------------------------------------------------------------------------------------
 local function notify(data)
-    -- Check for supported mods for which a reskin mod is missing, and notify
     for _, player in pairs(game.connected_players) do
         if player.admin then
             if player.mod_settings["reskins-lib-display-notifications"].value == true then
+                -- Check for supported mods for which a reskin mod is missing, and notify
                 check_for_missing_reskin(player)
 
                 -- Notify of changes when updated in a save we were already present in
@@ -161,6 +161,7 @@ script.on_event(defines.events.on_player_joined_game, function(event)
     local player = game.get_player(event.player_index)
     if player.admin then
         if player.mod_settings["reskins-lib-display-notifications"].value == true then
+            -- Check for supported mods for which a reskin mod is missing, and notify
             check_for_missing_reskin(player)
         end
     end
