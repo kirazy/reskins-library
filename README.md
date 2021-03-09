@@ -13,3 +13,6 @@ This mod is constantly being worked on, but I am a graduate student and school h
 
 **Localization**  
 You are welcome to help with localization, please use [this Crowdin project](https://crowdin.com/project/factorio-mods-localization). You can find more details [here](https://github.com/dima74/factorio-mods-localization#how-to-translate-using-crowdin). Locale updates will be released on the weekend they are received from Crowdin.
+
+## Licensing
+All content is licensed under [MIT](https://opensource.org/licenses/MIT).
