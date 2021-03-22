@@ -3,7 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if not (mods["angelsindustries"] or mods["bobspower"]) then return end
+if not (mods["angelsindustries"] or mods["bobpower"]) then return end
 
 local reactors = {
     "nuclear-reactor",

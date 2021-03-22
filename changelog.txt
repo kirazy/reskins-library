@@ -1,12 +1,17 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.5
+Date: 2021-03-22
+  Bugfixes:
+    - Fixed that nuclear reactor working lights were not properly overridden
+---------------------------------------------------------------------------------------------------
 Version: 1.1.4
-Date: 2021.03.13
+Date: 2021-03-13
   Locale:
     - Fixed an inconsistency with colons and Default coloring
     - Added Chinese Traditional and Korean localizations, updated German localization
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.3
-Date: 2021.03.04
+Date: 2021-03-04
   Features:
     - Moved handling for transport belts, splitters, and underground belts into this mod
     - Added startup settings "Reskin entities", "Reskin equipment", "Reskin items and fluids" and "Reskin technologies" to control the scope of the various mod reskin toggles; by default the complete scope is enabled
@@ -27,12 +32,12 @@ Date: 2021.03.04
     - Added partial localization for Polish
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.2
-Date: 2021.01.31
+Date: 2021-01-31
   Locale:
     - Added Russian localization
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.1
-Date: 2020.12.25
+Date: 2020-12-25
   Features:
     - Added function `vertical_pipe_shadow` to place shadows at appropriate tile locations for pipes
     - Added item icon for solder and silicon wafer, credit to Vigil for the sprites
@@ -46,7 +51,7 @@ Date: 2020.12.25
     - Fixed that inserting an equipment background into a single-layer icon did not properly transcribe the single-layer icon to an icons definition
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.0
-Date: 2020.11.26
+Date: 2020-11-26
   Features:
     - Moved to Factorio 1.1
     - Added a catch-all to ensure nuclear reactors working light is properly defined for Angels or Bobs
@@ -58,19 +63,19 @@ Date: 2020.11.26
     - Fixed that `icon_picture_extras` for icons with single layers was not properly handled by `construct_icon`
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.9
-Date: 2020.11.20
+Date: 2020-11-20
   Bugfixes:
     - Fixed that `append_tier_labels_to_vanilla_items` did not allow for non-vanilla icon definitions
   Locale:
     - Updated Brazilian Portuguese, Czech and German localizations
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.8
-Date: 2020.11.09
+Date: 2020-11-09
   Bugfixes:
     - Fixed that functions `append_tier_labels` and `append_tier_labels_to_vanilla_items` did not specify `icon_size` and `icon_mipmaps`
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.7
-Date: 2020.11.08
+Date: 2020-11-08
   Changes:
     - Changed how default indicators for true/false setting descriptions are handled internally
     - Added handling of custom Types/Animation parameter `vertically_oriented` to `make_4way_animation_from_spritesheet`
@@ -83,7 +88,7 @@ Date: 2020.11.08
     - Preliminary localizations for French (5% complete) and Polish (5% complete)
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.6
-Date: 2020.10.04
+Date: 2020-10-04
   Features:
     - Added function `ore_icon_pictures`
   Changes:
@@ -93,7 +98,7 @@ Date: 2020.10.04
     - Fixed that the function `composite_existing_icons` produced icons in alt-view that were twice as large as intended
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.5
-Date: 2020.09.21
+Date: 2020-09-21
   Features:
     - Added function `composite_existing_icons`
     - Added functions `pipe_pictures`, `underground_pipe_pictures` and `pipe_covers`
@@ -110,7 +115,7 @@ Date: 2020.09.21
     - Updated Czech and German localizations
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.4
-Date: 2020.09.06
+Date: 2020-09-06
   Features:
     - Added setting `Color intensity`, affecting how bright structures, vehicles and robots appear in-world
   Changes:
@@ -121,12 +126,12 @@ Date: 2020.09.06
     - Updated German localization
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.3
-Date: 2020.08.24
+Date: 2020-08-24
   Changes:
     - Reverted `icon_size` and `icon_mipmaps` are now set to `nil` when `icons` is defined
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.2
-Date: 2020.08.24
+Date: 2020-08-24
   Changes:
     - Added functionality to `create_icons_from_list` to be able to specify belt-type masks
     - Adjusted bright spot in oil refinery highlight
@@ -135,7 +140,7 @@ Date: 2020.08.24
     - Added localization support for German
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.1
-Date: 2020.08.15
+Date: 2020-08-15
   Features:
     - Added function `rescale_minimachine_technology`
   Changes:
@@ -144,14 +149,14 @@ Date: 2020.08.15
     - Fixed that `tint_index` could not be defined under some edge cases
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.15
-Date: 2020.08.11
+Date: 2020-08-11
   Changes:
     - Updated thumbnail
   Bugfixes:
     - Fixed startup error when starting without any of Bob's mods; calling a function that hadn't been defined yet
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.14
-Date: 2020.08.07
+Date: 2020-08-07
   Features:
     - Added functions `assign_deferred_icons`, `rescale_minimachine`
   Changes:
@@ -161,12 +166,12 @@ Date: 2020.08.07
     - Changed how tier label setting icons were created and referenced; now uses sprite prototype
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.13
-Date: 2020.08.03
+Date: 2020-08-03
   Changes:
     - Modified function `create_icons_from_list` to support inputs-defined icon deferral
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.12
-Date: 2020.08.03
+Date: 2020-08-03
   Features:
     - Added function `clear_icon_specification`
     - Added function `create_icons_from_list`
@@ -174,7 +179,7 @@ Date: 2020.08.03
     - Modified function `store_icon` to handle data-updates as well
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.11
-Date: 2020.07.15
+Date: 2020-07-15
   Changes:
     - Revised tier label icons, 32px is now more clear
     - Revised how equipment icon backgrounds are handled
@@ -184,42 +189,42 @@ Date: 2020.07.15
     - Removed files and code relating to target drone utility
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.10
-Date: 2020.07.13
+Date: 2020-07-13
   Features:
     - Added customized version of `make_4way_animation_from_spritesheet`
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.9
-Date: 2020.07.11
+Date: 2020-07-11
   Changes:
     - Code improvements; ensured variables are locally defined
     - Tier labels now have borders on the left
     - Tier labels have been improved at 16x and 8x pixel sizes for clarity
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.8
-Date: 2020.07.06
+Date: 2020-07-06
   Features:
     - Added function `rescale_remnant`
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.7
-Date: 2020.06.24
+Date: 2020-06-24
   Changes:
     - Reverted previous change in 0.0.6
     - Sets icon_size and icon_mipmaps at every entry within an icons table when icons are assigned
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.6
-Date: 2020.06.23
+Date: 2020-06-23
   Changes:
     - Unbrick mods that depend on icon field being present when icons was set by this mod
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.5
-Date: 2020.06.22
+Date: 2020-06-22
   Features:
     - Added function `startup_setting` to handle validation of startup settings
   Changes:
     - Moved icon assignments to occur immediately, with method to re-apply if necessary
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.4
-Date: 2020.06.18
+Date: 2020-06-18
   Features:
     - Added functions `construct_technology_icon` and `assign_technology_icon`
   Changes:
@@ -230,19 +235,19 @@ Date: 2020.06.18
     - Added `storage` parameter to function `store_icons` to allow for more control over where icons are stored
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.3
-Date: 2020.06.11
+Date: 2020-06-11
   Features:
     - Added function `store_icons` to collate icon setup parameters for later assignment in data-final-fixes by originating mod
   Changes:
     - Added `homepage` property to info.json
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.2
-Date: 2020.06.08
+Date: 2020-06-08
   Changes:
     - Renamed from `Function Library` to `Function Library`
     - Added means to disable icon mask tinting in setup_masked_icon
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.1
-Date: 2020.06.06
+Date: 2020-06-06
   Features:
     - Initial Beta Release
