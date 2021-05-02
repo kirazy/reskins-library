@@ -833,25 +833,26 @@ function reskins.lib.composite_existing_icons(target_name, target_type, icons)
     reskins.lib.assign_icons(target_name, {type = target_type, icon = composite_icon})
 end
 
-function reskins.lib.ore_icon_pictures(mod, group, name, variations, make_glow)
+function reskins.lib.create_icon_variations(parameters)
     local icon_picture = {}
-    for n = 1, variations do
-        local suffix = ".png"
-        if n > 1 then
-            suffix = "-"..(n-1)..".png"
-        end
+    local folder_path = parameters.group
+    if parameters.subgroup then folder_path = parameters.group.."/"..parameters.subgroup end
 
-        if make_glow then
+    for n = 1, parameters.variations do
+        local suffix = ".png"
+        if n > 1 then suffix = "-"..(n-1)..".png" end
+
+        if parameters.glows then
             table.insert(icon_picture, {
                 layers = {
                     {
-                        filename = reskins[mod].directory.."/graphics/icons/"..group.."/ores/"..name.."/"..name..suffix,
+                        filename = reskins[parameters.mod].directory.."/graphics/icons/"..folder_path.."/"..parameters.icon.."/"..parameters.icon..suffix,
                         size = 64,
                         scale = 0.25,
                         mipmap_count = 4
                     },
                     {
-                        filename = reskins[mod].directory.."/graphics/icons/"..group.."/ores/"..name.."/"..name..suffix,
+                        filename = reskins[parameters.mod].directory.."/graphics/icons/"..folder_path.."/"..parameters.icon.."/"..parameters.icon..suffix,
                         blend_mode = "additive",
                         draw_as_light = true,
                         tint = {r = 0.3, g = 0.3, b = 0.3, a = 0.3},
@@ -863,7 +864,7 @@ function reskins.lib.ore_icon_pictures(mod, group, name, variations, make_glow)
             })
         else
             table.insert(icon_picture, {
-                filename = reskins[mod].directory.."/graphics/icons/"..group.."/ores/"..name.."/"..name..suffix,
+                filename = reskins[parameters.mod].directory.."/graphics/icons/"..folder_path.."/"..parameters.icon.."/"..parameters.icon..suffix,
                 size = 64,
                 scale = 0.25,
                 mipmap_count = 4
