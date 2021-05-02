@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.6
-Date: ????
+Date: 2021-05-02
   Features:
     - Added function `create_icon_variations`
   Changes:
