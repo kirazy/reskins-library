@@ -37,9 +37,11 @@ function reskins.lib.construct_technology_icon(name, inputs)
     end
 
     -- Handle icon_layers defaults
-    local icon_layers = inputs.technology_icon_layers or 3
+    local icon_layers
     if inputs.technology_icon_filename then
-        icon_layers = 1
+        icon_layers = inputs.technology_icon_layers or 1
+    else
+        icon_layers = inputs.technology_icon_layers or 3
     end
 
     -- Some entities have variable bases and masks
@@ -218,9 +220,11 @@ function reskins.lib.construct_icon(name, tier, inputs)
     reskins.lib.parse_inputs(inputs)
 
     -- Handle icon_layers defaults
-    local icon_layers = inputs.icon_layers or 3
+    local icon_layers
     if inputs.icon_filename then
-        icon_layers = 1
+        icon_layers = inputs.icon_layers or 1
+    else
+        icon_layers = inputs.icon_layers or 3
     end
 
     -- Some entities have variable bases and masks
