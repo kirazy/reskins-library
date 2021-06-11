@@ -1,6 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.7
 Date: ????
+  Features:
+    - Added function `return_technology_effect_icon`, which returns an IconData layer containing technology constant icons of the specified type at the specified scale and default positioning
   Changes:
     - Dropped support for ShinyBobGFX, ShinyAngelGFX
 ---------------------------------------------------------------------------------------------------

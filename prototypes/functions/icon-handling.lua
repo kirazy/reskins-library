@@ -164,6 +164,35 @@ function reskins.lib.technology_equipment_overlay(parameters)
     }
 end
 
+local technology_constants = {
+    ["battery"] = {icon = "__core__/graphics/icons/technology/constants/constant-battery.png"},
+    ["braking-force"] = {icon = "__core__/graphics/icons/technology/constants/constant-braking-force.png"},
+    ["capacity"] = {icon = "__core__/graphics/icons/technology/constants/constant-capacity.png"},
+    ["count"] = {icon = "__core__/graphics/icons/technology/constants/constant-count.png"},
+    ["damage"] = {icon = "__core__/graphics/icons/technology/constants/constant-damage.png"},
+    ["follower-count"] = {icon = "__core__/graphics/icons/technology/constants/constant-follower-count.png"},
+    ["ghost"] = {icon = "__core__/graphics/icons/technology/constants/constant-time-to-live-ghosts.png"},
+    ["health"] = {icon = "__core__/graphics/icons/technology/constants/constant-health.png"},
+    ["logistic-slot"] = {icon = "__core__/graphics/icons/technology/constants/constant-logistic-slot.png"},
+    ["map-zoom"] = {icon = "__core__/graphics/icons/technology/constants/constant-map-zoom.png"},
+    ["mining"] = {icon = "__core__/graphics/icons/technology/constants/constant-mining.png"},
+    ["mining-productivity"] = {icon = "__core__/graphics/icons/technology/constants/constant-mining-productivity.png"},
+    ["movement-speed"] = {icon = "__core__/graphics/icons/technology/constants/constant-movement-speed.png"},
+    ["range"] = {icon = "__core__/graphics/icons/technology/constants/constant-range.png"},
+    ["speed"] = {icon = "__core__/graphics/icons/technology/constants/constant-speed.png"},
+}
+
+function reskins.lib.return_technology_effect_icon(effect, scale)
+    return
+    {
+        icon = technology_constants[effect].icon,
+        icon_size = 128,
+        icon_mipmaps = 3,
+        shift = {100*(scale and scale or 1), 100*(scale and scale or 1)},
+        scale = scale,
+    }
+end
+
 ----------------------------------------------------------------------------------------------------
 -- STANDARD ICON FUNCTIONS
 ----------------------------------------------------------------------------------------------------
