@@ -3,11 +3,6 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
--- Compatibility with ShinyBobGFX/ShinyAngelGFX
-if mods["ShinyBobGFX"] or mods["ShinyAngelGFX"] then
-    require("shiny-compatibility")
-end
-
 ----------------------------------------------------------------------------------------------------
 -- ENTITIES
 ----------------------------------------------------------------------------------------------------
