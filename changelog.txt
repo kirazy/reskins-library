@@ -5,6 +5,7 @@ Date: ????
     - Added function `return_technology_effect_icon`, which returns an IconData layer containing technology constant icons of the specified type at the specified scale and default positioning
   Changes:
     - Updated logistics technologies to latest sprites from base Factorio
+    - Revised tier 5 default color, reducing the brightness and saturation slightly to improve color mask results across a variety of entities
     - Dropped support for ShinyBobGFX, ShinyAngelGFX
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.6
