@@ -87,13 +87,13 @@ elseif reskins.lib.setting("reskins-angels-use-angels-tier-colors") then
 else
     -- Use default (Bob) color presets
     reskins.lib.tint_index = {
-        [0] = util.color("4d4d4d"),
-        [1] = util.color("de9400"),
-        [2] = util.color("c20600"),
-        [3] = util.color("0099ff"), -- 1b87c2
-        [4] = util.color("a600bf"),
-        [5] = util.color("16c746"), -- 23de55
-        [6] = util.color("ff7700"),
+        [0] = util.color("666666"), -- 4d4d4d
+        [1] = util.color("ffab1a"), -- de9400
+        [2] = util.color("ff2d1a"), -- c20600
+        [3] = util.color("00b2ff"), -- 0099ff -- 1b87c2
+        [4] = util.color("a333ff"), -- a600bf
+        [5] = util.color("33ff66"), -- 16c746 -- 23de55
+        [6] = util.color("ff7700"), -- ff7700
     }
 end
 
