@@ -92,8 +92,8 @@ else
         [2] = util.color("ff3826"), -- Old: c20600
         [3] = util.color("00b2ff"), -- Old: 0099ff, Historical 1b87c2
         [4] = util.color("b459ff"), -- Old: a600bf
-        [5] = util.color("33ff66"), -- Old: 16c746, Historical 23de55
-        [6] = util.color("ff7700"), -- Old: ff7700
+        [5] = util.color("2ee55c"), -- Old: 16c746, Historical 23de55
+        [6] = util.color("ff8533"), -- Old: ff7700
     }
 end
 
@@ -120,7 +120,7 @@ elseif reskins.lib.setting("reskins-angels-use-angels-tier-colors") and reskins.
         -- Pending
         [0] = reskins.lib.belt_mask_tint(util.color("262626")),
         [5] = reskins.lib.belt_mask_tint(util.color("16c746")),
-        [6] = reskins.lib.belt_mask_tint(util.color("ff7700")),
+        [6] = reskins.lib.belt_mask_tint(util.color("ff8533")),
     }
 else
     reskins.lib.belt_tint_index = {
@@ -129,8 +129,8 @@ else
         [2] = reskins.lib.belt_mask_tint(util.color("ff3826")),
         [3] = reskins.lib.belt_mask_tint(util.color("00b2ff")),
         [4] = reskins.lib.belt_mask_tint(util.color("b459ff")),
-        [5] = reskins.lib.belt_mask_tint(util.color("33ff66")),
-        [6] = reskins.lib.belt_mask_tint(util.color("ff7700")),
+        [5] = reskins.lib.belt_mask_tint(util.color("2ee55c")),
+        [6] = reskins.lib.belt_mask_tint(util.color("ff8533")),
     }
 end
 

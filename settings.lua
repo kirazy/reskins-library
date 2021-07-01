@@ -162,13 +162,13 @@ data:extend(
         name = "reskins-lib-custom-colors-tier-5",
         setting_type ="startup",
         order = "yy",
-        default_value = "33ff66",
+        default_value = "2ee55c",
     },
     {
         type = "string-setting",
         name = "reskins-lib-custom-colors-tier-6",
         setting_type ="startup",
         order = "yy",
-        default_value = "ff7700"
+        default_value = "ff8533"
     }
 })
