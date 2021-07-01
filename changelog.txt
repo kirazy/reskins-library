@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.7
-Date: ????
+Date: 2021-07-01
   Features:
     - Added function `return_technology_effect_icon`, which returns an IconData layer containing technology constant icons of the specified type at the specified scale and default positioning
   Changes:
