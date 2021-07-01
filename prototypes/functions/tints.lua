@@ -89,9 +89,9 @@ else
     reskins.lib.tint_index = {
         [0] = util.color("666666"), -- Old: 4d4d4d
         [1] = util.color("ffab1a"), -- Old: de9400
-        [2] = util.color("ff2d1a"), -- Old: c20600
+        [2] = util.color("ff3826"), -- Old: c20600
         [3] = util.color("00b2ff"), -- Old: 0099ff, Historical 1b87c2
-        [4] = util.color("a333ff"), -- Old: a600bf
+        [4] = util.color("b459ff"), -- Old: a600bf
         [5] = util.color("33ff66"), -- Old: 16c746, Historical 23de55
         [6] = util.color("ff7700"), -- Old: ff7700
     }
@@ -126,9 +126,9 @@ else
     reskins.lib.belt_tint_index = {
         [0] = reskins.lib.belt_mask_tint(util.color("666666")),
         [1] = reskins.lib.belt_mask_tint(util.color("ffab1a")),
-        [2] = reskins.lib.belt_mask_tint(util.color("ff2d1a")),
+        [2] = reskins.lib.belt_mask_tint(util.color("ff3826")),
         [3] = reskins.lib.belt_mask_tint(util.color("00b2ff")),
-        [4] = reskins.lib.belt_mask_tint(util.color("a333ff")),
+        [4] = reskins.lib.belt_mask_tint(util.color("b459ff")),
         [5] = reskins.lib.belt_mask_tint(util.color("33ff66")),
         [6] = reskins.lib.belt_mask_tint(util.color("ff7700")),
     }
