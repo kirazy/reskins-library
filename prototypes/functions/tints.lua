@@ -48,7 +48,7 @@ end
 -- TODO: Replace this with HSV-based correction at some point
 function reskins.lib.belt_mask_tint(tint)
     -- Define correction constants
-    local color_shift = 40/255
+    local color_shift = 0 -- 40/255
     local alpha = 0.82
 
     -- Color correct the tint
@@ -88,8 +88,8 @@ else
     -- Use default (Bob) color presets
     reskins.lib.tint_index = {
         [0] = util.color("666666"), -- Old: 4d4d4d
-        [1] = util.color("ffab1a"), -- Old: de9400
-        [2] = util.color("ff3826"), -- Old: c20600
+        [1] = util.color("ffbe26"), -- Old: de9400
+        [2] = util.color("ff2d1a"), -- Old: c20600
         [3] = util.color("00b2ff"), -- Old: 0099ff, Historical 1b87c2
         [4] = util.color("b459ff"), -- Old: a600bf
         [5] = util.color("2ee55c"), -- Old: 16c746, Historical 23de55
@@ -123,15 +123,15 @@ elseif reskins.lib.setting("reskins-angels-use-angels-tier-colors") and reskins.
         [6] = reskins.lib.belt_mask_tint(util.color("ff8533")),
     }
 else
-    reskins.lib.belt_tint_index = {
+    reskins.lib.belt_tint_index = reskins.lib.tint_index --[[{
         [0] = reskins.lib.belt_mask_tint(util.color("666666")),
-        [1] = reskins.lib.belt_mask_tint(util.color("ffab1a")),
-        [2] = reskins.lib.belt_mask_tint(util.color("ff3826")),
+        [1] = reskins.lib.belt_mask_tint(util.color("ffbe26")),
+        [2] = reskins.lib.belt_mask_tint(util.color("ff2d1a")),
         [3] = reskins.lib.belt_mask_tint(util.color("00b2ff")),
         [4] = reskins.lib.belt_mask_tint(util.color("b459ff")),
         [5] = reskins.lib.belt_mask_tint(util.color("2ee55c")),
         [6] = reskins.lib.belt_mask_tint(util.color("ff8533")),
-    }
+    }]]
 end
 
 -- Check if we're using an alternative tier-0 color for belts

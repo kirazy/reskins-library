@@ -134,14 +134,14 @@ data:extend(
         name = "reskins-lib-custom-colors-tier-1",
         setting_type ="startup",
         order = "yy",
-        default_value = "ffab1a",
+        default_value = "ffbe26",
     },
     {
         type = "string-setting",
         name = "reskins-lib-custom-colors-tier-2",
         setting_type ="startup",
         order = "yy",
-        default_value = "ff3826",
+        default_value = "ff2d1a",
     },
     {
         type = "string-setting",
