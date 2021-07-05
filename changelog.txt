@@ -4,9 +4,13 @@ Date: ????
   Features:
     - Major revisions to all color masks for all entities, items, and icons
     - Perceived brightness and contrast have been improved and oversaturation and color blowouts have been reduced
+    - Added "Realistic Reactor Glow" and "Extended Angels" to the whitelist for compatibility notifications
   Changes:
     - Revised tints to support new mask and highlights process; purple is now less pink
     - Setting "Color intensity" with options "Vibrant" and "Soft", which controlled the blending mode for the highlights layer, has been removed; current blending mode is equivalent to "Vibrant"
+    - Removed function `reskins.lib.belt_mask_tint`
+  Locale:
+    - Removed default text from string mod setting descriptions for ease of translation and reduction of reduplication of translation effort; defaults are now appended automatically
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.7
 Date: 2021-07-01

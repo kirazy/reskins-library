@@ -6,6 +6,7 @@
 -- Make our function host
 if not reskins then reskins = {} end
 if not reskins.lib then reskins.lib = {} end
+reskins.lib.default_tint = "#9cdcfe"
 
 -- Set the hidden flag to true and optionally override the default value
 function reskins.lib.setting_override(setting_type, setting_name, override_value)
@@ -54,7 +55,8 @@ data:extend(
         setting_type = "startup",
         order = "cb",
         default_value = "progression-map",
-        allowed_values = {"progression-map","traditional-map"}
+        allowed_values = {"progression-map","traditional-map"},
+        localised_description = {"", {"mod-setting-description.reskins-lib-tier-mapping"}, {"reskins-defaults.default"}, " [color="..reskins.lib.default_tint.."]", {"string-mod-setting.reskins-lib-tier-mapping-progression-map"}, "[/color]"}
     },
     {
         type = "string-setting",
@@ -62,7 +64,8 @@ data:extend(
         setting_type = "startup",
         order = "ca",
         default_value = "rounded-rectangle",
-        allowed_values = {"dots","half-circle","rectangle","rounded-half-circle","rounded-rectangle","teardrop"}
+        allowed_values = {"dots","half-circle","rectangle","rounded-half-circle","rounded-rectangle","teardrop"},
+        localised_description = {"", {"mod-setting-description.reskins-lib-icon-tier-labeling-style"}, {"reskins-defaults.default"}, " [color="..reskins.lib.default_tint.."]", {"string-mod-setting.reskins-lib-icon-tier-labeling-style-rounded-rectangle"}, "[/color]"},
     },
     {
         type = "string-setting",
@@ -127,28 +130,32 @@ data:extend(
         name = "reskins-lib-custom-colors-tier-0",
         setting_type ="startup",
         order = "yy",
-        default_value = "666666",
+        default_value = "808080",
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-0"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-0-color"}}
     },
     {
         type = "string-setting",
         name = "reskins-lib-custom-colors-tier-1",
         setting_type ="startup",
         order = "yy",
-        default_value = "ffbe26",
+        default_value = "ffb726",
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-1"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-1-color"}}
     },
     {
         type = "string-setting",
         name = "reskins-lib-custom-colors-tier-2",
         setting_type ="startup",
         order = "yy",
-        default_value = "ff2d1a",
+        default_value = "ff0800",
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-2"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-2-color"}}
     },
     {
         type = "string-setting",
         name = "reskins-lib-custom-colors-tier-3",
         setting_type ="startup",
         order = "yy",
-        default_value = "00b2ff",
+        default_value = "33b4ff",
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-3"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-3-color"}}
     },
     {
         type = "string-setting",
@@ -156,6 +163,7 @@ data:extend(
         setting_type ="startup",
         order = "yy",
         default_value = "b459ff",
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-4"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-4-color"}}
     },
     {
         type = "string-setting",
@@ -163,12 +171,14 @@ data:extend(
         setting_type ="startup",
         order = "yy",
         default_value = "2ee55c",
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-5"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-5-color"}}
     },
     {
         type = "string-setting",
         name = "reskins-lib-custom-colors-tier-6",
         setting_type ="startup",
         order = "yy",
-        default_value = "ff8533"
+        default_value = "ff8533",
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-6"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-6-color"}}
     }
 })

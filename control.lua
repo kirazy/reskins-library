@@ -51,6 +51,8 @@ function check_for_missing_reskin(player)
             "CircuitProcessing",
             "angels-smelting-extended",
             "Clowns-Processing",
+            "extendedangels",
+            "RealisticReactorGlow",
             "classic-beacon",
             "classic-mining-drill",
             "semi-classic-mining-drill",
