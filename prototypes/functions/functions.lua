@@ -13,8 +13,8 @@ reskins.lib.directory = "__reskins-library__"
 -- Setup reskin logging TODO: Actually log things...
 reskins.lib.status = {}
 
--- FLIB Requires
-reskins.lib.migration = require("__flib__.migration")
+-- Setup migration module
+reskins.lib.migration = require("migration")
 
 -- Check if a startup setting exists, and if it does, return its value
 function reskins.lib.setting(name)
