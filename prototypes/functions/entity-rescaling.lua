@@ -57,19 +57,24 @@ local function switch_icon_to_mini(name, source_name, pattern, replacement, inpu
 end
 
 -- Rescale a given machine added by Mini Machines mod
-function reskins.lib.rescale_minimachine(table, type, pattern, replacement, scale)
+function reskins.lib.rescale_minimachine(table, prototype, scale, pattern, replacement)
     -- Prepare a basic inputs table
     local inputs = {
         icon_size = 64,
         icon_mipmaps = 4,
-        type = type,
+        type = prototype,
         make_icon_pictures = true,
     }
 
     -- Shrink the icon
     for name, source in pairs(table) do
-        switch_icon_to_mini(name, source, pattern, replacement, inputs)
-        reskins.lib.rescale_remnant(data.raw[type][name], scale)
+        if type(source) == "table" then
+            switch_icon_to_mini(name, source.source, source.pattern, source.replacement, inputs)
+            reskins.lib.rescale_remnant(data.raw[prototype][name], scale)
+        else
+            switch_icon_to_mini(name, source, pattern, replacement, inputs)
+            reskins.lib.rescale_remnant(data.raw[prototype][name], scale)
+        end
     end
 end
 
