@@ -150,61 +150,71 @@ function reskins.lib.HSLtoRGB(tint)
 end
 
 -- DEFINE STANDARD TINT TABLES
-local custom_tints = {
-    [0] = util.color(settings.startup["reskins-lib-custom-colors-tier-0"].value),
-    [1] = util.color(settings.startup["reskins-lib-custom-colors-tier-1"].value),
-    [2] = util.color(settings.startup["reskins-lib-custom-colors-tier-2"].value),
-    [3] = util.color(settings.startup["reskins-lib-custom-colors-tier-3"].value),
-    [4] = util.color(settings.startup["reskins-lib-custom-colors-tier-4"].value),
-    [5] = util.color(settings.startup["reskins-lib-custom-colors-tier-5"].value),
-    [6] = util.color(settings.startup["reskins-lib-custom-colors-tier-6"].value),
-}
+local function custom_tints()
+	return
+	{
+		[0] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-0")),
+		[1] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-1")),
+		[2] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-2")),
+		[3] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-3")),
+		[4] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-4")),
+		[5] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-5")),
+		[6] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-6")),
+	}
+end
 
-local bobs_tints = {
-    [0] = util.color("808080"), -- Old: 4d4d4d
-    [1] = util.color("ffb726"), -- Old: de9400
-    [2] = util.color("ff0800"), -- Old: c20600
-    [3] = util.color("33b4ff"), -- Old: 0099ff, Historical 1b87c2
-    [4] = util.color("b459ff"), -- Old: a600bf
-    [5] = util.color("2ee55c"), -- Old: 16c746, Historical 23de55
-    [6] = util.color("ff8533"), -- Old: ff7700
-}
+local function bobs_tints()
+	return
+	{
+		[0] = util.color("808080"), -- Old: 4d4d4d
+		[1] = util.color("ffb726"), -- Old: de9400
+		[2] = util.color("f22318"), -- Old: c20600 e52c22
+		[3] = util.color("33b4ff"), -- Old: 0099ff, Historical 1b87c2
+		[4] = util.color("b459ff"), -- Old: a600bf
+		[5] = util.color("2ee55c"), -- Old: 16c746, Historical 23de55
+		[6] = util.color("ff8533"), -- Old: ff7700
+	}
+end
 
-local angels_tints = {
-    -- Core Angel's set
-    [1] = util.color("595959"), -- Gray
-    [2] = util.color("2957cc"), -- Blue
-    [3] = util.color("cc2929"), -- Red
-    [4] = util.color("ccae29"), -- Yellow
+local function angels_tints()
+	return
+	{
+		-- Core Angel's set
+		[1] = util.color("595959"), -- Gray
+		[2] = util.color("2957cc"), -- Blue
+		[3] = util.color("cc2929"), -- Red
+		[4] = util.color("ccae29"), -- Yellow
 
-    -- Pending
-    [0] = util.color("262626"),
-    [5] = util.color("16c746"),
-    [6] = util.color("ff8533"),
-}
+		-- Pending
+		[0] = util.color("262626"),
+		[5] = util.color("16c746"),
+		[6] = util.color("ff8533"),
+	}
+end
 
 -- SETUP ENTITY COLORS
 -- Determine which set of colors to use
 if settings.startup["reskins-lib-customize-tier-colors"].value == true then
     -- Setup custom colors
-    reskins.lib.tint_index = custom_tints
+    reskins.lib.tint_index = custom_tints()
 
     -- Use Angel color presets
 elseif reskins.lib.setting("reskins-angels-use-angels-tier-colors") then
-    reskins.lib.tint_index = angels_tints
+    reskins.lib.tint_index = angels_tints()
 else
     -- Use default (Bob) color presets
-    reskins.lib.tint_index = bobs_tints
+    reskins.lib.tint_index = bobs_tints()
 end
 
 -- SETUP BELT COLORS
 -- Determine which set of colors to use
 if settings.startup["reskins-lib-customize-tier-colors"].value == true then
-    reskins.lib.belt_tint_index = custom_tints
+    reskins.lib.belt_tint_index = custom_tints()
 elseif reskins.lib.setting("reskins-angels-use-angels-tier-colors") and reskins.lib.setting("reskins-angels-belts-use-angels-tier-colors") then
-    reskins.lib.belt_tint_index = angels_tints
+    reskins.lib.belt_tint_index = angels_tints()
 else
-    reskins.lib.belt_tint_index = bobs_tints
+    reskins.lib.belt_tint_index = bobs_tints()
+	reskins.lib.belt_tint_index[2] = util.color("ff0800") -- More saturated red
 end
 
 -- Check if we're using an alternative tier-0 color for belts
