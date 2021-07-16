@@ -8,7 +8,7 @@ Date: ????
     - Added additional tier labels "Arrows" and "Chevrons" in up and down orientations
   Changes:
     - Revised tints to support new mask and highlights process; purple is now less pink
-    - Setting "Color intensity" with options "Vibrant" and "Soft", which controlled the blending mode for the highlights layer, has been removed; current blending mode is equivalent to "Vibrant"
+    - Setting "Color intensity" with options "Vibrant" and "Soft", which controlled the blending mode for the highlights layer, has been disabled; the current blending mode is equivalent to "Vibrant". The setting may be enabled, see `settings-updates.lua` for details
     - Removed function `reskins.lib.belt_mask_tint`
     - Revised function `reskins.lib.rescale_minimachine` to support table-formatted parameters
     - Revised flib migration module importing, additional functions `is_version_or_older`, `is_version`, and `is_version_or_newer` added at `reskins.lib.migration`
