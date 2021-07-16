@@ -166,13 +166,13 @@ end
 local function bobs_tints()
 	return
 	{
-		[0] = util.color("808080"), -- Old: 4d4d4d
-		[1] = util.color("ffb726"), -- Old: de9400
-		[2] = util.color("f22318"), -- Old: c20600 e52c22
-		[3] = util.color("33b4ff"), -- Old: 0099ff, Historical 1b87c2
-		[4] = util.color("b459ff"), -- Old: a600bf
-		[5] = util.color("2ee55c"), -- Old: 16c746, Historical 23de55
-		[6] = util.color("ff8533"), -- Old: ff7700
+		[0] = util.color("808080"), -- 1.1.7: 4d4d4d
+		[1] = util.color("ffb726"), -- 1.1.7: de9400
+		[2] = util.color("f22318"), -- 1.1.7: c20600
+		[3] = util.color("33b4ff"), -- 1.1.7: 0099ff, 1.1.0: 1b87c2
+		[4] = util.color("b459ff"), -- 1.1.7: a600bf
+		[5] = util.color("2ee55c"), -- 1.1.7: 16c746, 1.1.6: 23de55
+		[6] = util.color("ff8533"), -- 1.1.7: ff7700
 	}
 end
 
@@ -214,7 +214,7 @@ elseif reskins.lib.setting("reskins-angels-use-angels-tier-colors") and reskins.
     reskins.lib.belt_tint_index = angels_tints()
 else
     reskins.lib.belt_tint_index = bobs_tints()
-	reskins.lib.belt_tint_index[2] = util.color("ff0800") -- More saturated red
+	reskins.lib.belt_tint_index[2] = util.color("ff0000") -- Pure red for belts
 end
 
 -- Check if we're using an alternative tier-0 color for belts
