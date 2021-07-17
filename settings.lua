@@ -56,7 +56,7 @@ data:extend(
         order = "cb",
         default_value = "progression-map",
         allowed_values = {"progression-map","traditional-map"},
-        localised_description = {"", {"mod-setting-description.reskins-lib-tier-mapping"}, {"reskins-defaults.default"}, " [color="..reskins.lib.default_tint.."]", {"string-mod-setting.reskins-lib-tier-mapping-progression-map"}, "[/color]"}
+        localised_description = {"", {"mod-setting-description.reskins-lib-tier-mapping"}, "\n\n", {"reskins-defaults.default"}, " [color="..reskins.lib.default_tint.."]", {"string-mod-setting.reskins-lib-tier-mapping-progression-map"}, "[/color]"}
     },
     {
         type = "string-setting",
@@ -65,7 +65,7 @@ data:extend(
         order = "ca",
         default_value = "rounded-rectangle",
         allowed_values = {"chevron","dots","half-circle","rectangle","rounded-half-circle","rounded-rectangle","teardrop"},
-        localised_description = {"", {"mod-setting-description.reskins-lib-icon-tier-labeling-style"}, {"reskins-defaults.default"}, " [color="..reskins.lib.default_tint.."]", {"string-mod-setting.reskins-lib-icon-tier-labeling-style-rounded-rectangle"}, "[/color]"},
+        localised_description = {"", {"mod-setting-description.reskins-lib-icon-tier-labeling-style"}, "\n\n", {"reskins-defaults.default"}, " [color="..reskins.lib.default_tint.."]", {"string-mod-setting.reskins-lib-icon-tier-labeling-style-rounded-rectangle"}, "[/color]"},
     },
     {
         type = "string-setting",
@@ -73,7 +73,8 @@ data:extend(
         setting_type = "startup",
         order = "d",
         default_value = "additive",
-        allowed_values = {"additive","additive-soft"}
+        allowed_values = {"additive","additive-soft"},
+        localised_description = {"", {"reskins-defaults.default"}, " [color="..reskins.lib.default_tint.."]", {"string-mod-setting.reskins-lib-blend-mode-additive"}, "[/color]"}
     },
 
     -- Reskin scope settings
@@ -131,7 +132,7 @@ data:extend(
         setting_type ="startup",
         order = "yy",
         default_value = "808080",
-        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-0"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-0-color"}}
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-0"}, "\n\n", {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-0-color"}}
     },
     {
         type = "string-setting",
@@ -139,7 +140,7 @@ data:extend(
         setting_type ="startup",
         order = "yy",
         default_value = "ffb726",
-        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-1"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-1-color"}}
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-1"}, "\n\n", {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-1-color"}}
     },
     {
         type = "string-setting",
@@ -147,7 +148,7 @@ data:extend(
         setting_type ="startup",
         order = "yy",
         default_value = "ff0800",
-        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-2"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-2-color"}}
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-2"}, "\n\n", {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-2-color"}}
     },
     {
         type = "string-setting",
@@ -155,7 +156,7 @@ data:extend(
         setting_type ="startup",
         order = "yy",
         default_value = "33b4ff",
-        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-3"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-3-color"}}
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-3"}, "\n\n", {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-3-color"}}
     },
     {
         type = "string-setting",
@@ -163,7 +164,7 @@ data:extend(
         setting_type ="startup",
         order = "yy",
         default_value = "b459ff",
-        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-4"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-4-color"}}
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-4"}, "\n\n", {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-4-color"}}
     },
     {
         type = "string-setting",
@@ -171,7 +172,7 @@ data:extend(
         setting_type ="startup",
         order = "yy",
         default_value = "2ee55c",
-        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-5"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-5-color"}}
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-5"}, "\n\n", {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-5-color"}}
     },
     {
         type = "string-setting",
@@ -179,6 +180,6 @@ data:extend(
         setting_type ="startup",
         order = "yy",
         default_value = "ff8533",
-        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-6"}, {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-6-color"}}
+        localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-6"}, "\n\n", {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-6-color"}}
     }
 })
