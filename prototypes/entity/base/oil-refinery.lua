@@ -42,8 +42,11 @@ for name, map in pairs(tier_map) do
         tier = map.prog_tier or map.tier
     end
 
-    -- COMPATIBILITY WITH SHINY RESKIN MODS
-    inputs.defer_to_data_final_fixes = true
+    if reskins.lib.migration.is_version_or_older(mods["angelspetrochem"], "0.9.19") then
+        inputs.defer_to_data_final_fixes = true
+    else
+        inputs.defer_to_data_updates = true -- angelspetrochem > 0.9.19 modifies icon in data-updates
+    end
 
     -- Determine what tint we're using
     inputs.tint = reskins.lib.tint_index[tier]
