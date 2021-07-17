@@ -17,10 +17,7 @@ local function create_label_sprite(label)
 end
 
 local icons = {
-    "arrow-down",
-    "arrow-up",
-    "chevron-down",
-    "chevron-up",
+    "chevron",
     "dots",
     "half-circle",
     "rectangle",

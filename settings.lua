@@ -64,7 +64,7 @@ data:extend(
         setting_type = "startup",
         order = "ca",
         default_value = "rounded-rectangle",
-        allowed_values = {"arrow-down","arrow-up","chevron-down","chevron-up","dots","half-circle","rectangle","rounded-half-circle","rounded-rectangle","teardrop"},
+        allowed_values = {"chevron","dots","half-circle","rectangle","rounded-half-circle","rounded-rectangle","teardrop"},
         localised_description = {"", {"mod-setting-description.reskins-lib-icon-tier-labeling-style"}, {"reskins-defaults.default"}, " [color="..reskins.lib.default_tint.."]", {"string-mod-setting.reskins-lib-icon-tier-labeling-style-rounded-rectangle"}, "[/color]"},
     },
     {
