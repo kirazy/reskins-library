@@ -32,9 +32,9 @@ end
 function reskins.lib.concatenate_setting_description(setting)
     -- Check for an already set localised_description
     if setting.localised_description then
-        return {"", setting.localised_description, {"reskins-defaults."..tostring(setting.default_value)}}
+        return {"", setting.localised_description, "\n\n", {"reskins-defaults.default"}, " ", {"reskins-defaults."..tostring(setting.default_value)}}
     else
-        return {"", {"mod-setting-description."..setting.name}, {"reskins-defaults."..tostring(setting.default_value)}}
+        return {"", {"mod-setting-description."..setting.name}, "\n\n", {"reskins-defaults.default"}, " ", {"reskins-defaults."..tostring(setting.default_value)}}
     end
 end
 

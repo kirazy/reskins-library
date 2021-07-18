@@ -134,12 +134,12 @@ local function notify(data)
                 -- Notify of changes when updated in a save we were already present in
                 if data.mod_changes and data.mod_changes["reskins-library"] and data.mod_changes["reskins-library"].old_version then
                     -- 1.0.4 update
-                    if not migration.is_newer_version("1.0.3", data.mod_changes["reskins-library"].old_version) then
+                    if migration.is_older_version(data.mod_changes["reskins-library"].old_version, "1.0.4") then
                         player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-0-4-update", {"mod-setting-name.reskins-lib-blend-mode"}}})
                     end
 
                     -- 1.1.3 update
-                    if not migration.is_newer_version("1.1.2", data.mod_changes["reskins-library"].old_version) then
+                    if not migration.is_older_version(data.mod_changes["reskins-library"].old_version, "1.1.3") then
                         if game.active_mods["reskins-bobs"] and not game.active_mods["reskins-compatibility"] then
                             player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-1-3-update-bobs", {"", "[color="..message_color.."]", {"reskins-library.reskins-compatibility-mod-name"}, "[/color]"}}})
                         end
