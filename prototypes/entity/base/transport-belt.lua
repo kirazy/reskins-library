@@ -16,7 +16,6 @@ local inputs = {
     mod = "lib",
     group = "base",
     particles = {["medium"] = 1, ["small"] = 2},
-    icon_layers = 2,
 }
 
 -- Handle belt tier labels
@@ -108,7 +107,33 @@ for name, map in pairs(tier_map) do
                     shift = util.by_pixel(1, -0.5),
                     scale = 0.5,
                 }
-            }
+            },
+            -- -- Highlights
+            -- {
+            --     filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/remnants/transport-belt-remnants-mask.png",
+            --     line_length = 1,
+            --     width = 54,
+            --     height = 52,
+            --     frame_count = 1,
+            --     variation_count = 1,
+            --     axially_symmetrical = false,
+            --     direction_count = 4,
+            --     tint = inputs.tint,
+            --     shift = util.by_pixel(1, 0),
+            --     hr_version = {
+            --         filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/remnants/hr-transport-belt-remnants-mask.png",
+            --         line_length = 1,
+            --         width = 106,
+            --         height = 102,
+            --         frame_count = 1,
+            --         variation_count = 1,
+            --         axially_symmetrical = false,
+            --         direction_count = 4,
+            --         tint = inputs.tint,
+            --         shift = util.by_pixel(1, -0.5),
+            --         scale = 0.5,
+            --     }
+            -- }
         }
     })
 
