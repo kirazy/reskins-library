@@ -17,7 +17,6 @@ local inputs = {
     mod = "lib",
     group = "base",
     particles = {["medium"] = 3, ["small"] = 2},
-    icon_layers = 2,
 }
 
 -- Handle belt tier labels
@@ -106,6 +105,32 @@ for name, map in pairs(tier_map) do
                     shift = util.by_pixel(10.5, 3),
                     scale = 0.5,
                 },
+            },
+            -- Highlights
+            {
+                filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/remnants/underground-belt-remnants-highlights.png",
+                line_length = 1,
+                width = 78,
+                height = 72,
+                frame_count = 1,
+                variation_count = 1,
+                axially_symmetrical = false,
+                direction_count = 8,
+                blend_mode = reskins.lib.blend_mode,
+                shift = util.by_pixel(10, 3),
+                hr_version = {
+                    filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/remnants/hr-underground-belt-remnants-highlights.png",
+                    line_length = 1,
+                    width = 156,
+                    height = 144,
+                    frame_count = 1,
+                    variation_count = 1,
+                    axially_symmetrical = false,
+                    direction_count = 8,
+                    blend_mode = reskins.lib.blend_mode,
+                    shift = util.by_pixel(10.5, 3),
+                    scale = 0.5,
+                },
             }
         }
     }
@@ -147,6 +172,24 @@ for name, map in pairs(tier_map) do
                         tint = inputs.tint,
                         scale = 0.5
                     }
+                },
+                -- Highlights
+                {
+                    filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
+                    priority = "extra-high",
+                    width = 96,
+                    height = 96,
+                    y = 96,
+                    blend_mode = reskins.lib.blend_mode,
+                    hr_version = {
+                        filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/hr-underground-belt-structure-highlights.png",
+                        priority = "extra-high",
+                        width = 192,
+                        height = 192,
+                        y = 192,
+                        blend_mode = reskins.lib.blend_mode,
+                        scale = 0.5
+                    }
                 }
             }
         },
@@ -181,6 +224,22 @@ for name, map in pairs(tier_map) do
                         tint = inputs.tint,
                         scale = 0.5
                     }
+                },
+                -- Highlights
+                {
+                    filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
+                    priority = "extra-high",
+                    width = 96,
+                    height = 96,
+                    blend_mode = reskins.lib.blend_mode,
+                    hr_version = {
+                        filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/hr-underground-belt-structure-highlights.png",
+                        priority = "extra-high",
+                        width = 192,
+                        height =192,
+                        blend_mode = reskins.lib.blend_mode,
+                        scale = 0.5
+                    }
                 }
             }
         },
@@ -193,8 +252,7 @@ for name, map in pairs(tier_map) do
                     width = 96,
                     height = 96,
                     y = 96*3,
-                    hr_version =
-                    {
+                    hr_version = {
                         filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/hr-underground-belt-structure.png",
                         priority = "extra-high",
                         width = 192,
@@ -211,14 +269,31 @@ for name, map in pairs(tier_map) do
                     height = 96,
                     y = 96*3,
                     tint = inputs.tint,
-                    hr_version =
-                    {
+                    hr_version = {
                         filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
                         y = 192*3,
                         tint = inputs.tint,
+                        scale = 0.5
+                    }
+                },
+                -- Highlights
+                {
+                    filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
+                    priority = "extra-high",
+                    width = 96,
+                    height = 96,
+                    y = 96*3,
+                    blend_mode = reskins.lib.blend_mode,
+                    hr_version = {
+                        filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/hr-underground-belt-structure-highlights.png",
+                        priority = "extra-high",
+                        width = 192,
+                        height = 192,
+                        y = 192*3,
+                        blend_mode = reskins.lib.blend_mode,
                         scale = 0.5
                     }
                 }
@@ -233,8 +308,7 @@ for name, map in pairs(tier_map) do
                     width = 96,
                     height = 96,
                     y = 96*2,
-                    hr_version =
-                    {
+                    hr_version = {
                         filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/hr-underground-belt-structure.png",
                         priority = "extra-high",
                         width = 192,
@@ -251,9 +325,26 @@ for name, map in pairs(tier_map) do
                     height = 96,
                     y = 96*2,
                     tint = inputs.tint,
-                    hr_version =
-                    {
+                    hr_version = {
                         filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
+                        priority = "extra-high",
+                        width = 192,
+                        height = 192,
+                        y = 192*2,
+                        tint = inputs.tint,
+                        scale = 0.5
+                    }
+                },
+                -- Highlights
+                {
+                    filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
+                    priority = "extra-high",
+                    width = 96,
+                    height = 96,
+                    y = 96*2,
+                    tint = inputs.tint,
+                    hr_version = {
+                        filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/hr-underground-belt-structure-highlights.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
@@ -270,8 +361,7 @@ for name, map in pairs(tier_map) do
                 priority = "extra-high",
                 width = 96,
                 height = 96,
-                hr_version =
-                {
+                hr_version = {
                     filename = "__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure-back-patch.png",
                     priority = "extra-high",
                     width = 192,
@@ -286,8 +376,7 @@ for name, map in pairs(tier_map) do
                 priority = "extra-high",
                 width = 96,
                 height = 96,
-                hr_version =
-                {
+                hr_version = {
                     filename = "__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure-front-patch.png",
                     priority = "extra-high",
                     width = 192,
