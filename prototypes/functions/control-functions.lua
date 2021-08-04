@@ -3,9 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-local host = {}
+local functions = {}
 
-function host.on_init() -- Called by migration/reskins-library_1.1.3.lua
+function functions.on_init() -- Called by migration/reskins-library_1.1.3.lua
     -- Check for each of the reskin mods, and set the notification status to true if they are detected otherwise, set to false
     global.notify = {
         bobs = {
@@ -20,4 +20,4 @@ function host.on_init() -- Called by migration/reskins-library_1.1.3.lua
     }
 end
 
-return host
+return functions
