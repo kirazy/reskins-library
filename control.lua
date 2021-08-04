@@ -5,6 +5,7 @@
 
 -- Requires
 local migration = require("__flib__.migration")
+local functions = require("__reskins-library__.prototypes.functions.control-functions")
 
 -- General Functions
 local message_color = "#9cdcfe" -- Light blue
@@ -104,22 +105,7 @@ end
 ----------------------------------------------------------------------------------------------------
 -- ON INIT
 ----------------------------------------------------------------------------------------------------
-function on_init() -- Called by migration/reskins-library_1.1.3.lua
-    -- Check for each of the reskin mods, and set the notification status to true if they are detected otherwise, set to false
-    global.notify = {
-        bobs = {
-            status = game.active_mods["reskins-bobs"] and true or false,
-        },
-        angels = {
-            status = game.active_mods["reskins-angels"] and true or false,
-        },
-        compatibility = {
-            status = game.active_mods["reskins-compatibility"] and true or false,
-        },
-    }
-end
-
-script.on_init(on_init)
+script.on_init(functions.on_init)
 
 ----------------------------------------------------------------------------------------------------
 -- ON CONFIGURATION CHANGED

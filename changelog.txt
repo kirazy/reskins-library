@@ -14,6 +14,8 @@ Date: ????
     - Revised flib migration module importing, additional functions `is_version_or_older`, `is_version`, and `is_version_or_newer` added at `reskins.lib.migration`
     - Revised 16x16 pixel tier label mipmaps to improve clarity for distinguishing tiers
     - Moved oil refinery icon updates to data-updates from data-final-fixes when using Angel's Petrochem Processing higher than version 0.9.19
+  Bugfixes:
+    - Fixed that attempting to play the train tutorial was blocked by a migration calling an undefined function
   Locale:
     - Removed default text from string mod setting descriptions for ease of translation and reduction of reduplication of translation effort; defaults are now appended automatically
 ---------------------------------------------------------------------------------------------------
