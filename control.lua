@@ -4,7 +4,7 @@
 -- See LICENSE.md in the project directory for license information.
 
 -- Requires
-local migration = require("__flib__.migration")
+local migration = require("prototypes.functions.migration")
 local functions = require("__reskins-library__.prototypes.functions.control-functions")
 
 -- General Functions

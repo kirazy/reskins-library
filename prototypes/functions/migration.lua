@@ -93,7 +93,7 @@ end
 -- @tparam string target_version
 -- @tparam[opt=%02d] string format
 -- @treturn boolean|nil
-function migration.is_older_verison(current_version, target_version, format)
+function migration.is_older_version(current_version, target_version, format)
     local v1 = migration.format_version(current_version, format)
     local v2 = migration.format_version(target_version, format)
 
