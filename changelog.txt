@@ -2,10 +2,10 @@
 Version: 2.0.0
 Date: ????
   Features:
-    - Major revisions to all color masks for all entities, items, and icons
-    - Perceived brightness and contrast have been improved and oversaturation and color blowouts have been reduced
-    - Added "Realistic Reactor Glow" and "Extended Angels" to the whitelist for compatibility notifications
-    - Added additional tier labels "Arrows" and "Chevrons" in up and down orientations
+    - Revisions to all color masks for all entities, items, and icons are ongoing
+    - Perceived brightness and contrast have been improved and oversaturation and color blowouts have been reduced for revised entities
+    - Added "Realistic Reactor Glow", "Extended Angels", and "Offshore P.U.M.P.S. and ground water" to the whitelist for compatibility notifications
+    - Added "Chevrons" as an additional option for tier labels
   Changes:
     - Revised tints to support new mask and highlights process; purple is now less pink
     - Setting "Color intensity" with options "Vibrant" and "Soft", which controlled the blending mode for the highlights layer, has been disabled; the current blending mode is equivalent to "Vibrant". The setting may be enabled, see `settings-updates.lua` for details
