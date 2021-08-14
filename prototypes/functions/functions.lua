@@ -13,8 +13,8 @@ reskins.lib.directory = "__reskins-library__"
 -- Setup reskin logging TODO: Actually log things...
 reskins.lib.status = {}
 
--- FLIB Requires
-reskins.lib.migration = require("__flib__.migration")
+-- Setup migration module
+reskins.lib.migration = require("migration")
 
 -- Check if a startup setting exists, and if it does, return its value
 function reskins.lib.setting(name)
@@ -367,6 +367,26 @@ function reskins.lib.transport_belt_animation_set(tint, variant)
                             direction_count = 20
                         }
                     },
+                    -- Highlights
+                    {
+                        filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/transport-belt-1-highlights.png",
+                        priority = "extra-high",
+                        width = 64,
+                        height = 64,
+                        frame_count = 16,
+                        blend_mode = reskins.lib.blend_mode,
+                        direction_count = 20,
+                        hr_version = {
+                            filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/hr-transport-belt-1-highlights.png",
+                            priority = "extra-high",
+                            width = 128,
+                            height = 128,
+                            scale = 0.5,
+                            frame_count = 16,
+                            blend_mode = reskins.lib.blend_mode,
+                            direction_count = 20
+                        }
+                    },
                 }
             }
         }
@@ -409,6 +429,26 @@ function reskins.lib.transport_belt_animation_set(tint, variant)
                             scale = 0.5,
                             frame_count = 32,
                             tint = tint,
+                            direction_count = 20
+                        }
+                    },
+                    -- Highlights
+                    {
+                        filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/transport-belt-2-highlights.png",
+                        priority = "extra-high",
+                        width = 64,
+                        height = 64,
+                        frame_count = 32,
+                        blend_mode = reskins.lib.blend_mode,
+                        direction_count = 20,
+                        hr_version = {
+                            filename = reskins.lib.directory.."/graphics/entity/base/transport-belt/hr-transport-belt-2-highlights.png",
+                            priority = "extra-high",
+                            width = 128,
+                            height = 128,
+                            scale = 0.5,
+                            frame_count = 32,
+                            blend_mode = reskins.lib.blend_mode,
                             direction_count = 20
                         }
                     },

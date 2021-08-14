@@ -4,7 +4,8 @@
 -- See LICENSE.md in the project directory for license information.
 
 -- Requires
-local migration = require("__flib__.migration")
+local migration = require("prototypes.functions.migration")
+local functions = require("__reskins-library__.prototypes.functions.control-functions")
 
 -- General Functions
 local message_color = "#9cdcfe" -- Light blue
@@ -12,13 +13,13 @@ local message_color = "#9cdcfe" -- Light blue
 function check_for_missing_reskin(player)
     local supported_mods = {
         angels = {
+            "angelsrefining",
             "angelssmelting",
             "angelspetrochem",
+            "angelsbioprocessing",
             "angelsaddons-storage",
-            -- "angelsbioprocessing",
-            -- "angelsexploration",
             "angelsindustries",
-            -- "angelsrefining",
+            -- "angelsexploration",
             -- "angelsaddons-cab",
             -- "angelsaddons-mobility",
         },
@@ -51,6 +52,9 @@ function check_for_missing_reskin(player)
             "CircuitProcessing",
             "angels-smelting-extended",
             "Clowns-Processing",
+            "extendedangels",
+            "RealisticReactorGlow",
+            "P-U-M-P-S",
             "classic-beacon",
             "classic-mining-drill",
             "semi-classic-mining-drill",
@@ -102,22 +106,7 @@ end
 ----------------------------------------------------------------------------------------------------
 -- ON INIT
 ----------------------------------------------------------------------------------------------------
-function on_init() -- Called by migration/reskins-library_1.1.3.lua
-    -- Check for each of the reskin mods, and set the notification status to true if they are detected otherwise, set to false
-    global.notify = {
-        bobs = {
-            status = game.active_mods["reskins-bobs"] and true or false,
-        },
-        angels = {
-            status = game.active_mods["reskins-angels"] and true or false,
-        },
-        compatibility = {
-            status = game.active_mods["reskins-compatibility"] and true or false,
-        },
-    }
-end
-
-script.on_init(on_init)
+script.on_init(functions.on_init)
 
 ----------------------------------------------------------------------------------------------------
 -- ON CONFIGURATION CHANGED
@@ -132,12 +121,12 @@ local function notify(data)
                 -- Notify of changes when updated in a save we were already present in
                 if data.mod_changes and data.mod_changes["reskins-library"] and data.mod_changes["reskins-library"].old_version then
                     -- 1.0.4 update
-                    if not migration.is_newer_version("1.0.3", data.mod_changes["reskins-library"].old_version) then
+                    if migration.is_older_version(data.mod_changes["reskins-library"].old_version, "1.0.4") then
                         player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-0-4-update", {"mod-setting-name.reskins-lib-blend-mode"}}})
                     end
 
                     -- 1.1.3 update
-                    if not migration.is_newer_version("1.1.2", data.mod_changes["reskins-library"].old_version) then
+                    if not migration.is_older_version(data.mod_changes["reskins-library"].old_version, "1.1.3") then
                         if game.active_mods["reskins-bobs"] and not game.active_mods["reskins-compatibility"] then
                             player.print({"", "[", {"reskins-library.reskins-suite-name"}, "] ", {"reskins-updates.reskins-lib-1-1-3-update-bobs", {"", "[color="..message_color.."]", {"reskins-library.reskins-compatibility-mod-name"}, "[/color]"}}})
                         end

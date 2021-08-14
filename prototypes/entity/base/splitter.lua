@@ -17,7 +17,6 @@ local inputs = {
     mod = "lib",
     group = "base",
     particles = {["medium"] = 1, ["big"] = 4},
-    icon_layers = 2,
 }
 
 -- Handle belt tier labels
@@ -106,6 +105,32 @@ for name, map in pairs(tier_map) do
                     shift = util.by_pixel(3.5, 1.5),
                     scale = 0.5,
                 },
+            },
+            -- Highlights
+            {
+                filename = reskins.lib.directory.."/graphics/entity/base/splitter/remnants/splitter-remnants-highlights.png",
+                line_length = 1,
+                width = 96,
+                height = 96,
+                frame_count = 1,
+                variation_count = 1,
+                axially_symmetrical = false,
+                direction_count = 4,
+                blend_mode = reskins.lib.blend_mode,
+                shift = util.by_pixel(4, 1.5),
+                hr_version = {
+                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/remnants/hr-splitter-remnants-highlights.png",
+                    line_length = 1,
+                    width = 190,
+                    height = 190,
+                    frame_count = 1,
+                    variation_count = 1,
+                    axially_symmetrical = false,
+                    direction_count = 4,
+                    blend_mode = reskins.lib.blend_mode,
+                    shift = util.by_pixel(3.5, 1.5),
+                    scale = 0.5,
+                },
             }
         }
     }
@@ -116,7 +141,7 @@ for name, map in pairs(tier_map) do
             layers = {
                 -- Base
                 {
-                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/north/splitter-north.png",
+                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/north/splitter-north-base.png",
                     frame_count = 32,
                     line_length = 8,
                     priority = "extra-high",
@@ -124,7 +149,7 @@ for name, map in pairs(tier_map) do
                     height = 36,
                     shift = util.by_pixel(6, 0),
                     hr_version = {
-                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/north/hr-splitter-north.png",
+                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/north/hr-splitter-north-base.png",
                         frame_count = 32,
                         line_length = 8,
                         priority = "extra-high",
@@ -155,6 +180,28 @@ for name, map in pairs(tier_map) do
                         tint = inputs.tint,
                         scale = 0.5
                     }
+                },
+                -- Highlights
+                {
+                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/north/splitter-north-highlights.png",
+                    frame_count = 32,
+                    line_length = 8,
+                    priority = "extra-high",
+                    width = 82,
+                    height = 36,
+                    shift = util.by_pixel(6, 0),
+                    blend_mode = reskins.lib.blend_mode,
+                    hr_version = {
+                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/north/hr-splitter-north-highlights.png",
+                        frame_count = 32,
+                        line_length = 8,
+                        priority = "extra-high",
+                        width = 160,
+                        height = 70,
+                        shift = util.by_pixel(7, 0),
+                        blend_mode = reskins.lib.blend_mode,
+                        scale = 0.5
+                    }
                 }
             }
         },
@@ -162,7 +209,7 @@ for name, map in pairs(tier_map) do
             layers = {
                 -- Base
                 {
-                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/east/splitter-east.png",
+                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/east/splitter-east-base.png",
                     frame_count = 32,
                     line_length = 8,
                     priority = "extra-high",
@@ -170,7 +217,7 @@ for name, map in pairs(tier_map) do
                     height = 44,
                     shift = util.by_pixel(4, 12),
                     hr_version = {
-                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/east/hr-splitter-east.png",
+                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/east/hr-splitter-east-base.png",
                         frame_count = 32,
                         line_length = 8,
                         priority = "extra-high",
@@ -201,6 +248,28 @@ for name, map in pairs(tier_map) do
                         tint = inputs.tint,
                         scale = 0.5
                     }
+                },
+                -- Highlights
+                {
+                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/east/splitter-east-highlights.png",
+                    frame_count = 32,
+                    line_length = 8,
+                    priority = "extra-high",
+                    width = 46,
+                    height = 44,
+                    shift = util.by_pixel(4, 12),
+                    blend_mode = reskins.lib.blend_mode,
+                    hr_version = {
+                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/east/hr-splitter-east-highlights.png",
+                        frame_count = 32,
+                        line_length = 8,
+                        priority = "extra-high",
+                        width = 90,
+                        height = 84,
+                        shift = util.by_pixel(4, 13),
+                        blend_mode = reskins.lib.blend_mode,
+                        scale = 0.5
+                    }
                 }
             }
         },
@@ -208,7 +277,7 @@ for name, map in pairs(tier_map) do
             layers = {
                 -- Base
                 {
-                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/south/splitter-south.png",
+                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/south/splitter-south-base.png",
                     frame_count = 32,
                     line_length = 8,
                     priority = "extra-high",
@@ -216,7 +285,7 @@ for name, map in pairs(tier_map) do
                     height = 32,
                     shift = util.by_pixel(4, 0),
                     hr_version = {
-                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/south/hr-splitter-south.png",
+                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/south/hr-splitter-south-base.png",
                         frame_count = 32,
                         line_length = 8,
                         priority = "extra-high",
@@ -247,6 +316,28 @@ for name, map in pairs(tier_map) do
                         tint = inputs.tint,
                         scale = 0.5
                     }
+                },
+                -- Highlights
+                {
+                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/south/splitter-south-highlights.png",
+                    frame_count = 32,
+                    line_length = 8,
+                    priority = "extra-high",
+                    width = 82,
+                    height = 32,
+                    shift = util.by_pixel(4, 0),
+                    blend_mode = reskins.lib.blend_mode,
+                    hr_version = {
+                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/south/hr-splitter-south-highlights.png",
+                        frame_count = 32,
+                        line_length = 8,
+                        priority = "extra-high",
+                        width = 164,
+                        height = 64,
+                        shift = util.by_pixel(4, 0),
+                        blend_mode = reskins.lib.blend_mode,
+                        scale = 0.5
+                    }
                 }
             }
         },
@@ -254,7 +345,7 @@ for name, map in pairs(tier_map) do
             layers = {
                 -- Base
                 {
-                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/west/splitter-west.png",
+                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/west/splitter-west-base.png",
                     frame_count = 32,
                     line_length = 8,
                     priority = "extra-high",
@@ -262,7 +353,7 @@ for name, map in pairs(tier_map) do
                     height = 44,
                     shift = util.by_pixel(6, 12),
                     hr_version = {
-                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/west/hr-splitter-west.png",
+                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/west/hr-splitter-west-base.png",
                         frame_count = 32,
                         line_length = 8,
                         priority = "extra-high",
@@ -293,6 +384,28 @@ for name, map in pairs(tier_map) do
                         tint = inputs.tint,
                         scale = 0.5
                     }
+                },
+                -- Highlights
+                {
+                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/west/splitter-west-highlights.png",
+                    frame_count = 32,
+                    line_length = 8,
+                    priority = "extra-high",
+                    width = 46,
+                    height = 44,
+                    shift = util.by_pixel(6, 12),
+                    blend_mode = reskins.lib.blend_mode,
+                    hr_version = {
+                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/west/hr-splitter-west-highlights.png",
+                        frame_count = 32,
+                        line_length = 8,
+                        priority = "extra-high",
+                        width = 94,
+                        height = 86,
+                        shift = util.by_pixel(5, 12),
+                        blend_mode = reskins.lib.blend_mode,
+                        scale = 0.5
+                    }
                 }
             }
         }
@@ -305,7 +418,7 @@ for name, map in pairs(tier_map) do
             layers = {
                 -- Base
                 {
-                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/east/splitter-east-top_patch.png",
+                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/east/splitter-east-top_patch-base.png",
                     frame_count = 32,
                     line_length = 8,
                     priority = "extra-high",
@@ -313,7 +426,7 @@ for name, map in pairs(tier_map) do
                     height = 52,
                     shift = util.by_pixel(4, -20),
                     hr_version = {
-                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/east/hr-splitter-east-top_patch.png",
+                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/east/hr-splitter-east-top_patch-base.png",
                         frame_count = 32,
                         line_length = 8,
                         priority = "extra-high",
@@ -344,6 +457,28 @@ for name, map in pairs(tier_map) do
                         tint = inputs.tint,
                         scale = 0.5
                     }
+                },
+                -- Highlights
+                {
+                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/east/splitter-east-top_patch-highlights.png",
+                    frame_count = 32,
+                    line_length = 8,
+                    priority = "extra-high",
+                    width = 46,
+                    height = 52,
+                    shift = util.by_pixel(4, -20),
+                    blend_mode = reskins.lib.blend_mode,
+                    hr_version = {
+                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/east/hr-splitter-east-top_patch-highlights.png",
+                        frame_count = 32,
+                        line_length = 8,
+                        priority = "extra-high",
+                        width = 90,
+                        height = 104,
+                        shift = util.by_pixel(4, -20),
+                        blend_mode = reskins.lib.blend_mode,
+                        scale = 0.5
+                    }
                 }
             }
         },
@@ -352,7 +487,7 @@ for name, map in pairs(tier_map) do
             layers = {
                 -- Base
                 {
-                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/west/splitter-west-top_patch.png",
+                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/west/splitter-west-top_patch-base.png",
                     frame_count = 32,
                     line_length = 8,
                     priority = "extra-high",
@@ -360,7 +495,7 @@ for name, map in pairs(tier_map) do
                     height = 48,
                     shift = util.by_pixel(6, -18),
                     hr_version = {
-                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/west/hr-splitter-west-top_patch.png",
+                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/west/hr-splitter-west-top_patch-base.png",
                         frame_count = 32,
                         line_length = 8,
                         priority = "extra-high",
@@ -389,6 +524,28 @@ for name, map in pairs(tier_map) do
                         height = 96,
                         shift = util.by_pixel(5, -18),
                         tint = inputs.tint,
+                        scale = 0.5
+                    }
+                },
+                -- Highlights
+                {
+                    filename = reskins.lib.directory.."/graphics/entity/base/splitter/west/splitter-west-top_patch-highlights.png",
+                    frame_count = 32,
+                    line_length = 8,
+                    priority = "extra-high",
+                    width = 46,
+                    height = 48,
+                    shift = util.by_pixel(6, -18),
+                    blend_mode = reskins.lib.blend_mode,
+                    hr_version = {
+                        filename = reskins.lib.directory.."/graphics/entity/base/splitter/west/hr-splitter-west-top_patch-highlights.png",
+                        frame_count = 32,
+                        line_length = 8,
+                        priority = "extra-high",
+                        width = 94,
+                        height = 96,
+                        shift = util.by_pixel(5, -18),
+                        blend_mode = reskins.lib.blend_mode,
                         scale = 0.5
                     }
                 }
