@@ -13,13 +13,13 @@ local message_color = "#9cdcfe" -- Light blue
 function check_for_missing_reskin(player)
     local supported_mods = {
         angels = {
+            "angelsrefining",
             "angelssmelting",
             "angelspetrochem",
+            "angelsbioprocessing",
             "angelsaddons-storage",
-            -- "angelsbioprocessing",
-            -- "angelsexploration",
             "angelsindustries",
-            -- "angelsrefining",
+            -- "angelsexploration",
             -- "angelsaddons-cab",
             -- "angelsaddons-mobility",
         },
@@ -54,6 +54,7 @@ function check_for_missing_reskin(player)
             "Clowns-Processing",
             "extendedangels",
             "RealisticReactorGlow",
+            "P-U-M-P-S",
             "classic-beacon",
             "classic-mining-drill",
             "semi-classic-mining-drill",
