@@ -147,7 +147,7 @@ data:extend(
         name = "reskins-lib-custom-colors-tier-2",
         setting_type ="startup",
         order = "yy",
-        default_value = "ff0800",
+        default_value = "f22318",
         localised_description = {"", {"mod-setting-description.reskins-lib-custom-colors-tier-2"}, "\n\n", {"reskins-defaults.default"}, " ", {"reskins-defaults.tier-2-color"}}
     },
     {
