@@ -554,7 +554,7 @@ for name, map in pairs(tier_map) do
     }
 
     -- Apply belt set
-    entity.belt_animation_set = reskins.lib.transport_belt_animation_set(inputs.tint, map.sprite_variant)
+    -- entity.belt_animation_set = reskins.lib.transport_belt_animation_set(inputs.tint, map.sprite_variant)
 
     -- Label to skip to next iteration
     ::continue::
