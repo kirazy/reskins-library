@@ -2,7 +2,7 @@
 Version: 2.0.1
 Date: ????
   Changes:
-    - Revised handling for entities using `belt_animation_set` property
+    - Revised handling for entities using `belt_animation_set`
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.0
 Date: 2021-08-14
