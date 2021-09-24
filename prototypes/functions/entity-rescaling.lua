@@ -148,11 +148,12 @@ local fields = {
     "south_position",
     "east_position",
     "west_position",
+    "position",
     "window_bounding_box",
     "circuit_wire_connection_points",
 }
 
-local ignored_fields ={
+local ignored_fields = {
     "fluid_boxes",
     "fluid_box",
     "energy_source",
