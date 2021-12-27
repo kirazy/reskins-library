@@ -14,6 +14,9 @@ require("prototypes.functions.label-items")
 ----------------------------------------------------------------------------------------------------
 -- ENTITIES
 ----------------------------------------------------------------------------------------------------
+-- Common
+require("prototypes.entity.common.pipe")
+
 -- Base
 require("prototypes.entity.base.oil-refinery")
 require("prototypes.entity.base.splitter")
