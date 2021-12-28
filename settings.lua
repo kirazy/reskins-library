@@ -106,6 +106,13 @@ data:extend(
         order = "ad",
         default_value = true,
     },
+    {
+        type = "bool-setting",
+        name = "reskins-lib-scope-interface",
+        setting_type = "startup",
+        order = "af",
+        default_value = true,
+    },
 
     -- Runtime settings
     {

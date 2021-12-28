@@ -1,7 +1,11 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.5
 Date: ????
+  Features:
+    - Added setting "Reskin interface" which supports visual changes and updates to the crafting tabs
+    - Pipes have been adjusted to have separate shadow layers, eliminating the shadow overlay with other entities when placing pipes
   Changes:
+    - Moved reskinning of the standard Factorio pipe into this mod from Artisanal Reskins: Angel's mods
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.4
 Date: 2021-12-12
