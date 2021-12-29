@@ -221,7 +221,6 @@ reskins.lib.particle_index = {
     ["big"] = "metal-particle-big",
     ["big-stone"] = "stone-particle-big",
     ["big-tint"] = "metal-particle-big-tint",
-
 }
 
 function reskins.lib.make_4way_animation_from_spritesheet(animation)
