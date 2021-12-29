@@ -6,6 +6,8 @@ Date: ????
     - Pipes have been adjusted to have separate shadow layers, eliminating the shadow overlay with other entities when placing pipes
   Changes:
     - Moved reskinning of the standard Factorio pipe into this mod from Artisanal Reskins: Angel's mods
+  Bugfixes:
+    - Fixed that `rescale_entity` was ignoring Types/Animation defined with stripes or filenames instead of filename
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.4
 Date: 2021-12-12
