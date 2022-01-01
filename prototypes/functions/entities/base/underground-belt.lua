@@ -1,60 +1,14 @@
--- Copyright (c) 2021 Kirazy
+-- Copyright (c) 2022 Kirazy
 -- Part of Artisanal Reskins: Library
 --
--- See LICENSE in the project directory for license information.
+-- See LICENSE.md in the project directory for license information.
 
--- Check if reskinning needs to be done
-if reskins.bobs and (reskins.bobs.triggers.logistics.entities == false) then return end
-
--- We reskin the base entities only if we're doing custom colors
-local use_custom_colors = reskins.lib.setting("reskins-lib-customize-tier-colors")
-
--- Set input parameters
-local inputs = {
-    type = "underground-belt",
-    icon_name = "underground-belt",
-    base_entity = "underground-belt",
-    mod = "lib",
-    group = "base",
-    particles = {["medium"] = 3, ["small"] = 2},
-}
-
--- Handle belt tier labels
-inputs.tier_labels = reskins.lib.setting("reskins-bobs-do-belt-entity-tier-labeling") and true or false
-
-local tier_map = {
-    ["basic-underground-belt"] = {tier = 0, sprite_variant = 1},
-    ["underground-belt"] = {tier = 1, sprite_variant = 1, recolor = use_custom_colors},
-    ["fast-underground-belt"] = {tier = 2, sprite_variant = 2, recolor = use_custom_colors},
-    ["express-underground-belt"] = {tier = 3, sprite_variant = 2, recolor = use_custom_colors},
-    ["turbo-underground-belt"] = {tier = 4, sprite_variant = 2},
-    ["ultimate-underground-belt"] = {tier = 5, sprite_variant = 2},
-}
-
--- Reskin entities
-for name, map in pairs(tier_map) do
-    -- Initialize paths
-    local entity = data.raw[inputs.type][name]
-
-    -- Check if entity exists, if not, skip this iteration
-    if not entity then goto continue end
-
-    -- Determine what tint we're using
-    inputs.tint = reskins.lib.belt_tint_index[map.tier]
-
-    -- Check if we're doing reskin operations on the vanilla splitters
-    if map.recolor == false then
-        reskins.lib.append_tier_labels_to_vanilla_icon(name, map.tier, inputs)
-        goto continue
-    end
-
-    reskins.lib.setup_standard_entity(name, map.tier, inputs)
-
-    -- Fetch remnant
-    local remnant = data.raw["corpse"][name.."-remnants"]
-
-    -- Reskin remnants
-    remnant.animation = {
+---Provides vanilla-style sprite definition for underground belt corpse `animation` field. See [Prototype/Corpse](https://wiki.factorio.com/Prototype/Corpse).
+---@param tint table # [Types/Color](https://wiki.factorio.com/Types/Color)
+---@return table animation # [Types/RotatedAnimation](https://wiki.factorio.com/Types/RotatedAnimation)
+local function corpse_animation(tint)
+    return
+    {
         layers= {
             -- Base
             {
@@ -90,7 +44,7 @@ for name, map in pairs(tier_map) do
                 variation_count = 1,
                 axially_symmetrical = false,
                 direction_count = 8,
-                tint = inputs.tint,
+                tint = tint,
                 shift = util.by_pixel(10, 3),
                 hr_version = {
                     filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/remnants/hr-underground-belt-remnants-mask.png",
@@ -101,7 +55,7 @@ for name, map in pairs(tier_map) do
                     variation_count = 1,
                     axially_symmetrical = false,
                     direction_count = 8,
-                    tint = inputs.tint,
+                    tint = tint,
                     shift = util.by_pixel(10.5, 3),
                     scale = 0.5,
                 },
@@ -134,9 +88,14 @@ for name, map in pairs(tier_map) do
             }
         }
     }
+end
 
-    -- Reskin entities
-    entity.structure = {
+---Provides vanilla-style sprite definition for underground belt `structure` field. See [Prototype/UndergroundBelt](https://wiki.factorio.com/Prototype/UndergroundBelt).
+---@param tint table # [Types/Color](https://wiki.factorio.com/Types/Color)
+---@return table structure # [UndergroundBelt structure](https://wiki.factorio.com/Prototype/UndergroundBelt#structure)
+local function entity_structure(tint)
+    return
+    {
         direction_in = {
             sheets = {
                 -- Base
@@ -162,14 +121,14 @@ for name, map in pairs(tier_map) do
                     width = 96,
                     height = 96,
                     y = 96,
-                    tint = inputs.tint,
+                    tint = tint,
                     hr_version = {
                         filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
                         y = 192,
-                        tint = inputs.tint,
+                        tint = tint,
                         scale = 0.5
                     }
                 },
@@ -215,13 +174,13 @@ for name, map in pairs(tier_map) do
                     priority = "extra-high",
                     width = 96,
                     height = 96,
-                    tint = inputs.tint,
+                    tint = tint,
                     hr_version = {
                         filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
                         priority = "extra-high",
                         width = 192,
                         height =192,
-                        tint = inputs.tint,
+                        tint = tint,
                         scale = 0.5
                     }
                 },
@@ -268,14 +227,14 @@ for name, map in pairs(tier_map) do
                     width = 96,
                     height = 96,
                     y = 96*3,
-                    tint = inputs.tint,
+                    tint = tint,
                     hr_version = {
                         filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
                         y = 192*3,
-                        tint = inputs.tint,
+                        tint = tint,
                         scale = 0.5
                     }
                 },
@@ -324,14 +283,14 @@ for name, map in pairs(tier_map) do
                     width = 96,
                     height = 96,
                     y = 96*2,
-                    tint = inputs.tint,
+                    tint = tint,
                     hr_version = {
                         filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
                         y = 192*2,
-                        tint = inputs.tint,
+                        tint = tint,
                         scale = 0.5
                     }
                 },
@@ -342,14 +301,14 @@ for name, map in pairs(tier_map) do
                     width = 96,
                     height = 96,
                     y = 96*2,
-                    tint = inputs.tint,
+                    tint = tint,
                     hr_version = {
                         filename = reskins.lib.directory.."/graphics/entity/base/underground-belt/hr-underground-belt-structure-highlights.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
                         y = 192*2,
-                        tint = inputs.tint,
+                        tint = tint,
                         scale = 0.5
                     }
                 }
@@ -386,10 +345,43 @@ for name, map in pairs(tier_map) do
             }
         }
     }
+end
 
-    -- Apply belt set
-    -- entity.belt_animation_set = reskins.lib.transport_belt_animation_set(inputs.tint, map.sprite_variant)
+---Reskins the named underground-belt with vanilla-style underground belt sprites and color masking, and sets up appropriate corpse, explosion, and particle prototypes
+---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
+---@param tier integer # 1-6 are supported, 0 to disable
+---@param tint? table # [Types/Color](https://wiki.factorio.com/Types/Color)
+---@param make_tier_labels? boolean
+---@param reskin_vanilla_entity? boolean
+function reskins.lib.apply_skin.underground_belt(name, tier, tint, make_tier_labels, reskin_vanilla_entity)
+    ---@type inputs.setup_standard_entity
+    local inputs = {
+        type = "underground-belt",
+        icon_name = "underground-belt",
+        base_entity_name = "underground-belt",
+        mod = "lib",
+        group = "base",
+        particles = {["medium"] = 3, ["small"] = 2},
+        tier_labels = make_tier_labels or false,
+        tint = tint and tint or reskins.lib.belt_tint_index[tier]
+    }
 
-    -- Label to skip to next iteration
-    ::continue::
+    local entity = data.raw[inputs.type][name]
+    if not entity then return end
+
+    if reskin_vanilla_entity == false then
+        reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
+        return
+    end
+
+    reskins.lib.setup_standard_entity(name, tier, inputs)
+
+    -- Fetch corpse
+    local corpse = data.raw["corpse"][name.."-remnants"]
+
+    -- Reskin corpse
+    corpse.animation = corpse_animation(inputs.tint)
+
+    -- Reskin entity
+    entity.structure = entity_structure(inputs.tint)
 end
