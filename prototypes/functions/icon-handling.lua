@@ -197,7 +197,7 @@ end
 -- STANDARD ICON FUNCTIONS
 ----------------------------------------------------------------------------------------------------
 
----@class inputs.construct_icons : inputs.parse_inputs
+---@class inputs.construct_icons : inputs.parse_inputs, inputs.store_icons
 ---@field mod '"angels"|"bobs"|"compatibility"|"lib"' # Key for global reskins table, used for storing icon definitions
 ---@field group string # Mod/category folder within the `graphics/icons` folder
 ---@field subgroup? string # Folder nested within `group`, e.g. `group/subgroup`
@@ -398,6 +398,15 @@ function reskins.lib.construct_icon(name, tier, inputs)
     reskins.lib.assign_icons(name, inputs)
 end
 
+---@class inputs.store_icons : inputs.assign_icons
+---@field mod '"angels"'|'"bobs"'|'"lib"'|'"compatibility"'
+---@field defer_to_data_updates boolean
+---@field defer_to_data_final_fixes boolean # Takes priority over `defer_to_data_updates`
+
+---Stores icon properties for assignment at a later data stage, has same input requirements as `reskins.lib.assign_icons()`
+---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
+---@param inputs inputs.store_icons
+---@param storage? '"technology"'|'"icons"' # May be omitted if `"icons"`
 function reskins.lib.store_icons(name, inputs, storage)
     -- Inputs required by this function
     -- mod              - Specifies the subtable of reskins where the icons should be stored
@@ -428,18 +437,31 @@ function reskins.lib.store_icons(name, inputs, storage)
     reskins[inputs.mod][storage][data_stage][name] = util.copy(inputs)
 end
 
-function reskins.lib.assign_icons(name, inputs)
-    -- Inputs required by this function
-    -- type            - Entity type
-    -- icon            - Table or string defining icon
-    -- icon_size       - Pixel size of icons
-    -- icon_mipmaps    - Number of mipmaps present in the icon image file
+---@class inputs.assign_icons
+---@field type string
+---@field icon string|table # [Types/FileName](https://wiki.factorio.com/Types/FileName), or table of [Types/IconData](https://wiki.factorio.com/Types/IconData)
+---@field icon_size integer
+---@field icon_mipmaps integer
+---@field icon_picture? table # [Types/SpriteVariations](https://wiki.factorio.com/Types/SpriteVariations)
+---@field make_entity_pictures? boolean # When true, entities of type `inputs.type` will be assigned the `inputs.icon_picture` definition
+---@field make_icon_pictures? boolean # When true, valid items will be assigned the `inputs.icon_picture` definition
 
-    -- Initialize paths
-    local entity
-    if inputs.type then
-        entity = data.raw[inputs.type][name]
-    end
+---Robustly assigns an `icon` or `icons` definition to an entity and related prototypes
+---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
+---@param inputs inputs.assign_icons
+--- ```
+--- inputs = {
+---     type = string
+---     icon = string|table -- https://wiki.factorio.com/Types/FileName, or table of https://wiki.factorio.com/Types/IconData
+---     icon_size = integer
+---     icon_mipmaps = integer
+---     icon_picture = table -- https://wiki.factorio.com/Types/SpriteVariations
+---     make_entity_pictures = boolean -- When true, entities of type `inputs.type` will be assigned the `inputs.icon_picture` definition
+---     make_icon_pictures = boolean -- When true, valid items will be assigned the `inputs.icon_picture` definition
+--- }
+--- ```
+function reskins.lib.assign_icons(name, inputs)
+    local entity = inputs.type and data.raw[inputs.type][name]
 
     -- Recipes are exceptions to the usual pattern
     local item, item_with_data, explosion, remnant
