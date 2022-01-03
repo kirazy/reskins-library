@@ -378,7 +378,9 @@ end
 ---Reskins the named assembling machine with vanilla-style chemical plant sprites and color masking, and sets up appropriate corpse, explosion, and particle prototypes
 ---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
 ---@param tier integer # 1-6 are supported, 0 to disable
-function reskins.lib.apply_skin.chemical_plant(name, tier)
+---@param tint? table # [Types/Color](https://wiki.factorio.com/Types/Color)
+---@param make_tier_labels? boolean
+function reskins.lib.apply_skin.chemical_plant(name, tier, tint, make_tier_labels)
     ---@type inputs.setup_standard_entity
     local inputs = {
         type = "assembling-machine",
@@ -387,7 +389,8 @@ function reskins.lib.apply_skin.chemical_plant(name, tier)
         mod = "lib",
         group = "common",
         particles = {["big"] = 1, ["medium"] = 2},
-        tint = reskins.lib.tint_index[tier],
+        tier_labels = make_tier_labels,
+        tint = tint and tint or reskins.lib.tint_index[tier],
     }
 
     local entity = data.raw[inputs.type][name]

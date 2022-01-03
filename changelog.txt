@@ -2,6 +2,8 @@
 Version: 2.1.1
 Date: ????
   Changes:
+    - Marked incompatible with Bob's Mods: Alternate Textures
+    - Adjusted entity functions `chemical_plant` and `oil_refinery` to support custom tints and tier label behaviors
 ---------------------------------------------------------------------------------------------------
 Version: 2.1.0
 Date: 2022-01-03
