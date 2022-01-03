@@ -11,6 +11,8 @@ Date: ????
   Bugfixes:
     - Fixed that `rescale_entity` was ignoring Types/Animation defined with stripes or filenames instead of filename
     - Fixed that highlights were not being applied to transport belt remnants
+  Locale:
+    - Updated Russian localization
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.4
 Date: 2021-12-12
