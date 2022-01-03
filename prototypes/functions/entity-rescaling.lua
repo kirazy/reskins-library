@@ -1,4 +1,4 @@
--- Copyright (c) 2021 Kirazy
+-- Copyright (c) 2022 Kirazy
 -- Part of Artisanal Reskins: Library
 --
 -- See LICENSE.md in the project directory for license information.
@@ -195,8 +195,8 @@ function reskins.lib.rescale_entity(entity, scalar)
 		-- This checks to see if we're within an hr_version table
 		if key == "hr_version" then
 			entity.scale = entity.scale or 0.5
-		-- If we're not, see if there's a filename, which means we're in a low-res table
-		elseif entity.filename then
+		-- If we're not, see if there's one of the three fields indicating a normal-res table
+		elseif (entity.filename or entity.stripes or entity.filenames) then
 			entity.scale = entity.scale or 1
 		end
 

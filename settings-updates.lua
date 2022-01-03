@@ -1,5 +1,5 @@
--- Copyright (c) 2021 Kirazy
--- Part of Artisanal Reskins: Bob's Mods
+-- Copyright (c) 2022 Kirazy
+-- Part of Artisanal Reskins: Library
 --
 -- See LICENSE.md in the project directory for license information.
 
@@ -10,3 +10,6 @@
 -- In general the new masks should perform better and be much closer to how additive-soft behaved previously, with some improvements
 reskins.lib.setting_override("string-setting", "reskins-lib-blend-mode", "additive")
 -- reskins.lib.setting_override("string-setting", "reskins-lib-blend-mode", "additive-soft")
+
+-- Interface item-group reskins are on-hold pending a deep-dive
+reskins.lib.setting_override("bool-setting", "reskins-lib-scope-interface")

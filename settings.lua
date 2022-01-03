@@ -1,4 +1,4 @@
--- Copyright (c) 2021 Kirazy
+-- Copyright (c) 2022 Kirazy
 -- Part of Artisanal Reskins: Library
 --
 -- See LICENSE.md in the project directory for license information.
@@ -8,7 +8,10 @@ if not reskins then reskins = {} end
 if not reskins.lib then reskins.lib = {} end
 reskins.lib.default_tint = "#9cdcfe"
 
--- Set the hidden flag to true and optionally override the default value
+---Sets the hidden flag to true and optionally overrides the default value
+---@param setting_type '"bool-setting"'|'"double-setting"'|'"int-setting"'|'"string-setting"'
+---@param setting_name string
+---@param override_value any
 function reskins.lib.setting_override(setting_type, setting_name, override_value)
     if data.raw[setting_type] and data.raw[setting_type][setting_name] then
         -- Fetch the setting, and hide it
@@ -104,6 +107,13 @@ data:extend(
         name = "reskins-lib-scope-technologies",
         setting_type = "startup",
         order = "ad",
+        default_value = true,
+    },
+    {
+        type = "bool-setting",
+        name = "reskins-lib-scope-interface",
+        setting_type = "startup",
+        order = "af",
         default_value = true,
     },
 

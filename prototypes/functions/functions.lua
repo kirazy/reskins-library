@@ -1,4 +1,4 @@
--- Copyright (c) 2021 Kirazy
+-- Copyright (c) 2022 Kirazy
 -- Part of Artisanal Reskins: Library
 --
 -- See LICENSE.md in the project directory for license information.
@@ -16,7 +16,9 @@ reskins.lib.status = {}
 -- Setup migration module
 reskins.lib.migration = require("migration")
 
--- Check if a startup setting exists, and if it does, return its value
+---Validates startup settings and returns their value
+---@param name string
+---@return any setting.value
 function reskins.lib.setting(name)
     local startup_setting
     if settings.startup[name] then
@@ -28,8 +30,38 @@ function reskins.lib.setting(name)
     return startup_setting
 end
 
--- Checks to see if the reskin-toggle is enabled for a given setting, and if it is, checks if the given scope is also enabled
--- Returns true if both are true, returns false if one is false, and nil otherwise
+---@alias mod_settings
+---| '"angelsaddons-cab"'
+---| '"angelsaddons-mobility"'
+---| '"angelsaddons-storage"'
+---| '"angelsbioprocessing"'
+---| '"angelsexploration"'
+---| '"angelsindustries"'
+---| '"angelspetrochem"'
+---| '"angelsrefining"'
+---| '"angelssmelting"'
+---| '"bobassembly"'
+---| '"bobelectronics"'
+---| '"bobenemies"'
+---| '"bobequipment"'
+---| '"bobgreenhouse"'
+---| '"boblogistics"'
+---| '"bobmining"'
+---| '"bobmodules"'
+---| '"bobores"'
+---| '"bobplates"'
+---| '"bobpower"'
+---| '"bobrevamp"'
+---| '"bobtech"'
+---| '"bobvehicleequipment"'
+---| '"bobwarfare"'
+
+---Checks to see if the reskin-toggle is enabled for a given setting, and if it is, checks if the given scope is also enabled.
+---Returns true if both are true, returns false if one is false, and nil otherwise.
+---@param scope '"entities"'|'"equipment"'|'"items-and-fluids"'|'"technologies"'
+---@param mod '"angels"'|'"bobs"'|'"lib"'|'"compatibility"'
+---@param setting mod_settings
+---@return boolean
 function reskins.lib.check_scope(scope, mod, setting)
     if reskins.lib.setting("reskins-"..mod.."-do-"..setting) == true then
         if reskins.lib.setting("reskins-lib-scope-"..scope) == true then
@@ -63,10 +95,17 @@ if mods["reskins-compatibility"] then
     }
 end
 
--- Fetch blend mode
+
+-- Fetch blend mode, default `"additive"`. May be overridden in `settings-updates.lua` by uncommenting the line.
+---@type string
 reskins.lib.blend_mode = reskins.lib.setting("reskins-lib-blend-mode")
 
--- Most entities have a common process for reskinning, so consolidate the other functions under one superfunction for ease of use
+---@class inputs.setup_standard_entity : inputs.parse_inputs, inputs.create_explosions_and_particles, inputs.create_remnant, inputs.construct_icons
+
+---Most entities have a common process for reskinning, so consolidate the other functions under one superfunction for ease of use
+---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
+---@param tier integer # 1-6 are supported, 0 to disable
+---@param inputs inputs.setup_standard_entity
 function reskins.lib.setup_standard_entity(name, tier, inputs)
     -- Parse inputs
     reskins.lib.parse_inputs(inputs)
@@ -87,14 +126,35 @@ function reskins.lib.setup_standard_entity(name, tier, inputs)
     end
 end
 
--- Parses the main inputs table of parameters
-function reskins.lib.parse_inputs(inputs)
-    -- Check that we have a particles table
-    -- if not inputs.particles then
-    --     inputs.make_explosions = false
-    -- end
+---@class inputs.parse_inputs
+---@field icon_size? integer # Default 64
+---@field icon_mipmaps? integer # Default 4
+---@field technology_icon_size? integer # Default 128
+---@field technology_icon_mipmaps? integer # Default 1
+---@field make_explosions? boolean # Default true, create explosions in `standard_setup_entity`
+---@field make_remnants? boolean # Default true, create corpses in `standard_setup_entity`
+---@field make_icons? boolean # Default true, create icons in `standard_setup_entity`
+---@field tier_labels? boolean # Default true, displays tier labels on icons
+---@field make_icon_pictures? boolean # Default true
 
-    -- Constructs defaults for optional input parameters.
+---Sets the default parameters on the standard inputs table if not already set
+---@param inputs inputs.parse_inputs
+---@return inputs.parse_inputs inputs @
+---```
+--- inputs = {
+---     icon_size integer -- Default 64
+---     icon_mipmaps integer -- Default 4
+---     technology_icon_size integer -- Default 128
+---     technology_icon_mipmaps integer -- Default 1
+---     make_explosions boolean -- Default true, create explosions in `standard_setup_entity`
+---     make_remnants boolean -- Default true, create corpses in `standard_setup_entity`
+---     make_icons boolean -- Default true, create icons in `standard_setup_entity`
+---     tier_labels boolean -- Default true, displays tier labels on icons
+---     make_icon_pictures boolean -- Default true
+---     ...
+--- }
+---```
+function reskins.lib.parse_inputs(inputs)
     inputs.icon_size = inputs.icon_size or 64 -- Pixel size of icons
     inputs.icon_mipmaps = inputs.icon_mipmaps or 4 -- Number of mipmaps present in the icon image file
     inputs.technology_icon_size = inputs.technology_icon_size or 128 -- Pixel size of technology icons
@@ -108,13 +168,16 @@ function reskins.lib.parse_inputs(inputs)
     return inputs
 end
 
-function reskins.lib.assign_order(name, inputs)
-    -- Inputs required by this function
-    -- type
-    -- sort_order
-    -- sort_group
-    -- sort_subgroup
+---@class inputs.assign_order
+---@field type? string # [Prototype](https://wiki.factorio.com/Prototype_definitions)
+---@field sort_order? string # [Types/Order](https://wiki.factorio.com/Types/Order)
+---@field sort_group? string # Unclear; may be deprecated or unused in Factorio
+---@field sort_subgroup? string # The name of the subgroup this entity should be sorted into in the map editor building selection
 
+---Assigns a consistent `order` property to a given entity prototype and the associated items, explosions, and remnants if they exist
+---@param name string
+---@param inputs inputs.assign_order
+function reskins.lib.assign_order(name, inputs)
     -- Initialize paths
     local entity
     if inputs.type then
@@ -149,14 +212,25 @@ function reskins.lib.assign_order(name, inputs)
     end
 end
 
--- Create remnant entity; reskin the remnant after calling this function
-function reskins.lib.create_remnant(name, inputs)
-    -- Inputs required by this function:
-    -- base_entity - Entity to copy remnant prototype from
-    -- type        - Entity type
+---@class inputs.create_remnant
+---@field base_entity_name string # Name of Factorio reference entity to copy from, e.g. `stone-furnace`
+---@field type string # [Prototype](https://wiki.factorio.com/Prototype_definitions)
 
-    -- Copy remnant prototype
-    local remnant = util.copy(data.raw["corpse"][inputs.base_entity.."-remnants"])
+---@class remnant # See [Prototype/Corpse](https://wiki.factorio.com/Prototype/Corpse)
+
+---Copies the Factorio corpse specified by `inputs.base_entity_name`, extends `data` with a new
+---corpse with the name `[name]-remnants`, and assigns it to the named entity
+---@param name string
+---@param inputs inputs.create_remnant
+---```
+--- inputs = {
+---     base_entity_name = string -- Name of Factorio reference entity to copy from, e.g. `stone-furnace`
+---     type = string -- See https://wiki.factorio.com/Prototype_definitions
+--- }
+---```
+function reskins.lib.create_remnant(name, inputs)
+    ---@type remnant
+    local remnant = util.copy(data.raw["corpse"][inputs.base_entity_name.."-remnants"])
     remnant.name = name.."-remnants"
     data:extend({remnant})
 
@@ -164,13 +238,20 @@ function reskins.lib.create_remnant(name, inputs)
     data.raw[inputs.type][name]["corpse"] = remnant.name
 end
 
--- Create explosion entity; create particles after calling this function
-function reskins.lib.create_explosion(name, inputs)
-    -- Inputs required by this function:
-    -- base_entity - Entity to copy explosion prototype from
-    -- type        - Entity type
+---@class inputs.create_explosion : inputs.create_remnant
 
-    local explosion = util.copy(data.raw["explosion"][inputs.base_entity.."-explosion"])
+---Copies the Factorio explosion specified by `inputs.base_entity_name`, extends `data` with a new
+---explosion with the name `[name]-explosion`, and assigns it to the named entity
+---@param name string
+---@param inputs inputs.create_explosion
+---```
+--- inputs = {
+---     base_entity_name = string -- Name of Factorio reference entity to copy from, e.g. `stone-furnace`
+---     type = string -- See https://wiki.factorio.com/Prototype_definitions
+--- }
+---```
+function reskins.lib.create_explosion(name, inputs)
+    local explosion = util.copy(data.raw["explosion"][inputs.base_entity_name.."-explosion"])
     explosion.name = name.."-explosion"
     data:extend({explosion})
 
@@ -178,11 +259,16 @@ function reskins.lib.create_explosion(name, inputs)
     data.raw[inputs.type][name]["dying_explosion"] = explosion.name
 end
 
--- Create tinted particle
-function reskins.lib.create_particle(name, base_entity, base_particle, key, tint)
-    -- Copy the particle prototype
-    local particle = util.copy(data.raw["optimized-particle"][base_entity.."-"..base_particle])
-    particle.name = name.."-"..base_particle.."-tinted"
+---Copies the Factorio particle specified by `base_entity_name`, applies tints, extends `data`
+---with a new particle with the name `[name]-[base-particle-name]-tinted`, and assigns it to the named explosion
+---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
+---@param base_entity_name string # Name of Factorio reference entity to copy from, e.g. `stone-furnace`
+---@param base_particle_name string # Key for `reskins.lib.particle_index`
+---@param key integer # Index corresponding to the particle within the `explosion` prototype
+---@param tint table # [Types/Color](https://wiki.factorio.com/Types/Color)
+function reskins.lib.create_particle(name, base_entity_name, base_particle_name, key, tint)
+    local particle = util.copy(data.raw["optimized-particle"][base_entity_name.."-"..base_particle_name])
+    particle.name = name.."-"..base_particle_name.."-tinted"
     particle.pictures.sheet.tint = tint
     particle.pictures.sheet.hr_version.tint = tint
     data:extend({particle})
@@ -191,22 +277,31 @@ function reskins.lib.create_particle(name, base_entity, base_particle, key, tint
     data.raw["explosion"][name.."-explosion"]["created_effect"]["action_delivery"]["target_effects"][key].particle_name = particle.name
 end
 
--- Batch the explosion and particle function together for ease of use
-function reskins.lib.create_explosions_and_particles(name, inputs)
-    -- Inputs required by this function:
-    -- base_entity - Entity to copy explosion prototype from
-    -- type        - Entity type
-    -- tint        - Particle color
-    -- particles   - Optional; specify which particle to receive a tint
+---@class inputs.create_explosions_and_particles : inputs.create_explosion
+---@field particles? table # Table of keys for `reskins.lib.particle_index` and the target index within the explosion particle table to copy
+---@field tint table # [Types/Color](https://wiki.factorio.com/Types/Color)
 
-    -- Create explosions and related particles
+---Batches the `create_explosion` and `create_particle` function together for ease of use
+---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
+---@param inputs inputs.create_explosions_and_particles @
+---```
+--- inputs = {
+---     base_entity_name = string -- Name of Factorio reference entity to copy from, e.g. `stone-furnace`
+---     type = string -- See https://wiki.factorio.com/Prototype_definitions
+---     tint = table -- See https://wiki.factorio.com/Types/Color
+---     particles? = {
+---         [string] = integer, -- reskins.lib.particle_index key, and associated target particle index
+---         ...
+---     }
+--- }
+---```
+function reskins.lib.create_explosions_and_particles(name, inputs)
     reskins.lib.create_explosion(name, inputs)
 
-    -- Create and assign needed particles with appropriate tints
     if inputs.particles then
         for particle, key in pairs(inputs.particles) do
             -- Create and assign the particle
-            reskins.lib.create_particle(name, inputs.base_entity, reskins.lib.particle_index[particle], key, inputs.tint)
+            reskins.lib.create_particle(name, inputs.base_entity_name, reskins.lib.particle_index[particle], key, inputs.tint)
         end
     end
 end
@@ -221,7 +316,6 @@ reskins.lib.particle_index = {
     ["big"] = "metal-particle-big",
     ["big-stone"] = "stone-particle-big",
     ["big-tint"] = "metal-particle-big-tint",
-
 }
 
 function reskins.lib.make_4way_animation_from_spritesheet(animation)

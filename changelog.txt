@@ -1,7 +1,16 @@
 ---------------------------------------------------------------------------------------------------
-Version: 2.0.5
+Version: 2.1.0
 Date: ????
+  Features:
+    - Added setting "Reskin interface" which supports visual changes and updates to the crafting tabs
+    - Pipes have been adjusted to have separate shadow layers, eliminating the shadow overlay with other entities when placing pipes
+    - Additions of EmmyLua-style documentation is ongoing
   Changes:
+    - Moved reskinning of the standard Factorio pipe into this mod from Artisanal Reskins: Angel's mods
+    - Internal restructuring to make entity reskinning through functions globally available under `reskins.lib.apply_skin` is ongoing
+  Bugfixes:
+    - Fixed that `rescale_entity` was ignoring Types/Animation defined with stripes or filenames instead of filename
+    - Fixed that highlights were not being applied to transport belt remnants
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.4
 Date: 2021-12-12

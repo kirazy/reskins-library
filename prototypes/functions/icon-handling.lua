@@ -1,4 +1,4 @@
--- Copyright (c) 2021 Kirazy
+-- Copyright (c) 2022 Kirazy
 -- Part of Artisanal Reskins: Library
 --
 -- See LICENSE.md in the project directory for license information.
@@ -196,26 +196,35 @@ end
 ----------------------------------------------------------------------------------------------------
 -- STANDARD ICON FUNCTIONS
 ----------------------------------------------------------------------------------------------------
+
+---@class inputs.construct_icons : inputs.parse_inputs, inputs.store_icons
+---@field mod '"angels"|"bobs"|"compatibility"|"lib"' # Key for global reskins table, used for storing icon definitions
+---@field group string # Mod/category folder within the `graphics/icons` folder
+---@field subgroup? string # Folder nested within `group`, e.g. `group/subgroup`
+---@field icon_filename? string # Required if `icon_name` is not defined; see [Types/FileName](https://wiki.factorio.com/Types/FileName)
+---@field tint? table # Required if `untinted_icon_mask` is not true; see [Types/Color](https://wiki.factorio.com/Types/Color)
+---@field untinted_icon_mask? boolean # Override default tinting behavior; will not apply `tint` to tinted layers
+---@field icon_layers? '0-3' # Default 3 if used with `icon_name`, 1 if used with `icon_filename`, corresponds to the number of standard-form files to prepare
+---@field icon_name? string # Required if `icon_filename` is not defined, specifies the folder/filenames to prepare the layered icon
+---@field icon_base? string # Override of `icon_name` for filename variants within the folder specified by `icon_name`, for the base layer
+---@field icon_mask? string # Override of `icon_name` for filename variants within the folder specified by `icon_name`, for the mask layer
+---@field icon_highlights? string # Override of `icon_name` for filename variants within the folder specified by `icon_name`, for the highlights layer
+---@field icon_extras? table # Table of [Types/IconData](https://wiki.factorio.com/Types/IconData), extras to append to the item `icon`/`icons`
+---@field icon_picture_extras? table # [Types/SpriteVariations](https://wiki.factorio.com/Types/SpriteVariations), extras to append to the item-on-ground
+---@field defer_to_data_updates? boolean # Stores the icon for assignment at the end of data-updates
+---@field defer_to_data_final_fixes? boolean # Stores the icon for assignment at the end of data-final-fixes
+---@field equipment_category? equipment_category
+
+---@alias equipment_category '"offense"|"defense"|"energy"|"utility"'
+
+---Constructs a properly formatted icon or icons definition using standardized filenames and assets
+---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
+---@param tier integer # 1-6 are supported, 0 to disable
+---@param inputs inputs.construct_icons
 function reskins.lib.construct_icon(name, tier, inputs)
-    -- Inputs required by this function
-    -- mod                      - String; Originating mod calling the function, used to determine the subtable to store icon information for later processing
-    -- group                    - String; Mod/category folder within the graphics/icons folder
-
-    -- One of the following inputs must be specified; technology_icon_filename being set assumes a flat icon with 1 layer
-    -- icon_filename            - String; Used to provide direct reference to source icon outside of the regular format
-    -- icon_name                - String; Folder containing the icon files, and the assumed icon file prefix
-
-    -- Optional inputs, used when each entity being fed to this function has unique base or mask images
-    -- subgroup                 - String; Folder nested within group, e.g. group/subgroup
-    -- tier_labels              - Boolean; Used to override appending tier labels
-    -- icon_base                - String; Prefix for the icon-base.png file
-    -- icon_mask                - String; Prefix for the icon-mask.png file
-    -- icon_highlights          - String; Prefix for the icon-highlights.png file
-    -- icon_layers              - Integer, 1-3; Specify the number of layers to make; 3 by defualt
-    -- untinted_icon_mask       - Boolean; determine whether to apply a tint
-    -- icon_extras              - Table of additional icon layers to add
-    -- icon_picture_extras      - Table of additional icon layers to add for on-the-ground items
-
+    ---Prepares an icon underlayer corresponding to a vehicle equipment category
+    ---@param category equipment_category
+    ---@return table icon_data # [Types/IconData](https://wiki.factorio.com/Types/IconData)
     local function equipment_background(category)
         local tints = {
             ["offense"] = util.color("e62c2c"),
@@ -243,6 +252,8 @@ function reskins.lib.construct_icon(name, tier, inputs)
     local icon_tint = inputs.tint
     if inputs.untinted_icon_mask then
         icon_tint = nil
+    elseif not inputs.tint then
+        inputs.untinted_icon_mask = true
     end
 
     -- Handle inputs defaults
@@ -387,6 +398,15 @@ function reskins.lib.construct_icon(name, tier, inputs)
     reskins.lib.assign_icons(name, inputs)
 end
 
+---@class inputs.store_icons : inputs.assign_icons
+---@field mod '"angels"'|'"bobs"'|'"lib"'|'"compatibility"'
+---@field defer_to_data_updates boolean
+---@field defer_to_data_final_fixes boolean # Takes priority over `defer_to_data_updates`
+
+---Stores icon properties for assignment at a later data stage, has same input requirements as `reskins.lib.assign_icons()`
+---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
+---@param inputs inputs.store_icons
+---@param storage? '"technology"'|'"icons"' # May be omitted if `"icons"`
 function reskins.lib.store_icons(name, inputs, storage)
     -- Inputs required by this function
     -- mod              - Specifies the subtable of reskins where the icons should be stored
@@ -417,18 +437,31 @@ function reskins.lib.store_icons(name, inputs, storage)
     reskins[inputs.mod][storage][data_stage][name] = util.copy(inputs)
 end
 
-function reskins.lib.assign_icons(name, inputs)
-    -- Inputs required by this function
-    -- type            - Entity type
-    -- icon            - Table or string defining icon
-    -- icon_size       - Pixel size of icons
-    -- icon_mipmaps    - Number of mipmaps present in the icon image file
+---@class inputs.assign_icons
+---@field type string
+---@field icon string|table # [Types/FileName](https://wiki.factorio.com/Types/FileName), or table of [Types/IconData](https://wiki.factorio.com/Types/IconData)
+---@field icon_size integer
+---@field icon_mipmaps integer
+---@field icon_picture? table # [Types/SpriteVariations](https://wiki.factorio.com/Types/SpriteVariations)
+---@field make_entity_pictures? boolean # When true, entities of type `inputs.type` will be assigned the `inputs.icon_picture` definition
+---@field make_icon_pictures? boolean # When true, valid items will be assigned the `inputs.icon_picture` definition
 
-    -- Initialize paths
-    local entity
-    if inputs.type then
-        entity = data.raw[inputs.type][name]
-    end
+---Robustly assigns an `icon` or `icons` definition to an entity and related prototypes
+---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
+---@param inputs inputs.assign_icons
+--- ```
+--- inputs = {
+---     type = string
+---     icon = string|table -- https://wiki.factorio.com/Types/FileName, or table of https://wiki.factorio.com/Types/IconData
+---     icon_size = integer
+---     icon_mipmaps = integer
+---     icon_picture = table -- https://wiki.factorio.com/Types/SpriteVariations
+---     make_entity_pictures = boolean -- When true, entities of type `inputs.type` will be assigned the `inputs.icon_picture` definition
+---     make_icon_pictures = boolean -- When true, valid items will be assigned the `inputs.icon_picture` definition
+--- }
+--- ```
+function reskins.lib.assign_icons(name, inputs)
+    local entity = inputs.type and data.raw[inputs.type][name]
 
     -- Recipes are exceptions to the usual pattern
     local item, item_with_data, explosion, remnant
