@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.1.0
-Date: ????
+Date: 2022-01-03
   Features:
     - Added setting "Reskin interface" which supports visual changes and updates to the crafting tabs
     - Pipes have been adjusted to have separate shadow layers, eliminating the shadow overlay with other entities when placing pipes
