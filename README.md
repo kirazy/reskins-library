@@ -8,11 +8,13 @@ This mod serves as the core of the Artisanal Reskins series of mods.
 [Artisanal Reskins: Compatibility](https://github.com/kirazy/reskins-compatibility)  
 [Artisanal Reskins: Library](https://github.com/kirazy/reskins-library)  
 
-**Updates**  
-This mod is constantly being worked on, but I am a graduate student and school has resumed. Regular content updates will be released monthly, and critical bugfixes will be released on an as-needed basis.
+**Update Schedule**  
+Regular content and low-impact bugs will be released monthly.  
+Critical bug fixes will be deployed on an as-needed basis.  
+Locale updates will be released on the weekend of the week in which they are received from Crowdin.
 
 **Localization**  
-You are welcome to help with localization, please use [this Crowdin project](https://crowdin.com/project/factorio-mods-localization). You can find more details [here](https://github.com/dima74/factorio-mods-localization#how-to-translate-using-crowdin). Locale updates will be released on the weekend they are received from Crowdin.
+You are welcome to help with localization, please use [this Crowdin project](https://crowdin.com/project/factorio-mods-localization). You can find more details [here](https://github.com/dima74/factorio-mods-localization#how-to-translate-using-crowdin).
 
 ## Licensing
 All content is licensed under [MIT](https://opensource.org/licenses/MIT).
