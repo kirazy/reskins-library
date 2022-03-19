@@ -14,6 +14,7 @@ reskins.lib.directory = "__reskins-library__"
 reskins.lib.status = {}
 
 -- Setup migration module
+---@diagnostic disable-next-line: different-requires
 reskins.lib.migration = require("migration")
 
 ---Validates startup settings and returns their value

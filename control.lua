@@ -4,6 +4,7 @@
 -- See LICENSE.md in the project directory for license information.
 
 -- Requires
+---@diagnostic disable-next-line: different-requires
 local migration = require("prototypes.functions.migration")
 local functions = require("__reskins-library__.prototypes.functions.control-functions")
 
