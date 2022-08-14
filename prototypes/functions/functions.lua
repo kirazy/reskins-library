@@ -57,12 +57,24 @@ end
 ---| '"bobvehicleequipment"'
 ---| '"bobwarfare"'
 
+---@alias reskin_mods
+---| '"angels"'
+---| '"bobs"'
+---| '"lib"'
+---| '"compatibility"'
+
+---@alias sprite_scopes
+---| '"entities"'
+---| '"equipment"'
+---| '"items-and-fluids"'
+---| '"technologies"'
+
 ---Checks to see if the reskin-toggle is enabled for a given setting, and if it is, checks if the given scope is also enabled.
 ---Returns true if both are true, returns false if one is false, and nil otherwise.
----@param scope '"entities"'|'"equipment"'|'"items-and-fluids"'|'"technologies"'
----@param mod '"angels"'|'"bobs"'|'"lib"'|'"compatibility"'
+---@param scope sprite_scopes
+---@param mod reskin_mods
 ---@param setting mod_settings
----@return boolean
+---@return boolean|nil
 function reskins.lib.check_scope(scope, mod, setting)
     if reskins.lib.setting("reskins-"..mod.."-do-"..setting) == true then
         if reskins.lib.setting("reskins-lib-scope-"..scope) == true then

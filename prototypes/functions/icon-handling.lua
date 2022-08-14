@@ -82,7 +82,7 @@ function reskins.lib.construct_technology_icon(name, inputs)
 
     -- Construct triple-layer icons
     if icon_layers > 2 then
-        table.insert(inputs.technology_icon, icon_highlights_layer)
+        table.insert(inputs.technology_icon --[[@as table]], icon_highlights_layer)
     end
 
     -- Append icon extras as needed
@@ -90,13 +90,13 @@ function reskins.lib.construct_technology_icon(name, inputs)
         -- If we have one layer, we need to convert to an icons table format
         if icon_layers == 1 then
             inputs.technology_icon = {
-                { icon = inputs.technology_icon }
+                { icon = inputs.technology_icon --[[@as string]]}
             }
         end
 
         -- Append icon_extras
         for n = 1, #inputs.technology_icon_extras do
-            table.insert(inputs.technology_icon, inputs.technology_icon_extras[n])
+            table.insert(inputs.technology_icon --[[@as table]], inputs.technology_icon_extras[n])
         end
     end
 
@@ -198,7 +198,7 @@ end
 ----------------------------------------------------------------------------------------------------
 
 ---@class inputs.construct_icons : inputs.parse_inputs, inputs.store_icons
----@field mod '"angels"|"bobs"|"compatibility"|"lib"' # Key for global reskins table, used for storing icon definitions
+---@field mod "angels"|"bobs"|"compatibility"|"lib" # Key for global reskins table, used for storing icon definitions
 ---@field group string # Mod/category folder within the `graphics/icons` folder
 ---@field subgroup? string # Folder nested within `group`, e.g. `group/subgroup`
 ---@field icon_filename? string # Required if `icon_name` is not defined; see [Types/FileName](https://wiki.factorio.com/Types/FileName)
@@ -215,7 +215,7 @@ end
 ---@field defer_to_data_final_fixes? boolean # Stores the icon for assignment at the end of data-final-fixes
 ---@field equipment_category? equipment_category
 
----@alias equipment_category '"offense"|"defense"|"energy"|"utility"'
+---@alias equipment_category "offense"|"defense"|"energy"|"utility"
 
 ---Constructs a properly formatted icon or icons definition using standardized filenames and assets
 ---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
@@ -341,7 +341,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
 
     -- Construct triple-layer icons
     if icon_layers > 2 then
-        table.insert(inputs.icon, icon_highlights_layer)
+        table.insert(inputs.icon --[[@as table]], icon_highlights_layer)
         table.insert(inputs.icon_picture.layers, picture_highlights_layer)
     end
 
@@ -356,7 +356,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
 
         -- Append icon_extras
         for n = 1, #inputs.icon_extras do
-            table.insert(inputs.icon, inputs.icon_extras[n])
+            table.insert(inputs.icon --[[@as table]], inputs.icon_extras[n])
         end
     end
 
@@ -383,7 +383,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
         end
 
         -- Insert the equipment background
-        table.insert(inputs.icon, 1, equipment_background(inputs.equipment_category))
+        table.insert(inputs.icon --[[@as table]], 1, equipment_background(inputs.equipment_category))
     end
 
     -- Append tier labels
@@ -399,7 +399,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
 end
 
 ---@class inputs.store_icons : inputs.assign_icons
----@field mod '"angels"'|'"bobs"'|'"lib"'|'"compatibility"'
+---@field mod '"angels"'|'"bobs"'|'"lib"'|'"compatibility"''
 ---@field defer_to_data_updates boolean
 ---@field defer_to_data_final_fixes boolean # Takes priority over `defer_to_data_updates`
 

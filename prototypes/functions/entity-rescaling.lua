@@ -3,7 +3,42 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
--- Icon switching function
+--- RegEx string to search for within an icon filename to identify the standard version to be replaced
+---@alias search_strings
+---| '"assembly%-machine"'
+---| '"beacon"'
+---| '"chemical%-plant"'
+---| '"electric%-furnace"'
+---| '"electric%-chemical%-furnace"'
+---| '"electric%-chemical%-mixing%-furnace"'
+---| '"electric%-mining%-drill"'
+---| '"electric%-mixing%-furnace"'
+---| '"electrolyser"'
+---| '"oil%-refinery"'
+---| '"radar"'
+---| '"storage-tank"'
+
+--- String to substitute within an icon filename path to point to the miniature version
+---@alias replacement_strings
+---| '"assembly-machine"'
+---| '"beacon"'
+---| '"chemical-plant"'
+---| '"electric-furnace"'
+---| '"electric-chemical-furnace"'
+---| '"electric-chemical-mixing-furnace"'
+---| '"electric-mining-drill"'
+---| '"electric-mixing-furnace"'
+---| '"electrolyser"'
+---| '"oil-refinery"'
+---| '"radar"'
+---| '"storage-tank"'
+
+---Switches a standard-sized entity icon to a miniature-sized entity icon
+---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
+---@param source_name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
+---@param pattern search_strings
+---@param replacement replacement_strings
+---@param inputs inputs.assign_icons
 local function switch_icon_to_mini(name, source_name, pattern, replacement, inputs)
     -- Initialize paths
     local destination = data.raw["item"][name]
@@ -33,12 +68,11 @@ local function switch_icon_to_mini(name, source_name, pattern, replacement, inpu
             inputs.icon[n].icon = string.gsub(inputs.icon[n].icon, "/"..pattern.."/", "/"..replacement.."/mini-")
         end
     else
-        -- Convert to icons table
-        inputs.icon = {{ icon = string.gsub(inputs.icon, "/"..pattern.."/", "/"..replacement.."/mini-") }}
+        inputs.icon = {{ icon = string.gsub(inputs.icon --[[@as string]], "/"..pattern.."/", "/"..replacement.."/mini-") }}
     end
 
     -- Overlay the mini-machine symbol
-    table.insert(inputs.icon, {
+    table.insert(inputs.icon --[[@as table]], {
         icon = reskins.lib.directory.."/graphics/icons/mini-machine-overlay.png",
         icon_size = 64,
         icon_mipmaps = 2,
@@ -56,7 +90,12 @@ local function switch_icon_to_mini(name, source_name, pattern, replacement, inpu
     reskins.lib.assign_icons(name, inputs)
 end
 
--- Rescale a given machine added by Mini Machines mod
+--- Rescale a given machine added by Mini Machines mod
+---@param table table # Table of {[name] = source_name}
+---@param prototype string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
+---@param scale integer # Ratio of bounding box side length in tiles of the source and target entities
+---@param pattern? search_strings
+---@param replacement? replacement_strings
 function reskins.lib.rescale_minimachine(table, prototype, scale, pattern, replacement)
     -- Prepare a basic inputs table
     local inputs = {
@@ -72,6 +111,8 @@ function reskins.lib.rescale_minimachine(table, prototype, scale, pattern, repla
             switch_icon_to_mini(name, source.source, source.pattern, source.replacement, inputs)
             reskins.lib.rescale_remnant(data.raw[prototype][name], scale)
         else
+            if not pattern or not replacement then return end
+
             switch_icon_to_mini(name, source, pattern, replacement, inputs)
             reskins.lib.rescale_remnant(data.raw[prototype][name], scale)
         end
@@ -226,7 +267,9 @@ function reskins.lib.rescale_entity(entity, scalar)
     end
 end
 
--- Rescale remnants
+--- Rescale remnants
+---@param entity any
+---@param scale integer
 function reskins.lib.rescale_remnant(entity, scale)
     -- Check the entity exists
     if not entity then return end
