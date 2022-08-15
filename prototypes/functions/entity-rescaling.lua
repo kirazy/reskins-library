@@ -91,7 +91,7 @@ local function switch_icon_to_mini(name, source_name, pattern, replacement, inpu
 end
 
 --- Rescale a given machine added by Mini Machines mod
----@param table table # Table of {[name] = source_name}
+---@param table table # Table of {[name] = source_name} or {[name] = {source = source_name, pattern = search_strings, replacement = replacement_strings}}
 ---@param prototype string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
 ---@param scale integer # Ratio of bounding box side length in tiles of the source and target entities
 ---@param pattern? search_strings
@@ -111,6 +111,7 @@ function reskins.lib.rescale_minimachine(table, prototype, scale, pattern, repla
             switch_icon_to_mini(name, source.source, source.pattern, source.replacement, inputs)
             reskins.lib.rescale_remnant(data.raw[prototype][name], scale)
         else
+            -- Arguments are optional only if using the table version of table.source
             if not pattern or not replacement then return end
 
             switch_icon_to_mini(name, source, pattern, replacement, inputs)
