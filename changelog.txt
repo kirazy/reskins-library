@@ -2,6 +2,7 @@
 Version: 2.1.4
 Date: ????
   Changes:
+    - Updated transport belt icons to the latest version from Factorio
 ---------------------------------------------------------------------------------------------------
 Version: 2.1.3
 Date: 2022-04-03
