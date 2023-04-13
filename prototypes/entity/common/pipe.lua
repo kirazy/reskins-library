@@ -5,5 +5,5 @@
 
 -- Overwrite the vanilla pipe cover function
 pipecoverspictures = function()
-    return reskins.lib.pipe_covers({material = "iron", mod = "lib", group = "common"})
+    return reskins.lib.pipe_covers({ material = "iron", mod = "lib", group = "common" })
 end
