@@ -2,6 +2,7 @@
 Version: 2.1.5
 Date: ????
   Changes:
+    - Added Intermodal Containers to the list of supported mods
 ---------------------------------------------------------------------------------------------------
 Version: 2.1.4
 Date: 2022-10-06
