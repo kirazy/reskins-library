@@ -9,6 +9,7 @@ Date: ????
     - Added `reskins.lib.convert_icons_to_sprite`
     - Added `reskins.lib.convert_icon_to_sprite`
   Changes:
+    - Added AAI Loaders to the list of supported mods
   Deprecated:
     - Deprecated `reskins.lib.append_tier_labels_to_vanilla_icon`, use `reskins.lib.add_tier_labels_to_entity`
     - Deprecated `reskins.lib.append_tier_labels`, use `reskins.lib.add_tier_labels_to_icons`

@@ -44,6 +44,7 @@ function check_for_missing_reskin(player)
             "bobwarfare",
         },
         compatibility = {
+            "aai-loaders",
             "miniloader",
             "LoaderRedux",
             "deadlock-beltboxes-loaders",
