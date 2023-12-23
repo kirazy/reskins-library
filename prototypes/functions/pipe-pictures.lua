@@ -3,20 +3,59 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
--- Prepare standard pipe sprites
-function reskins.lib.pipe_pictures(inputs)
-    return
-    {
+---@alias PipeMaterials
+---| '"iron"'
+---| '"brass"'
+---| '"bronze"'
+---| '"ceramic"'
+---| '"copper"'
+---| '"copper-tungsten"'
+---| '"nitinol"'
+---| '"plastic"'
+---| '"steel"'
+---| '"stone"'
+---| '"titanium"'
+---| '"tungsten"'
+---| '"angels-ceramic"'
+---| '"angels-nitinol"'
+---| '"angels-titanium"'
+---| '"angels-tungsten"'
+
+--- Gets the root path to the location of the pipe pictures for the given `material`.
+---@param material PipeMaterials
+---@return string
+local function get_path_to_material(material)
+    ---@type string
+    local path
+    if material == "iron" then
+        path = reskins.lib.directory .. "/graphics/entity/common"
+    elseif material:find("angels") then
+        path = reskins.angels.directory .. "/graphics/entity/smelting"
+    else
+        path = reskins.bobs.directory .. "/graphics/entity/logistics"
+    end
+
+    return path
+end
+
+--- Gets the standard set of pipe pictures for the given `material`.
+---@param material PipeMaterials # The material to get pipe pictures for.
+---@return data.PipePictures # Pipe pictures for the requested `material`.
+function reskins.lib.get_pipe_pictures(material)
+    local path = get_path_to_material(material)
+
+    ---@type data.PipePictures
+    local pipe_pictures = {
         straight_vertical_single = {
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-straight-vertical-single.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-straight-vertical-single.png",
                     priority = "extra-high",
                     width = 80,
                     height = 80,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-straight-vertical-single.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-straight-vertical-single.png",
                         priority = "extra-high",
                         width = 160,
                         height = 160,
@@ -45,12 +84,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-straight-vertical.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-straight-vertical.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-straight-vertical.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-straight-vertical.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -79,12 +118,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-straight-vertical-window.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-straight-vertical-window.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-straight-vertical-window.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-straight-vertical-window.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -113,12 +152,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-straight-horizontal-window.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-straight-horizontal-window.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-straight-horizontal-window.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-straight-horizontal-window.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -147,12 +186,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-straight-horizontal.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-straight-horizontal.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-straight-horizontal.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-straight-horizontal.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -181,12 +220,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-corner-up-right.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-corner-up-right.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-corner-up-right.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-corner-up-right.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -215,12 +254,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-corner-up-left.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-corner-up-left.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-corner-up-left.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-corner-up-left.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -249,12 +288,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-corner-down-right.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-corner-down-right.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-corner-down-right.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-corner-down-right.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -283,12 +322,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-corner-down-left.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-corner-down-left.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-corner-down-left.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-corner-down-left.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -317,12 +356,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-t-up.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-t-up.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-t-up.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-t-up.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -351,12 +390,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-t-down.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-t-down.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-t-down.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-t-down.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -385,12 +424,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-t-right.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-t-right.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-t-right.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-t-right.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -419,12 +458,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-t-left.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-t-left.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-t-left.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-t-left.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -453,12 +492,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-cross.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-cross.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-cross.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-cross.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -487,12 +526,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-ending-up.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-ending-up.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-ending-up.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-ending-up.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -521,12 +560,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-ending-down.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-ending-down.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-ending-down.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-ending-down.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -555,12 +594,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-ending-right.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-ending-right.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-ending-right.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-ending-right.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -589,12 +628,12 @@ function reskins.lib.pipe_pictures(inputs)
             layers = {
                 -- Base
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-ending-left.png",
+                    filename = path .. "/pipe/" .. material .. "/pipe-ending-left.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-ending-left.png",
+                        filename = path .. "/pipe/" .. material .. "/hr-pipe-ending-left.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -620,12 +659,12 @@ function reskins.lib.pipe_pictures(inputs)
             },
         },
         horizontal_window_background = {
-            filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-horizontal-window-background.png",
+            filename = path .. "/pipe/" .. material .. "/pipe-horizontal-window-background.png",
             priority = "extra-high",
             width = 64,
             height = 64,
             hr_version = {
-                filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-horizontal-window-background.png",
+                filename = path .. "/pipe/" .. material .. "/hr-pipe-horizontal-window-background.png",
                 priority = "extra-high",
                 width = 128,
                 height = 128,
@@ -633,12 +672,12 @@ function reskins.lib.pipe_pictures(inputs)
             },
         },
         vertical_window_background = {
-            filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/pipe-vertical-window-background.png",
+            filename = path .. "/pipe/" .. material .. "/pipe-vertical-window-background.png",
             priority = "extra-high",
             width = 64,
             height = 64,
             hr_version = {
-                filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe/" .. inputs.material .. "/hr-pipe-vertical-window-background.png",
+                filename = path .. "/pipe/" .. material .. "/hr-pipe-vertical-window-background.png",
                 priority = "extra-high",
                 width = 128,
                 height = 128,
@@ -697,22 +736,28 @@ function reskins.lib.pipe_pictures(inputs)
             },
         },
     }
+
+    return pipe_pictures
 end
 
--- Prepare underground pipe sprites
-function reskins.lib.underground_pipe_pictures(inputs)
-    return
-    {
+--- Gets the standard set of pipe-to-ground pictures for the given `material`.
+---@param material PipeMaterials
+---@return data.PipeToGroundPictures # Pipe-to-ground pictures for the requested `material`.
+function reskins.lib.get_pipe_to_ground_pictures(material)
+    local path = get_path_to_material(material)
+
+    ---@type data.PipeToGroundPictures
+    local pipe_to_ground_pictures = {
         up = {
             layers = {
                 -- Pipe
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-to-ground/" .. inputs.material .. "/pipe-to-ground-up.png",
+                    filename = path .. "/pipe-to-ground/" .. material .. "/pipe-to-ground-up.png",
                     priority = "high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-to-ground/" .. inputs.material .. "/hr-pipe-to-ground-up.png",
+                        filename = path .. "/pipe-to-ground/" .. material .. "/hr-pipe-to-ground-up.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -741,12 +786,12 @@ function reskins.lib.underground_pipe_pictures(inputs)
             layers = {
                 -- Pipe
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-to-ground/" .. inputs.material .. "/pipe-to-ground-down.png",
+                    filename = path .. "/pipe-to-ground/" .. material .. "/pipe-to-ground-down.png",
                     priority = "high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-to-ground/" .. inputs.material .. "/hr-pipe-to-ground-down.png",
+                        filename = path .. "/pipe-to-ground/" .. material .. "/hr-pipe-to-ground-down.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -775,12 +820,12 @@ function reskins.lib.underground_pipe_pictures(inputs)
             layers = {
                 -- Pipe
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-to-ground/" .. inputs.material .. "/pipe-to-ground-left.png",
+                    filename = path .. "/pipe-to-ground/" .. material .. "/pipe-to-ground-left.png",
                     priority = "high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-to-ground/" .. inputs.material .. "/hr-pipe-to-ground-left.png",
+                        filename = path .. "/pipe-to-ground/" .. material .. "/hr-pipe-to-ground-left.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -809,12 +854,12 @@ function reskins.lib.underground_pipe_pictures(inputs)
             layers = {
                 -- Pipe
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-to-ground/" .. inputs.material .. "/pipe-to-ground-right.png",
+                    filename = path .. "/pipe-to-ground/" .. material .. "/pipe-to-ground-right.png",
                     priority = "high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-to-ground/" .. inputs.material .. "/hr-pipe-to-ground-right.png",
+                        filename = path .. "/pipe-to-ground/" .. material .. "/hr-pipe-to-ground-right.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -840,21 +885,27 @@ function reskins.lib.underground_pipe_pictures(inputs)
             },
         },
     }
+
+    return pipe_to_ground_pictures
 end
 
--- Prepare pipe covers
-function reskins.lib.pipe_covers(inputs)
-    return
-    {
+--- Gets the standard set of pipe cover pictures for the given `material`.
+---@param material PipeMaterials
+---@return data.Sprite4Way # Pipe cover pictures for the requested `material`.
+function reskins.lib.get_pipe_covers(material)
+    local path = get_path_to_material(material)
+
+    ---@type data.Sprite4Way
+    local pipe_cover_pictures = {
         north = {
             layers = {
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-covers/" .. inputs.material .. "/pipe-cover-north.png",
+                    filename = path .. "/pipe-covers/" .. material .. "/pipe-cover-north.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-covers/" .. inputs.material .. "/hr-pipe-cover-north.png",
+                        filename = path .. "/pipe-covers/" .. material .. "/hr-pipe-cover-north.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -881,12 +932,12 @@ function reskins.lib.pipe_covers(inputs)
         east = {
             layers = {
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-covers/" .. inputs.material .. "/pipe-cover-east.png",
+                    filename = path .. "/pipe-covers/" .. material .. "/pipe-cover-east.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-covers/" .. inputs.material .. "/hr-pipe-cover-east.png",
+                        filename = path .. "/pipe-covers/" .. material .. "/hr-pipe-cover-east.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -913,12 +964,12 @@ function reskins.lib.pipe_covers(inputs)
         south = {
             layers = {
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-covers/" .. inputs.material .. "/pipe-cover-south.png",
+                    filename = path .. "/pipe-covers/" .. material .. "/pipe-cover-south.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-covers/" .. inputs.material .. "/hr-pipe-cover-south.png",
+                        filename = path .. "/pipe-covers/" .. material .. "/hr-pipe-cover-south.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -945,12 +996,12 @@ function reskins.lib.pipe_covers(inputs)
         west = {
             layers = {
                 {
-                    filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-covers/" .. inputs.material .. "/pipe-cover-west.png",
+                    filename = path .. "/pipe-covers/" .. material .. "/pipe-cover-west.png",
                     priority = "extra-high",
                     width = 64,
                     height = 64,
                     hr_version = {
-                        filename = reskins[inputs.mod].directory .. "/graphics/entity/" .. inputs.group .. "/pipe-covers/" .. inputs.material .. "/hr-pipe-cover-west.png",
+                        filename = path .. "/pipe-covers/" .. material .. "/hr-pipe-cover-west.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -975,4 +1026,30 @@ function reskins.lib.pipe_covers(inputs)
             },
         },
     }
+
+    return pipe_cover_pictures
+end
+
+---@deprecated
+function reskins.lib.pipe_pictures(inputs)
+    material = inputs.material
+    if inputs.mod == "angels" then material = "angels-" .. inputs.material end
+
+    return reskins.lib.get_pipe_pictures(material)
+end
+
+---@deprecated
+function reskins.lib.underground_pipe_pictures(inputs)
+    material = inputs.material
+    if inputs.mod == "angels" then material = "angels-" .. inputs.material end
+
+    return reskins.lib.get_pipe_to_ground_pictures(material)
+end
+
+---@deprecated
+function reskins.lib.pipe_covers(inputs)
+    material = inputs.material
+    if inputs.mod == "angels" then material = "angels-" .. inputs.material end
+
+    return reskins.lib.get_pipe_covers(material)
 end
