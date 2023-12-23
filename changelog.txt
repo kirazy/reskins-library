@@ -1,7 +1,18 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.1.6
 Date: ????
+  Features:
+    - Added `reskins.lib.add_tier_labels_to_entity`
+    - Added `reskins.lib.add_tier_labels_to_icons`
+    - Added `reskins.lib.get_icons_from_entity`. 
+      - Use to get a table of IconData from an entity, regardless of how an icon is formatted
+    - Added `reskins.lib.convert_icons_to_sprite`
+    - Added `reskins.lib.convert_icon_to_sprite`
   Changes:
+  Deprecated:
+    - Deprecated `reskins.lib.append_tier_labels_to_vanilla_icon`, use `reskins.lib.add_tier_labels_to_entity`
+    - Deprecated `reskins.lib.append_tier_labels`, use `reskins.lib.add_tier_labels_to_icons`
+      - Note that the new function returns a modified icons table, it does not modify the table in place
 ---------------------------------------------------------------------------------------------------
 Version: 2.1.5
 Date: 2023-04-13

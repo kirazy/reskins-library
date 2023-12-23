@@ -224,7 +224,7 @@ end
 function reskins.lib.construct_icon(name, tier, inputs)
     ---Prepares an icon underlayer corresponding to a vehicle equipment category
     ---@param category equipment_category
-    ---@return table icon_data # [Types/IconData](https://wiki.factorio.com/Types/IconData)
+    ---@return data.IconData
     local function equipment_background(category)
         local tints = {
             ["offense"] = util.color("e62c2c"),
@@ -233,13 +233,15 @@ function reskins.lib.construct_icon(name, tier, inputs)
             ["utility"] = util.color("cccccc"),
         }
 
-        return
-        {
+        ---@type data.IconData
+        local icon_data = {
             icon = reskins.lib.directory .. "/graphics/icons/backgrounds/equipment-background.png",
             icon_size = 64,
             icon_mipmaps = 4,
             tint = tints[category],
         }
+
+        return icon_data
     end
 
     -- Handle compatibility defaults
@@ -249,6 +251,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
     end
 
     -- Handle mask tinting defaults
+    ---@type data.Color|nil
     local icon_tint = inputs.tint
     if inputs.untinted_icon_mask then
         icon_tint = nil
@@ -260,6 +263,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
     reskins.lib.parse_inputs(inputs)
 
     -- Handle icon_layers defaults
+    ---@type integer
     local icon_layers
     if inputs.icon_filename then
         icon_layers = inputs.icon_layers or 1
@@ -387,7 +391,8 @@ function reskins.lib.construct_icon(name, tier, inputs)
     end
 
     -- Append tier labels
-    reskins.lib.append_tier_labels(tier, inputs)
+    if type(inputs.icon) ~= "table" then inputs.icon = { { icon = inputs.icon } } end
+    inputs.icon = reskins.lib.add_tier_labels_to_icons(inputs.icon, tier)
 
     -- It may be necessary to put icons back in final fixes, allow for that
     if inputs.defer_to_data_final_fixes or inputs.defer_to_data_updates then
@@ -575,96 +580,182 @@ function reskins.lib.assign_icons(name, inputs)
     end
 end
 
-function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
-    -- Inputs required by this function
-    -- type            - Entity type
-
-    -- Prevent cross-contamination
-    local inputs = util.copy(inputs)
-    local type = inputs.type or "item"
-
-    -- Handle required parameters
-    reskins.lib.parse_inputs(inputs)
-
-    -- Extact the icon
-    if data.raw[type][name].icons then
-        inputs.icon = util.copy(data.raw[type][name].icons)
-
-        -- Set icon_size and icon_mipmaps per icons specification, setup icon_picture
-        inputs.icon_picture = {}
-        for n = 1, #inputs.icon do
-            if not inputs.icon[n].icon_size then
-                inputs.icon[n].icon_size = data.raw[type][name].icon_size
-            end
-
-            if not inputs.icon[n].icon_mipmaps then
-                inputs.icon[n].icon_mipmaps = data.raw[type][name].icon_mipmaps or 1
-            end
-
-            inputs.icon_picture[n] = {
-                filename = inputs.icon[n].icon,
-                size = inputs.icon[n].icon_size,
-                tint = inputs.icon[n].tint,
-                shift = inputs.icon[n].shift,
-                scale = 0.25 * (inputs.icon[n].scale or 1),
-                mipmaps = inputs.icon[n].icon_mipmaps or 1,
-            }
-        end
-    else
-        inputs.icon = {
-            {
-                icon = data.raw[type][name].icon,
-                icon_size = data.raw[type][name].icon_size,
-                icon_mipmaps = data.raw[type][name].icon_mipmaps,
-            },
-        }
-
-        inputs.icon_picture = {
-            {
-                filename = data.raw[type][name].icon,
-                size = data.raw[type][name].icon_size,
-                scale = 0.25,
-                mipmaps = data.raw[type][name].icon_mipmaps,
-            },
-        }
+---Converts the given `icon` to a sprite.
+---@param icon_data data.IconData
+---@param scale double
+---@return data.Sprite
+function reskins.lib.convert_icon_to_sprite(icon_data, scale)
+    if type(icon_data) ~= "table" then
+        local wait = "stop"
     end
 
-    reskins.lib.append_tier_labels(tier, inputs)
+    ---@type data.Sprite
+    local sprite = {
+        filename = icon_data.icon,
+        size = icon_data.icon_size,
+        mipmaps = icon_data.icon_mipmaps and icon_data.icon_mipmaps or 0,
+        scale = (icon_data.scale and icon_data.scale or 1) * scale,
+        shift = icon_data.shift and util.mul_shift(icon_data.shift, scale) or nil,
+        tint = icon_data.tint and icon_data.tint or nil,
+    }
 
-    -- It may be necessary to put icons back in final fixes, allow for that
-    if inputs.defer_to_data_final_fixes or inputs.defer_to_data_updates then
-        reskins.lib.store_icons(name, inputs)
-        return
-    end
-
-    reskins.lib.assign_icons(name, inputs)
+    return sprite
 end
 
+--- Converts the given `icons_data` to a layered sprite, rescaled by the
+--- specified `scale`.
+---@param icons_data data.IconData[] # The icons_data to process.
+---@param scale double # The scale factor to apply to `icons_data`.
+---@return data.Sprite
+function reskins.lib.convert_icons_to_sprite(icons_data, scale)
+    ---@type data.Sprite
+    local sprite = { layers = {} }
+    for _, icon_data in pairs(icons_data) do
+        table.insert(sprite.layers, reskins.lib.convert_icon_to_sprite(icon_data, scale))
+    end
+
+    return sprite
+end
+
+--- Gets a properly formatted `icons` definition from the entity with the given
+--- `name` and `prototype`.
+---
+--- The entity is not modified.
+---@param name string # The name of the instance.
+---@param prototype string # The name of the prototype.
+---@return data.IconData[]|nil # The icon reformatted as an `icons` definition, or `nil` if the entity does not exist.
+function reskins.lib.get_icons_from_entity(name, prototype)
+    local entity = data.raw[prototype][name]
+    if not entity then return nil end
+
+    ---@type data.IconData[]
+    local icons
+    if entity.icons then
+        ---@type data.IconData[]
+        icons = util.copy(entity.icons)
+
+        for n = 1, #icons do
+            ---@type data.IconData
+            local icon = {
+                icon = icons[n].icon,
+                icon_size = icons[n].icon_size and icons[n].icon_size or entity.icon_size,
+                icon_mipmaps = icons[n].icon_mipmaps or 0,
+                shift = icons[n].shift or nil,
+                scale = icons[n].scale or 1,
+                tint = icons[n].tint or nil,
+            }
+
+            icons[n] = icon
+        end
+    else
+        ---@type data.IconData
+        local icon = {
+            icon = entity.icon,
+            icon_size = entity.icon_size,
+            icon_mipmaps = entity.icon_mipmaps or 0,
+        }
+
+        icons = { icon }
+    end
+
+    return icons
+end
+
+--- Access via `reskins.lib.stage`.
+---@enum Stage
+reskins.lib.stage = {
+    data_updates = 0,
+    data_final_fixes = 1,
+}
+
+--- Adds tier labels for the given `tier` to the entity with the specified `name`
+--- and `prototype`. Optionally defers adding tier labels until the specified `defer_to_stage`.
+---@param name string # The name of the instance.
+---@param prototype string # The name of the prototype.
+---@param tier Tier # The tier of tier labels to add.
+---@param defer_to_stage Stage? # The mod loading stage at which to add the tier labels.
+function reskins.lib.add_tier_labels_to_entity(name, prototype, tier, defer_to_stage)
+    local icons = reskins.lib.get_icons_from_entity(name, prototype)
+    if not icons then return end
+    if tier <= 0 then return end
+
+    local inputs = {
+        type = prototype,
+        defer_to_data_final_fixes = (defer_to_stage == reskins.lib.stage.data_final_fixes) or nil,
+        defer_to_data_updates = (defer_to_stage == reskins.lib.stage.data_updates) or nil,
+        icon = reskins.lib.add_tier_labels_to_icons(icons, tier),
+        icon_picture = reskins.lib.convert_icons_to_sprite(icons, 0.25),
+    }
+
+    reskins.lib.parse_inputs(inputs)
+
+    if defer_to_stage then
+        reskins.lib.store_icons(name, inputs)
+    else
+        reskins.lib.assign_icons(name, inputs)
+    end
+end
+
+--- Adds tier labels for the given `tier` to the specified `icons` definition.
+---
+--- Handles compliance with the mod setting to disable tier labels.
+---@param icons data.IconData[] # An icons definition to receive the tier labels.
+---@param tier? integer # The tier of the tier labels to add.
+---@return data.IconData[] # A copy of `icons` with added tier labels.
+function reskins.lib.add_tier_labels_to_icons(icons, tier)
+    if not icons then error("Invalid argument: icons was nil.") end
+    if not tier then tier = 0 end
+
+    ---@type data.IconData[]
+    local copy = util.copy(icons)
+
+    if settings.startup["reskins-lib-icon-tier-labeling"].value ~= true or tier <= 0 then return copy end
+
+    local icon_style = settings.startup["reskins-lib-icon-tier-labeling-style"].value
+    local icon = reskins.lib.directory .. "/graphics/icons/tiers/" .. icon_style .. "/" .. tier .. ".png"
+
+    -- Base layer to help with vibrancy.
+    table.insert(copy, {
+        icon = icon,
+        icon_size = 64,
+        icon_mipmaps = 4,
+        scale = copy[1].scale or nil,
+    })
+
+    -- Tinted layer for color.
+    table.insert(copy, {
+        icon = icon,
+        icon_size = 64,
+        icon_mipmaps = 4,
+        tint = reskins.lib.adjust_alpha(reskins.lib.tint_index[tier], 0.75),
+        scale = copy[1].scale or nil,
+    })
+
+    return copy
+end
+
+--- Adds tier labels for the given `tier` to the prototype with the specified `name` and `type`.
+---@param name string # The name of the prototype with the icon to be modified.
+---@param tier Tier # The tier to apply to the icon.
+---@param inputs any # { type = "prototype" }
+---@deprecated
+function reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
+    reskins.lib.add_tier_labels_to_entity(name, inputs.type, tier)
+end
+
+---@deprecated
 function reskins.lib.append_tier_labels(tier, inputs)
     -- Inputs required by this function
     -- icon             - Table containing an icon/icons definition
     -- tier_labels      - Determines whether tier labels are appended
 
-    if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 and inputs.tier_labels == true then
+    if inputs.tier_labels == true then
         -- Ensure inputs.icon is the right format
         if type(inputs.icon) ~= "table" then
             inputs.icon = { { icon = inputs.icon } }
         end
 
-        -- Append the tier labels
-        local icon_style = settings.startup["reskins-lib-icon-tier-labeling-style"].value
-        table.insert(inputs.icon, {
-            icon = reskins.lib.directory .. "/graphics/icons/tiers/" .. icon_style .. "/" .. tier .. ".png",
-            icon_size = 64,
-            icon_mipmaps = 4,
-        }
-        )
-        table.insert(inputs.icon, {
-            icon = reskins.lib.directory .. "/graphics/icons/tiers/" .. icon_style .. "/" .. tier .. ".png",
-            icon_size = 64,
-            icon_mipmaps = 4,
-            tint = reskins.lib.adjust_alpha(reskins.lib.tint_index[tier], 0.75),
-        })
+        inputs.icon = reskins.lib.add_tier_labels_to_icons(inputs.icon, tier)
     end
 end
 

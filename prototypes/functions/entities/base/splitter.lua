@@ -541,7 +541,7 @@ function reskins.lib.apply_skin.splitter(name, tier, tint, make_tier_labels, res
     if not entity then return end
 
     if reskin_vanilla_entity == false then
-        reskins.lib.append_tier_labels_to_vanilla_icon(name, tier, inputs)
+        reskins.lib.add_tier_labels_to_entity(name, inputs.type, tier)
         return
     end
 
