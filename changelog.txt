@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.1.6
-Date: ????
+Date: 2023-12-23
   Features:
     - Added `reskins.lib.add_tier_labels_to_entity`
     - Added `reskins.lib.add_tier_labels_to_icons`
