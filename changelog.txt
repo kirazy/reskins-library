@@ -1,7 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.1.7
 Date: ????
-  Changes:
+  Bugfixes:
+    - Fixed that parsing of Angels pipe materials was not returning the expected file paths
 ---------------------------------------------------------------------------------------------------
 Version: 2.1.6
 Date: 2023-12-23
