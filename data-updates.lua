@@ -1,4 +1,4 @@
--- Copyright (c) 2023 Kirazy
+-- Copyright (c) 2024 Kirazy
 -- Part of Artisanal Reskins: Library
 --
 -- See LICENSE.md in the project directory for license information.
@@ -7,7 +7,6 @@
 -- ENTITIES
 ----------------------------------------------------------------------------------------------------
 require("prototypes.entity.base.nuclear-reactor")
-
 
 -- Reskin the vanilla pipes
 data.raw["pipe"]["pipe"].pictures = reskins.lib.get_pipe_pictures("iron")
