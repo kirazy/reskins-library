@@ -2,6 +2,9 @@
 Version: 2.1.8
 Date: ????
   Changes:
+  Deprecated:
+    - Deprecated `reskins.lib.adjust_alpha` and `reskins.lib.adjust_tint`, these will be removed in a future release. 
+      - Use util.get_color_with_alpha directly.
 ---------------------------------------------------------------------------------------------------
 Version: 2.1.7
 Date: 2023-12-24

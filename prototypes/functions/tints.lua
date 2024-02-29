@@ -6,6 +6,7 @@
 -- The intention of this script is to determine belt tints, and make them available to anything using belt tints.
 
 -- Shift the rgb values of a given tint by shift amount, and optionally adjust the alpha value
+---@deprecated
 function reskins.lib.adjust_tint(tint, shift, alpha)
     local adjusted_tint = {}
 
@@ -38,6 +39,7 @@ function reskins.lib.adjust_tint(tint, shift, alpha)
 end
 
 -- Adjust the alpha value of a given RGB tint
+---@deprecated
 function reskins.lib.adjust_alpha(tint, alpha)
     local adjusted_tint = { r = tint.r, g = tint.g, b = tint.b, a = alpha }
     return adjusted_tint

@@ -727,7 +727,7 @@ function reskins.lib.add_tier_labels_to_icons(icons, tier)
         icon = icon,
         icon_size = 64,
         icon_mipmaps = 4,
-        tint = reskins.lib.adjust_alpha(reskins.lib.tint_index[tier], 0.75),
+        tint = util.get_color_with_alpha(reskins.lib.tint_index[tier], 0.75),
         scale = copy[1].scale or nil,
     })
 
