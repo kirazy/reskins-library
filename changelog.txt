@@ -2,10 +2,11 @@
 Version: 2.1.8
 Date: ????
   Changes:
-    - Migrated custom color settings to `color-setting`, allowing for the use of a color picker in-game.
+    - Migrated custom color settings to `color-setting`, allowing for the use of a color picker in-game
   Deprecated:
-    - Deprecated `reskins.lib.adjust_alpha` and `reskins.lib.adjust_tint`, these will be removed in a future release. 
-      - Use util.get_color_with_alpha directly.
+    - Deprecated `reskins.lib.adjust_alpha` and `reskins.lib.adjust_tint`, these will be removed in a future release
+      - Use util.get_color_with_alpha directly
+    - Deprecated `reskins.lib.lit_icon_pictures_layer`, use `reskins.lib.get_lit_sprite_layer`
 ---------------------------------------------------------------------------------------------------
 Version: 2.1.7
 Date: 2023-12-24
@@ -17,7 +18,7 @@ Date: 2023-12-23
   Features:
     - Added `reskins.lib.add_tier_labels_to_entity`
     - Added `reskins.lib.add_tier_labels_to_icons`
-    - Added `reskins.lib.get_icons_from_entity`. 
+    - Added `reskins.lib.get_icons_from_entity`
       - Use to get a table of IconData from an entity, regardless of how an icon is formatted
     - Added `reskins.lib.convert_icons_to_sprite`
     - Added `reskins.lib.convert_icon_to_sprite`

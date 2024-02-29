@@ -1067,13 +1067,60 @@ function reskins.lib.create_icon_variations(parameters)
             })
         end
     end
-
-    return icon_picture
 end
 
+---
+---**Deprecated.**
+---
+---Replace this:
+---```
+---local sprite = reskins.lib.lit_icon_pictures_layer(mod, light, tint)
+---```
+---With this:
+---```
+---local sprite = reskins.lib.get_lit_sprite_layer(light, tint)
+---```
+---The `mod` parameter is no longer necessary and handled internally.
+---@return data.Sprite
+---@deprecated
 function reskins.lib.lit_icon_pictures_layer(mod, light, tint)
-    return {
-        filename = reskins[mod].directory .. "/graphics/icons/lights/" .. light .. "-light.png",
+    return reskins.lib.get_lit_sprite_layer(light, tint)
+end
+
+---@alias LightType
+---| "atomic-artillery-shell"
+---| "aura-bullet"
+---| "aura-projectile"
+---| "aura-rocket"
+---| "aura-shotgun-shell"
+---| "aura-warhead"
+---| "electric-bullet"
+---| "electric-projectile"
+---| "electric-rocket"
+---| "electric-shotgun-shell"
+---| "electric-warhead"
+---| "fuel"
+---| "fuel-cell"
+---| "laser-rifle-battery"
+---| "rocket-light"
+---| "rounds-magazine"
+
+---
+---Gets a sprite configured for in-world illumination, with the given `light_type` and `tint`.
+---
+---@param light_type LightType # The type of light layer to create. Corresponds to an image file within the Artisanal Reskins mod files.
+---@param tint data.Color?
+---@return data.Sprite
+function reskins.lib.get_lit_sprite_layer(light_type, tint)
+    local root_directory = (light_type == "fuel" or light_type == "fuel-cell") and "__reskins-library__" or "__reskins-bobs__"
+
+    if root_directory == "__reskins-bobs__" and not mods["reskins-bobs"] then
+        error("Missing mods: Artisanal Reskins: Bob's Mods is not enabled.")
+    end
+
+    ---@type data.Sprite
+    local sprite = {
+        filename = root_directory .. "/graphics/icons/lights/" .. light_type .. "-light.png",
         draw_as_light = true,
         flags = { "light" },
         tint = tint,
@@ -1081,4 +1128,6 @@ function reskins.lib.lit_icon_pictures_layer(mod, light, tint)
         scale = 0.25,
         mipmap_count = 4,
     }
+
+    return sprite
 end
