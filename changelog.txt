@@ -2,6 +2,7 @@
 Version: 2.1.8
 Date: ????
   Changes:
+    - Migrated custom color settings to `color-setting`, allowing for the use of a color picker in-game.
   Deprecated:
     - Deprecated `reskins.lib.adjust_alpha` and `reskins.lib.adjust_tint`, these will be removed in a future release. 
       - Use util.get_color_with_alpha directly.

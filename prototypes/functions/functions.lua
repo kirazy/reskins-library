@@ -17,18 +17,16 @@ reskins.lib.status = {}
 ---@diagnostic disable-next-line: different-requires
 reskins.lib.migration = require("migration")
 
----Validates startup settings and returns their value
----@param name string
----@return any setting.value
+---Gets the value of the startup setting with the given `name`, if it exists. Otherwise, returns `nil`.
+---@param name string # The name of a startup setting.
+---@return boolean|string|Color|double|int|nil
 function reskins.lib.setting(name)
-    local startup_setting
+    local value = nil
     if settings.startup[name] then
-        startup_setting = settings.startup[name].value
-    else
-        startup_setting = nil
+        value = settings.startup[name].value
     end
 
-    return startup_setting
+    return value
 end
 
 ---@alias mod_settings

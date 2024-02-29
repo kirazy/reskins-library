@@ -155,13 +155,13 @@ end
 local function custom_tints()
     return
     {
-        [0] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-0")),
-        [1] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-1")),
-        [2] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-2")),
-        [3] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-3")),
-        [4] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-4")),
-        [5] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-5")),
-        [6] = util.color(reskins.lib.setting("reskins-lib-custom-colors-tier-6")),
+        [0] = reskins.lib.setting("reskins-lib-custom-colors-tier-0"),
+        [1] = reskins.lib.setting("reskins-lib-custom-colors-tier-1"),
+        [2] = reskins.lib.setting("reskins-lib-custom-colors-tier-2"),
+        [3] = reskins.lib.setting("reskins-lib-custom-colors-tier-3"),
+        [4] = reskins.lib.setting("reskins-lib-custom-colors-tier-4"),
+        [5] = reskins.lib.setting("reskins-lib-custom-colors-tier-5"),
+        [6] = reskins.lib.setting("reskins-lib-custom-colors-tier-6"),
     }
 end
 
@@ -220,5 +220,5 @@ end
 
 -- Check if we're using an alternative tier-0 color for belts
 if reskins.lib.setting("reskins-bobs-do-basic-belts-separately") == true then
-    reskins.lib.belt_tint_index[0] = util.color(reskins.lib.setting("reskins-bobs-basic-belts-color"))
+    reskins.lib.belt_tint_index[0] = reskins.lib.setting("reskins-bobs-basic-belts-color")
 end

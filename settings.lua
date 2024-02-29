@@ -8,6 +8,9 @@ if not reskins then reskins = {} end
 if not reskins.lib then reskins.lib = {} end
 reskins.lib.default_tint = "#9cdcfe"
 
+-- util global is not available during settings stage and must be imported.
+local util = require("util")
+
 ---Sets the hidden flag to true and optionally overrides the default value
 ---@param setting_type '"bool-setting"'|'"double-setting"'|'"int-setting"'|'"string-setting"'
 ---@param setting_name string
@@ -137,59 +140,59 @@ data:extend(
             default_value = false,
         },
         {
-            type = "string-setting",
+            type = "color-setting",
             name = "reskins-lib-custom-colors-tier-0",
             setting_type = "startup",
             order = "yy",
-            default_value = "808080",
+            default_value = util.color("#808080"),
             localised_description = { "", { "mod-setting-description.reskins-lib-custom-colors-tier-0" }, "\n\n", { "reskins-defaults.default" }, " ", { "reskins-defaults.tier-0-color" } },
         },
         {
-            type = "string-setting",
+            type = "color-setting",
             name = "reskins-lib-custom-colors-tier-1",
             setting_type = "startup",
             order = "yy",
-            default_value = "ffb726",
+            default_value = util.color("#ffb726"),
             localised_description = { "", { "mod-setting-description.reskins-lib-custom-colors-tier-1" }, "\n\n", { "reskins-defaults.default" }, " ", { "reskins-defaults.tier-1-color" } },
         },
         {
-            type = "string-setting",
+            type = "color-setting",
             name = "reskins-lib-custom-colors-tier-2",
             setting_type = "startup",
             order = "yy",
-            default_value = "f22318",
+            default_value = util.color("#f22318"),
             localised_description = { "", { "mod-setting-description.reskins-lib-custom-colors-tier-2" }, "\n\n", { "reskins-defaults.default" }, " ", { "reskins-defaults.tier-2-color" } },
         },
         {
-            type = "string-setting",
+            type = "color-setting",
             name = "reskins-lib-custom-colors-tier-3",
             setting_type = "startup",
             order = "yy",
-            default_value = "33b4ff",
+            default_value = util.color("#33b4ff"),
             localised_description = { "", { "mod-setting-description.reskins-lib-custom-colors-tier-3" }, "\n\n", { "reskins-defaults.default" }, " ", { "reskins-defaults.tier-3-color" } },
         },
         {
-            type = "string-setting",
+            type = "color-setting",
             name = "reskins-lib-custom-colors-tier-4",
             setting_type = "startup",
             order = "yy",
-            default_value = "b459ff",
+            default_value = util.color("#b459ff"),
             localised_description = { "", { "mod-setting-description.reskins-lib-custom-colors-tier-4" }, "\n\n", { "reskins-defaults.default" }, " ", { "reskins-defaults.tier-4-color" } },
         },
         {
-            type = "string-setting",
+            type = "color-setting",
             name = "reskins-lib-custom-colors-tier-5",
             setting_type = "startup",
             order = "yy",
-            default_value = "2ee55c",
+            default_value = util.color("#2ee55c"),
             localised_description = { "", { "mod-setting-description.reskins-lib-custom-colors-tier-5" }, "\n\n", { "reskins-defaults.default" }, " ", { "reskins-defaults.tier-5-color" } },
         },
         {
-            type = "string-setting",
+            type = "color-setting",
             name = "reskins-lib-custom-colors-tier-6",
             setting_type = "startup",
             order = "yy",
-            default_value = "ff8533",
+            default_value = util.color("#ff8533"),
             localised_description = { "", { "mod-setting-description.reskins-lib-custom-colors-tier-6" }, "\n\n", { "reskins-defaults.default" }, " ", { "reskins-defaults.tier-6-color" } },
         },
     })
