@@ -51,18 +51,25 @@ function reskins.lib.construct_technology_icon(name, inputs)
 
     -- Setup icon layers
     local icon_base_layer = {
-        icon = inputs.technology_icon_filename or reskins[inputs.mod].directory .. "/graphics/technology/" .. folder_path .. "/" .. inputs.icon_name .. "/" .. icon_base .. "-technology-base.png",
+        icon = inputs.technology_icon_filename or
+            reskins[inputs.mod].directory ..
+            "/graphics/technology/" ..
+            folder_path .. "/" .. inputs.icon_name .. "/" .. icon_base .. "-technology-base.png",
     }
 
     local icon_mask_layer, icon_highlights_layer
     if icon_layers > 1 then
         icon_mask_layer = {
-            icon = reskins[inputs.mod].directory .. "/graphics/technology/" .. folder_path .. "/" .. inputs.icon_name .. "/" .. icon_mask .. "-technology-mask.png",
+            icon = reskins[inputs.mod].directory ..
+                "/graphics/technology/" ..
+                folder_path .. "/" .. inputs.icon_name .. "/" .. icon_mask .. "-technology-mask.png",
             tint = icon_tint,
         }
 
         icon_highlights_layer = {
-            icon = reskins[inputs.mod].directory .. "/graphics/technology/" .. folder_path .. "/" .. inputs.icon_name .. "/" .. icon_highlights .. "-technology-highlights.png",
+            icon = reskins[inputs.mod].directory ..
+                "/graphics/technology/" ..
+                folder_path .. "/" .. inputs.icon_name .. "/" .. icon_highlights .. "-technology-highlights.png",
             tint = { 1, 1, 1, 0 },
         }
     end
@@ -278,25 +285,35 @@ function reskins.lib.construct_icon(name, tier, inputs)
 
     -- Setup icon layers
     local icon_base_layer = {
-        icon = inputs.icon_filename or reskins[inputs.mod].directory .. "/graphics/icons/" .. folder_path .. "/" .. inputs.icon_name .. "/" .. icon_base .. "-icon-base.png",
+        icon = inputs.icon_filename or
+            reskins[inputs.mod].directory ..
+            "/graphics/icons/" .. folder_path .. "/" .. inputs.icon_name .. "/" .. icon_base .. "-icon-base.png",
+        icon_size = inputs.icon_size,
     }
 
     local icon_mask_layer, icon_highlights_layer
     if icon_layers > 1 then
         icon_mask_layer = {
-            icon = reskins[inputs.mod].directory .. "/graphics/icons/" .. folder_path .. "/" .. inputs.icon_name .. "/" .. icon_mask .. "-icon-mask.png",
+            icon = reskins[inputs.mod].directory ..
+                "/graphics/icons/" .. folder_path .. "/" .. inputs.icon_name .. "/" .. icon_mask .. "-icon-mask.png",
+            icon_size = inputs.icon_size,
             tint = icon_tint,
         }
 
         icon_highlights_layer = {
-            icon = reskins[inputs.mod].directory .. "/graphics/icons/" .. folder_path .. "/" .. inputs.icon_name .. "/" .. icon_highlights .. "-icon-highlights.png",
+            icon = reskins[inputs.mod].directory ..
+                "/graphics/icons/" ..
+                folder_path .. "/" .. inputs.icon_name .. "/" .. icon_highlights .. "-icon-highlights.png",
+            icon_size = inputs.icon_size,
             tint = { 1, 1, 1, 0 },
         }
     end
 
     -- Setup picture layers
     local picture_base_layer = {
-        filename = inputs.icon_filename or reskins[inputs.mod].directory .. "/graphics/icons/" .. folder_path .. "/" .. inputs.icon_name .. "/" .. icon_base .. "-icon-base.png",
+        filename = inputs.icon_filename or
+            reskins[inputs.mod].directory ..
+            "/graphics/icons/" .. folder_path .. "/" .. inputs.icon_name .. "/" .. icon_base .. "-icon-base.png",
         size = inputs.icon_size,
         mipmaps = inputs.icon_mipmaps,
         scale = 0.25,
@@ -305,7 +322,8 @@ function reskins.lib.construct_icon(name, tier, inputs)
     local picture_mask_layer, picture_highlights_layer
     if icon_layers > 1 then
         picture_mask_layer = {
-            filename = reskins[inputs.mod].directory .. "/graphics/icons/" .. folder_path .. "/" .. inputs.icon_name .. "/" .. icon_mask .. "-icon-mask.png",
+            filename = reskins[inputs.mod].directory ..
+                "/graphics/icons/" .. folder_path .. "/" .. inputs.icon_name .. "/" .. icon_mask .. "-icon-mask.png",
             size = inputs.icon_size,
             mipmaps = inputs.icon_mipmaps,
             scale = 0.25,
@@ -313,7 +331,9 @@ function reskins.lib.construct_icon(name, tier, inputs)
         }
 
         picture_highlights_layer = {
-            filename = reskins[inputs.mod].directory .. "/graphics/icons/" .. folder_path .. "/" .. inputs.icon_name .. "/" .. icon_highlights .. "-icon-highlights.png",
+            filename = reskins[inputs.mod].directory ..
+                "/graphics/icons/" ..
+                folder_path .. "/" .. inputs.icon_name .. "/" .. icon_highlights .. "-icon-highlights.png",
             size = inputs.icon_size,
             mipmaps = inputs.icon_mipmaps,
             scale = 0.25,
@@ -354,7 +374,9 @@ function reskins.lib.construct_icon(name, tier, inputs)
         -- If we have one layer, we need to convert to an icons table format
         if icon_layers == 1 then
             inputs.icon = {
-                { icon = inputs.icon },
+                {
+                    icon = inputs.icon,
+                },
             }
         end
 
@@ -391,7 +413,14 @@ function reskins.lib.construct_icon(name, tier, inputs)
     end
 
     -- Append tier labels
-    if type(inputs.icon) ~= "table" then inputs.icon = { { icon = inputs.icon } } end
+    if type(inputs.icon) ~= "table" then
+        inputs.icon = {
+            {
+                icon = inputs.icon,
+            },
+        }
+    end
+
     inputs.icon = reskins.lib.add_tier_labels_to_icons(inputs.icon, tier)
 
     -- It may be necessary to put icons back in final fixes, allow for that
@@ -856,10 +885,14 @@ function reskins.lib.create_icons_from_list(table, inputs)
 
             -- Make the icon
             if inputs.type == "technology" then
-                inputs.technology_icon_filename = map.technology_icon_filename or inputs.technology_icon_filename or reskins[inputs.mod].directory .. "/graphics/technology/" .. path .. "/" .. image .. ".png"
+                inputs.technology_icon_filename = map.technology_icon_filename or inputs.technology_icon_filename or
+                    reskins[inputs.mod].directory .. "/graphics/technology/" .. path .. "/" .. image .. ".png"
+
                 reskins.lib.construct_technology_icon(name, inputs)
             else
-                inputs.icon_filename = map.icon_filename or inputs.icon_filename or reskins[inputs.mod].directory .. "/graphics/icons/" .. path .. "/" .. image .. ".png"
+                inputs.icon_filename = map.icon_filename or inputs.icon_filename or
+                    reskins[inputs.mod].directory .. "/graphics/icons/" .. path .. "/" .. image .. ".png"
+
                 reskins.lib.construct_icon(name, 0, inputs)
             end
         else
@@ -932,8 +965,10 @@ function reskins.lib.composite_existing_icons_onto_icons_definition(name, compos
                 tint = layer.tint,
                 scale = layer.scale and layer.scale * (params.scale or 1) or (32 / icon_size) * (params.scale or 1),
                 shift = {
-                    (layer.shift and (layer.shift[1] or layer.shift.x) or 0) * (params.scale or 1) + (params.shift and (params.shift[1] or params.shift.x) or 0),
-                    (layer.shift and (layer.shift[2] or layer.shift.y) or 0) * (params.scale or 1) + (params.shift and (params.shift[2] or params.shift.y) or 0),
+                    (layer.shift and (layer.shift[1] or layer.shift.x) or 0) * (params.scale or 1) +
+                    (params.shift and (params.shift[1] or params.shift.x) or 0),
+                    (layer.shift and (layer.shift[2] or layer.shift.y) or 0) * (params.scale or 1) +
+                    (params.shift and (params.shift[2] or params.shift.y) or 0),
                 },
             })
         end
