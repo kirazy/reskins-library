@@ -12,7 +12,7 @@ local function corpse_animation(tint)
         layers = {
             -- Base
             {
-                filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/remnants/underground-belt-remnants-base.png",
+                filename = "__reskins-library__/graphics/entity/base/underground-belt/remnants/underground-belt-remnants-base.png",
                 line_length = 1,
                 width = 78,
                 height = 72,
@@ -22,7 +22,7 @@ local function corpse_animation(tint)
                 direction_count = 8,
                 shift = util.by_pixel(10, 3),
                 hr_version = {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/remnants/hr-underground-belt-remnants-base.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/remnants/hr-underground-belt-remnants-base.png",
                     line_length = 1,
                     width = 156,
                     height = 144,
@@ -36,7 +36,7 @@ local function corpse_animation(tint)
             },
             -- Mask
             {
-                filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/remnants/underground-belt-remnants-mask.png",
+                filename = "__reskins-library__/graphics/entity/base/underground-belt/remnants/underground-belt-remnants-mask.png",
                 line_length = 1,
                 width = 78,
                 height = 72,
@@ -47,7 +47,7 @@ local function corpse_animation(tint)
                 tint = tint,
                 shift = util.by_pixel(10, 3),
                 hr_version = {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/remnants/hr-underground-belt-remnants-mask.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/remnants/hr-underground-belt-remnants-mask.png",
                     line_length = 1,
                     width = 156,
                     height = 144,
@@ -62,7 +62,7 @@ local function corpse_animation(tint)
             },
             -- Highlights
             {
-                filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/remnants/underground-belt-remnants-highlights.png",
+                filename = "__reskins-library__/graphics/entity/base/underground-belt/remnants/underground-belt-remnants-highlights.png",
                 line_length = 1,
                 width = 78,
                 height = 72,
@@ -70,10 +70,10 @@ local function corpse_animation(tint)
                 variation_count = 1,
                 axially_symmetrical = false,
                 direction_count = 8,
-                blend_mode = reskins.lib.blend_mode,
+                blend_mode = reskins.lib.settings.blend_mode,
                 shift = util.by_pixel(10, 3),
                 hr_version = {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/remnants/hr-underground-belt-remnants-highlights.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/remnants/hr-underground-belt-remnants-highlights.png",
                     line_length = 1,
                     width = 156,
                     height = 144,
@@ -81,7 +81,7 @@ local function corpse_animation(tint)
                     variation_count = 1,
                     axially_symmetrical = false,
                     direction_count = 8,
-                    blend_mode = reskins.lib.blend_mode,
+                    blend_mode = reskins.lib.settings.blend_mode,
                     shift = util.by_pixel(10.5, 3),
                     scale = 0.5,
                 },
@@ -100,13 +100,13 @@ local function entity_structure(tint)
             sheets = {
                 -- Base
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/underground-belt-structure.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure.png",
                     priority = "extra-high",
                     width = 96,
                     height = 96,
                     y = 96,
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/hr-underground-belt-structure.png",
+                        filename = "__reskins-library__/graphics/entity/base/underground-belt/hr-underground-belt-structure.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
@@ -116,14 +116,14 @@ local function entity_structure(tint)
                 },
                 -- Mask
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
                     priority = "extra-high",
                     width = 96,
                     height = 96,
                     y = 96,
                     tint = tint,
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
+                        filename = "__reskins-library__/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
@@ -134,19 +134,19 @@ local function entity_structure(tint)
                 },
                 -- Highlights
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
                     priority = "extra-high",
                     width = 96,
                     height = 96,
                     y = 96,
-                    blend_mode = reskins.lib.blend_mode,
+                    blend_mode = reskins.lib.settings.blend_mode,
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/hr-underground-belt-structure-highlights.png",
+                        filename = "__reskins-library__/graphics/entity/base/underground-belt/hr-underground-belt-structure-highlights.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
                         y = 192,
-                        blend_mode = reskins.lib.blend_mode,
+                        blend_mode = reskins.lib.settings.blend_mode,
                         scale = 0.5,
                     },
                 },
@@ -156,12 +156,12 @@ local function entity_structure(tint)
             sheets = {
                 -- Base
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/underground-belt-structure.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure.png",
                     priority = "extra-high",
                     width = 96,
                     height = 96,
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/hr-underground-belt-structure.png",
+                        filename = "__reskins-library__/graphics/entity/base/underground-belt/hr-underground-belt-structure.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
@@ -170,13 +170,13 @@ local function entity_structure(tint)
                 },
                 -- Mask
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
                     priority = "extra-high",
                     width = 96,
                     height = 96,
                     tint = tint,
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
+                        filename = "__reskins-library__/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
@@ -186,17 +186,17 @@ local function entity_structure(tint)
                 },
                 -- Highlights
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
                     priority = "extra-high",
                     width = 96,
                     height = 96,
-                    blend_mode = reskins.lib.blend_mode,
+                    blend_mode = reskins.lib.settings.blend_mode,
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/hr-underground-belt-structure-highlights.png",
+                        filename = "__reskins-library__/graphics/entity/base/underground-belt/hr-underground-belt-structure-highlights.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
-                        blend_mode = reskins.lib.blend_mode,
+                        blend_mode = reskins.lib.settings.blend_mode,
                         scale = 0.5,
                     },
                 },
@@ -206,13 +206,13 @@ local function entity_structure(tint)
             sheets = {
                 -- Base
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/underground-belt-structure.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure.png",
                     priority = "extra-high",
                     width = 96,
                     height = 96,
                     y = 96 * 3,
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/hr-underground-belt-structure.png",
+                        filename = "__reskins-library__/graphics/entity/base/underground-belt/hr-underground-belt-structure.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
@@ -222,14 +222,14 @@ local function entity_structure(tint)
                 },
                 -- Mask
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
                     priority = "extra-high",
                     width = 96,
                     height = 96,
                     y = 96 * 3,
                     tint = tint,
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
+                        filename = "__reskins-library__/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
@@ -240,19 +240,19 @@ local function entity_structure(tint)
                 },
                 -- Highlights
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
                     priority = "extra-high",
                     width = 96,
                     height = 96,
                     y = 96 * 3,
-                    blend_mode = reskins.lib.blend_mode,
+                    blend_mode = reskins.lib.settings.blend_mode,
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/hr-underground-belt-structure-highlights.png",
+                        filename = "__reskins-library__/graphics/entity/base/underground-belt/hr-underground-belt-structure-highlights.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
                         y = 192 * 3,
-                        blend_mode = reskins.lib.blend_mode,
+                        blend_mode = reskins.lib.settings.blend_mode,
                         scale = 0.5,
                     },
                 },
@@ -262,13 +262,13 @@ local function entity_structure(tint)
             sheets = {
                 -- Base
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/underground-belt-structure.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure.png",
                     priority = "extra-high",
                     width = 96,
                     height = 96,
                     y = 96 * 2,
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/hr-underground-belt-structure.png",
+                        filename = "__reskins-library__/graphics/entity/base/underground-belt/hr-underground-belt-structure.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
@@ -278,14 +278,14 @@ local function entity_structure(tint)
                 },
                 -- Mask
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
                     priority = "extra-high",
                     width = 96,
                     height = 96,
                     y = 96 * 2,
                     tint = tint,
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
+                        filename = "__reskins-library__/graphics/entity/base/underground-belt/hr-underground-belt-structure-mask.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
@@ -296,14 +296,14 @@ local function entity_structure(tint)
                 },
                 -- Highlights
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
+                    filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
                     priority = "extra-high",
                     width = 96,
                     height = 96,
                     y = 96 * 2,
                     tint = tint,
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/underground-belt/hr-underground-belt-structure-highlights.png",
+                        filename = "__reskins-library__/graphics/entity/base/underground-belt/hr-underground-belt-structure-highlights.png",
                         priority = "extra-high",
                         width = 192,
                         height = 192,
@@ -354,7 +354,7 @@ end
 ---@param make_tier_labels? boolean
 ---@param reskin_vanilla_entity? boolean
 function reskins.lib.apply_skin.underground_belt(name, tier, tint, make_tier_labels, reskin_vanilla_entity)
-    ---@type inputs.setup_standard_entity
+    ---@type SetupStandardEntityInputs
     local inputs = {
         type = "underground-belt",
         icon_name = "underground-belt",
@@ -363,14 +363,14 @@ function reskins.lib.apply_skin.underground_belt(name, tier, tint, make_tier_lab
         group = "base",
         particles = { ["medium"] = 3,["small"] = 2 },
         tier_labels = make_tier_labels or false,
-        tint = tint and tint or reskins.lib.belt_tint_index[tier],
+        tint = tint and tint or reskins.lib.tiers.get_belt_tint(tier),
     }
 
     local entity = data.raw[inputs.type][name]
     if not entity then return end
 
     if reskin_vanilla_entity == false then
-        reskins.lib.add_tier_labels_to_entity(name, inputs.type, tier)
+        reskins.lib.tiers.add_tier_labels_to_prototype_by_reference(tier, entity)
         return
     end
 

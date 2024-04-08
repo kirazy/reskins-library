@@ -8,7 +8,7 @@ local function create_label_sprite(label)
         {
             type = "sprite",
             name = "reskins-lib-" .. label .. "-tier-label",
-            filename = reskins.lib.directory .. "/graphics/icons/sprites/tier-labels/icon-" .. label .. ".png",
+            filename = "__reskins-library__/graphics/icons/sprites/tier-labels/icon-" .. label .. ".png",
             size = 40,
             mipmap_count = 2,
             flags = { "gui-icon" },

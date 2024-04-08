@@ -4,7 +4,7 @@
 -- See LICENSE in the project directory for license information.
 
 -- Check if reskinning needs to be done
-if reskins.lib.check_scope("technologies", "bobs", "boblogistics") == false then return end
+if reskins.lib.settings.is_feature_set_enabled("technologies", "reskins-bobs", "boblogistics") == false then return end
 
 -- Setup standard inputs
 local inputs = {
@@ -23,10 +23,10 @@ local technologies = {
 }
 
 -- Only do logistics 1, 2 and 3 if we're doing custom colors
-if reskins.lib.setting("reskins-lib-customize-tier-colors") == true then
+if reskins.lib.settings.get_value("reskins-lib-customize-tier-colors") == true then
     technologies["logistics"] = {tier = 1, icon_name = "logistics", uses_belt_mask = true}
     technologies["logistics-2"] = {tier = 2, icon_name = "logistics", uses_belt_mask = true}
     technologies["logistics-3"] = {tier = 3, icon_name = "logistics", uses_belt_mask = true}
 end
 
-reskins.lib.create_icons_from_list(technologies, inputs)
+reskins.internal.create_icons_from_list(technologies, inputs)

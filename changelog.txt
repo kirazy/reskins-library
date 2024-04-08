@@ -1,12 +1,12 @@
 ---------------------------------------------------------------------------------------------------
-Version: 2.1.8
+Version: 2.2.0
 Date: ????
   Changes:
     - Migrated custom color settings to `color-setting`, allowing for the use of a color picker in-game
   Deprecated:
     - Deprecated `reskins.lib.adjust_alpha` and `reskins.lib.adjust_tint`, these will be removed in a future release
       - Use util.get_color_with_alpha directly
-    - Deprecated `reskins.lib.lit_icon_pictures_layer`, use `reskins.lib.get_lit_sprite_layer`
+    - Deprecated `reskins.lib.lit_icon_pictures_layer`, use `reskins.tools.sprite_tools.get_sprite_light_layer`
 ---------------------------------------------------------------------------------------------------
 Version: 2.1.7
 Date: 2023-12-24
@@ -22,9 +22,9 @@ Date: 2023-12-23
       - Use to get a table of IconData from an entity, regardless of how an icon is formatted
     - Added `reskins.lib.convert_icons_to_sprite`
     - Added `reskins.lib.convert_icon_to_sprite`
-    - Added `reskins.lib.get_pipe_pictures`, 
-    - Added `reskins.lib.get_pipe_to_ground_pictures`
-    - Added `reskins.lib.get_pipe_covers`
+    - Added `reskins.lib.sprites.pipes.get_pipe_pictures`, 
+    - Added `reskins.lib.sprites.pipes.get_pipe_to_ground_pictures`
+    - Added `reskins.lib.sprites.pipes.get_pipe_covers`
   Changes:
     - Added AAI Loaders to the list of supported mods
   Deprecated:

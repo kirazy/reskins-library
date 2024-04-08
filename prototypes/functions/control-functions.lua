@@ -3,10 +3,17 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-local functions = {}
+---Provides control functions for Artisanal Reskins.
+---@class Reskins.Control
+local _control = {}
 
-function functions.on_init() -- Called by migration/reskins-library_1.1.3.lua
-    -- Check for each of the reskin mods, and set the notification status to true if they are detected otherwise, set to false
+---
+---Checks for each of the Artisanal Reskin mods, and sets the notification status to `true` if
+---they are detected; otherwise, sets to `false`.
+---
+---### Remarks
+---Called by `migration/reskins-library_1.1.3.lua`
+function _control.on_init()
     global.notify = {
         bobs = {
             status = game.active_mods["reskins-bobs"] and true or false,
@@ -20,4 +27,4 @@ function functions.on_init() -- Called by migration/reskins-library_1.1.3.lua
     }
 end
 
-return functions
+return _control

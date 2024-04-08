@@ -3,6 +3,8 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
+---@type Reskins.Control
+local _control = require("__reskins-library__.prototypes.functions.control-functions")
+
 -- Perform on_init routines for existing saves
-local functions = require("__reskins-library__.prototypes.functions.control-functions")
-functions.on_init()
+_control.on_init()

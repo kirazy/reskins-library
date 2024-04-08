@@ -12,7 +12,7 @@ local function corpse_animation(tint)
             layers = {
                 -- Base
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/transport-belt/remnants/transport-belt-remnants-base.png",
+                    filename = "__reskins-library__/graphics/entity/base/transport-belt/remnants/transport-belt-remnants-base.png",
                     line_length = 1,
                     width = 54,
                     height = 52,
@@ -22,7 +22,7 @@ local function corpse_animation(tint)
                     direction_count = 4,
                     shift = util.by_pixel(1, 0),
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/transport-belt/remnants/hr-transport-belt-remnants-base.png",
+                        filename = "__reskins-library__/graphics/entity/base/transport-belt/remnants/hr-transport-belt-remnants-base.png",
                         line_length = 1,
                         width = 106,
                         height = 102,
@@ -36,7 +36,7 @@ local function corpse_animation(tint)
                 },
                 -- Mask
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/transport-belt/remnants/transport-belt-remnants-mask.png",
+                    filename = "__reskins-library__/graphics/entity/base/transport-belt/remnants/transport-belt-remnants-mask.png",
                     line_length = 1,
                     width = 54,
                     height = 52,
@@ -47,7 +47,7 @@ local function corpse_animation(tint)
                     tint = tint,
                     shift = util.by_pixel(1, 0),
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/transport-belt/remnants/hr-transport-belt-remnants-mask.png",
+                        filename = "__reskins-library__/graphics/entity/base/transport-belt/remnants/hr-transport-belt-remnants-mask.png",
                         line_length = 1,
                         width = 106,
                         height = 102,
@@ -62,7 +62,7 @@ local function corpse_animation(tint)
                 },
                 -- Highlights
                 {
-                    filename = reskins.lib.directory .. "/graphics/entity/base/transport-belt/remnants/transport-belt-remnants-mask.png",
+                    filename = "__reskins-library__/graphics/entity/base/transport-belt/remnants/transport-belt-remnants-mask.png",
                     line_length = 1,
                     width = 54,
                     height = 52,
@@ -70,10 +70,10 @@ local function corpse_animation(tint)
                     variation_count = 1,
                     axially_symmetrical = false,
                     direction_count = 4,
-                    blend_mode = reskins.lib.blend_mode,
+                    blend_mode = reskins.lib.settings.blend_mode,
                     shift = util.by_pixel(1, 0),
                     hr_version = {
-                        filename = reskins.lib.directory .. "/graphics/entity/base/transport-belt/remnants/hr-transport-belt-remnants-mask.png",
+                        filename = "__reskins-library__/graphics/entity/base/transport-belt/remnants/hr-transport-belt-remnants-mask.png",
                         line_length = 1,
                         width = 106,
                         height = 102,
@@ -81,7 +81,7 @@ local function corpse_animation(tint)
                         variation_count = 1,
                         axially_symmetrical = false,
                         direction_count = 4,
-                        blend_mode = reskins.lib.blend_mode,
+                        blend_mode = reskins.lib.settings.blend_mode,
                         shift = util.by_pixel(1, -0.5),
                         scale = 0.5,
                     },
@@ -98,7 +98,7 @@ end
 ---@param use_express_spritesheet? boolean
 ---@param reskin_vanilla_entity? boolean
 function reskins.lib.apply_skin.transport_belt(name, tier, tint, make_tier_labels, use_express_spritesheet, reskin_vanilla_entity)
-    ---@type inputs.setup_standard_entity
+    ---@type SetupStandardEntityInputs
     local inputs = {
         type = "transport-belt",
         icon_name = "transport-belt",
@@ -107,14 +107,15 @@ function reskins.lib.apply_skin.transport_belt(name, tier, tint, make_tier_label
         group = "base",
         particles = { ["medium"] = 1,["small"] = 2 },
         tier_labels = make_tier_labels or false,
-        tint = tint and tint or reskins.lib.belt_tint_index[tier],
+        tint = tint and tint or reskins.lib.tiers.get_belt_tint(tier),
     }
 
+    ---@type data.TransportBeltPrototype
     local entity = data.raw[inputs.type][name]
     if not entity then return end
 
     if reskin_vanilla_entity == false then
-        reskins.lib.add_tier_labels_to_entity(name, inputs.type, tier)
+        reskins.lib.tiers.add_tier_labels_to_prototype_by_reference(tier, entity)
         return
     end
 
@@ -127,5 +128,6 @@ function reskins.lib.apply_skin.transport_belt(name, tier, tint, make_tier_label
     corpse.animation = corpse_animation(inputs.tint)
 
     -- Reskin entity
-    entity.belt_animation_set.animation_set = reskins.lib.transport_belt_animation_set(inputs.tint, use_express_spritesheet and 2 or 1).animation_set
+    local belt_sprite = reskins.lib.defines.belt_sprites
+    entity.belt_animation_set.animation_set = reskins.lib.sprites.belts.get_belt_animation_set(use_express_spritesheet and belt_sprite.express or belt_sprite.standard, inputs.tint).animation_set
 end
