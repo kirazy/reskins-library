@@ -486,7 +486,6 @@ end
 local related_prototypes = {
     ["item"] = true,
     ["item-with-entity-data"] = true,
-    ["recipe"] = true,
     ["explosion"] = true,
     ["corpse"] = true,
 }
@@ -522,7 +521,7 @@ local related_prototypes = {
 ---@param name string # The name of the prototype.
 ---@param type_name? string # The type name of the prototype.
 ---@param icon_data data.IconData[] # An icon represented by an array of `IconData` objects.
----@param pictures? data.Sprite # A `Sprite` object. Typical use is when `icon_data` has tier labels and the in-world sprite should not.
+---@param pictures? data.SpriteVariations # A `SpriteVariations` object. Typical use is when `icon_data` has tier labels and the in-world sprite should not.
 ---
 ---### Exceptions
 ---*@throws* `string` — Thrown when `name` is `nil` or an empty string.<br/>
@@ -537,20 +536,16 @@ function _icons.assign_icons_to_prototype_and_related_prototypes(name, type_name
 
     local prototype = (type_name and not related_prototypes[type_name]) and data.raw[type_name][name] or nil
 
-    if type_name ~= "technology" then
-        -- Basic set of related prototypes.
+    -- Exclude technologies and recipies from related-prototype updates.
+    if type_name ~= "technology" and type_name ~= "recipe" then
         local item = data.raw["item"][name]
-        local recipe = data.raw["recipe"][name]
-        local item_with_entity_data = data.raw["item-with-entity-data"][name]
-        local explosion = data.raw["explosion"][name .. "-explosion"]
-        local remnants = data.raw["corpse"][name .. "-remnants"]
-
         if item then
             _icons.clear_icon_from_prototype_by_reference(item)
             item.icons = icon_data_copy
             item.pictures = pictures
         end
 
+        local item_with_entity_data = data.raw["item-with-entity-data"][name]
         if item_with_entity_data then
             _icons.clear_icon_from_prototype_by_reference(item_with_entity_data)
             item_with_entity_data.icons = icon_data_copy
@@ -560,23 +555,24 @@ function _icons.assign_icons_to_prototype_and_related_prototypes(name, type_name
             item_with_entity_data.pictures = pictures
         end
 
+        local explosion = data.raw["explosion"][name .. "-explosion"]
         if explosion then
             _icons.clear_icon_from_prototype_by_reference(explosion)
             explosion.icons = icon_data_copy
         end
 
+        local remnants = data.raw["corpse"][name .. "-remnants"]
         if remnants then
             _icons.clear_icon_from_prototype_by_reference(remnants)
             remnants.icons = icon_data_copy
         end
 
-        if type_name ~= "recipe" then
+        -- Clear out recipes of the same name so that the item icon is inherited properly.
             -- Possibly a dangerous assumption that all recipes with the same name as the item
             -- are intended to inherit the icon directly and do not use a custom icon.
-
-            -- Clear out recipe so that then icon is inherited properly.
+        -- Possible additional checks to make sure the recipe has only one output and it's the item?
+        local recipe = data.raw["recipe"][name]
             _icons.clear_icon_from_prototype_by_reference(recipe)
-        end
     end
 
     if prototype then
