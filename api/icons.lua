@@ -571,7 +571,8 @@ function _icons.assign_icons_to_prototype_and_related_prototypes(name, type_name
         end
 
         if type_name ~= "recipe" then
-            -- prototype.pictures = pictures
+            -- Possibly a dangerous assumption that all recipes with the same name as the item
+            -- are intended to inherit the icon directly and do not use a custom icon.
 
             -- Clear out recipe so that then icon is inherited properly.
             _icons.clear_icon_from_prototype_by_reference(recipe)
