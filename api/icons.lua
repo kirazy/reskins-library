@@ -568,11 +568,11 @@ function _icons.assign_icons_to_prototype_and_related_prototypes(name, type_name
         end
 
         -- Clear out recipes of the same name so that the item icon is inherited properly.
-            -- Possibly a dangerous assumption that all recipes with the same name as the item
-            -- are intended to inherit the icon directly and do not use a custom icon.
+        -- Possibly a dangerous assumption that all recipes with the same name as the item
+        -- are intended to inherit the icon directly and do not use a custom icon.
         -- Possible additional checks to make sure the recipe has only one output and it's the item?
         local recipe = data.raw["recipe"][name]
-            _icons.clear_icon_from_prototype_by_reference(recipe)
+        _icons.clear_icon_from_prototype_by_reference(recipe)
     end
 
     if prototype then
@@ -1247,7 +1247,7 @@ function _icons.create_icons_from_sources(sources)
 
     -- Apply only a tint transformation on the base layer. Scale and shift are not applicable.
     for _, icon_datum in pairs(base_icon_data) do
-        icon_datum.tint = sources[1].tint
+        icon_datum.tint = sources[1].tint or icon_datum.tint
     end
 
     local icon_data, added_blank_layers = _icons.add_icons_from_sources_to_icons(base_icon_data, sources_copy)
