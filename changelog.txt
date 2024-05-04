@@ -1,7 +1,12 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.2.1
 Date: ????
-  Changes:
+  Bugfixes:
+    - Fix that the table check in reskins.lib.append_tier_labels was lost in the deprecation. 
+      - This restores the historical behavior, but mods should now use one of:
+        - reskins.lib.tiers.add_tier_labels_to_icon, taking an IconData object
+        - reskins.lib.tiers_add_tier_labels_to_icons, taking an array of IconData objects
+        - reskins.lib.create_icon_with_tier_labels, taking an icon filename and icon size and optional mipmaps, scale, shift and tint.
 ---------------------------------------------------------------------------------------------------
 Version: 2.2.0
 Date: 2024-05-04

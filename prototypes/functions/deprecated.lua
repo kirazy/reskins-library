@@ -140,7 +140,6 @@ function reskins.lib.adjust_alpha(tint, alpha)
     return adjusted_tint
 end
 
-
 -- Fetch blend mode, default `"additive"`. May be overridden in `settings-updates.lua` by uncommenting the line.
 ---@deprecated Use `reskins.library.settings.blend_mode` instead.
 ---@type data.BlendMode
@@ -209,7 +208,6 @@ end
 function reskins.lib.make_4way_animation_from_spritesheet(animation)
     return reskins.lib.sprites.make_4way_animation_from_spritesheet(animation)
 end
-
 
 ---Stores icon properties for assignment at a later data stage, has same input requirements as `reskins.lib.assign_icons()`
 ---@param name string # The name of the prototype.
@@ -461,6 +459,11 @@ function reskins.lib.append_tier_labels(tier, inputs)
     -- tier_labels      - Determines whether tier labels are appended
 
     if settings.startup["reskins-lib-icon-tier-labeling"].value == true and tier > 0 and inputs.tier_labels == true then
+        -- Ensure we're working with a table.
+        if type(inputs.icon) ~= "table" then
+            inputs.icon = { { icon = inputs.icon } }
+        end
+
         -- Append the tier labels
         local icon_style = settings.startup["reskins-lib-icon-tier-labeling-style"].value
         table.insert(inputs.icon, {
