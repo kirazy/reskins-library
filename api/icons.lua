@@ -226,7 +226,7 @@ function _icons.add_missing_icon_defaults(icon_datum, is_technology_icon)
 
     -- Validate icon file path.
     assert(icon_datum.icon and icon_datum.icon ~= "", "Missing required field: 'icon' must not be nil or empty.")
-    assert(icon_datum.icon:find("^__[%a%d-]+__"), "Invalid filename: 'icon' must be an absolute file path, but was '" .. icon_datum.icon .. "'.")
+    assert(icon_datum.icon:find("^__[%a%d%-%_-]+__"), "Invalid filename: 'icon' must be an absolute file path, but was '" .. icon_datum.icon .. "'.")
     assert(icon_datum.icon:match("%.([%a%d]+)$"), "Invalid filename: 'icon' must have a valid file extension, but was '" .. icon_datum.icon .. "'.")
 
     -- Validate icon size.

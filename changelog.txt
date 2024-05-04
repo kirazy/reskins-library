@@ -1,7 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.2.2
 Date: ????
-  Changes:
+  Bugfixes:
+    - Fix that underscores were not considered valid characters in mod names when performing icon filename validation.
 ---------------------------------------------------------------------------------------------------
 Version: 2.2.1
 Date: 2024-05-04
