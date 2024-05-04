@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.2.0
-Date: ????
+Date: 2024-05-04
   Changes:
     - Migrated custom color settings to `color-setting`, allowing for the use of a color picker in-game
     - Significant rework of internals (ongoing), and the API is being reworked.
