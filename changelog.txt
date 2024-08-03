@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.2.3
-Date: ????
+Date: 2024-08-03
   Changes:
     - Modified the handling of icon defaults: icon_size will now attempt to be coerced to a number, instead of throwing an exception. 
       - Starting in Factorio 2.0, icon_size can only be a number and will throw exceptions otherwise.
