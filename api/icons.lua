@@ -231,7 +231,16 @@ function _icons.add_missing_icon_defaults(icon_datum, is_technology_icon)
 
     -- Validate icon size.
     assert(icon_datum.icon_size, "Missing required field: 'icon_size' must not be nil.")
-    assert(type(icon_datum.icon_size) == "number" and icon_datum.icon_size > 0 and icon_datum.icon_size % 1 == 0,
+
+    local icon_type = type(icon_datum.icon_size)
+    if icon_type ~= "number" then
+        log("Invalid type: 'icon_size' must be a number, but was a '" .. icon_type .. "'. Starting in Factorio 2.0, this exception will be thrown instead of logged.")
+        log(serpent.block(icon_datum))
+
+        icon_datum.icon_size = tonumber(icon_datum.icon_size)
+    end
+
+    assert(icon_datum.icon_size > 0 and icon_datum.icon_size % 1 == 0,
         "Invalid value: 'icon_size' must be an integer greater than zero, but was '" .. icon_datum.icon_size .. "'.")
 
     -- Validate icon mipmaps.
