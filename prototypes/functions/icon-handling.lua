@@ -15,7 +15,6 @@
 ---@field tint? data.Color # Expected if `untinted_icon_mask` is not `true`. If not provided, defaults to white ({1, 1, 1, 1}).
 ---@field technology_icon_filename? data.FileName # Required if `icon_name` is not defined.
 ---@field technology_icon_size? data.SpriteSizeType # Default `128`.
----@field technology_icon_mipmaps? data.IconMipMapType # Default `1`.
 ---@field icon_name? string # Required if `technology_icon_filename` is not defined. Specifies the folder/filenames to prepare the layered icon.
 ---@field icon_base? string # Override of `icon_name` for filename variants within the folder specified by `icon_name`, for the base layer
 ---@field icon_mask? string # Override of `icon_name` for filename variants within the folder specified by `icon_name`, for the mask layer
@@ -35,7 +34,6 @@ function reskins.lib.construct_technology_icon(name, inputs)
 
     --Set defaults
     inputs_copy.technology_icon_size = inputs_copy.technology_icon_size or 128
-    inputs_copy.technology_icon_mipmaps = inputs_copy.technology_icon_mipmaps or 0
 
     -- Handle compatibility defaults
     local folder_path = inputs_copy.group
@@ -67,7 +65,6 @@ function reskins.lib.construct_technology_icon(name, inputs)
     local icon_base_layer = {
         icon = inputs_copy.technology_icon_filename or reskins[inputs_copy.mod].directory .. "/graphics/technology/" .. folder_path .. "/" .. inputs_copy.icon_name .. "/" .. icon_base .. "-technology-base.png",
         icon_size = inputs_copy.technology_icon_size,
-        icon_mipmaps = inputs_copy.technology_icon_mipmaps,
     }
 
     ---@type data.IconData, data.IconData
@@ -76,14 +73,12 @@ function reskins.lib.construct_technology_icon(name, inputs)
         icon_mask_layer = {
             icon = reskins[inputs_copy.mod].directory .. "/graphics/technology/" .. folder_path .. "/" .. inputs_copy.icon_name .. "/" .. icon_mask .. "-technology-mask.png",
             icon_size = inputs_copy.technology_icon_size,
-            icon_mipmaps = inputs_copy.technology_icon_mipmaps,
             tint = icon_tint,
         }
 
         icon_highlights_layer = {
             icon = reskins[inputs_copy.mod].directory .. "/graphics/technology/" .. folder_path .. "/" .. inputs_copy.icon_name .. "/" .. icon_highlights .. "-technology-highlights.png",
             icon_size = inputs_copy.technology_icon_size,
-            icon_mipmaps = inputs_copy.technology_icon_mipmaps,
             tint = { 1, 1, 1, 0 },
         }
     end
@@ -144,7 +139,6 @@ function reskins.lib.technology_equipment_overlay(parameters)
     local overlay = {
         icon = "__reskins-library__/graphics/technology/" .. equipment .. "-equipment-overlay.png",
         icon_size = 128,
-        icon_mipmaps = 3,
         shift = { 64 * scale, 100 * scale },
         scale = scale,
     }
@@ -196,7 +190,6 @@ function reskins.lib.return_technology_effect_icon(constant, scale)
     local icon_data = {
         icon = technology_constants[constant].icon,
         icon_size = 128,
-        icon_mipmaps = 3,
         shift = util.mul_shift({ 100, 100 }, scale or 1),
         scale = scale,
     }
@@ -211,25 +204,30 @@ end
 
 ---The common base class for all creatable icons.
 ---@class CreateableIconBase
----@field subfolder string # The path to the folder containing the icon files, relative to the mod's `graphics` folder.
----[View Documentation](https://lua-api.factorio.com/latest/types/IconData.html#icon_mipmaps)
----@field icon_mipmaps? data.IconMipMapType
+---The path to the folder containing the icon files, relative to the mod's `graphics` folder.
+---@field subfolder string
 ---The size of the square icon, in pixels, e.g. `32` for a 32px by 32px icon.
 ---
 ---Mandatory if `icon_size` is not specified outside of `icons`.
 ---
 ---[View Documentation](https://lua-api.factorio.com/latest/types/IconData.html#icon_size)
 ---@field icon_size data.SpriteSizeType
+---
 ---Defaults to `32/icon_size` for items and recipes, and `256/icon_size` for technologies.
 ---
----Specifies the scale of the icon on the GUI scale. A scale of `2` means that the icon will be two times bigger on screen (and thus more pixelated).
+---Specifies the scale of the icon on the GUI scale. A scale of `2` means that the icon will be two 
+---times bigger on screen (and thus more pixelated).
 ---
 ---[View Documentation](https://lua-api.factorio.com/latest/types/IconData.html#scale)
 ---@field scale? double
----Used to offset the icon "layer" from the overall icon. The shift is applied from the center (so negative shifts are left and up, respectively). Shift values are based on final size (`icon_size * scale`) of the first icon.
+---
+---Used to offset the icon "layer" from the overall icon. The shift is applied from the center (so
+---negative shifts are left and up, respectively). Shift values are based on final size (`icon_size
+---* scale`) of the first icon.
 ---
 ---[View Documentation](https://lua-api.factorio.com/latest/types/IconData.html#shift)
 ---@field shift? data.Vector
+---
 ---The tint to apply to the icon.
 ---
 ---[View Documentation](https://lua-api.factorio.com/latest/types/IconData.html#tint)
@@ -240,28 +238,32 @@ end
 ---
 ---The number of layers used to create the icon is determined by the `num_layers` field.
 ---@class TintedCreateableIcon : CreateableIconBase
----@field icon_base string # The prefix of the base icon file named `{icon_base}-icon-base.png`. Used in place of `mask_name` and `highlights_name` if neither is provided.
----@field icon_mask? string # The prefix of the mask icon file named `{icon_mask}-icon-mask.png` Optional; uses `icon_base` if not provided.
----@field icon_highlights? string # The prefix of the highlights icon file named `{icon_highlights}-icon-highlights.png` Optional; uses `icon_base` if not provided.
----@field tint data.Color # The tint to apply to the mask layer.
----@field num_layers? 1|2|3 # The number of layers in the icon. Default `3`.
+---
+---The prefix of the base icon file named `{icon_base}-icon-base.png`. Used in place of `mask_name`
+---and `highlights_name` if neither is provided.
+---@field icon_base string 
+---
+---The prefix of the mask icon file named `{icon_mask}-icon-mask.png` Optional; uses `icon_base` if
+---not provided.
+---@field icon_mask? string 
+---
+---The prefix of the highlights icon file named `{icon_highlights}-icon-highlights.png` Optional;
+---uses `icon_base` if not provided.
+---@field icon_highlights? string 
+---
+---The tint to apply to the mask layer.
+---@field tint data.Color 
+---
+---The number of layers in the icon. Default `3`.
+---@field num_layers? 1|2|3 
 
 ---A createable single-layer icon.
 ---@class FlatCreateableIcon : CreateableIconBase
----@field icon string # The name of the icon file named `{icon}.png`.
----@field tint? data.Color # An optional tint to apply to the icon.
-
----comment
+---The name of the icon file named `{icon}.png`.
+---@field icon string
 ---
----@return data.IconData[]
----
----@param root_path any
----@param parameters TintedCreateableIcon|FlatCreateableIcon
----@param is_technology_icon any
-local function create_icon_from_parameters(root_path, parameters, is_technology_icon)
-
-end
-
+---An optional tint to apply to the icon.
+---@field tint? data.Color
 
 ---@class ConstructIconInputsOld
 ---@field type string # The type name of the prototype.
@@ -273,7 +275,6 @@ end
 ---@field tier_labels? boolean # Default `true`, displays tier labels on icons.
 ---@field icon_filename? data.FileName # Required if `icon_name` is not defined.
 ---@field icon_size? data.SpriteSizeType # Default `64`.
----@field icon_mipmaps? data.IconMipMapType # Default `4`.
 ---@field icon_name? string # Required if `icon_filename` is not defined. Specifies the folder/filenames to prepare the layered icon.
 ---@field icon_base? string # Override of `icon_name` for filename variants within the folder specified by `icon_name`, for the base layer
 ---@field icon_mask? string # Override of `icon_name` for filename variants within the folder specified by `icon_name`, for the mask layer
@@ -298,7 +299,6 @@ function reskins.lib.construct_icon(name, tier, inputs)
 
     --Set defaults
     inputs_copy.icon_size = inputs.icon_size or 64
-    inputs_copy.icon_mipmaps = inputs.icon_mipmaps or 4
     inputs_copy.tier_labels = (inputs.tier_labels ~= false)
 
     -- Handle compatibility defaults
@@ -335,7 +335,6 @@ function reskins.lib.construct_icon(name, tier, inputs)
     local icon_base_layer = {
         icon = inputs_copy.icon_filename or reskins[inputs_copy.mod].directory .. "/graphics/icons/" .. folder_path .. "/" .. inputs_copy.icon_name .. "/" .. icon_base .. "-icon-base.png",
         icon_size = inputs_copy.icon_size,
-        icon_mipmaps = inputs_copy.icon_mipmaps,
     }
 
     ---@type data.IconData, data.IconData
@@ -344,14 +343,12 @@ function reskins.lib.construct_icon(name, tier, inputs)
         icon_mask_layer = {
             icon = reskins[inputs_copy.mod].directory .. "/graphics/icons/" .. folder_path .. "/" .. inputs_copy.icon_name .. "/" .. icon_mask .. "-icon-mask.png",
             icon_size = inputs_copy.icon_size,
-            icon_mipmaps = inputs_copy.icon_mipmaps,
             tint = icon_tint,
         }
 
         icon_highlights_layer = {
             icon = reskins[inputs_copy.mod].directory .. "/graphics/icons/" .. folder_path .. "/" .. inputs_copy.icon_name .. "/" .. icon_highlights .. "-icon-highlights.png",
             icon_size = inputs_copy.icon_size,
-            icon_mipmaps = inputs_copy.icon_mipmaps,
             tint = { 1, 1, 1, 0 },
         }
     end

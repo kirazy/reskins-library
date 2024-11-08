@@ -43,7 +43,6 @@ local function convert_icon_layer_to_sprite_layer(icon_layer, scale)
         flags = { "icon" },
         filename = icon_copy.icon,
         size = icon_copy.icon_size,
-        mipmap_count = icon_copy.icon_mipmaps,
         scale = scale_to_apply,
         shift = converted_shift,
         tint = icon_copy.tint,
@@ -67,13 +66,11 @@ end
 ---    {
 ---        icon = "__base__/graphics/icons/iron-plate.png",
 ---        icon_size = 64,
----        icon_mipmaps = 4,
 ---        scale = 0.5,
 ---    },
 ---    {
 ---        icon = "__base__/graphics/icons/copper-wire.png",
 ---        icon_size = 64,
----        icon_mipmaps = 4,
 ---        scale = 0.25,
 ---        shift = { -16, -16 }
 ---    },
@@ -92,7 +89,6 @@ end
 ---*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon_mipmaps` is defined and not an integer between 0 and 255.
 ---@nodiscard
 function _sprites.create_sprite_from_icons(icon_data, scale)
     assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
@@ -125,7 +121,6 @@ end
 ---local icon_datum = {
 ---    icon = "__base__/graphics/icons/iron-plate.png",
 ---    icon_size = 64,
----    icon_mipmaps = 4,
 ---    scale = 0.5,
 ---}
 ---
@@ -143,7 +138,6 @@ end
 ---*@throws* `string` — Thrown when `icon_datum` is not an IconData object.<br/>
 ---*@throws* `string` — Thrown when `icon_datum.icon` is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_datum.icon_size` is not a positive integer.<br/>
----*@throws* `string` — Thrown when `icon_datum.icon_mipmaps` is defined and not an integer between 0 and 255.
 ---@nodiscard
 function _sprites.create_sprite_from_icon(icon_datum, scale)
     assert(icon_datum, "Invalid parameter: 'icon_datum' must not be nil.")

@@ -71,7 +71,6 @@ local function get_icon_datum(type_name, material_type)
     local icon_datum = {
         icon = path .. "-" .. type_name .. "-icon.png",
         icon_size = 64,
-        icon_mipmaps = 4,
         scale = 0.5,
     }
 

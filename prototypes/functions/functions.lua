@@ -34,9 +34,7 @@ end
 
 ---@class ParseInputsInputs
 ---@field icon_size? data.SpriteSizeType # Default `64`.
----@field icon_mipmaps? data.IconMipMapType # Default `4`.
 ---@field technology_icon_size? data.SpriteSizeType # Default `128`.
----@field technology_icon_mipmaps? data.IconMipMapType # Default `1`.
 ---@field make_explosions? boolean # Default `true`, creates explosions in `standard_setup_entity`.
 ---@field make_remnants? boolean # Default `true`, creates corpses in `standard_setup_entity`.
 ---@field make_icons? boolean # Default `true`, create icons in `standard_setup_entity`.
@@ -49,9 +47,7 @@ end
 ---```lua
 --- inputs = {
 ---     icon_size = 64,
----     icon_mipmaps = 4,
 ---     technology_icon_size = 128,
----     technology_icon_mipmaps = 1,
 ---     make_explosions = true,
 ---     make_remnants = true,
 ---     make_icons = true,
@@ -61,9 +57,7 @@ end
 ---```
 function reskins.lib.parse_inputs(inputs)
     inputs.icon_size = inputs.icon_size or 64
-    inputs.icon_mipmaps = inputs.icon_mipmaps or 4
     inputs.technology_icon_size = inputs.technology_icon_size or 128
-    inputs.technology_icon_mipmaps = inputs.technology_icon_mipmaps or 0
     inputs.make_explosions = (inputs.make_explosions ~= false)
     inputs.make_remnants = (inputs.make_remnants ~= false)
     inputs.make_icons = (inputs.make_icons ~= false)

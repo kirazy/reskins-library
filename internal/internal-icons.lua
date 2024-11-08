@@ -47,7 +47,6 @@ end
 ---@field mask_name? string
 ---@field highlight_name? string
 ---@field icon_size data.SpriteSizeType
----@field icon_mipmaps? data.IconMipMapType
 ---@field layers? 1|2|3 # The number of layers in the icon.
 
 ---@class CreatableFlatIconDatum
@@ -108,9 +107,7 @@ function reskins.internal.create_icons_from_list(table, inputs)
 
         -- Set defaults
         inputs_copy.icon_size = inputs.icon_size or 64
-        inputs_copy.icon_mipmaps = inputs.icon_mipmaps or 4
         inputs_copy.technology_icon_size = inputs.technology_icon_size or 128
-        inputs_copy.technology_icon_mipmaps = inputs.technology_icon_mipmaps or 0
         inputs_copy.tier_labels = (inputs.tier_labels ~= false)
 
         -- Handle input parameters
@@ -118,9 +115,7 @@ function reskins.internal.create_icons_from_list(table, inputs)
         inputs_copy.mod = overrides.mod or inputs_copy.mod
         inputs_copy.group = overrides.group or inputs_copy.group
         inputs_copy.icon_size = overrides.icon_size or inputs_copy.icon_size
-        inputs_copy.icon_mipmaps = overrides.icon_mipmaps or inputs_copy.icon_mipmaps
         inputs_copy.technology_icon_size = overrides.technology_icon_size or inputs_copy.technology_icon_size
-        inputs_copy.technology_icon_mipmaps = overrides.technology_icon_mipmaps or inputs_copy.technology_icon_mipmaps
         inputs_copy.subgroup = overrides.subgroup or inputs_copy.subgroup or nil
 
         -- Transcribe icon properties

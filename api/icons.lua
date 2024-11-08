@@ -29,7 +29,6 @@ local _icons = {
 ---local icon_data = {
 ---    icon = "__core__/graphics/empty.png",
 ---    icon_size = 1,
----    icon_mipmaps = 0,
 ---    scale = 32,
 ---}
 ---```
@@ -43,7 +42,6 @@ function _icons.empty_icon()
     return {
         icon = "__core__/graphics/empty.png",
         icon_size = 1,
-        icon_mipmaps = 0,
         scale = 32,
     }
 end
@@ -56,7 +54,6 @@ end
 ---local icon_data = {
 ---    icon = "__core__/graphics/empty.png",
 ---    icon_size = 1,
----    icon_mipmaps = 0,
 ---    scale = 256,
 ---}
 ---```
@@ -70,7 +67,6 @@ function _icons.empty_technology_icon()
     return {
         icon = "__core__/graphics/empty.png",
         icon_size = 1,
-        icon_mipmaps = 0,
         scale = 256,
     }
 end
@@ -118,13 +114,11 @@ end
 ---    {
 ---        icon = "__base__/graphics/icons/iron-plate.png",
 ---        icon_size = 64,
----        icon_mipmaps = 4,
 ---        scale = 0.5,
 ---    },
 ---    {
 ---        icon = "__base__/graphics/icons/copper-wire.png",
 ---        icon_size = 64,
----        icon_mipmaps = 4,
 ---        scale = 0.25,
 ---        shift = { -16, 16 }
 ---    },
@@ -167,7 +161,6 @@ function _icons.clear_icon_from_prototype_by_reference(prototype)
         prototype.icons = nil
         prototype.icon = nil
         prototype.icon_size = nil
-        prototype.icon_mipmaps = nil
     end
 end
 
@@ -202,7 +195,6 @@ end
 ---local icon_datum = {
 ---    icon = "__base__/graphics/icons/iron-plate.png",
 ---    icon_size = 64,
----    icon_mipmaps = 4,
 ---    scale = 0.5,
 ---}
 ---
@@ -217,7 +209,6 @@ end
 ---*@throws* `string` — Thrown when `icon_dataum` is `nil`<br/>
 ---*@throws* `string` — Thrown when `icon_dataum.icon` is not a mod-prefixed absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_dataum.icon_size` is not a positive integer.<br/>
----*@throws* `string` — Thrown when `icon_dataum.icon_mipmaps` is not `nil` and not an integer between 0 and 255.
 ---@nodiscard
 function _icons.add_missing_icon_defaults(icon_datum, is_technology_icon)
     assert(icon_datum, "Missing required parameter: 'icon_datum' must not be nil.")
@@ -231,26 +222,12 @@ function _icons.add_missing_icon_defaults(icon_datum, is_technology_icon)
 
     -- Validate icon size.
     assert(icon_datum.icon_size, "Missing required field: 'icon_size' must not be nil.")
-
-    local icon_type = type(icon_datum.icon_size)
-    if icon_type ~= "number" then
-        log("Invalid type: 'icon_size' must be a number, but was a '" .. icon_type .. "'. Starting in Factorio 2.0, this exception will be thrown instead of logged.")
-        log(serpent.block(icon_datum))
-
-        icon_datum.icon_size = tonumber(icon_datum.icon_size)
-    end
-
-    assert(icon_datum.icon_size > 0 and icon_datum.icon_size % 1 == 0,
-        "Invalid value: 'icon_size' must be an integer greater than zero, but was '" .. icon_datum.icon_size .. "'.")
-
-    -- Validate icon mipmaps.
-    assert(icon_datum.icon_mipmaps == nil or (type(icon_datum.icon_mipmaps) == "number" and icon_datum.icon_mipmaps >= 0 and icon_datum.icon_mipmaps <= 255 and icon_datum.icon_mipmaps % 1 == 0),
-        "Invalid value: 'icon_mipmaps' must be an integer between 0 and 255, or nil, but was '" .. tostring(icon_datum.icon_mipmaps) .. "'.")
+    assert(type(icon_datum.icon_size) == "number", "Invalid type: 'icon_size' must be a number, but was a '" .. type(icon_datum.icon_size) .. "'.")
+    assert(icon_datum.icon_size > 0 and icon_datum.icon_size % 1 == 0, "Invalid value: 'icon_size' must be an integer greater than zero, but was '" .. icon_datum.icon_size .. "'.")
 
     return {
         icon = icon_datum.icon,
         icon_size = icon_datum.icon_size,
-        icon_mipmaps = icon_datum.icon_mipmaps or 0,
         scale = icon_datum.scale or (is_technology_icon and 256 / icon_datum.icon_size) or (32 / icon_datum.icon_size),
         shift = icon_datum.shift or nil,
         tint = icon_datum.tint or nil,
@@ -271,13 +248,11 @@ end
 ---    {
 ---        icon = "__base__/graphics/icons/iron-plate.png",
 ---        icon_size = 64,
----        icon_mipmaps = 4,
 ---        scale = 0.5,
 ---    },
 ---    {
 ---        icon = "__base__/graphics/icons/copper-wire.png",
 ---        icon_size = 64,
----        icon_mipmaps = 4,
 ---        scale = 0.25,
 ---        shift = { -16, 16 }
 ---    },
@@ -294,7 +269,6 @@ end
 ---*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon_mipmaps` is defined and not an integer between 0 and 255.
 ---@nodiscard
 function _icons.add_missing_icons_defaults(icon_data, is_technology_icon)
     assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
@@ -323,17 +297,15 @@ end
 ---### Parameters
 ---@param icon data.FileName # The file name of the icon to use.
 ---@param icon_size data.SpriteSizeType # The size of the icon.
----@param icon_mipmaps? data.IconMipMapType # The number of mipmap levels the icon file supports.
 ---@param scale? double # The scale of the icon.
 ---@param shift? data.Vector # The shift of the icon.
 ---@param tint? data.Color # The tint of the icon.
 ---@nodiscard
-local function pack_as_icon_datum(icon, icon_size, icon_mipmaps, scale, shift, tint)
+local function pack_as_icon_datum(icon, icon_size, scale, shift, tint)
     ---@type data.IconData
     local icon_datum = {
         icon = icon,
         icon_size = icon_size,
-        icon_mipmaps = icon_mipmaps,
         scale = scale,
         shift = shift,
         tint = tint,
@@ -356,7 +328,6 @@ end
 ---### Parameters
 ---@param icon data.FileName # The file name of the icon to use.
 ---@param icon_size data.SpriteSizeType # The size of the icon.
----@param icon_mipmaps? data.IconMipMapType # The number of mipmap levels the icon file supports. Default `0`.
 ---@param scale? double # The scale of the icon. Default `32 / icon_size`.
 ---@param shift? data.Vector # The shift of the icon. Default `nil`.
 ---@param tint? data.Color # The tint of the icon. Default `nil`.
@@ -364,10 +335,9 @@ end
 ---### Exceptions
 ---*@throws* `string` — Thrown when `icon` is not a mod-prefixed absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_size` is not a positive integer.<br/>
----*@throws* `string` — Thrown when `icon_mipmaps` is not `nil` and not an integer between 0 and 255.
 ---@nodiscard
-function _icons.create_icon(icon, icon_size, icon_mipmaps, scale, shift, tint)
-    return _icons.add_missing_icon_defaults(pack_as_icon_datum(icon, icon_size, icon_mipmaps, scale, shift, tint), false)
+function _icons.create_icon(icon, icon_size, scale, shift, tint)
+    return _icons.add_missing_icon_defaults(pack_as_icon_datum(icon, icon_size, scale, shift, tint), false)
 end
 
 ---
@@ -384,7 +354,6 @@ end
 ---### Parameters
 ---@param icon data.FileName # The file name of the icon to use.
 ---@param icon_size data.SpriteSizeType # The size of the icon.
----@param icon_mipmaps? data.IconMipMapType # The number of mipmap levels the icon file supports. Default `0`.
 ---@param scale? double # The scale of the icon. Default `256 / icon_size`.
 ---@param shift? data.Vector # The shift of the icon. Default `nil`.
 ---@param tint? data.Color # The tint of the icon. Default `nil`.
@@ -393,10 +362,9 @@ end
 ---### Exceptions
 ---*@throws* `string` — Thrown when `icon` is not a mod-prefixed absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_size` is not a positive integer.<br/>
----*@throws* `string` — Thrown when `icon_mipmaps` is not `nil` and not an integer between 0 and 255.
 ---@nodiscard
-function _icons.create_technology_icon(icon, icon_size, icon_mipmaps, scale, shift, tint)
-    return _icons.add_missing_icon_defaults(pack_as_icon_datum(icon, icon_size, icon_mipmaps, scale, shift, tint), true)
+function _icons.create_technology_icon(icon, icon_size, scale, shift, tint)
+    return _icons.add_missing_icon_defaults(pack_as_icon_datum(icon, icon_size, scale, shift, tint), true)
 end
 
 ---
@@ -453,7 +421,6 @@ function _icons.get_icon_from_prototype_by_reference(prototype)
         icons = { {
             icon = prototype.icon,
             icon_size = prototype.icon_size,
-            icon_mipmaps = prototype.icon_mipmaps,
         } }
     end
 
@@ -512,7 +479,6 @@ local related_prototypes = {
 ---local icon_datum = {
 ---    icon = "__base__/graphics/icons/assembling-machine-1.png",
 ---    icon_size = 64,
----    icon_mipmaps = 4,
 ---    scale = 0.5,
 ---}
 ---
@@ -537,7 +503,6 @@ local related_prototypes = {
 ---*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon_mipmaps` is defined and not an integer between 0 and 255.
 function _icons.assign_icons_to_prototype_and_related_prototypes(name, type_name, icon_data, pictures)
     assert(name and name ~= "", "Invalid parameter: 'name' must not be nil or an empty string.")
 
@@ -629,7 +594,6 @@ end
 ---    icon_data = { {
 ---        icon = "__base__/graphics/icons/iron-plate.png",
 ---        icon_size = 64,
----        icon_mipmaps = 4,
 ---        scale = 0.5,
 ---    } },
 ---}
@@ -684,7 +648,6 @@ end
 ---    icon_data = { {
 ---        icon = "__base__/graphics/icons/iron-plate.png",
 ---        icon_size = 64,
----        icon_mipmaps = 4,
 ---        scale = 0.5,
 ---    } },
 ---}
@@ -701,7 +664,6 @@ end
 ---*@throws* `string` — Thrown when a deferred icon's `icon_data` field is `nil`<br/>
 ---*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon` field is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon_size` field is not a positive integer.<br/>
----*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon_mipmaps` field is defined and not an integer between 0 and 255.
 ---
 ---### See Also
 ---@see Reskins.Lib.Icons.assign_icons_to_prototype_and_related_prototypes
@@ -734,7 +696,6 @@ end
 ---*@throws* `string` — Thrown when a deferred icon's `icon_data` field is `nil`<br/>
 ---*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon` field is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon_size` field is not a positive integer.<br/>
----*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon_mipmaps` field is defined and not an integer between 0 and 255.
 ---
 ---### See Also
 ---@see Reskins.Lib.Icons.store_icon_for_deferred_assigment_in_stage
@@ -806,13 +767,11 @@ end
 ---    {
 ---        icon = "__base__/graphics/icons/iron-plate.png",
 ---        icon_size = 64,
----        icon_mipmaps = 4,
 ---        scale = 0.5,
 ---    },
 ---    {
 ---        icon = "__base__/graphics/icons/copper-wire.png",
 ---        icon_size = 64,
----        icon_mipmaps = 4,
 ---        scale = 0.25,
 ---        shift = { -16, 16 }
 ---    },
@@ -834,7 +793,6 @@ end
 ---*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon_mipmaps` is defined and not an integer between 0 and 255.
 ---@nodiscard
 function _icons.transform_icon(icon_data, scale, shift, tint, is_technology_icon)
     local icon_data_copy = _icons.add_missing_icons_defaults(icon_data, is_technology_icon)
@@ -846,7 +804,6 @@ function _icons.transform_icon(icon_data, scale, shift, tint, is_technology_icon
         local icon_datum = {
             icon = layer.icon,
             icon_size = layer.icon_size,
-            icon_mipmaps = layer.icon_mipmaps,
             scale = layer.scale * (scale or 1),
             shift = shift and util.add_shift(util.mul_shift(layer.shift or { 0, 0 }, scale or 1), shift) or layer.shift,
             tint = tint or layer.tint,
@@ -878,7 +835,6 @@ end
 ---    {
 ---        icon = "__base__/graphics/icons/iron-plate.png",
 ---        icon_size = 64,
----        icon_mipmaps = 4,
 ---        scale = 0.5,
 ---    },
 ---}
@@ -910,7 +866,7 @@ function _icons.add_icons_from_prototype_to_icons_by_reference(icon_data, protot
     local icon_data_copy = _icons.add_missing_icons_defaults(icon_data, prototype.type == "technology")
 
     -- Ensure working with a copy of the prototype.
-    -- This method sets default values for missing fields, so icon_mipmaps and scale are present.
+    -- This method sets default values for missing fields, so scale is present.
     local sourced_icon_data = _icons.get_icon_from_prototype_by_reference(prototype)
     if not sourced_icon_data then return icon_data_copy end
 
@@ -941,7 +897,6 @@ end
 ---local icon_datum = {
 ---    icon = "__base__/graphics/icons/iron-plate.png",
 ---    icon_size = 64,
----    icon_mipmaps = 4,
 ---    scale = 0.5,
 ---}
 ---
@@ -1029,7 +984,6 @@ end
 ---local icon_datum = {
 ---    icon = "__base__/graphics/icons/iron-plate.png",
 ---    icon_size = 64,
----    icon_mipmaps = 4,
 ---    scale = 0.5,
 ---}
 ---
@@ -1221,7 +1175,6 @@ end
 ---        icon_datum = {
 ---            icon = "__base__/graphics/icons/iron-plate.png",
 ---            icon_size = 64,
----            icon_mipmaps = 4,
 ---            scale = 0.5,
 ---        },
 ---    },
@@ -1336,13 +1289,11 @@ function _icons.get_symbol(symbol, tint)
         {
             icon = "__reskins-library__/graphics/icons/symbols/" .. symbol:lower() .. "-symbol.png",
             icon_size = 64,
-            icon_mipmaps = 4,
             scale = 0.5,
         },
         {
             icon = "__reskins-library__/graphics/icons/symbols/" .. symbol:lower() .. "-symbol.png",
             icon_size = 64,
-            icon_mipmaps = 4,
             scale = 0.5,
             tint = util.get_color_with_alpha(tint, 0.75),
         },
@@ -1438,13 +1389,11 @@ function _icons.get_letter(letter, tint)
         {
             icon = "__reskins-library__/graphics/icons/letters/letter-" .. letter:lower() .. ".png",
             icon_size = 64,
-            icon_mipmaps = 4,
             scale = 0.5,
         },
         {
             icon = "__reskins-library__/graphics/icons/letters/letter-" .. letter:lower() .. ".png",
             icon_size = 64,
-            icon_mipmaps = 4,
             scale = 0.5,
             tint = util.get_color_with_alpha(tint, 0.75),
         },
@@ -1537,7 +1486,6 @@ function _icons.get_equipment_icon_background(category)
     local icon_data = {
         icon = "__reskins-library__/graphics/icons/backgrounds/equipment-background.png",
         icon_size = 64,
-        icon_mipmaps = 4,
         scale = 0.5,
         tint = tint,
     }

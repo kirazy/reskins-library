@@ -1,7 +1,10 @@
 ---------------------------------------------------------------------------------------------------
-Version: 2.2.4
+Version: 2.3.0
 Date: ????
-  Changes:
+  Breaking Changes:
+    - Removed `icon_mipmaps` parameter from `api.icons.create_icon` method
+    - Removed `icon_mipmaps` parameter from `api.icons.create_technology_icon` method
+    - Removed `icon_mipmaps` parameter from `api.tiers.create_icon_with_tier_labels` method
 ---------------------------------------------------------------------------------------------------
 Version: 2.2.3
 Date: 2024-08-03

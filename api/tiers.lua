@@ -294,13 +294,11 @@ end
 ---    {
 ---        icon = "__base__/graphics/icons/iron-plate.png",
 ---        icon_size = 64,
----        icon_mipmaps = 4,
 ---        scale = 0.5,
 ---    },
 ---    {
 ---        icon = "__base__/graphics/icons/copper-wire.png",
 ---        icon_size = 64,
----        icon_mipmaps = 4,
 ---        scale = 0.25,
 ---        shift = { -16, -16 }
 ---    },
@@ -318,7 +316,6 @@ end
 ---*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon_mipmaps` is defined and not an integer between 0 and 255.
 ---@nodiscard
 function _tiers.add_tier_labels_to_icons(tier, icon_data)
     assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
@@ -339,14 +336,12 @@ function _tiers.add_tier_labels_to_icons(tier, icon_data)
         table.insert(icon_data_copy, _icons.add_missing_icon_defaults({
             icon = icon_file_name,
             icon_size = 64,
-            icon_mipmaps = 4,
         }))
 
         -- Add tinted layer.
         table.insert(icon_data_copy, _icons.add_missing_icon_defaults({
             icon = icon_file_name,
             icon_size = 64,
-            icon_mipmaps = 4,
             tint = util.get_color_with_alpha(reskins.lib.tiers.get_tint(tier), 0.75),
         }))
     end
@@ -373,7 +368,6 @@ end
 ---local icon_datum = {
 ---    icon = "__base__/graphics/icons/assembling-machine-1.png",
 ---    icon_size = 64,
----    icon_mipmaps = 4,
 ---    scale = 0.5,
 ---}
 ---
@@ -389,7 +383,6 @@ end
 ---*@throws* `string` — Thrown when `icon_datum` is `nil`.<br/>
 ---*@throws* `string` — Thrown when `icon_datum.icon` is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_datum.icon_size` is not a positive integer.<br/>
----*@throws* `string` — Thrown when `icon_datum.icon_mipmaps` is defined and not an integer between 0 and 255.
 ---@nodiscard
 function _tiers.add_tier_labels_to_icon(tier, icon_datum)
     return _tiers.add_tier_labels_to_icons(tier, { icon_datum })
@@ -414,7 +407,6 @@ end
 ---@param tier integer # The tier of the added labels.
 ---@param icon data.FileName # The file name of the icon to use.
 ---@param icon_size data.SpriteSizeType # The size of the icon.
----@param icon_mipmaps? data.IconMipMapType # The number of mipmap levels the icon file supports. Default `0`.
 ---@param scale? double # The scale of the icon. Default `32 / icon_size`.
 ---@param shift? data.Vector # The shift of the icon. Default `nil`.
 ---@param tint? data.Color # The tint of the icon. Default `nil`.
@@ -423,10 +415,9 @@ end
 ---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.<br/>
 ---*@throws* `string` — Thrown when `icon` is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_size` is not a positive integer.<br/>
----*@throws* `string` — Thrown when `icon_mipmaps` is defined and not an integer between 0 and 255.
 ---@nodiscard
-function _tiers.create_icon_with_tier_labels(tier, icon, icon_size, icon_mipmaps, scale, shift, tint)
-    return _tiers.add_tier_labels_to_icon(tier, _icons.create_icon(icon, icon_size, icon_mipmaps, scale, shift, tint))
+function _tiers.create_icon_with_tier_labels(tier, icon, icon_size, scale, shift, tint)
+    return _tiers.add_tier_labels_to_icon(tier, _icons.create_icon(icon, icon_size, scale, shift, tint))
 end
 
 ---
@@ -457,7 +448,6 @@ end
 ---*@throws* `string` — Thrown when `prototype` has no defined field `icon_size` at the root, or at the root of the first element in `icons`.<br/>
 ---*@throws* `string` — Thrown when `prototype` has an icon with field `icon` that is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `prototype` has an icon with field `icon_size` that is not a positive integer.<br/>
----*@throws* `string` — Thrown when `prototype` has an icon with field `icon_mipmaps` that is defined and not an integer between 0 and 255.
 function _tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(tier, prototype)
     assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
 
@@ -511,7 +501,6 @@ end
 ---*@throws* `string` — Thrown when `prototype` has no defined field `icon_size` at the root, or at the root of the first element in `icons`.<br/>
 ---*@throws* `string` — Thrown when `prototype` has an icon with field `icon` that is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `prototype` has an icon with field `icon_size` that is not a positive integer.<br/>
----*@throws* `string` — Thrown when `prototype` has an icon with field `icon_mipmaps` that is defined and not an integer between 0 and 255.
 function _tiers.add_tier_labels_to_prototype_by_reference(tier, prototype)
     local deferrable_icon = _tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(tier, prototype)
 
@@ -549,7 +538,6 @@ end
 ---*@throws* `string` — Thrown when the prototype has no defined field `icon_size` at the root, or at the root of the first element in `icons`.<br/>
 ---*@throws* `string` — Thrown when the prototype icon has an with field `icon` that is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when the prototype icon has an with field `icon_size` that is not a positive integer.<br/>
----*@throws* `string` — Thrown when the prototype icon has an with field `icon_mipmaps` that is defined and not an integer between 0 and 255.
 function _tiers.add_tier_labels_to_prototype_by_name(tier, name, type_name)
     assert(name and name ~= "", "Invalid parameter: 'name' must not be nil or an empty string.")
     assert(type_name and type_name ~= "", "Invalid parameter: 'type_name' must not be nil or an empty string.")
