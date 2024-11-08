@@ -22,6 +22,7 @@ function reskins.lib.apply_skin.chemical_plant(name, tier, tint, make_tier_label
         tint = tint and tint or reskins.lib.tiers.get_tint(tier),
     }
 
+    ---@type data.AssemblingMachinePrototype
     local entity = data.raw[inputs.type][name]
     if not entity then return end
 
@@ -39,7 +40,6 @@ function reskins.lib.apply_skin.chemical_plant(name, tier, tint, make_tier_label
     corpse.animation = reskins.lib.sprites.chemical_plants.get_standard_remnants(inputs.tint)
 
     -- Reskin entity
-    entity.animation = reskins.lib.sprites.chemical_plants.get_standard_animation(inputs.tint)
-    entity.working_visualisations = reskins.lib.sprites.chemical_plants.get_standard_working_visualisations()
-    entity.drawing_box = { { -1.5, -2.25 }, { 1.5, 1.5 } }
+    entity.graphics_set.animation = reskins.lib.sprites.chemical_plants.get_standard_animation(inputs.tint)
+    entity.graphics_set.working_visualisations = reskins.lib.sprites.chemical_plants.get_standard_working_visualisations()
 end
