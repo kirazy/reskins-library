@@ -5,6 +5,7 @@ Date: ????
     - Removed `icon_mipmaps` parameter from `api.icons.create_icon` method
     - Removed `icon_mipmaps` parameter from `api.icons.create_technology_icon` method
     - Removed `icon_mipmaps` parameter from `api.tiers.create_icon_with_tier_labels` method
+    - Removed all deprecated API functions
 ---------------------------------------------------------------------------------------------------
 Version: 2.2.3
 Date: 2024-08-03
