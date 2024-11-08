@@ -535,7 +535,6 @@ end
 ---*@throws* `string` — Thrown when `type_name` is `nil` or an empty string.<br/>
 ---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.<br/>
 ---*@throws* `string` — Thrown when the prototype has no defined field `icon` or `icons`.<br/>
----*@throws* `string` — Thrown when the prototype has no defined field `icon_size` at the root, or at the root of the first element in `icons`.<br/>
 ---*@throws* `string` — Thrown when the prototype icon has an with field `icon` that is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when the prototype icon has an with field `icon_size` that is not a positive integer.<br/>
 function _tiers.add_tier_labels_to_prototype_by_name(tier, name, type_name)

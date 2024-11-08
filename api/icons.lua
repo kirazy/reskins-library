@@ -220,15 +220,16 @@ function _icons.add_missing_icon_defaults(icon_datum, is_technology_icon)
     assert(icon_datum.icon:find("^__[%a%d%-%_-]+__"), "Invalid filename: 'icon' must be an absolute file path, but was '" .. icon_datum.icon .. "'.")
     assert(icon_datum.icon:match("%.([%a%d]+)$"), "Invalid filename: 'icon' must have a valid file extension, but was '" .. icon_datum.icon .. "'.")
 
-    -- Validate icon size.
-    assert(icon_datum.icon_size, "Missing required field: 'icon_size' must not be nil.")
-    assert(type(icon_datum.icon_size) == "number", "Invalid type: 'icon_size' must be a number, but was a '" .. type(icon_datum.icon_size) .. "'.")
-    assert(icon_datum.icon_size > 0 and icon_datum.icon_size % 1 == 0, "Invalid value: 'icon_size' must be an integer greater than zero, but was '" .. icon_datum.icon_size .. "'.")
+    -- Validate icon size, which is now optional.
+    local icon_size = icon_datum.icon_size or defines.default_icon_size
+
+    assert(type(icon_size) == "number", "Invalid type: 'icon_size' must be a number, but was a '" .. type(icon_size) .. "'.")
+    assert(icon_size > 0 and icon_size % 1 == 0, "Invalid value: 'icon_size' must be an integer greater than zero, but was '" .. icon_size .. "'.")
 
     return {
         icon = icon_datum.icon,
-        icon_size = icon_datum.icon_size,
-        scale = icon_datum.scale or (is_technology_icon and 256 / icon_datum.icon_size) or (32 / icon_datum.icon_size),
+        icon_size = icon_size,
+        scale = icon_datum.scale or (is_technology_icon and 256 / icon_size) or (32 / icon_size),
         shift = icon_datum.shift or nil,
         tint = icon_datum.tint or nil,
     }
@@ -389,7 +390,6 @@ end
 ---
 ---### Exceptions
 ---*@throws* `string` — Thrown when `prototype` has no defined field `icon` or `icons`.<br/>
----*@throws* `string` — Thrown when `prototype` has no defined field `icon_size` at the root, or at the root of the first element in `icons`.
 ---@nodiscard
 function _icons.get_icon_from_prototype_by_reference(prototype)
     if not prototype then return end
@@ -401,9 +401,6 @@ function _icons.get_icon_from_prototype_by_reference(prototype)
     assert(prototype.icons or prototype.icon,
         "Invalid parameter: 'prototype' must have a defined 'icon' or 'icons' field.")
 
-    assert((not prototype.icons or prototype.icons[1].icon_size or prototype.icon_size),
-        "Invalid parameter: 'prototype' must have a defined 'icon_size' at the root, or at the root of the first element of the `icons` field.")
-
     ---@type data.IconData[]
     local icons
 
@@ -414,7 +411,7 @@ function _icons.get_icon_from_prototype_by_reference(prototype)
 
         -- Ensure icon_size is set for all elements before adding defaults.
         for n = 1, #icons do
-            icons[n].icon_size = icons[n].icon_size or prototype.icon_size
+            icons[n].icon_size = icons[n].icon_size or prototype.icon_size or defines.default_icon_size
         end
     else
         ---@type data.IconData[]
@@ -450,7 +447,6 @@ end
 ---*@throws* `string` — Thrown when `name` is `nil` or an empty string.<br/>
 ---*@throws* `string` — Thrown when `type_name` is `nil` or an empty string.<br/>
 ---*@throws* `string` — Thrown when the prototype has no defined field `icon` or `icons`.<br/>
----*@throws* `string` — Thrown when the prototype has no defined field `icon_size` at the root, or at the root of the first element in `icons`.
 ---@nodiscard
 function _icons.get_icon_from_prototype_by_name(name, type_name)
     assert(name and name ~= "", "Invalid parameter: 'name' must not be nil or an empty string.")
