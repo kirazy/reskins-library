@@ -69,6 +69,14 @@ end
 ---@field sort_group? string # Unclear; may be deprecated or unused in Factorio
 ---@field sort_subgroup? string # The name of the `ItemSubGroup` this entity should be sorted into in the map editor building selection.
 
+---@class AssignIconInputs
+---@field type string # The type name of the prototype.
+---@field icon data.FileName|data.IconData[] # The icon to assign, given as a file name or an array of `IconData` objects.
+---@field icon_size? data.SpriteSizeType # Required if `icon` is data.FileName, or not every `IconData` object has an `icon_size` value.
+---@field icon_picture? data.SpriteVariations
+---@field make_entity_pictures? boolean # When true, entities of type `type` will be assigned the `icon_picture` value.
+---@field make_icon_pictures? boolean # When true, valid items will be assigned the `icon_picture` value.
+
 ---@class StoreIconsInputs : AssignIconInputs
 ---@field mod "angels"|"bobs"|"lib"|"compatibility"
 ---@field defer_to_data_updates? boolean # When `true`, stores the icon for assignment at the end of data-updates. Expected if `defer_to_data_final_fixes` is not set.
