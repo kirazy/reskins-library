@@ -116,6 +116,7 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
         tint = tint and tint or reskins.lib.tiers.get_tint(tier),
     }
 
+    ---@type data.AssemblingMachinePrototype
     local entity = data.raw[inputs.type][name]
     if not entity then return end
 
@@ -135,5 +136,5 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
     corpse.animation = corpse_animation(inputs.tint)
 
     -- Reskin entity
-    entity.animation = entity_animation(inputs.tint)
+    entity.graphics_set.animation = entity_animation(inputs.tint)
 end
