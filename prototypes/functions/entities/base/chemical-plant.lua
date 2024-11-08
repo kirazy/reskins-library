@@ -17,7 +17,7 @@ function reskins.lib.apply_skin.chemical_plant(name, tier, tint, make_tier_label
         base_entity_name = "chemical-plant",
         mod = "lib",
         group = "common",
-        particles = { ["big"] = 1,["medium"] = 2 },
+        particles = { ["big"] = 1, ["medium"] = 2 },
         tier_labels = make_tier_labels,
         tint = tint and tint or reskins.lib.tiers.get_tint(tier),
     }

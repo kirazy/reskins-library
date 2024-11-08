@@ -15,4 +15,3 @@ end
 ---```
 ---@class Reskins.Lib.Tints
 local _tints = {}
-

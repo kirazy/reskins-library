@@ -70,7 +70,7 @@ function reskins.lib.apply_skin.transport_belt(name, tier, tint, make_tier_label
         base_entity_name = use_express_spritesheet and "express-transport-belt" or "transport-belt",
         mod = "lib",
         group = "base",
-        particles = { ["medium"] = 1,["small"] = 2 },
+        particles = { ["medium"] = 1, ["small"] = 2 },
         tier_labels = make_tier_labels or false,
         tint = tint and tint or reskins.lib.tiers.get_belt_tint(tier),
     }

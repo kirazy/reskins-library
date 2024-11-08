@@ -169,54 +169,53 @@ end
 ---@nodiscard
 function _chemical_plants.get_standard_animation(tint)
     return reskins.lib.sprites.make_4way_animation_from_spritesheet({
-            layers = {
-                -- Base
-                {
-                    filename = "__reskins-library__/graphics/entity/common/chemical-plant/hr-chemical-plant-base.png",
-                    width = 220,
-                    height = 292,
-                    frame_count = 24,
-                    line_length = 12,
-                    shift = util.by_pixel(0.5, -9),
-                    scale = 0.5,
-                },
-                -- Mask
-                {
-                    filename = "__reskins-library__/graphics/entity/common/chemical-plant/hr-chemical-plant-mask.png",
-                    width = 220,
-                    height = 292,
-                    frame_count = 24,
-                    line_length = 12,
-                    shift = util.by_pixel(0.5, -9),
-                    tint = tint,
-                    scale = 0.5,
-                },
-                -- Highlights
-                {
-                    filename = "__reskins-library__/graphics/entity/common/chemical-plant/hr-chemical-plant-highlights.png",
-                    width = 220,
-                    height = 292,
-                    frame_count = 24,
-                    line_length = 12,
-                    shift = util.by_pixel(0.5, -9),
-                    blend_mode = reskins.lib.settings.blend_mode, -- "additive",
-                    scale = 0.5,
-                },
-                -- Shadow
-                {
-                    filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-shadow.png",
-                    width = 312,
-                    height = 222,
-                    repeat_count = 24,
-                    frame_count = 1,
-                    shift = util.by_pixel(27, 6),
-                    draw_as_shadow = true,
-                    scale = 0.5,
-                },
+        layers = {
+            -- Base
+            {
+                filename = "__reskins-library__/graphics/entity/common/chemical-plant/hr-chemical-plant-base.png",
+                width = 220,
+                height = 292,
+                frame_count = 24,
+                line_length = 12,
+                shift = util.by_pixel(0.5, -9),
+                scale = 0.5,
             },
-        })
+            -- Mask
+            {
+                filename = "__reskins-library__/graphics/entity/common/chemical-plant/hr-chemical-plant-mask.png",
+                width = 220,
+                height = 292,
+                frame_count = 24,
+                line_length = 12,
+                shift = util.by_pixel(0.5, -9),
+                tint = tint,
+                scale = 0.5,
+            },
+            -- Highlights
+            {
+                filename = "__reskins-library__/graphics/entity/common/chemical-plant/hr-chemical-plant-highlights.png",
+                width = 220,
+                height = 292,
+                frame_count = 24,
+                line_length = 12,
+                shift = util.by_pixel(0.5, -9),
+                blend_mode = reskins.lib.settings.blend_mode, -- "additive",
+                scale = 0.5,
+            },
+            -- Shadow
+            {
+                filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-shadow.png",
+                width = 312,
+                height = 222,
+                repeat_count = 24,
+                frame_count = 1,
+                shift = util.by_pixel(27, 6),
+                draw_as_shadow = true,
+                scale = 0.5,
+            },
+        },
+    })
 end
-
 
 ---
 ---Gets a `RotatedAnimationVariations` object containing vanilla-type (standard) chemical plant

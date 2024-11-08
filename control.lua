@@ -98,13 +98,13 @@ local function check_for_missing_reskin(player)
                 if count == 0 then
                     player.print({ "", "[", { "reskins-library.reskins-suite-name" }, "] ", { "reskins-notifications.reskins-notify-missing-single",
                         { "", "[color=" .. message_color .. "]", { "reskins-supported-mods." .. notify_mod_name }, "[/color]" },
-                        { "", "[color=" .. message_color .. "]", { "reskins-library.reskins-" .. reskin .. "-mod-name" }, "[/color]" }, },
+                        { "", "[color=" .. message_color .. "]", { "reskins-library.reskins-" .. reskin .. "-mod-name" }, "[/color]" } },
                     })
                 else
                     player.print({ "", "[", { "reskins-library.reskins-suite-name" }, "] ", { "reskins-notifications.reskins-notify-missing-multiple",
                         { "", "[color=" .. message_color .. "]", { "reskins-supported-mods." .. notify_mod_name }, "[/color]" },
                         count,
-                        { "", "[color=" .. message_color .. "]", { "reskins-library.reskins-" .. reskin .. "-mod-name" }, "[/color]" }, },
+                        { "", "[color=" .. message_color .. "]", { "reskins-library.reskins-" .. reskin .. "-mod-name" }, "[/color]" } },
                     })
                 end
             end

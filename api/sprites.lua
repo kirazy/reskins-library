@@ -335,7 +335,6 @@ end
 ---@param animation VerticallyOrientableAnimation|data.Animation # The animation object to create the 4-way animation from.
 ---@nodiscard
 function _sprites.make_4way_animation_from_spritesheet(animation)
-
     local animation_copy = util.copy(animation)
 
     ---@class DirectionDefines : integer

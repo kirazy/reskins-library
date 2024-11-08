@@ -323,7 +323,7 @@ function reskins.lib.apply_skin.splitter(name, tier, tint, make_tier_labels, res
         base_entity_name = "splitter",
         mod = "lib",
         group = "base",
-        particles = { ["medium"] = 1,["big"] = 4 },
+        particles = { ["medium"] = 1, ["big"] = 4 },
         tier_labels = make_tier_labels or false,
         tint = tint and tint or reskins.lib.tiers.get_belt_tint(tier),
     }

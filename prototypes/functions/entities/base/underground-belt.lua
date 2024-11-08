@@ -225,7 +225,7 @@ function reskins.lib.apply_skin.underground_belt(name, tier, tint, make_tier_lab
         base_entity_name = "underground-belt",
         mod = "lib",
         group = "base",
-        particles = { ["medium"] = 3,["small"] = 2 },
+        particles = { ["medium"] = 3, ["small"] = 2 },
         tier_labels = make_tier_labels or false,
         tint = tint and tint or reskins.lib.tiers.get_belt_tint(tier),
     }

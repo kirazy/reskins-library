@@ -29,7 +29,6 @@ function _prototypes.get_name_of_first_item_that_exists(...)
     end
 end
 
-
 -- Filtering tables for rescale_entity
 local included_fields = {
     ["shift"] = true,
@@ -76,7 +75,6 @@ local excluded_fields = {
 ---@param entity_prototype any # The entity prototype to rescale.
 ---@param scalar double # The scale factor to resize the prototype by.
 function _prototypes.rescale_prototype(entity_prototype, scalar)
-
     ---
     ---Recursively scales all numeric values in the given `table`, regardless of depth.
     ---
@@ -100,7 +98,7 @@ function _prototypes.rescale_prototype(entity_prototype, scalar)
     end
 
     for key, value in pairs(entity_prototype) do
-        -- Because Factorio assumes the value of the scale field if left undefined, 
+        -- Because Factorio assumes the value of the scale field if left undefined,
         -- we need to ensure it's defined. Use canon-typical violence.
         if (entity_prototype.filename or entity_prototype.stripes or entity_prototype.filenames) then
             -- Hi-res table.
@@ -123,7 +121,7 @@ function _prototypes.rescale_prototype(entity_prototype, scalar)
     end
 end
 
----Resizes a copy of the `CorpsePrototype` associated with the given `prototype` by the given 
+---Resizes a copy of the `CorpsePrototype` associated with the given `prototype` by the given
 ---`scalar`, and assigns the rescaled copy to `prototype`. The name of the rescaled copy is
 ---prefixed with "rescaled-".
 ---
@@ -196,7 +194,6 @@ local particle_types = {
 -- 3. Adds the new prototype to the data table.
 -- 4. Replaces the particle on the explosion prototype with the new particle, based on a given key.
 function _prototypes.create_particle_by_duplication(name, source_entity_name, source_particle_name, tint)
-
     ---@type data.ParticlePrototype
     local particle = util.copy(data.raw["optimized-particle"][source_entity_name .. "-" .. source_particle_name])
 

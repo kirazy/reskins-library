@@ -34,7 +34,7 @@ local _library = {
     tiers = require("__reskins-library__.api.tiers"),
 
     ---@type Reskins.Lib.Version
-    version = require("__reskins-library__.api.version")
+    version = require("__reskins-library__.api.version"),
 }
 
 return _library

@@ -28,7 +28,6 @@
 ---@param name string # The name of the technology prototype.
 ---@param inputs ConstructTechnologyIconInputsOld
 function reskins.lib.construct_technology_icon(name, inputs)
-
     ---@type ConstructTechnologyIconInputsOld
     local inputs_copy = util.copy(inputs)
 
@@ -197,7 +196,6 @@ function reskins.lib.return_technology_effect_icon(constant, scale)
     return icon_data
 end
 
-
 ----------------------------------------------------------------------------------------------------
 -- STANDARD ICON FUNCTIONS
 ----------------------------------------------------------------------------------------------------
@@ -215,7 +213,7 @@ end
 ---
 ---Defaults to `32/icon_size` for items and recipes, and `256/icon_size` for technologies.
 ---
----Specifies the scale of the icon on the GUI scale. A scale of `2` means that the icon will be two 
+---Specifies the scale of the icon on the GUI scale. A scale of `2` means that the icon will be two
 ---times bigger on screen (and thus more pixelated).
 ---
 ---[View Documentation](https://lua-api.factorio.com/latest/types/IconData.html#scale)
@@ -241,21 +239,21 @@ end
 ---
 ---The prefix of the base icon file named `{icon_base}-icon-base.png`. Used in place of `mask_name`
 ---and `highlights_name` if neither is provided.
----@field icon_base string 
+---@field icon_base string
 ---
 ---The prefix of the mask icon file named `{icon_mask}-icon-mask.png` Optional; uses `icon_base` if
 ---not provided.
----@field icon_mask? string 
+---@field icon_mask? string
 ---
 ---The prefix of the highlights icon file named `{icon_highlights}-icon-highlights.png` Optional;
 ---uses `icon_base` if not provided.
----@field icon_highlights? string 
+---@field icon_highlights? string
 ---
 ---The tint to apply to the mask layer.
----@field tint data.Color 
+---@field tint data.Color
 ---
 ---The number of layers in the icon. Default `3`.
----@field num_layers? 1|2|3 
+---@field num_layers? 1|2|3
 
 ---A createable single-layer icon.
 ---@class FlatCreateableIcon : CreateableIconBase
@@ -293,7 +291,6 @@ end
 ---@param tier integer # The tier of the added labels. An integer value from 0 to 6.
 ---@param inputs ConstructIconInputsOld
 function reskins.lib.construct_icon(name, tier, inputs)
-
     ---@type ConstructIconInputsOld
     local inputs_copy = util.copy(inputs)
 

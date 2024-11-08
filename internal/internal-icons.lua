@@ -92,7 +92,6 @@ end
 ---@param table CreateIconsFromListTable # A dictionary of `CreateIconsFromListOverrides` objects, keyed by the name of the prototype.
 ---@param inputs CreateIconsFromListInputs # The base inputs to apply to all icons.
 function reskins.internal.create_icons_from_list(table, inputs)
-
     for name, overrides in pairs(table) do
         -- Fetch the icon
         local icon_type = overrides.type or inputs.type or "item"

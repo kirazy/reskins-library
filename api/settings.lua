@@ -89,7 +89,7 @@ _settings.blend_mode = _settings.get_value("reskins-lib-blend-mode")
 ---| '"technologies"'
 
 ---
----Checks if reskinning the given `feature_set` is enabled for a given `source_mod` 
+---Checks if reskinning the given `feature_set` is enabled for a given `source_mod`
 ---doing the reskinning, and a given `target_mod` being reskinned.
 ---
 ---### Returns

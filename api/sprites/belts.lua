@@ -19,7 +19,7 @@ local _belts = {}
 ---
 ---Gets the belt animation set for the given `belt_sprites`, tinted with the given `tint`.
 ---
----### Returns 
+---### Returns
 ---@return data.TransportBeltAnimationSet # A tinted belt animation set.
 ---
 ---### Examples
