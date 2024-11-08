@@ -31,7 +31,6 @@ if mods["reskins-compatibility"] then
 end
 
 require("prototypes.functions.functions")
-require("prototypes.functions.deprecated")
 require("prototypes.functions.tints")
 require("prototypes.functions.icon-handling")
 require("prototypes.functions.label-items")
