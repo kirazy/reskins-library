@@ -306,12 +306,6 @@ end
 ---If this property is present, all other properties, including those inherited from
 ---AnimationParameters, are ignored.
 ---@field layers? VerticallyOrientableAnimation[]
----
----Only loaded if `layers` is not defined.
----
----If this property exists and high resolution sprites are turned on, this is used to load the
----Animation.
----@field hr_version? VerticallyOrientableAnimation
 
 ---
 ---Creates an `Animation4Way` object using the given `animation`, parsing the `line_length`
@@ -334,18 +328,10 @@ end
 ---    filename = "__modname__/graphics/entity/prototype/prototype.png",
 ---    priority = "extra-high",
 ---    vertically_oriented = true,
----    width = 330,
----    height = 230,
----    shift = util.by_pixel(50, 10),
----    hr_version = {
----        filename = "__modname__/graphics/entity/prototype/hr-prototype.png",
----        priority = "extra-high",
----        vertically_oriented = true,
----        width = 660,
----        height = 460,
----        shift = util.by_pixel_hr(100, 20),
----        scale = 0.5,
----    }
+---    width = 660,
+---    height = 460,
+---    shift = util.by_pixel_hr(100, 20),
+---    scale = 0.5,
 ---},
 ---```
 ---For a real-world example, see the Advanced Gas Refinery sprite sheets in Artisanal Reskins:
@@ -435,27 +421,6 @@ function _sprites.make_4way_animation_from_spritesheet(animation)
 
     ---
     ---Creates the `data.Animation` object for the given `direction` using the given
-    ---`source_animation`, including an `hr_version` field if available in `source_animation`.
-    ---
-    ---### Returns
-    ---@return data.Animation # The new animation for the given `direction`.
-    ---
-    ---### Parameters
-    ---@param direction DirectionDefines # The direction to create the animation for.
-    ---@param source_animation VerticallyOrientableAnimation # The source animation object with a sprite sheet supporting direction-based configurations.
-    local function make_animation_layer_with_hr_version_for_direction(direction, source_animation)
-        ---@type data.Animation
-        local animation_for_direction = make_animation_layer_for_direction(direction, source_animation)
-
-        if source_animation.hr_version and source_animation.hr_version.filename then
-            animation_for_direction.hr_version = make_animation_layer_for_direction(direction, source_animation.hr_version)
-        end
-
-        return animation_for_direction
-    end
-
-    ---
-    ---Creates the `data.Animation` object for the given `direction` using the given
     ---`source_animation`.
     ---
     ---### Returns
@@ -468,11 +433,11 @@ function _sprites.make_4way_animation_from_spritesheet(animation)
             ---@type data.Animation
             local new_animation = { layers = {} }
             for _, v in ipairs(animation_copy.layers) do
-                table.insert(new_animation.layers, make_animation_layer_with_hr_version_for_direction(direction, v))
+                table.insert(new_animation.layers, make_animation_layer_for_direction(direction, v))
             end
             return new_animation
         else
-            return make_animation_layer_with_hr_version_for_direction(direction, animation_copy)
+            return make_animation_layer_for_direction(direction, animation_copy)
         end
     end
 

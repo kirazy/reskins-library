@@ -102,12 +102,9 @@ function _prototypes.rescale_prototype(entity_prototype, scalar)
     for key, value in pairs(entity_prototype) do
         -- Because Factorio assumes the value of the scale field if left undefined, 
         -- we need to ensure it's defined. Use canon-typical violence.
-        if key == "hr_version" then
-            -- High-res table.
-            entity_prototype[key].scale = entity_prototype[key].scale or 0.5
-        elseif (entity_prototype.filename or entity_prototype.stripes or entity_prototype.filenames) then
-            -- Normal-res table.
-            entity_prototype.scale = entity_prototype.scale or 1
+        if (entity_prototype.filename or entity_prototype.stripes or entity_prototype.filenames) then
+            -- Hi-res table.
+            entity_prototype.scale = entity_prototype.scale or 0.5
         end
 
         if included_fields[key] then
@@ -205,7 +202,6 @@ function _prototypes.create_particle_by_duplication(name, source_entity_name, so
 
     particle.name = "ar-" .. name .. "-" .. source_particle_name .. "-tinted"
     particle.pictures.sheet.tint = tint
-    particle.pictures.sheet.hr_version.tint = tint
 
     data:extend({ particle })
 

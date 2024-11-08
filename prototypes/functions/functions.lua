@@ -169,7 +169,6 @@ function reskins.lib.create_particle(name, base_entity_name, base_particle_name,
     local particle = util.copy(data.raw["optimized-particle"][base_entity_name .. "-" .. base_particle_name])
     particle.name = name .. "-" .. base_particle_name .. "-tinted"
     particle.pictures.sheet.tint = tint
-    particle.pictures.sheet.hr_version.tint = tint
     data:extend({ particle })
 
     -- Assign particle to originating explosion
