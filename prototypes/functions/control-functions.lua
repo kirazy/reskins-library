@@ -14,15 +14,15 @@ local _control = {}
 ---### Remarks
 ---Called by `migration/reskins-library_1.1.3.lua`
 function _control.on_init()
-    global.notify = {
+    storage.notify = {
         bobs = {
-            status = game.active_mods["reskins-bobs"] and true or false,
+            status = script.active_mods["reskins-bobs"] and true or false,
         },
         angels = {
-            status = game.active_mods["reskins-angels"] and true or false,
+            status = script.active_mods["reskins-angels"] and true or false,
         },
         compatibility = {
-            status = game.active_mods["reskins-compatibility"] and true or false,
+            status = script.active_mods["reskins-compatibility"] and true or false,
         },
     }
 end

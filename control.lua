@@ -74,18 +74,18 @@ local function check_for_missing_reskin(player)
     }
 
     -- Make sure at least one reskin mod is present
-    if game.active_mods["reskins-bobs"] or game.active_mods["reskins-angels"] or game.active_mods["reskins-compatibility"] then
+    if script.active_mods["reskins-bobs"] or script.active_mods["reskins-angels"] or script.active_mods["reskins-compatibility"] then
         -- Iterate through each of the reskin mods
         for reskin, mod_list in pairs(supported_mods) do
             -- Check if notification for this reskin is needed
-            if global.notify[reskin].status then goto continue end
+            if storage.notify[reskin].status then goto continue end
             local count = -1
             local notify_mod_name
 
             -- Check for each of the mods supported by the reskin mod, store the first result found, count the number of matches
             for _, mod in pairs(mod_list) do
                 -- A supported mod is present
-                if game.active_mods[mod] then
+                if script.active_mods[mod] then
                     -- Store the name of the first positive result
                     if count == -1 then notify_mod_name = mod end
                     count = count + 1
@@ -94,7 +94,7 @@ local function check_for_missing_reskin(player)
 
             -- Notify the player, set the flag not to do so again
             if notify_mod_name then
-                global.notify[reskin].status = true
+                storage.notify[reskin].status = true
                 if count == 0 then
                     player.print({ "", "[", { "reskins-library.reskins-suite-name" }, "] ", { "reskins-notifications.reskins-notify-missing-single",
                         { "", "[color=" .. message_color .. "]", { "reskins-supported-mods." .. notify_mod_name }, "[/color]" },
@@ -144,11 +144,11 @@ local function notify(data)
 
                     -- 1.1.3 update
                     if not _version.is_older(data.mod_changes["reskins-library"].old_version, "1.1.3") then
-                        if game.active_mods["reskins-bobs"] and not game.active_mods["reskins-compatibility"] then
+                        if script.active_mods["reskins-bobs"] and not script.active_mods["reskins-compatibility"] then
                             player.print({ "", "[", { "reskins-library.reskins-suite-name" }, "] ", { "reskins-updates.reskins-lib-1-1-3-update-bobs", { "", "[color=" .. message_color .. "]", { "reskins-library.reskins-compatibility-mod-name" }, "[/color]" } } })
                         end
 
-                        if game.active_mods["reskins-angels"] and not game.active_mods["reskins-compatibility"] then
+                        if script.active_mods["reskins-angels"] and not script.active_mods["reskins-compatibility"] then
                             player.print({ "", "[", { "reskins-library.reskins-suite-name" }, "] ", { "reskins-updates.reskins-lib-1-1-3-update-angels", { "", "[color=" .. message_color .. "]", { "reskins-library.reskins-compatibility-mod-name" }, "[/color]" } } })
                         end
                     end
