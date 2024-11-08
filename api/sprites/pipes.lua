@@ -542,7 +542,7 @@ function _pipes.get_pipe(material_type)
             scale = 0.5,
         },
         fluid_background = {
-            filename = "__base__/graphics/entity/pipe/hr-fluid-background.png",
+            filename = "__base__/graphics/entity/pipe/fluid-background.png",
             priority = "extra-high",
             width = 64,
             height = 40,
@@ -567,7 +567,7 @@ function _pipes.get_pipe(material_type)
             height = 18,
         },
         gas_flow = {
-            filename = "__base__/graphics/entity/pipe/hr-steam.png",
+            filename = "__base__/graphics/entity/pipe/steam.png",
             priority = "extra-high",
             line_length = 10,
             width = 48,

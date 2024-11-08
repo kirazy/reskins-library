@@ -28,7 +28,7 @@ function _chemical_plants.get_standard_working_visualisations()
         {
             apply_recipe_tint = "primary",
             north_animation = {
-                filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-liquid-north.png",
+                filename = "__base__/graphics/entity/chemical-plant/chemical-plant-liquid-north.png",
                 frame_count = 24,
                 line_length = 6,
                 width = 66,
@@ -37,7 +37,7 @@ function _chemical_plants.get_standard_working_visualisations()
                 scale = 0.5,
             },
             east_animation = {
-                filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-liquid-east.png",
+                filename = "__base__/graphics/entity/chemical-plant/chemical-plant-liquid-east.png",
                 frame_count = 24,
                 line_length = 6,
                 width = 70,
@@ -46,7 +46,7 @@ function _chemical_plants.get_standard_working_visualisations()
                 scale = 0.5,
             },
             south_animation = {
-                filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-liquid-south.png",
+                filename = "__base__/graphics/entity/chemical-plant/chemical-plant-liquid-south.png",
                 frame_count = 24,
                 line_length = 6,
                 width = 66,
@@ -55,7 +55,7 @@ function _chemical_plants.get_standard_working_visualisations()
                 scale = 0.5,
             },
             west_animation = {
-                filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-liquid-west.png",
+                filename = "__base__/graphics/entity/chemical-plant/chemical-plant-liquid-west.png",
                 frame_count = 24,
                 line_length = 6,
                 width = 74,
@@ -67,7 +67,7 @@ function _chemical_plants.get_standard_working_visualisations()
         {
             apply_recipe_tint = "secondary",
             north_animation = {
-                filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-foam-north.png",
+                filename = "__base__/graphics/entity/chemical-plant/chemical-plant-foam-north.png",
                 frame_count = 24,
                 line_length = 6,
                 width = 62,
@@ -76,7 +76,7 @@ function _chemical_plants.get_standard_working_visualisations()
                 scale = 0.5,
             },
             east_animation = {
-                filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-foam-east.png",
+                filename = "__base__/graphics/entity/chemical-plant/chemical-plant-foam-east.png",
                 frame_count = 24,
                 line_length = 6,
                 width = 68,
@@ -85,7 +85,7 @@ function _chemical_plants.get_standard_working_visualisations()
                 scale = 0.5,
             },
             south_animation = {
-                filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-foam-south.png",
+                filename = "__base__/graphics/entity/chemical-plant/chemical-plant-foam-south.png",
                 frame_count = 24,
                 line_length = 6,
                 width = 60,
@@ -94,7 +94,7 @@ function _chemical_plants.get_standard_working_visualisations()
                 scale = 0.5,
             },
             west_animation = {
-                filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-foam-west.png",
+                filename = "__base__/graphics/entity/chemical-plant/chemical-plant-foam-west.png",
                 frame_count = 24,
                 line_length = 6,
                 width = 68,
@@ -113,7 +113,7 @@ function _chemical_plants.get_standard_working_visualisations()
             west_position = util.by_pixel_hr(-32, -130),
             render_layer = "wires",
             animation = {
-                filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-smoke-outer.png",
+                filename = "__base__/graphics/entity/chemical-plant/chemical-plant-smoke-outer.png",
                 frame_count = 47,
                 line_length = 16,
                 width = 90,
@@ -133,7 +133,7 @@ function _chemical_plants.get_standard_working_visualisations()
             west_position = util.by_pixel_hr(-32, -130),
             render_layer = "wires",
             animation = {
-                filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-smoke-inner.png",
+                filename = "__base__/graphics/entity/chemical-plant/chemical-plant-smoke-inner.png",
                 frame_count = 47,
                 line_length = 16,
                 width = 40,
@@ -204,7 +204,7 @@ function _chemical_plants.get_standard_animation(tint)
             },
             -- Shadow
             {
-                filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-shadow.png",
+                filename = "__base__/graphics/entity/chemical-plant/chemical-plant-shadow.png",
                 width = 312,
                 height = 222,
                 repeat_count = 24,

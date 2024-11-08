@@ -11,7 +11,7 @@ local function entity_animation(tint)
         layers = {
             -- Base
             {
-                filename = "__base__/graphics/entity/oil-refinery/hr-oil-refinery.png",
+                filename = "__base__/graphics/entity/oil-refinery/oil-refinery.png",
                 width = 386,
                 height = 430,
                 frame_count = 1,
@@ -40,7 +40,7 @@ local function entity_animation(tint)
             },
             -- Shadow
             {
-                filename = "__base__/graphics/entity/oil-refinery/hr-oil-refinery-shadow.png",
+                filename = "__base__/graphics/entity/oil-refinery/oil-refinery-shadow.png",
                 width = 674,
                 height = 426,
                 frame_count = 1,
@@ -61,7 +61,7 @@ local function corpse_animation(tint)
         layers = {
             -- Base
             {
-                filename = "__base__/graphics/entity/oil-refinery/remnants/hr-refinery-remnants.png",
+                filename = "__base__/graphics/entity/oil-refinery/remnants/refinery-remnants.png",
                 line_length = 1,
                 width = 467,
                 height = 415,

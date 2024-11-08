@@ -192,7 +192,7 @@ local function entity_structure(tint)
         },
         back_patch = {
             sheet = {
-                filename = "__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure-back-patch.png",
+                filename = "__base__/graphics/entity/express-underground-belt/express-underground-belt-structure-back-patch.png",
                 priority = "extra-high",
                 width = 192,
                 height = 192,
@@ -201,7 +201,7 @@ local function entity_structure(tint)
         },
         front_patch = {
             sheet = {
-                filename = "__base__/graphics/entity/express-underground-belt/hr-express-underground-belt-structure-front-patch.png",
+                filename = "__base__/graphics/entity/express-underground-belt/express-underground-belt-structure-front-patch.png",
                 priority = "extra-high",
                 width = 192,
                 height = 192,
