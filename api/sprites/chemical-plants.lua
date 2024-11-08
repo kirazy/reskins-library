@@ -158,7 +158,7 @@ end
 ---### Examples
 ---```lua
 ----- Get the sprites colored for a tier 3 chemical plant.
----local tint = reskins.library.tiers.get_tint(3)
+---local tint = reskins.lib.tiers.get_tint(3)
 ---local chemical_plant = data.raw["assembling-machine"]["chemical-plant-3"]
 ---
 ---chemical_plant.animation = _chemical_plants.get_standard_animation(tint)
@@ -228,7 +228,7 @@ end
 ---### Examples
 ---```lua
 ----- Get the remnant sprites colored for a tier 3 chemical plant.
----local tint = reskins.library.tiers.get_tint(3)
+---local tint = reskins.lib.tiers.get_tint(3)
 ---local chemical_plant_remants = data.raw["corpse"]["chemical-plant-3-remnants"]
 ---
 ---chemical_plant_remants.animation = _chemical_plants.get_standard_remnants(tint)

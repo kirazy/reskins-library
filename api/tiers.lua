@@ -371,7 +371,7 @@ end
 ---    scale = 0.5,
 ---}
 ---
----local labeled_icon = reskins.api.add_tier_labels_to_icon(1, icon_datum)
+---local labeled_icon = reskins.lib.add_tier_labels_to_icon(1, icon_datum)
 ---```
 ---
 ---### Parameters
@@ -400,7 +400,7 @@ end
 ---
 ---### Examples
 ---```
----local labeled_icon = reskins.api.create_icon_with_tier_labels(1, "__base__/graphics/icons/assembling-machine-1.png", 64, 4, 0.5)
+---local labeled_icon = reskins.lib.create_icon_with_tier_labels(1, "__base__/graphics/icons/assembling-machine-1.png", 64, 4, 0.5)
 ---```
 ---
 ---### Parameters
