@@ -14,7 +14,7 @@ reskins.lib.directory = "__reskins-library__"
 ---@param inputs SetupStandardEntityInputs
 function reskins.lib.setup_standard_entity(name, tier, inputs)
     -- Parse inputs
-    reskins.lib.parse_inputs(inputs)
+    reskins.lib.set_inputs_defaults(inputs)
 
     -- Create particles and explosions
     if inputs.make_explosions then
@@ -55,7 +55,7 @@ end
 ---     make_icon_pictures = true,
 --- }
 ---```
-function reskins.lib.parse_inputs(inputs)
+function reskins.lib.set_inputs_defaults(inputs)
     inputs.icon_size = inputs.icon_size or 64
     inputs.technology_icon_size = inputs.technology_icon_size or 128
     inputs.make_explosions = (inputs.make_explosions ~= false)
