@@ -586,7 +586,7 @@ end
 ---`material_type`.
 ---
 ---### Returns
----@return data.PipeToGroundPictures # The complete set of pipe-to-ground sprites in the given `material_type`.
+---@return data.Sprite4Way # The complete set of pipe-to-ground sprites in the given `material_type`.
 ---
 ---### Examples
 ---```lua
@@ -602,9 +602,9 @@ end
 function _pipes.get_pipe_to_ground(material_type)
     local path = get_path_to_pipe_material_sprites("pipe-to-ground", material_type)
 
-    ---@type data.PipeToGroundPictures
+    ---@type data.Sprite4Way
     local pipe_to_ground_pictures = {
-        up = {
+        north = {
             layers = {
                 -- Pipe
                 {
@@ -625,7 +625,28 @@ function _pipes.get_pipe_to_ground(material_type)
                 },
             },
         },
-        down = {
+        east = {
+            layers = {
+                -- Pipe
+                {
+                    filename = path .. "hr-pipe-to-ground-right.png",
+                    priority = "extra-high",
+                    width = 128,
+                    height = 128,
+                    scale = 0.5,
+                },
+                -- Shadows
+                {
+                    filename = "__reskins-library__/graphics/entity/common/pipe-to-ground/shadows/hr-pipe-to-ground-right-shadow.png",
+                    priority = "extra-high",
+                    width = 128,
+                    height = 128,
+                    draw_as_shadow = true,
+                    scale = 0.5,
+                },
+            },
+        },
+        south = {
             layers = {
                 -- Pipe
                 {
@@ -646,7 +667,7 @@ function _pipes.get_pipe_to_ground(material_type)
                 },
             },
         },
-        left = {
+        west = {
             layers = {
                 -- Pipe
                 {
@@ -659,27 +680,6 @@ function _pipes.get_pipe_to_ground(material_type)
                 -- Shadows
                 {
                     filename = "__reskins-library__/graphics/entity/common/pipe-to-ground/shadows/hr-pipe-to-ground-left-shadow.png",
-                    priority = "extra-high",
-                    width = 128,
-                    height = 128,
-                    draw_as_shadow = true,
-                    scale = 0.5,
-                },
-            },
-        },
-        right = {
-            layers = {
-                -- Pipe
-                {
-                    filename = path .. "hr-pipe-to-ground-right.png",
-                    priority = "extra-high",
-                    width = 128,
-                    height = 128,
-                    scale = 0.5,
-                },
-                -- Shadows
-                {
-                    filename = "__reskins-library__/graphics/entity/common/pipe-to-ground/shadows/hr-pipe-to-ground-right-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
