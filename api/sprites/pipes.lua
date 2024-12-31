@@ -51,7 +51,7 @@ local _pipes = {}
 function _pipes.get_vertical_pipe_shadow(shift)
     ---@type data.Animation
     local shadow_animation = {
-        filename = "__reskins-library__/graphics/entity/common/pipe-patches/hr-vertical-pipe-shadow-patch.png",
+        filename = "__reskins-library__/graphics/entity/common/pipe-patches/vertical-pipe-shadow-patch.png",
         priority = "high",
         width = 128,
         height = 128,
@@ -153,7 +153,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-straight-vertical-single.png",
+                    filename = path .. "pipe-straight-vertical-single.png",
                     priority = "extra-high",
                     width = 160,
                     height = 160,
@@ -161,7 +161,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-straight-vertical-single-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-straight-vertical-single-shadow.png",
                     priority = "extra-high",
                     width = 160,
                     height = 160,
@@ -174,7 +174,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-straight-vertical.png",
+                    filename = path .. "pipe-straight-vertical.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -182,7 +182,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-straight-vertical-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-straight-vertical-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -195,7 +195,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-straight-vertical-window.png",
+                    filename = path .. "pipe-straight-vertical-window.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -203,7 +203,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-straight-vertical-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-straight-vertical-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -216,7 +216,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-straight-horizontal-window.png",
+                    filename = path .. "pipe-straight-horizontal-window.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -224,7 +224,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-straight-horizontal-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-straight-horizontal-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -237,7 +237,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-straight-horizontal.png",
+                    filename = path .. "pipe-straight-horizontal.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -245,7 +245,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-straight-horizontal-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-straight-horizontal-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -258,7 +258,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-corner-up-right.png",
+                    filename = path .. "pipe-corner-up-right.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -266,7 +266,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-corner-up-right-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-corner-up-right-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -279,7 +279,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-corner-up-left.png",
+                    filename = path .. "pipe-corner-up-left.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -287,7 +287,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-corner-up-left-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-corner-up-left-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -300,7 +300,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-corner-down-right.png",
+                    filename = path .. "pipe-corner-down-right.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -308,7 +308,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-corner-down-right-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-corner-down-right-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -321,7 +321,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-corner-down-left.png",
+                    filename = path .. "pipe-corner-down-left.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -329,7 +329,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-corner-down-left-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-corner-down-left-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -342,7 +342,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-t-up.png",
+                    filename = path .. "pipe-t-up.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -350,7 +350,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-t-up-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-t-up-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -363,7 +363,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-t-down.png",
+                    filename = path .. "pipe-t-down.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -371,7 +371,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-t-down-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-t-down-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -384,7 +384,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-t-right.png",
+                    filename = path .. "pipe-t-right.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -392,7 +392,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-t-right-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-t-right-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -405,7 +405,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-t-left.png",
+                    filename = path .. "pipe-t-left.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -413,7 +413,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-t-left-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-t-left-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -426,7 +426,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-cross.png",
+                    filename = path .. "pipe-cross.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -434,7 +434,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-cross-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-cross-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -447,7 +447,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-ending-up.png",
+                    filename = path .. "pipe-ending-up.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -455,7 +455,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-ending-up-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-ending-up-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -468,7 +468,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-ending-down.png",
+                    filename = path .. "pipe-ending-down.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -476,7 +476,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-ending-down-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-ending-down-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -489,7 +489,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-ending-right.png",
+                    filename = path .. "pipe-ending-right.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -497,7 +497,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-ending-right-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-ending-right-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -510,7 +510,7 @@ function _pipes.get_pipe(material_type)
             layers = {
                 -- Base
                 {
-                    filename = path .. "hr-pipe-ending-left.png",
+                    filename = path .. "pipe-ending-left.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -518,7 +518,7 @@ function _pipes.get_pipe(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/hr-pipe-ending-left-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe/shadows/pipe-ending-left-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -528,14 +528,14 @@ function _pipes.get_pipe(material_type)
             },
         },
         horizontal_window_background = {
-            filename = path .. "hr-pipe-horizontal-window-background.png",
+            filename = path .. "pipe-horizontal-window-background.png",
             priority = "extra-high",
             width = 128,
             height = 128,
             scale = 0.5,
         },
         vertical_window_background = {
-            filename = path .. "hr-pipe-vertical-window-background.png",
+            filename = path .. "pipe-vertical-window-background.png",
             priority = "extra-high",
             width = 128,
             height = 128,
@@ -608,7 +608,7 @@ function _pipes.get_pipe_to_ground(material_type)
             layers = {
                 -- Pipe
                 {
-                    filename = path .. "hr-pipe-to-ground-up.png",
+                    filename = path .. "pipe-to-ground-up.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -616,7 +616,7 @@ function _pipes.get_pipe_to_ground(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe-to-ground/shadows/hr-pipe-to-ground-up-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe-to-ground/shadows/pipe-to-ground-up-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -629,7 +629,7 @@ function _pipes.get_pipe_to_ground(material_type)
             layers = {
                 -- Pipe
                 {
-                    filename = path .. "hr-pipe-to-ground-right.png",
+                    filename = path .. "pipe-to-ground-right.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -637,7 +637,7 @@ function _pipes.get_pipe_to_ground(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe-to-ground/shadows/hr-pipe-to-ground-right-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe-to-ground/shadows/pipe-to-ground-right-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -650,7 +650,7 @@ function _pipes.get_pipe_to_ground(material_type)
             layers = {
                 -- Pipe
                 {
-                    filename = path .. "hr-pipe-to-ground-down.png",
+                    filename = path .. "pipe-to-ground-down.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -658,7 +658,7 @@ function _pipes.get_pipe_to_ground(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe-to-ground/shadows/hr-pipe-to-ground-down-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe-to-ground/shadows/pipe-to-ground-down-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -671,7 +671,7 @@ function _pipes.get_pipe_to_ground(material_type)
             layers = {
                 -- Pipe
                 {
-                    filename = path .. "hr-pipe-to-ground-left.png",
+                    filename = path .. "pipe-to-ground-left.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -679,7 +679,7 @@ function _pipes.get_pipe_to_ground(material_type)
                 },
                 -- Shadows
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe-to-ground/shadows/hr-pipe-to-ground-left-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe-to-ground/shadows/pipe-to-ground-left-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -718,14 +718,14 @@ function _pipes.get_pipe_covers(material_type)
         north = {
             layers = {
                 {
-                    filename = path .. "hr-pipe-cover-north.png",
+                    filename = path .. "pipe-cover-north.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
                     scale = 0.5,
                 },
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe-covers/shadows/hr-pipe-cover-north-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe-covers/shadows/pipe-cover-north-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -737,14 +737,14 @@ function _pipes.get_pipe_covers(material_type)
         east = {
             layers = {
                 {
-                    filename = path .. "hr-pipe-cover-east.png",
+                    filename = path .. "pipe-cover-east.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
                     scale = 0.5,
                 },
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe-covers/shadows/hr-pipe-cover-east-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe-covers/shadows/pipe-cover-east-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -756,14 +756,14 @@ function _pipes.get_pipe_covers(material_type)
         south = {
             layers = {
                 {
-                    filename = path .. "hr-pipe-cover-south.png",
+                    filename = path .. "pipe-cover-south.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
                     scale = 0.5,
                 },
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe-covers/shadows/hr-pipe-cover-south-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe-covers/shadows/pipe-cover-south-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -775,14 +775,14 @@ function _pipes.get_pipe_covers(material_type)
         west = {
             layers = {
                 {
-                    filename = path .. "hr-pipe-cover-west.png",
+                    filename = path .. "pipe-cover-west.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
                     scale = 0.5,
                 },
                 {
-                    filename = "__reskins-library__/graphics/entity/common/pipe-covers/shadows/hr-pipe-cover-west-shadow.png",
+                    filename = "__reskins-library__/graphics/entity/common/pipe-covers/shadows/pipe-cover-west-shadow.png",
                     priority = "extra-high",
                     width = 128,
                     height = 128,
@@ -819,7 +819,7 @@ function _pipes.get_pipe_remnants(material_type)
 
     ---@type data.RotatedAnimationVariations
     local animation = make_rotated_animation_variations_from_sheet(2, {
-        filename = path .. "remnants/hr-pipe-remnants.png",
+        filename = path .. "remnants/pipe-remnants.png",
         width = 122,
         height = 120,
         line_length = 1,
@@ -855,7 +855,7 @@ function _pipes.get_pipe_to_ground_remnants(material_type)
 
     ---@type data.RotatedAnimationVariations
     local animation = {
-        filename = path .. "remnants/hr-pipe-to-ground-remnants.png",
+        filename = path .. "remnants/pipe-to-ground-remnants.png",
         width = 90,
         height = 80,
         line_length = 1,

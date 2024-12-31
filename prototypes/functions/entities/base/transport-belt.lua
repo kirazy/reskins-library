@@ -12,7 +12,7 @@ local function corpse_animation(tint)
             layers = {
                 -- Base
                 {
-                    filename = "__reskins-library__/graphics/entity/base/transport-belt/remnants/hr-transport-belt-remnants-base.png",
+                    filename = "__reskins-library__/graphics/entity/base/transport-belt/remnants/transport-belt-remnants-base.png",
                     line_length = 1,
                     width = 106,
                     height = 102,
@@ -25,7 +25,7 @@ local function corpse_animation(tint)
                 },
                 -- Mask
                 {
-                    filename = "__reskins-library__/graphics/entity/base/transport-belt/remnants/hr-transport-belt-remnants-mask.png",
+                    filename = "__reskins-library__/graphics/entity/base/transport-belt/remnants/transport-belt-remnants-mask.png",
                     line_length = 1,
                     width = 106,
                     height = 102,
@@ -39,7 +39,7 @@ local function corpse_animation(tint)
                 },
                 -- Highlights
                 {
-                    filename = "__reskins-library__/graphics/entity/base/transport-belt/remnants/hr-transport-belt-remnants-mask.png",
+                    filename = "__reskins-library__/graphics/entity/base/transport-belt/remnants/transport-belt-remnants-mask.png",
                     line_length = 1,
                     width = 106,
                     height = 102,

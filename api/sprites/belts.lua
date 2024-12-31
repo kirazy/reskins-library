@@ -53,7 +53,7 @@ function _belts.get_belt_animation_set(belt_sprites, tint)
                 layers = {
                     -- Base
                     {
-                        filename = "__reskins-library__/graphics/entity/base/transport-belt/hr-transport-belt-1-base.png",
+                        filename = "__reskins-library__/graphics/entity/base/transport-belt/transport-belt-1-base.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -63,7 +63,7 @@ function _belts.get_belt_animation_set(belt_sprites, tint)
                     },
                     -- Mask
                     {
-                        filename = "__reskins-library__/graphics/entity/base/transport-belt/hr-transport-belt-1-mask.png",
+                        filename = "__reskins-library__/graphics/entity/base/transport-belt/transport-belt-1-mask.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -74,7 +74,7 @@ function _belts.get_belt_animation_set(belt_sprites, tint)
                     },
                     -- Highlights
                     {
-                        filename = "__reskins-library__/graphics/entity/base/transport-belt/hr-transport-belt-1-highlights.png",
+                        filename = "__reskins-library__/graphics/entity/base/transport-belt/transport-belt-1-highlights.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -96,7 +96,7 @@ function _belts.get_belt_animation_set(belt_sprites, tint)
                 layers = {
                     -- Base
                     {
-                        filename = "__reskins-library__/graphics/entity/base/transport-belt/hr-transport-belt-2-base.png",
+                        filename = "__reskins-library__/graphics/entity/base/transport-belt/transport-belt-2-base.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -106,7 +106,7 @@ function _belts.get_belt_animation_set(belt_sprites, tint)
                     },
                     -- Mask
                     {
-                        filename = "__reskins-library__/graphics/entity/base/transport-belt/hr-transport-belt-2-mask.png",
+                        filename = "__reskins-library__/graphics/entity/base/transport-belt/transport-belt-2-mask.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
@@ -117,7 +117,7 @@ function _belts.get_belt_animation_set(belt_sprites, tint)
                     },
                     -- Highlights
                     {
-                        filename = "__reskins-library__/graphics/entity/base/transport-belt/hr-transport-belt-2-highlights.png",
+                        filename = "__reskins-library__/graphics/entity/base/transport-belt/transport-belt-2-highlights.png",
                         priority = "extra-high",
                         width = 128,
                         height = 128,
