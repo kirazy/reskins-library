@@ -479,7 +479,7 @@ local related_prototypes = {
 ---}
 ---
 -----Get a sprite for display in-world without tier labels.
----local unlabeled_pictures = sprite_tools.create_sprite_from_icon(icon_datum, 0.5)
+---local unlabeled_pictures = sprite_tools.create_sprite_from_icon(icon_datum, 1.0)
 ---
 -----Add tier labels to the assembling machine icon.
 ---local labeled_icon = tier_tools.add_tier_labels_to_icon(1, icon_datum)

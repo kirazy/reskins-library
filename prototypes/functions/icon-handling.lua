@@ -362,7 +362,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
     end
 
     ---@type data.SpriteVariations
-    local pictures = reskins.lib.sprites.create_sprite_from_icons(icon_data, 0.5)
+    local pictures = reskins.lib.sprites.create_sprite_from_icons(icon_data, 1.0)
 
     -- Append icon extras as needed
     if inputs_copy.icon_extras then

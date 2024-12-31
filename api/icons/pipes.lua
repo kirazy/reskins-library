@@ -121,7 +121,7 @@ function _pipes.get_icon(prototype, material_type, tier)
             name = prototype.name,
             type_name = prototype.type,
             icon_data = reskins.lib.tiers.add_tier_labels_to_icon(tier or 0, icon_datum),
-            pictures = reskins.lib.sprites.create_sprite_from_icon(icon_datum, 0.5),
+            pictures = reskins.lib.sprites.create_sprite_from_icon(icon_datum, 1.0),
         }
     else
         ---@type DeferrableIconDatum

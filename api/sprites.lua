@@ -76,7 +76,7 @@ end
 ---    },
 ---}
 ---
----local sprite = reskins.tools.sprites.create_sprite_from_icons(icon_data, 0.5)
+---local sprite = reskins.tools.sprites.create_sprite_from_icons(icon_data, 1.0)
 ---```
 ---
 ---### Parameters
@@ -124,7 +124,7 @@ end
 ---    scale = 0.5,
 ---}
 ---
----local sprite = reskins.tools.sprites.create_sprite_from_icon(icon_datum, 0.5)
+---local sprite = reskins.tools.sprites.create_sprite_from_icon(icon_datum, 1.0)
 ---```
 ---
 ---### Parameters
@@ -187,7 +187,7 @@ function _sprites.get_sprite_light_layer(light_name, tint)
         filename = "__reskins-library__/graphics/icons/lights/" .. light_name .. "-light.png",
         size = 64,
         mipmap_count = 4,
-        scale = 0.25,
+        scale = 0.5,
         tint = tint,
     }
 
@@ -252,14 +252,14 @@ function _sprites.create_sprite_variations(directory, sprite_name, num_variation
                         filename = directory .. file_name,
                         size = 64,
                         mipmap_count = 4,
-                        scale = 0.25,
+                        scale = 0.5,
                     },
                     {
                         draw_as_light = true,
                         filename = directory .. file_name,
                         size = 64,
                         mipmap_count = 4,
-                        scale = 0.25,
+                        scale = 0.5,
                         tint = tint or { r = 0.3, g = 0.3, b = 0.3, a = 0.3 },
                         blend_mode = "additive",
                     },
@@ -273,7 +273,7 @@ function _sprites.create_sprite_variations(directory, sprite_name, num_variation
                 filename = directory .. file_name,
                 size = 64,
                 mipmap_count = 4,
-                scale = 0.25,
+                scale = 0.5,
             }
 
             table.insert(sprites, sprite)
