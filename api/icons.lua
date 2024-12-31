@@ -1309,11 +1309,12 @@ end
 ---
 ---### Examples
 ---```lua
------ Remove any symbols from the filter-inserter icon.
----local icon_data = data.raw["inserter"]["filter-inserter"].icons
----local icon_without_letter = _tiers.remove_symbols_from_icons(icon_data)
+----- Assuming that the inserter icon has a filter symbol applied to it, do the following
+----- to remove the symbol from the inserter icon.
+---local icon_data = data.raw["inserter"]["inserter"].icons
+---local icon_without_symbol = _tiers.remove_symbols_from_icons(icon_data)
 ---
------ Remove any symbols from the filter-inserter icon and keep a copy of the removed letter icon layers.
+----- Remove any symbols from the inserter icon and keep a copy of the removed symbol icon layers.
 ---local icon_without_tier_labels, removed_tier_labels = __tiers.remove_symbols_from_icons(icon_data)
 ---```
 ---
