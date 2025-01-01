@@ -306,7 +306,7 @@ end
 ---and `frame_count` fields to slice a sprite sheet into direction-based `Animation` objects.
 ---
 ---### Returns
----@return data.Animation4Way # The 4-way animation object created from `animation`.
+---@return data.Animation4Way|data.Sprite4Way # The 4-way animation object created from `animation`.
 ---
 ---### Remarks
 ---Extends the functionality of `make_rotated_animation_variations_from_sheet` to include handling
