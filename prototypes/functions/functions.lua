@@ -6,6 +6,30 @@
 -- Library directory
 reskins.lib.directory = "__reskins-library__"
 
+--- Searches through a nested table based on a sequence of keys and returns the final value.
+---
+--- This function takes a root table and a series of keys, then attempts to locate the value
+--- at the nested position defined by the keys. If any key in the sequence does not exist or the
+--- current value is not a table during traversal, the function returns `nil`.
+---
+--- This mimics the behavior of the null-conditional operator in C#, safely accessing deeply nested properties.
+---
+--- @param root table The table from which to begin the search.
+--- @param ... string|integer A list of keys defining the path to traverse within the root table.
+--- @return any #The value at the end of the key sequence if it exists; otherwise, `nil`.
+local function try_get_value(root, ...)
+    for i = 1, select('#', ...) do
+        if type(root) ~= "table" then return nil end
+        local key = select(i, ...)
+        root = root[key]
+        if root == nil then
+            return nil
+        end
+    end
+
+    return root
+end
+
 ---@class SetupStandardEntityInputs : ParseInputsInputs, CreateExplosionsAndParticlesInputs, CreateRemnantInputs, ConstructIconInputsOld
 
 ---Most entities have a common process for reskinning, so consolidate the other functions under one superfunction for ease of use
@@ -166,7 +190,22 @@ function reskins.lib.create_particle(name, base_entity_name, base_particle_name,
     data:extend({ particle })
 
     -- Assign particle to originating explosion
-    data.raw["explosion"][name .. "-explosion"]["created_effect"]["action_delivery"]["target_effects"][key].particle_name = particle.name
+    ---@type table|nil
+    local target_effects = try_get_value(data.raw.explosion, name .. "-explosion", "created_effect", "action_delivery", "target_effects")
+    if not target_effects or #target_effects == 0 then return end
+
+    -- Check if the target_effects table has at least one member, check if that member is of type =
+    -- "create-explosion", and if so, collection the entity name and then go find THAT explosion.
+    if target_effects[1].type == "create_explosion" then
+        local explosion_reference_name = target_effects[1].entity_name
+
+        target_effects = try_get_value(data.raw.explosion, explosion_reference_name, "created_effect", "action_delivery", "target_effects")
+    end
+
+    local target_effect = try_get_value(target_effects, key)
+    if target_effect and target_effect.type == "create_particle" then
+        target_effect.particle_name = particle.name
+    end
 end
 
 ---@class CreateExplosionsAndParticlesInputs : CreateExplosionInputs
