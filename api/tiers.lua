@@ -3,9 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.tiers" then
-    return require("__reskins-library__.api.tiers")
-end
+if ... ~= "__reskins-library__.api.tiers" then return require("__reskins-library__.api.tiers") end
 
 --- Provides methods for working with tier labels and tints.
 ---
@@ -63,40 +61,40 @@ local is_using_basic_belt_override = _settings.get_value("reskins-bobs-do-basic-
 
 ---@type data.Color[]
 local custom_tier_colors = {
-    ---@type data.Color
-    [0] = _settings.get_value("reskins-lib-custom-colors-tier-0"),
-    [1] = _settings.get_value("reskins-lib-custom-colors-tier-1"),
-    [2] = _settings.get_value("reskins-lib-custom-colors-tier-2"),
-    [3] = _settings.get_value("reskins-lib-custom-colors-tier-3"),
-    [4] = _settings.get_value("reskins-lib-custom-colors-tier-4"),
-    [5] = _settings.get_value("reskins-lib-custom-colors-tier-5"),
-    [6] = _settings.get_value("reskins-lib-custom-colors-tier-6"),
+	---@type data.Color
+	[0] = _settings.get_value("reskins-lib-custom-colors-tier-0"),
+	[1] = _settings.get_value("reskins-lib-custom-colors-tier-1"),
+	[2] = _settings.get_value("reskins-lib-custom-colors-tier-2"),
+	[3] = _settings.get_value("reskins-lib-custom-colors-tier-3"),
+	[4] = _settings.get_value("reskins-lib-custom-colors-tier-4"),
+	[5] = _settings.get_value("reskins-lib-custom-colors-tier-5"),
+	[6] = _settings.get_value("reskins-lib-custom-colors-tier-6"),
 }
 
 ---@type data.Color[]
 local standard_tier_colors = {
-    ---@type data.Color
-    [0] = util.color("808080"), -- 1.1.7: 4d4d4d
-    [1] = util.color("ffb726"), -- 1.1.7: de9400
-    [2] = util.color("f22318"), -- 1.1.7: c20600
-    [3] = util.color("33b4ff"), -- 1.1.7: 0099ff, 1.1.0: 1b87c2
-    [4] = util.color("b459ff"), -- 1.1.7: a600bf
-    [5] = util.color("2ee55c"), -- 1.1.7: 16c746, 1.1.6: 23de55
-    [6] = util.color("ff8533"), -- 1.1.7: ff7700
+	---@type data.Color
+	[0] = util.color("808080"), -- 1.1.7: 4d4d4d
+	[1] = util.color("ffb726"), -- 1.1.7: de9400
+	[2] = util.color("f22318"), -- 1.1.7: c20600
+	[3] = util.color("33b4ff"), -- 1.1.7: 0099ff, 1.1.0: 1b87c2
+	[4] = util.color("b459ff"), -- 1.1.7: a600bf
+	[5] = util.color("2ee55c"), -- 1.1.7: 16c746, 1.1.6: 23de55
+	[6] = util.color("ff8533"), -- 1.1.7: ff7700
 }
 
 ---@type data.Color[]
 local angels_tier_colors = {
-    -- Core Angel's set
-    [1] = util.color("595959"), -- Gray
-    [2] = util.color("2957cc"), -- Blue
-    [3] = util.color("cc2929"), -- Red
-    [4] = util.color("ccae29"), -- Yellow
-    -- Pending
-    ---@type data.Color
-    [0] = util.color("262626"),
-    [5] = util.color("16c746"),
-    [6] = util.color("ff8533"),
+	-- Core Angel's set
+	[1] = util.color("595959"), -- Gray
+	[2] = util.color("2957cc"), -- Blue
+	[3] = util.color("cc2929"), -- Red
+	[4] = util.color("ccae29"), -- Yellow
+	-- Pending
+	---@type data.Color
+	[0] = util.color("262626"),
+	[5] = util.color("16c746"),
+	[6] = util.color("ff8533"),
 }
 
 ---@type data.Color
@@ -114,15 +112,15 @@ local basic_belt_color_override = _settings.get_value("reskins-bobs-basic-belts-
 ---### Exceptions
 ---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.
 function _tiers.get_tint(tier)
-    assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
+	assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
 
-    if is_using_custom_tier_colors then
-        return util.copy(custom_tier_colors[tier])
-    elseif is_using_angels_tier_colors then
-        return util.copy(angels_tier_colors[tier])
-    else
-        return util.copy(standard_tier_colors[tier])
-    end
+	if is_using_custom_tier_colors then
+		return util.copy(custom_tier_colors[tier])
+	elseif is_using_angels_tier_colors then
+		return util.copy(angels_tier_colors[tier])
+	else
+		return util.copy(standard_tier_colors[tier])
+	end
 end
 
 ---
@@ -137,28 +135,26 @@ end
 ---### Exceptions
 ---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.
 function _tiers.get_belt_tint(tier)
-    assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
+	assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
 
-    ---@type data.Color
-    local tint
-    if tier == 0 and is_using_basic_belt_override then
-        tint = util.copy(basic_belt_color_override)
-    end
+	---@type data.Color
+	local tint
+	if tier == 0 and is_using_basic_belt_override then tint = util.copy(basic_belt_color_override) end
 
-    if is_using_custom_tier_colors then
-        tint = util.copy(custom_tier_colors[tier])
-    elseif is_using_angels_belt_tier_colors then
-        tint = util.copy(angels_tier_colors[tier])
-    else
-        if tier == 2 then
-            -- Use pure red for belt-related entities to better match the vanilla sprites.
-            tint = util.color("ff0000")
-        else
-            tint = util.copy(standard_tier_colors[tier])
-        end
-    end
+	if is_using_custom_tier_colors then
+		tint = util.copy(custom_tier_colors[tier])
+	elseif is_using_angels_belt_tier_colors then
+		tint = util.copy(angels_tier_colors[tier])
+	else
+		if tier == 2 then
+			-- Use pure red for belt-related entities to better match the vanilla sprites.
+			tint = util.color("ff0000")
+		else
+			tint = util.copy(standard_tier_colors[tier])
+		end
+	end
 
-    return tint
+	return tint
 end
 
 ---
@@ -169,7 +165,7 @@ end
 ---
 ---@param icon_datum data.IconData # An `IconData` object to check for tier labels.
 local function is_icon_tier_labeled(icon_datum)
-    return icon_datum and icon_datum.icon:find("__reskins%-library__%/graphics%/icons%/tiers%/") ~= nil
+	return icon_datum and icon_datum.icon:find("__reskins%-library__%/graphics%/icons%/tiers%/") ~= nil
 end
 
 ---
@@ -191,16 +187,14 @@ end
 ---### Parameters
 ---@param icon_data data.IconData[] # An array of `IconData` objects.
 function _tiers.is_icons_tier_labeled(icon_data)
-    -- A labeled icon will have minimum three layers.
-    if icon_data and #icon_data >= 3 then
-        for i = #icon_data, 1, -1 do
-            if is_icon_tier_labeled(icon_data[i]) then
-                return true
-            end
-        end
-    end
+	-- A labeled icon will have minimum three layers.
+	if icon_data and #icon_data >= 3 then
+		for i = #icon_data, 1, -1 do
+			if is_icon_tier_labeled(icon_data[i]) then return true end
+		end
+	end
 
-    return false
+	return false
 end
 
 ---
@@ -226,15 +220,13 @@ end
 ---### Parameters
 ---@param icon_data data.IconData[] # An array of `IconData` objects.
 function _tiers.get_tier_from_icons(icon_data)
-    if icon_data and #icon_data >= 3 then
-        for i = #icon_data, 1, -1 do
-            if is_icon_tier_labeled(icon_data[i]) then
-                return tonumber(icon_data[i].icon:match("(%d+)%.png"))
-            end
-        end
-    end
+	if icon_data and #icon_data >= 3 then
+		for i = #icon_data, 1, -1 do
+			if is_icon_tier_labeled(icon_data[i]) then return tonumber(icon_data[i].icon:match("(%d+)%.png")) end
+		end
+	end
 
-    return nil
+	return nil
 end
 
 ---
@@ -257,22 +249,20 @@ end
 ---### Parameters
 ---@param icon_data data.IconData[] # An array of `IconData` objects.
 function _tiers.remove_tier_labels_from_icons(icon_data)
-    assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
+	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
 
-    local icon_data_copy = util.copy(icon_data)
+	local icon_data_copy = util.copy(icon_data)
 
-    ---@type data.IconData[]
-    local removed_layers = {}
+	---@type data.IconData[]
+	local removed_layers = {}
 
-    if #icon_data >= 2 then
-        for i = #icon_data_copy, 1, -1 do
-            if is_icon_tier_labeled(icon_data_copy[i]) then
-                table.insert(removed_layers, 1, table.remove(icon_data_copy, i))
-            end
-        end
-    end
+	if #icon_data >= 2 then
+		for i = #icon_data_copy, 1, -1 do
+			if is_icon_tier_labeled(icon_data_copy[i]) then table.insert(removed_layers, 1, table.remove(icon_data_copy, i)) end
+		end
+	end
 
-    return icon_data_copy, removed_layers
+	return icon_data_copy, removed_layers
 end
 
 ---
@@ -318,35 +308,39 @@ end
 ---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
 ---@nodiscard
 function _tiers.add_tier_labels_to_icons(tier, icon_data)
-    assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
-    assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
+	assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
+	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
 
-    if not _tiers.is_tier_labeling_enabled then
-        return util.copy(icon_data)
-    end
+	if not _tiers.is_tier_labeling_enabled then return util.copy(icon_data) end
 
-    local icon_data_copy = _icons.add_missing_icons_defaults(icon_data)
+	local icon_data_copy = _icons.add_missing_icons_defaults(icon_data)
 
-    -- There is not a 0th tier pip.
-    if tier > 0 then
-        local labeling_style = _tiers.tier_labeling_style
-        local icon_file_name = "__reskins-library__/graphics/icons/tiers/" .. labeling_style .. "/" .. tier .. ".png"
+	-- There is not a 0th tier pip.
+	if tier > 0 then
+		local labeling_style = _tiers.tier_labeling_style
+		local icon_file_name = "__reskins-library__/graphics/icons/tiers/" .. labeling_style .. "/" .. tier .. ".png"
 
-        -- Add base layer.
-        table.insert(icon_data_copy, _icons.add_missing_icon_defaults({
-            icon = icon_file_name,
-            icon_size = 64,
-        }))
+		-- Add base layer.
+		table.insert(
+			icon_data_copy,
+			_icons.add_missing_icon_defaults({
+				icon = icon_file_name,
+				icon_size = 64,
+			})
+		)
 
-        -- Add tinted layer.
-        table.insert(icon_data_copy, _icons.add_missing_icon_defaults({
-            icon = icon_file_name,
-            icon_size = 64,
-            tint = util.get_color_with_alpha(reskins.lib.tiers.get_tint(tier), 0.75),
-        }))
-    end
+		-- Add tinted layer.
+		table.insert(
+			icon_data_copy,
+			_icons.add_missing_icon_defaults({
+				icon = icon_file_name,
+				icon_size = 64,
+				tint = util.get_color_with_alpha(reskins.lib.tiers.get_tint(tier), 0.75),
+			})
+		)
+	end
 
-    return icon_data_copy
+	return icon_data_copy
 end
 
 ---
@@ -385,7 +379,7 @@ end
 ---*@throws* `string` — Thrown when `icon_datum.icon_size` is not a positive integer.<br/>
 ---@nodiscard
 function _tiers.add_tier_labels_to_icon(tier, icon_datum)
-    return _tiers.add_tier_labels_to_icons(tier, { icon_datum })
+	return _tiers.add_tier_labels_to_icons(tier, { icon_datum })
 end
 
 ---
@@ -417,7 +411,7 @@ end
 ---*@throws* `string` — Thrown when `icon_size` is not a positive integer.<br/>
 ---@nodiscard
 function _tiers.create_icon_with_tier_labels(tier, icon, icon_size, scale, shift, tint)
-    return _tiers.add_tier_labels_to_icon(tier, _icons.create_icon(icon, icon_size, scale, shift, tint))
+	return _tiers.add_tier_labels_to_icon(tier, _icons.create_icon(icon, icon_size, scale, shift, tint))
 end
 
 ---
@@ -449,32 +443,32 @@ end
 ---*@throws* `string` — Thrown when `prototype` has an icon with field `icon` that is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `prototype` has an icon with field `icon_size` that is not a positive integer.<br/>
 function _tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(tier, prototype)
-    assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
+	assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
 
-    -- There is not a 0th tier pip.
-    if tier == 0 then return nil end
+	-- There is not a 0th tier pip.
+	if tier == 0 then return nil end
 
-    local source_icon_data = _icons.get_icon_from_prototype_by_reference(prototype)
-    if not source_icon_data then return nil end
+	local source_icon_data = _icons.get_icon_from_prototype_by_reference(prototype)
+	if not source_icon_data then return nil end
 
-    -- A list of types that should not have their pictures field set.
-    local filtered_types = {
-        ["corpse"] = true,                -- Not a droppable prototype.
-        ["explosion"] = true,             -- Not a droppable prototype.
-        ["item-with-entity-data"] = true, -- pictures field is non-functional on this type.
-        ["recipe"] = true,                -- Not a droppable prototype.
-        ["technology"] = true,            -- Not a droppable prototype.
-    }
+	-- A list of types that should not have their pictures field set.
+	local filtered_types = {
+		["corpse"] = true, -- Not a droppable prototype.
+		["explosion"] = true, -- Not a droppable prototype.
+		["item-with-entity-data"] = true, -- pictures field is non-functional on this type.
+		["recipe"] = true, -- Not a droppable prototype.
+		["technology"] = true, -- Not a droppable prototype.
+	}
 
-    ---@type DeferrableIconData
-    local deferrable_icon = {
-        name = prototype.name,
-        type_name = prototype.type,
-        icon_data = _tiers.add_tier_labels_to_icons(tier, source_icon_data),
-        pictures = not filtered_types[prototype.type] and _sprites.create_sprite_from_icons(source_icon_data, 1.0) or nil,
-    }
+	---@type DeferrableIconData
+	local deferrable_icon = {
+		name = prototype.name,
+		type_name = prototype.type,
+		icon_data = _tiers.add_tier_labels_to_icons(tier, source_icon_data),
+		pictures = not filtered_types[prototype.type] and _sprites.create_sprite_from_icons(source_icon_data, 1.0) or nil,
+	}
 
-    return deferrable_icon
+	return deferrable_icon
 end
 
 ---
@@ -502,12 +496,12 @@ end
 ---*@throws* `string` — Thrown when `prototype` has an icon with field `icon` that is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `prototype` has an icon with field `icon_size` that is not a positive integer.<br/>
 function _tiers.add_tier_labels_to_prototype_by_reference(tier, prototype)
-    local deferrable_icon = _tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(tier, prototype)
+	local deferrable_icon = _tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(tier, prototype)
 
-    -- Prototype doesn't exist, or tier was 0.
-    if not deferrable_icon then return end
+	-- Prototype doesn't exist, or tier was 0.
+	if not deferrable_icon then return end
 
-    _icons.assign_icons_to_prototype_and_related_prototypes(deferrable_icon.name, deferrable_icon.type_name, deferrable_icon.icon_data, deferrable_icon.pictures)
+	_icons.assign_icons_to_prototype_and_related_prototypes(deferrable_icon.name, deferrable_icon.type_name, deferrable_icon.icon_data, deferrable_icon.pictures)
 end
 
 ---
@@ -538,10 +532,10 @@ end
 ---*@throws* `string` — Thrown when the prototype icon has an with field `icon` that is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when the prototype icon has an with field `icon_size` that is not a positive integer.<br/>
 function _tiers.add_tier_labels_to_prototype_by_name(tier, name, type_name)
-    assert(name and name ~= "", "Invalid parameter: 'name' must not be nil or an empty string.")
-    assert(type_name and type_name ~= "", "Invalid parameter: 'type_name' must not be nil or an empty string.")
+	assert(name and name ~= "", "Invalid parameter: 'name' must not be nil or an empty string.")
+	assert(type_name and type_name ~= "", "Invalid parameter: 'type_name' must not be nil or an empty string.")
 
-    _tiers.add_tier_labels_to_prototype_by_reference(tier, data.raw[type_name][name])
+	_tiers.add_tier_labels_to_prototype_by_reference(tier, data.raw[type_name][name])
 end
 
 return _tiers

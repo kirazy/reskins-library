@@ -41,10 +41,9 @@
 ---@see Reskins.Lib.Sprites.create_sprite_variations
 ---@nodiscard
 function reskins.internal.create_sprite_variations(key, subfolder, sprite_name, num_variations, is_light, tint)
-    assert(key and reskins[key] and reskins[key].directory,
-        "Invalid parameter: `mod_key` must be a valid key to the directory of a mod in the reskins global.")
-    ---@type string
-    local directory = reskins[key].directory .. "/graphics/icons/" .. subfolder .. "/" .. sprite_name
+	assert(key and reskins[key] and reskins[key].directory, "Invalid parameter: `mod_key` must be a valid key to the directory of a mod in the reskins global.")
+	---@type string
+	local directory = reskins[key].directory .. "/graphics/icons/" .. subfolder .. "/" .. sprite_name
 
-    return reskins.lib.sprites.create_sprite_variations(directory, sprite_name, num_variations, is_light, tint)
+	return reskins.lib.sprites.create_sprite_variations(directory, sprite_name, num_variations, is_light, tint)
 end

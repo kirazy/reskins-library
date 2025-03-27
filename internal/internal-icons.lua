@@ -23,7 +23,7 @@ reskins.internal.deferrable_icons = reskins.internal.deferrable_icons or {}
 ---### See Also
 ---@see Reskins.Lib.Icons.store_icon_for_deferred_assigment_in_stage
 function reskins.internal.store_icon_for_deferred_assigment_in_stage(stage, deferrable_icon)
-    reskins.lib.icons.store_icon_for_deferred_assigment_in_stage(reskins.internal.deferrable_icons, stage, deferrable_icon)
+	reskins.lib.icons.store_icon_for_deferred_assigment_in_stage(reskins.internal.deferrable_icons, stage, deferrable_icon)
 end
 
 ---
@@ -36,7 +36,7 @@ end
 ---### See Also
 ---@see Reskins.Lib.Icons.assign_icons_deferred_to_stage
 function reskins.internal.assign_icons_deferred_to_stage(stage)
-    reskins.lib.icons.assign_icons_deferred_to_stage(reskins.internal.deferrable_icons, stage)
+	reskins.lib.icons.assign_icons_deferred_to_stage(reskins.internal.deferrable_icons, stage)
 end
 
 ---@class CreatableLayeredIconDatum
@@ -100,114 +100,104 @@ end
 ---@param table CreateIconsFromListTable # A dictionary of `CreateIconsFromListOverrides` objects, keyed by the name of the prototype.
 ---@param inputs CreateIconsFromListInputs # The base inputs to apply to all icons.
 function reskins.internal.create_icons_from_list(table, inputs)
-    for name, overrides in pairs(table) do
-        -- Fetch the icon
-        local icon_type = overrides.type or inputs.type or "item"
-        local icon = data.raw[icon_type][name]
+	for name, overrides in pairs(table) do
+		-- Fetch the icon
+		local icon_type = overrides.type or inputs.type or "item"
+		local icon = data.raw[icon_type][name]
 
-        -- Check if icon exists, if not, skip this iteration
-        if not icon then goto continue end
+		-- Check if icon exists, if not, skip this iteration
+		if not icon then goto continue end
 
-        -- Work with a local copy of inputs
-        ---@type CreateIconsFromListInputs
-        local inputs_copy = util.copy(inputs)
+		-- Work with a local copy of inputs
+		---@type CreateIconsFromListInputs
+		local inputs_copy = util.copy(inputs)
 
-        -- Set defaults
-        inputs_copy.icon_size = inputs.icon_size or 64
-        inputs_copy.technology_icon_size = inputs.technology_icon_size or 128
-        inputs_copy.tier_labels = (inputs.tier_labels ~= false)
+		-- Set defaults
+		inputs_copy.icon_size = inputs.icon_size or 64
+		inputs_copy.technology_icon_size = inputs.technology_icon_size or 128
+		inputs_copy.tier_labels = (inputs.tier_labels ~= false)
 
-        -- Handle input parameters
-        inputs_copy.type = overrides.type or inputs_copy.type or nil
-        inputs_copy.mod = overrides.mod or inputs_copy.mod
-        inputs_copy.group = overrides.group or inputs_copy.group
-        inputs_copy.icon_size = overrides.icon_size or inputs_copy.icon_size
-        inputs_copy.technology_icon_size = overrides.technology_icon_size or inputs_copy.technology_icon_size
-        inputs_copy.subgroup = overrides.subgroup or inputs_copy.subgroup or nil
+		-- Handle input parameters
+		inputs_copy.type = overrides.type or inputs_copy.type or nil
+		inputs_copy.mod = overrides.mod or inputs_copy.mod
+		inputs_copy.group = overrides.group or inputs_copy.group
+		inputs_copy.icon_size = overrides.icon_size or inputs_copy.icon_size
+		inputs_copy.technology_icon_size = overrides.technology_icon_size or inputs_copy.technology_icon_size
+		inputs_copy.subgroup = overrides.subgroup or inputs_copy.subgroup or nil
 
-        -- Transcribe icon properties
-        inputs_copy.technology_icon_layers = overrides.technology_icon_layers or inputs_copy.technology_icon_layers or nil
-        inputs_copy.icon_layers = overrides.icon_layers or inputs_copy.icon_layers or nil
-        inputs_copy.technology_icon_extras = overrides.technology_icon_extras or inputs_copy.technology_icon_extras or nil
-        inputs_copy.icon_extras = overrides.icon_extras or inputs_copy.icon_extras or nil
-        inputs_copy.icon_picture_extras = overrides.icon_picture_extras or inputs_copy.icon_picture_extras or nil
+		-- Transcribe icon properties
+		inputs_copy.technology_icon_layers = overrides.technology_icon_layers or inputs_copy.technology_icon_layers or nil
+		inputs_copy.icon_layers = overrides.icon_layers or inputs_copy.icon_layers or nil
+		inputs_copy.technology_icon_extras = overrides.technology_icon_extras or inputs_copy.technology_icon_extras or nil
+		inputs_copy.icon_extras = overrides.icon_extras or inputs_copy.icon_extras or nil
+		inputs_copy.icon_picture_extras = overrides.icon_picture_extras or inputs_copy.icon_picture_extras or nil
 
-        -- Handle all the boolean overrides
-        if overrides.defer_to_data_updates == false then
-            inputs_copy.defer_to_data_updates = false
-        else
-            inputs_copy.defer_to_data_updates = overrides.defer_to_data_updates or inputs_copy.defer_to_data_updates
-        end
+		-- Handle all the boolean overrides
+		if overrides.defer_to_data_updates == false then
+			inputs_copy.defer_to_data_updates = false
+		else
+			inputs_copy.defer_to_data_updates = overrides.defer_to_data_updates or inputs_copy.defer_to_data_updates
+		end
 
-        if overrides.defer_to_data_final_fixes == false then
-            inputs_copy.defer_to_data_final_fixes = false
-        else
-            inputs_copy.defer_to_data_final_fixes = overrides.defer_to_data_final_fixes or inputs_copy.defer_to_data_final_fixes
-        end
+		if overrides.defer_to_data_final_fixes == false then
+			inputs_copy.defer_to_data_final_fixes = false
+		else
+			inputs_copy.defer_to_data_final_fixes = overrides.defer_to_data_final_fixes or inputs_copy.defer_to_data_final_fixes
+		end
 
-        -- Prevent double assignment
-        if inputs_copy.defer_to_data_final_fixes then inputs_copy.defer_to_data_updates = nil end
+		-- Prevent double assignment
+		if inputs_copy.defer_to_data_final_fixes then inputs_copy.defer_to_data_updates = nil end
 
-        local flat_icon
-        if overrides.flat_icon == false then
-            flat_icon = false
-        else
-            flat_icon = overrides.flat_icon or inputs_copy.flat_icon
-        end
+		local flat_icon
+		if overrides.flat_icon == false then
+			flat_icon = false
+		else
+			flat_icon = overrides.flat_icon or inputs_copy.flat_icon
+		end
 
-        -- Construct the icon
-        if flat_icon then
-            -- Setup filename details
-            local image = overrides.image or name
-            local subfolder = inputs_copy.group
-            if inputs_copy.subgroup then
-                subfolder = inputs_copy.group .. "/" .. inputs_copy.subgroup
-            end
+		-- Construct the icon
+		if flat_icon then
+			-- Setup filename details
+			local image = overrides.image or name
+			local subfolder = inputs_copy.group
+			if inputs_copy.subgroup then subfolder = inputs_copy.group .. "/" .. inputs_copy.subgroup end
 
-            -- Make the icon
-            if inputs_copy.type == "technology" then
-                inputs_copy.technology_icon_filename = overrides.technology_icon_filename
-                    or inputs_copy.technology_icon_filename
-                    or reskins[inputs_copy.mod].directory .. "/graphics/technology/" .. subfolder .. "/" .. image .. ".png"
+			-- Make the icon
+			if inputs_copy.type == "technology" then
+				inputs_copy.technology_icon_filename = overrides.technology_icon_filename or inputs_copy.technology_icon_filename or reskins[inputs_copy.mod].directory .. "/graphics/technology/" .. subfolder .. "/" .. image .. ".png"
 
-                reskins.lib.construct_technology_icon(name, inputs_copy)
-            else
-                inputs_copy.icon_filename = overrides.icon_filename
-                    or inputs_copy.icon_filename
-                    or reskins[inputs_copy.mod].directory .. "/graphics/icons/" .. subfolder .. "/" .. image .. ".png"
+				reskins.lib.construct_technology_icon(name, inputs_copy)
+			else
+				inputs_copy.icon_filename = overrides.icon_filename or inputs_copy.icon_filename or reskins[inputs_copy.mod].directory .. "/graphics/icons/" .. subfolder .. "/" .. image .. ".png"
 
-                reskins.lib.construct_icon(name, 0, inputs_copy --[[@as ConstructIconInputsOld]])
-            end
-        else
-            -- Handle tier
-            local tier = overrides.tier or 0
-            if reskins.lib.settings.get_value("reskins-lib-tier-mapping") == "progression-map" then
-                tier = overrides.prog_tier or overrides.tier or 0
-            end
+				reskins.lib.construct_icon(name, 0, inputs_copy --[[@as ConstructIconInputsOld]])
+			end
+		else
+			-- Handle tier
+			local tier = overrides.tier or 0
+			if reskins.lib.settings.get_value("reskins-lib-tier-mapping") == "progression-map" then tier = overrides.prog_tier or overrides.tier or 0 end
 
-            -- Handle tints
-            inputs_copy.tint = overrides.tint or inputs_copy.tint or reskins.lib.tiers.get_tint(tier)
+			-- Handle tints
+			inputs_copy.tint = overrides.tint or inputs_copy.tint or reskins.lib.tiers.get_tint(tier)
 
-            -- Adjust tint to belt-type if necessary
-            if overrides.uses_belt_mask == true then
-                inputs_copy.tint = reskins.lib.tiers.get_belt_tint(tier)
-            end
+			-- Adjust tint to belt-type if necessary
+			if overrides.uses_belt_mask == true then inputs_copy.tint = reskins.lib.tiers.get_belt_tint(tier) end
 
-            -- Handle icon_name and related parameters
-            inputs_copy.icon_name = overrides.icon_name or inputs_copy.icon_name
-            inputs_copy.icon_base = overrides.icon_base or inputs_copy.icon_base or nil
-            inputs_copy.icon_mask = overrides.icon_mask or inputs_copy.icon_mask or nil
-            inputs_copy.icon_highlights = overrides.icon_highlights or inputs_copy.icon_highlights or nil
+			-- Handle icon_name and related parameters
+			inputs_copy.icon_name = overrides.icon_name or inputs_copy.icon_name
+			inputs_copy.icon_base = overrides.icon_base or inputs_copy.icon_base or nil
+			inputs_copy.icon_mask = overrides.icon_mask or inputs_copy.icon_mask or nil
+			inputs_copy.icon_highlights = overrides.icon_highlights or inputs_copy.icon_highlights or nil
 
-            -- Make the icon
-            if inputs_copy.type == "technology" then
-                reskins.lib.construct_technology_icon(name, inputs_copy)
-            else
-                reskins.lib.construct_icon(name, tier, inputs_copy --[[@as ConstructIconInputsOld]])
-            end
-        end
+			-- Make the icon
+			if inputs_copy.type == "technology" then
+				reskins.lib.construct_technology_icon(name, inputs_copy)
+			else
+				reskins.lib.construct_icon(name, tier, inputs_copy --[[@as ConstructIconInputsOld]])
+			end
+		end
 
-        -- Label to skip to next iteration
-        ::continue::
-    end
+		-- Label to skip to next iteration
+		::continue::
+	end
 end

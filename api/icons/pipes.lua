@@ -3,9 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.icons.pipes" then
-    return require("__reskins-library__.api.icons.pipes")
-end
+if ... ~= "__reskins-library__.api.icons.pipes" then return require("__reskins-library__.api.icons.pipes") end
 
 --- Provides methods for getting icons for pipe-type entities.
 ---
@@ -36,16 +34,16 @@ local _pipes = {}
 ---@param material_type PipeMaterialType # The type of material to get the path for.
 ---@nodiscard
 local function get_path_to_pipe_material_icons(folder_name, material_type)
-    local path
-    if material_type == "iron" then
-        path = "__reskins-library__/graphics/icons/common/" .. folder_name .. "/iron"
-    elseif material_type:find("angels") then
-        path = "__reskins-angels__/graphics/icons/smelting/" .. folder_name .. "/" .. material_type:gsub("angels%-", "")
-    else
-        path = "__reskins-bobs__/graphics/icons/logistics/" .. folder_name .. "/" .. material_type
-    end
+	local path
+	if material_type == "iron" then
+		path = "__reskins-library__/graphics/icons/common/" .. folder_name .. "/iron"
+	elseif material_type:find("angels") then
+		path = "__reskins-angels__/graphics/icons/smelting/" .. folder_name .. "/" .. material_type:gsub("angels%-", "")
+	else
+		path = "__reskins-bobs__/graphics/icons/logistics/" .. folder_name .. "/" .. material_type
+	end
 
-    return path
+	return path
 end
 
 ---
@@ -65,22 +63,22 @@ end
 ---@param material_type PipeMaterialType # The type of material to get the path for.
 ---@nodiscard
 local function get_icon_datum(type_name, material_type)
-    local path = get_path_to_pipe_material_icons(type_name, material_type)
+	local path = get_path_to_pipe_material_icons(type_name, material_type)
 
-    ---@type data.IconData
-    local icon_datum = {
-        icon = path .. "-" .. type_name .. "-icon.png",
-        icon_size = 64,
-        scale = 0.5,
-    }
+	---@type data.IconData
+	local icon_datum = {
+		icon = path .. "-" .. type_name .. "-icon.png",
+		icon_size = 64,
+		scale = 0.5,
+	}
 
-    return icon_datum
+	return icon_datum
 end
 
 ---Prototype type-names supported by generic methods in this module.
 local supported_types = {
-    ["pipe"] = true,
-    ["pipe-to-ground"] = true,
+	["pipe"] = true,
+	["pipe-to-ground"] = true,
 }
 
 ---
@@ -107,32 +105,32 @@ local supported_types = {
 ---*@throws* `string` — Thrown when `prototype` is not of a supported type.
 ---@nodiscard
 function _pipes.get_icon(prototype, material_type, tier)
-    ---@type data.IconData
-    local icon_datum = get_icon_datum(prototype.type, material_type)
+	---@type data.IconData
+	local icon_datum = get_icon_datum(prototype.type, material_type)
 
-    assert(prototype, "Invalid parameter: 'prototype' must not be nil.")
-    assert(supported_types[prototype.type], "Invalid parameter: 'prototype' must be of a supported type.")
+	assert(prototype, "Invalid parameter: 'prototype' must not be nil.")
+	assert(supported_types[prototype.type], "Invalid parameter: 'prototype' must be of a supported type.")
 
-    ---@type DeferrableIconDatum|DeferrableIconData
-    local deferrable_icon
-    if reskins.lib.tiers.is_pipe_tier_labeling_enabled then
-        ---@type DeferrableIconData
-        deferrable_icon = {
-            name = prototype.name,
-            type_name = prototype.type,
-            icon_data = reskins.lib.tiers.add_tier_labels_to_icon(tier or 0, icon_datum),
-            pictures = reskins.lib.sprites.create_sprite_from_icon(icon_datum, 1.0),
-        }
-    else
-        ---@type DeferrableIconDatum
-        deferrable_icon = {
-            name = prototype.name,
-            type_name = prototype.type,
-            icon_datum = icon_datum,
-        }
-    end
+	---@type DeferrableIconDatum|DeferrableIconData
+	local deferrable_icon
+	if reskins.lib.tiers.is_pipe_tier_labeling_enabled then
+		---@type DeferrableIconData
+		deferrable_icon = {
+			name = prototype.name,
+			type_name = prototype.type,
+			icon_data = reskins.lib.tiers.add_tier_labels_to_icon(tier or 0, icon_datum),
+			pictures = reskins.lib.sprites.create_sprite_from_icon(icon_datum, 1.0),
+		}
+	else
+		---@type DeferrableIconDatum
+		deferrable_icon = {
+			name = prototype.name,
+			type_name = prototype.type,
+			icon_datum = icon_datum,
+		}
+	end
 
-    return deferrable_icon
+	return deferrable_icon
 end
 
 return _pipes

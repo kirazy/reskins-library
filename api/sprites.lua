@@ -3,9 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.sprites" then
-    return require("__reskins-library__.api.sprites")
-end
+if ... ~= "__reskins-library__.api.sprites" then return require("__reskins-library__.api.sprites") end
 
 --- Provides methods for manipulating sprites.
 ---
@@ -15,14 +13,14 @@ end
 ---```
 ---@class Reskins.Lib.Sprites
 local _sprites = {
-    ---@type Reskins.Lib.Sprites.Belts
-    belts = require("__reskins-library__.api.sprites.belts"),
+	---@type Reskins.Lib.Sprites.Belts
+	belts = require("__reskins-library__.api.sprites.belts"),
 
-    ---@type Reskins.Lib.Sprites.ChemicalPlants
-    chemical_plants = require("__reskins-library__.api.sprites.chemical-plants"),
+	---@type Reskins.Lib.Sprites.ChemicalPlants
+	chemical_plants = require("__reskins-library__.api.sprites.chemical-plants"),
 
-    ---@type Reskins.Lib.Sprites.Pipes
-    pipes = require("__reskins-library__.api.sprites.pipes"),
+	---@type Reskins.Lib.Sprites.Pipes
+	pipes = require("__reskins-library__.api.sprites.pipes"),
 }
 
 ---@type Reskins.Lib.Icons
@@ -32,23 +30,23 @@ local _icons = require("__reskins-library__.api.icons")
 ---@param scale? double # The scale to apply to the sprite.
 ---@return data.Sprite # A layer of sprite data.
 local function convert_icon_layer_to_sprite_layer(icon_layer, scale)
-    local icon_copy = _icons.add_missing_icon_defaults(icon_layer)
-    local scale_to_apply = scale and scale * icon_copy.scale or icon_copy.scale or 32 / icon_copy.icon_size
+	local icon_copy = _icons.add_missing_icon_defaults(icon_layer)
+	local scale_to_apply = scale and scale * icon_copy.scale or icon_copy.scale or 32 / icon_copy.icon_size
 
-    -- Icon shift is in pixels, so we need to scale it down to 32 pixels per tile.
-    local converted_shift = icon_copy.shift and util.mul_shift(icon_copy.shift, scale_to_apply * 1 / 32) or nil
+	-- Icon shift is in pixels, so we need to scale it down to 32 pixels per tile.
+	local converted_shift = icon_copy.shift and util.mul_shift(icon_copy.shift, scale_to_apply * 1 / 32) or nil
 
-    ---@type data.Sprite
-    local sprite_layer = {
-        flags = { "icon" },
-        filename = icon_copy.icon,
-        size = icon_copy.icon_size,
-        scale = scale_to_apply,
-        shift = converted_shift,
-        tint = icon_copy.tint,
-    }
+	---@type data.Sprite
+	local sprite_layer = {
+		flags = { "icon" },
+		filename = icon_copy.icon,
+		size = icon_copy.icon_size,
+		scale = scale_to_apply,
+		shift = converted_shift,
+		tint = icon_copy.tint,
+	}
 
-    return sprite_layer
+	return sprite_layer
 end
 
 ---
@@ -91,20 +89,20 @@ end
 ---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
 ---@nodiscard
 function _sprites.create_sprite_from_icons(icon_data, scale)
-    assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
+	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
 
-    ---@type data.Sprite
-    local sprite = {}
-    if #icon_data == 1 then
-        sprite = convert_icon_layer_to_sprite_layer(icon_data[1], scale)
-    else
-        sprite = { layers = {} }
-        for n = 1, #icon_data do
-            sprite.layers[n] = convert_icon_layer_to_sprite_layer(icon_data[n], scale)
-        end
-    end
+	---@type data.Sprite
+	local sprite = {}
+	if #icon_data == 1 then
+		sprite = convert_icon_layer_to_sprite_layer(icon_data[1], scale)
+	else
+		sprite = { layers = {} }
+		for n = 1, #icon_data do
+			sprite.layers[n] = convert_icon_layer_to_sprite_layer(icon_data[n], scale)
+		end
+	end
 
-    return sprite
+	return sprite
 end
 
 ---
@@ -140,9 +138,9 @@ end
 ---*@throws* `string` — Thrown when `icon_datum.icon_size` is not a positive integer.<br/>
 ---@nodiscard
 function _sprites.create_sprite_from_icon(icon_datum, scale)
-    assert(icon_datum, "Invalid parameter: 'icon_datum' must not be nil.")
+	assert(icon_datum, "Invalid parameter: 'icon_datum' must not be nil.")
 
-    return convert_icon_layer_to_sprite_layer(icon_datum, scale)
+	return convert_icon_layer_to_sprite_layer(icon_datum, scale)
 end
 
 ---@alias LightSpriteNames
@@ -180,18 +178,18 @@ end
 ---@return data.Sprite # A `Sprite` object configured for use as a light layer.
 ---@nodiscard
 function _sprites.get_sprite_light_layer(light_name, tint)
-    ---@type data.Sprite
-    local sprite = {
-        flags = { "light" },
-        draw_as_light = true,
-        filename = "__reskins-library__/graphics/icons/lights/" .. light_name .. "-light.png",
-        size = 64,
-        mipmap_count = 4,
-        scale = 0.5,
-        tint = tint,
-    }
+	---@type data.Sprite
+	local sprite = {
+		flags = { "light" },
+		draw_as_light = true,
+		filename = "__reskins-library__/graphics/icons/lights/" .. light_name .. "-light.png",
+		size = 64,
+		mipmap_count = 4,
+		scale = 0.5,
+		tint = tint,
+	}
 
-    return sprite
+	return sprite
 end
 
 ---
@@ -228,59 +226,54 @@ end
 ---*@throws* `string` — Thrown when `num_variations` is not a positive integer.
 ---@nodiscard
 function _sprites.create_sprite_variations(directory, sprite_name, num_variations, is_light, tint)
-    assert(directory and type(directory) == "string" and directory ~= "",
-        "Invalid parameter: `directory` must not be non-empty string.")
-    assert(sprite_name and type(sprite_name) == "string" and sprite_name ~= "",
-        "Invalid parameter: `sprite_name` must not be non-empty string.")
-    assert(num_variations and num_variations > 0 and num_variations % 1 == 0,
-        "Invalid parameter: `num_variations` must be a positive integer.")
+	assert(directory and type(directory) == "string" and directory ~= "", "Invalid parameter: `directory` must not be non-empty string.")
+	assert(sprite_name and type(sprite_name) == "string" and sprite_name ~= "", "Invalid parameter: `sprite_name` must not be non-empty string.")
+	assert(num_variations and num_variations > 0 and num_variations % 1 == 0, "Invalid parameter: `num_variations` must be a positive integer.")
 
-    if not directory:match("/$") then
-        directory = directory .. "/"
-    end
+	if not directory:match("/$") then directory = directory .. "/" end
 
-    ---@type data.SpriteVariations[]
-    local sprites = {}
-    for n = 1, num_variations do
-        local file_name = sprite_name .. ((n > 1) and ("-" .. (n - 1) .. ".png") or (".png"))
+	---@type data.SpriteVariations[]
+	local sprites = {}
+	for n = 1, num_variations do
+		local file_name = sprite_name .. ((n > 1) and ("-" .. (n - 1) .. ".png") or ".png")
 
-        if is_light then
-            ---@type data.Sprite
-            local sprite = {
-                layers = {
-                    {
-                        filename = directory .. file_name,
-                        size = 64,
-                        mipmap_count = 4,
-                        scale = 0.5,
-                    },
-                    {
-                        draw_as_light = true,
-                        filename = directory .. file_name,
-                        size = 64,
-                        mipmap_count = 4,
-                        scale = 0.5,
-                        tint = tint or { r = 0.3, g = 0.3, b = 0.3, a = 0.3 },
-                        blend_mode = "additive",
-                    },
-                },
-            }
+		if is_light then
+			---@type data.Sprite
+			local sprite = {
+				layers = {
+					{
+						filename = directory .. file_name,
+						size = 64,
+						mipmap_count = 4,
+						scale = 0.5,
+					},
+					{
+						draw_as_light = true,
+						filename = directory .. file_name,
+						size = 64,
+						mipmap_count = 4,
+						scale = 0.5,
+						tint = tint or { r = 0.3, g = 0.3, b = 0.3, a = 0.3 },
+						blend_mode = "additive",
+					},
+				},
+			}
 
-            table.insert(sprites, sprite)
-        else
-            ---@type data.Sprite
-            local sprite = {
-                filename = directory .. file_name,
-                size = 64,
-                mipmap_count = 4,
-                scale = 0.5,
-            }
+			table.insert(sprites, sprite)
+		else
+			---@type data.Sprite
+			local sprite = {
+				filename = directory .. file_name,
+				size = 64,
+				mipmap_count = 4,
+				scale = 0.5,
+			}
 
-            table.insert(sprites, sprite)
-        end
-    end
+			table.insert(sprites, sprite)
+		end
+	end
 
-    return sprites
+	return sprites
 end
 
 ---Provides additional fields for the `data.Animation` object when using a sprite sheet with
@@ -335,114 +328,114 @@ end
 ---@param animation VerticallyOrientableAnimation|data.Animation # The animation object to create the 4-way animation from.
 ---@nodiscard
 function _sprites.make_4way_animation_from_spritesheet(animation)
-    local animation_copy = util.copy(animation)
+	local animation_copy = util.copy(animation)
 
-    ---@class DirectionDefines : integer
-    local defines = {
-        north = 0,
-        east = 1,
-        south = 2,
-        west = 3,
-    }
+	---@class DirectionDefines : integer
+	local defines = {
+		north = 0,
+		east = 1,
+		south = 2,
+		west = 3,
+	}
 
-    ---
-    ---Creates the `data.Animation` object for the given `direction` using the given
-    ---`source_animation`.
-    ---
-    ---### Returns
-    ---@return data.Animation # The new animation for the given `direction`.
-    ---
-    ---### Parameters
-    ---@param direction DirectionDefines # The direction to create the animation for.
-    ---@param source_animation VerticallyOrientableAnimation # The source animation object with a sprite sheet supporting direction-based configurations.
-    local function make_animation_layer_for_direction(direction, source_animation)
-        local start_frame = (source_animation.frame_count or 1) * direction
-        local x, y = 0, 0
+	---
+	---Creates the `data.Animation` object for the given `direction` using the given
+	---`source_animation`.
+	---
+	---### Returns
+	---@return data.Animation # The new animation for the given `direction`.
+	---
+	---### Parameters
+	---@param direction DirectionDefines # The direction to create the animation for.
+	---@param source_animation VerticallyOrientableAnimation # The source animation object with a sprite sheet supporting direction-based configurations.
+	local function make_animation_layer_for_direction(direction, source_animation)
+		local start_frame = (source_animation.frame_count or 1) * direction
+		local x, y = 0, 0
 
-        -- Extend vanilla function with handling for vertically_oriented sprite sheets.
-        if source_animation.vertically_oriented then
-            if source_animation.line_length then
-                y = direction * source_animation.height * math.floor(start_frame / (source_animation.line_length or 1))
-            else
-                y = direction * source_animation.height
-            end
-        else
-            if source_animation.line_length then
-                y = source_animation.height * math.floor(start_frame / (source_animation.line_length or 1))
-            else
-                x = direction * source_animation.width
-            end
-        end
+		-- Extend vanilla function with handling for vertically_oriented sprite sheets.
+		if source_animation.vertically_oriented then
+			if source_animation.line_length then
+				y = direction * source_animation.height * math.floor(start_frame / (source_animation.line_length or 1))
+			else
+				y = direction * source_animation.height
+			end
+		else
+			if source_animation.line_length then
+				y = source_animation.height * math.floor(start_frame / (source_animation.line_length or 1))
+			else
+				x = direction * source_animation.width
+			end
+		end
 
-        ---@type data.Animation
-        local animation_for_direction = {
-            filename = source_animation.filename,
-            priority = source_animation.priority or "high",
-            flags = source_animation.flags,
-            x = x,
-            y = y,
-            width = source_animation.width,
-            height = source_animation.height,
-            frame_count = source_animation.frame_count or 1,
-            line_length = source_animation.line_length,
-            repeat_count = source_animation.repeat_count,
-            shift = source_animation.shift,
-            draw_as_shadow = source_animation.draw_as_shadow,
-            draw_as_glow = source_animation.draw_as_glow,
-            draw_as_light = source_animation.draw_as_light,
-            apply_runtime_tint = source_animation.apply_runtime_tint,
-            animation_speed = source_animation.animation_speed,
-            scale = source_animation.scale or 1,
-            tint = source_animation.tint,
-            blend_mode = source_animation.blend_mode,
-            load_in_minimal_mode = source_animation.load_in_minimal_mode,
-            premul_alpha = source_animation.premul_alpha,
-            generate_sdf = source_animation.generate_sdf,
+		---@type data.Animation
+		local animation_for_direction = {
+			filename = source_animation.filename,
+			priority = source_animation.priority or "high",
+			flags = source_animation.flags,
+			x = x,
+			y = y,
+			width = source_animation.width,
+			height = source_animation.height,
+			frame_count = source_animation.frame_count or 1,
+			line_length = source_animation.line_length,
+			repeat_count = source_animation.repeat_count,
+			shift = source_animation.shift,
+			draw_as_shadow = source_animation.draw_as_shadow,
+			draw_as_glow = source_animation.draw_as_glow,
+			draw_as_light = source_animation.draw_as_light,
+			apply_runtime_tint = source_animation.apply_runtime_tint,
+			animation_speed = source_animation.animation_speed,
+			scale = source_animation.scale or 1,
+			tint = source_animation.tint,
+			blend_mode = source_animation.blend_mode,
+			load_in_minimal_mode = source_animation.load_in_minimal_mode,
+			premul_alpha = source_animation.premul_alpha,
+			generate_sdf = source_animation.generate_sdf,
 
-            -- Extend vanilla function with additional parameters.
-            run_mode = source_animation.run_mode,
-            frame_sequence = source_animation.frame_sequence,
+			-- Extend vanilla function with additional parameters.
+			run_mode = source_animation.run_mode,
+			frame_sequence = source_animation.frame_sequence,
 
-            ---This may have been deprecated, the Factorio API does not mention this field,
-            ---but it is present in the original function defintion.
-            ---@diagnostic disable-next-line: undefined-field
-            force_hr_shadow = source_animation.force_hr_shadow,
-        }
+			---This may have been deprecated, the Factorio API does not mention this field,
+			---but it is present in the original function defintion.
+			---@diagnostic disable-next-line: undefined-field
+			force_hr_shadow = source_animation.force_hr_shadow,
+		}
 
-        return animation_for_direction
-    end
+		return animation_for_direction
+	end
 
-    ---
-    ---Creates the `data.Animation` object for the given `direction` using the given
-    ---`source_animation`.
-    ---
-    ---### Returns
-    ---@return data.Animation # The new animation for the given `direction`.
-    ---
-    ---### Parameters
-    ---@param direction DirectionDefines # The direction to create the animation for.
-    local function make_animation_for_direction(direction)
-        if animation_copy.layers then
-            ---@type data.Animation
-            local new_animation = { layers = {} }
-            for _, v in ipairs(animation_copy.layers) do
-                table.insert(new_animation.layers, make_animation_layer_for_direction(direction, v))
-            end
-            return new_animation
-        else
-            return make_animation_layer_for_direction(direction, animation_copy)
-        end
-    end
+	---
+	---Creates the `data.Animation` object for the given `direction` using the given
+	---`source_animation`.
+	---
+	---### Returns
+	---@return data.Animation # The new animation for the given `direction`.
+	---
+	---### Parameters
+	---@param direction DirectionDefines # The direction to create the animation for.
+	local function make_animation_for_direction(direction)
+		if animation_copy.layers then
+			---@type data.Animation
+			local new_animation = { layers = {} }
+			for _, v in ipairs(animation_copy.layers) do
+				table.insert(new_animation.layers, make_animation_layer_for_direction(direction, v))
+			end
+			return new_animation
+		else
+			return make_animation_layer_for_direction(direction, animation_copy)
+		end
+	end
 
-    ---@type data.Animation4Way
-    local animation_4way = {
-        north = make_animation_for_direction(defines.north),
-        east = make_animation_for_direction(defines.east),
-        south = make_animation_for_direction(defines.south),
-        west = make_animation_for_direction(defines.west),
-    }
+	---@type data.Animation4Way
+	local animation_4way = {
+		north = make_animation_for_direction(defines.north),
+		east = make_animation_for_direction(defines.east),
+		south = make_animation_for_direction(defines.south),
+		west = make_animation_for_direction(defines.west),
+	}
 
-    return animation_4way
+	return animation_4way
 end
 
 return _sprites

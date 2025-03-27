@@ -3,9 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.tints" then
-    return require("__reskins-library__.api.tints")
-end
+if ... ~= "__reskins-library__.api.tints" then return require("__reskins-library__.api.tints") end
 
 --- Provides methods for manipulating tints.
 ---

@@ -7,8 +7,8 @@
 if not reskins.lib.apply_skin then reskins.lib.apply_skin = {} end
 
 -- Vanilla prototypes
-require('entities.base.chemical-plant')
-require('entities.base.oil-refinery')
-require('entities.base.transport-belt')
-require('entities.base.underground-belt')
-require('entities.base.splitter')
+require("entities.base.chemical-plant")
+require("entities.base.oil-refinery")
+require("entities.base.transport-belt")
+require("entities.base.underground-belt")
+require("entities.base.splitter")

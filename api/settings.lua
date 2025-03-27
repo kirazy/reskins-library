@@ -3,9 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.settings" then
-    return require("__reskins-library__.api.settings")
-end
+if ... ~= "__reskins-library__.api.settings" then return require("__reskins-library__.api.settings") end
 
 --- Provides methods for retrieving and validating startup settings.
 ---
@@ -36,12 +34,10 @@ local _settings = {}
 ---### Parameters
 ---@param name string # The name of a startup setting.
 function _settings.get_value(name)
-    local value = nil
-    if settings.startup[name] then
-        value = settings.startup[name].value
-    end
+	local value = nil
+	if settings.startup[name] then value = settings.startup[name].value end
 
-    return value
+	return value
 end
 
 ---
@@ -106,13 +102,13 @@ _settings.blend_mode = _settings.get_value("reskins-lib-blend-mode")
 ---@param source_mod SourceMod # The source mod with reskin authority.
 ---@param target_mod TargetMod # The target mod being reskinned.
 function _settings.is_feature_set_enabled(feature_set, source_mod, target_mod)
-    if _settings.get_value(source_mod .. "-do-" .. target_mod) == true then
-        return _settings.get_value("reskins-lib-scope-" .. feature_set) == true
-    elseif _settings.get_value(source_mod .. "-do-" .. target_mod) == false then
-        return false
-    else
-        return nil
-    end
+	if _settings.get_value(source_mod .. "-do-" .. target_mod) == true then
+		return _settings.get_value("reskins-lib-scope-" .. feature_set) == true
+	elseif _settings.get_value(source_mod .. "-do-" .. target_mod) == false then
+		return false
+	else
+		return nil
+	end
 end
 
 return _settings
