@@ -172,7 +172,6 @@ end
 function reskins.lib.create_explosion(name, inputs)
 	local explosion_copy = util.copy(data.raw["explosion"][inputs.base_entity_name .. "-explosion"])
 	explosion_copy.name = "ar-" .. name .. "-explosion"
-	log("Created explosion " .. explosion_copy.name .. " as setup for entity " .. name .. " copied from " .. inputs.base_entity_name)
 	data:extend({ explosion_copy })
 
 	-- Assign explosion to originating entity
