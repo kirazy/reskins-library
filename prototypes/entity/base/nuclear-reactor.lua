@@ -9,8 +9,8 @@ end
 
 local reactors = {
 	"nuclear-reactor",
-	"nuclear-reactor-2",
-	"nuclear-reactor-3",
+	"bob-nuclear-reactor-2",
+	"bob-nuclear-reactor-3",
 }
 
 -- Fix lighting
