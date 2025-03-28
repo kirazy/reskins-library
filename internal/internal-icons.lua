@@ -84,6 +84,9 @@ end
 
 ---The base inputs for `create_icons_from_list`.
 ---@class CreateIconsFromListInputs : ConstructIconInputsOld, ConstructTechnologyIconInputsOld
+---@field type? string # The type name of the prototype; defaults to "item".
+---@field mod? "angels"|"bobs"|"lib"|"compatibility" Required if not specified in the overrides.
+---@field group? string # Folder under the `graphics/icons` folder. Required if not specified in the overrides.
 ---@field flat_icon? boolean # When `true`, indicates that the icon is a flat icon with one layer.
 ---@field image? string # The name of a single image file, without extension, in the `graphics/icons/{group}/{subgroup}` or `graphics/technology/{group}/{subgroup}` folders.
 
@@ -122,7 +125,11 @@ function reskins.internal.create_icons_from_list(table, inputs)
 		-- Handle input parameters
 		inputs_copy.type = overrides.type or inputs_copy.type or nil
 		inputs_copy.mod = overrides.mod or inputs_copy.mod
+		assert(inputs_copy.mod, "A mod must be specified for icon creation.")
+
 		inputs_copy.group = overrides.group or inputs_copy.group
+		assert(inputs_copy.group, "A group must be specified for icon creation.")
+
 		inputs_copy.icon_size = overrides.icon_size or inputs_copy.icon_size
 		inputs_copy.technology_icon_size = overrides.technology_icon_size or inputs_copy.technology_icon_size
 		inputs_copy.subgroup = overrides.subgroup or inputs_copy.subgroup or nil
