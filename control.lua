@@ -78,7 +78,9 @@ local function check_for_missing_reskin(player)
 		-- Iterate through each of the reskin mods
 		for reskin, mod_list in pairs(supported_mods) do
 			-- Check if notification for this reskin is needed
-			if storage.notify[reskin].status then goto continue end
+			if storage.notify[reskin].status then
+				goto continue
+			end
 			local count = -1
 			local notify_mod_name
 
@@ -87,7 +89,9 @@ local function check_for_missing_reskin(player)
 				-- A supported mod is present
 				if script.active_mods[mod] then
 					-- Store the name of the first positive result
-					if count == -1 then notify_mod_name = mod end
+					if count == -1 then
+						notify_mod_name = mod
+					end
 					count = count + 1
 				end
 			end

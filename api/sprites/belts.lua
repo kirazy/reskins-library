@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.sprites.belts" then return require("__reskins-library__.api.sprites.belts") end
+if ... ~= "__reskins-library__.api.sprites.belts" then
+	return require("__reskins-library__.api.sprites.belts")
+end
 
 --- Provides methods for getting sprites for belt-type entities.
 ---

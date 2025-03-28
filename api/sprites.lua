@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.sprites" then return require("__reskins-library__.api.sprites") end
+if ... ~= "__reskins-library__.api.sprites" then
+	return require("__reskins-library__.api.sprites")
+end
 
 --- Provides methods for manipulating sprites.
 ---
@@ -230,7 +232,9 @@ function _sprites.create_sprite_variations(directory, sprite_name, num_variation
 	assert(sprite_name and type(sprite_name) == "string" and sprite_name ~= "", "Invalid parameter: `sprite_name` must not be non-empty string.")
 	assert(num_variations and num_variations > 0 and num_variations % 1 == 0, "Invalid parameter: `num_variations` must be a positive integer.")
 
-	if not directory:match("/$") then directory = directory .. "/" end
+	if not directory:match("/$") then
+		directory = directory .. "/"
+	end
 
 	---@type data.SpriteVariations[]
 	local sprites = {}

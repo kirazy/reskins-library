@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.icons" then return require("__reskins-library__.api.icons") end
+if ... ~= "__reskins-library__.api.icons" then
+	return require("__reskins-library__.api.icons")
+end
 
 --- Provides methods for manipulating icons.
 ---
@@ -92,7 +94,9 @@ end
 function _icons.is_icons_using_reskins_images(icon_data)
 	if icon_data then
 		for i = #icon_data, 1, -1 do
-			if is_icon_using_reskins_images(icon_data[i]) then return true end
+			if is_icon_using_reskins_images(icon_data[i]) then
+				return true
+			end
 		end
 	end
 
@@ -390,7 +394,9 @@ end
 ---*@throws* `string` — Thrown when `prototype` has no defined field `icon` or `icons`.<br/>
 ---@nodiscard
 function _icons.get_icon_from_prototype_by_reference(prototype)
-	if not prototype then return end
+	if not prototype then
+		return
+	end
 
 	-- Recipes must have an icon or icons field if being passed to this function.
 	assert((prototype.type ~= "recipe" or (prototype.icons or prototype.icon)), "Invalid parameter: 'prototype' must not be a RecipePrototype with an undefined 'icon' or 'icons' field.")
@@ -623,7 +629,9 @@ function _icons.store_icon_for_deferred_assigment_in_stage(deferred_icons, stage
 	-- Validate the icon data and add missing defaults.
 	deferrable_icon.icon_data = _icons.add_missing_icons_defaults(deferrable_icon.icon_data, deferrable_icon.type_name == "technology")
 
-	if not deferred_icons[stage] then deferred_icons[stage] = {} end
+	if not deferred_icons[stage] then
+		deferred_icons[stage] = {}
+	end
 
 	table.insert(deferred_icons[stage], deferrable_icon)
 end
@@ -691,7 +699,9 @@ end
 ---@see Reskins.Lib.Icons.store_icon_for_deferred_assigment_in_stage
 ---@see Reskins.Lib.Icons.assign_deferrable_icon
 function _icons.assign_icons_deferred_to_stage(deferred_icons, stage)
-	if not deferred_icons[stage] then return end
+	if not deferred_icons[stage] then
+		return
+	end
 
 	for _, deferrable_icon in pairs(deferred_icons[stage]) do
 		_icons.assign_deferrable_icon(deferrable_icon)
@@ -786,7 +796,9 @@ end
 ---@nodiscard
 function _icons.transform_icon(icon_data, scale, shift, tint, is_technology_icon)
 	local icon_data_copy = _icons.add_missing_icons_defaults(icon_data, is_technology_icon)
-	if not scale and not shift and not tint then return icon_data_copy end
+	if not scale and not shift and not tint then
+		return icon_data_copy
+	end
 
 	local transformed_icon_data = {}
 	for _, layer in pairs(icon_data_copy) do
@@ -851,14 +863,18 @@ end
 function _icons.add_icons_from_prototype_to_icons_by_reference(icon_data, prototype, scale, shift, tint)
 	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
 
-	if not prototype then return util.copy(icon_data) end
+	if not prototype then
+		return util.copy(icon_data)
+	end
 
 	local icon_data_copy = _icons.add_missing_icons_defaults(icon_data, prototype.type == "technology")
 
 	-- Ensure working with a copy of the prototype.
 	-- This method sets default values for missing fields, so scale is present.
 	local sourced_icon_data = _icons.get_icon_from_prototype_by_reference(prototype)
-	if not sourced_icon_data then return icon_data_copy end
+	if not sourced_icon_data then
+		return icon_data_copy
+	end
 
 	for _, icon_datum in pairs(sourced_icon_data) do
 		table.insert(icon_data_copy, _icons.transform_icon(icon_datum, scale, shift, tint, prototype.type == "technology"))
@@ -1328,7 +1344,9 @@ function _icons.remove_symbols_from_icons(icon_data)
 
 	if #icon_data >= 2 then
 		for i = #icon_data_copy, 1, -1 do
-			if is_icon_using_reskins_images(icon_data_copy[i]) and icon_data_copy[i].icon:find("%-symbol.png") then table.insert(removed_layers, 1, table.remove(icon_data_copy, i)) end
+			if is_icon_using_reskins_images(icon_data_copy[i]) and icon_data_copy[i].icon:find("%-symbol.png") then
+				table.insert(removed_layers, 1, table.remove(icon_data_copy, i))
+			end
 		end
 	end
 
@@ -1426,7 +1444,9 @@ function _icons.remove_letters_from_icons(icon_data)
 
 	if #icon_data > 2 then
 		for i = #icon_data_copy, 1, -1 do
-			if is_icon_using_reskins_images(icon_data_copy[i]) and icon_data_copy[i].icon:find("letter%-.%.png") then table.insert(removed_layers, 1, table.remove(icon_data_copy, i)) end
+			if is_icon_using_reskins_images(icon_data_copy[i]) and icon_data_copy[i].icon:find("letter%-.%.png") then
+				table.insert(removed_layers, 1, table.remove(icon_data_copy, i))
+			end
 		end
 	end
 

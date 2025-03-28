@@ -118,7 +118,9 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
 
 	---@type data.AssemblingMachinePrototype
 	local entity = data.raw[inputs.type][name]
-	if not entity then return end
+	if not entity then
+		return
+	end
 
 	-- angelspetrochem at this version or earlier does icon work in data-final-fixes
 	if reskins.lib.version.is_same_or_older(mods["angelspetrochem"], "0.9.19") then

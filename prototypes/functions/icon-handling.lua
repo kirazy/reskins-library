@@ -36,11 +36,15 @@ function reskins.lib.construct_technology_icon(name, inputs)
 
 	-- Handle compatibility defaults
 	local folder_path = inputs_copy.group
-	if inputs_copy.subgroup then folder_path = inputs_copy.group .. "/" .. inputs_copy.subgroup end
+	if inputs_copy.subgroup then
+		folder_path = inputs_copy.group .. "/" .. inputs_copy.subgroup
+	end
 
 	-- Handle mask tinting defaults
 	local icon_tint = inputs_copy.tint
-	if inputs_copy.untinted_icon_mask then icon_tint = nil end
+	if inputs_copy.untinted_icon_mask then
+		icon_tint = nil
+	end
 
 	-- Handle icon_layers defaults
 	local icon_layers
@@ -81,9 +85,13 @@ function reskins.lib.construct_technology_icon(name, inputs)
 	---@type data.IconData[]
 	local icon_data = { icon_base_layer }
 
-	if icon_layers > 1 then table.insert(icon_data, icon_mask_layer) end
+	if icon_layers > 1 then
+		table.insert(icon_data, icon_mask_layer)
+	end
 
-	if icon_layers > 2 then table.insert(icon_data, icon_highlights_layer) end
+	if icon_layers > 2 then
+		table.insert(icon_data, icon_highlights_layer)
+	end
 
 	-- Append icon extras as needed
 	if inputs_copy.technology_icon_extras then
@@ -292,7 +300,9 @@ function reskins.lib.construct_icon(name, tier, inputs)
 
 	-- Handle compatibility defaults
 	local folder_path = inputs_copy.group
-	if inputs_copy.subgroup then folder_path = inputs_copy.group .. "/" .. inputs_copy.subgroup end
+	if inputs_copy.subgroup then
+		folder_path = inputs_copy.group .. "/" .. inputs_copy.subgroup
+	end
 
 	-- Handle mask tinting defaults
 	---@type data.Color|nil
@@ -343,9 +353,13 @@ function reskins.lib.construct_icon(name, tier, inputs)
 	---@type data.IconData[]
 	local icon_data = { icon_base_layer }
 
-	if icon_layers > 1 then table.insert(icon_data, icon_mask_layer) end
+	if icon_layers > 1 then
+		table.insert(icon_data, icon_mask_layer)
+	end
 
-	if icon_layers > 2 then table.insert(icon_data, icon_highlights_layer) end
+	if icon_layers > 2 then
+		table.insert(icon_data, icon_highlights_layer)
+	end
 
 	---@type data.SpriteVariations
 	local pictures = reskins.lib.sprites.create_sprite_from_icons(icon_data, 1.0)
@@ -360,9 +374,11 @@ function reskins.lib.construct_icon(name, tier, inputs)
 
 	if inputs_copy.icon_picture_extras then
 		-- If we have one layer, we need to convert to an layered sprite.
-		if not pictures.layers then pictures = {
-			layers = { pictures },
-		} end
+		if not pictures.layers then
+			pictures = {
+				layers = { pictures },
+			}
+		end
 
 		for n = 1, #inputs_copy.icon_picture_extras do
 			table.insert(pictures.layers, inputs_copy.icon_picture_extras[n])

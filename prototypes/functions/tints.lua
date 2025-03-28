@@ -25,7 +25,9 @@ function reskins.lib.RGBtoHSV(tint)
 		h = (4 + (r - g) / range) * 60
 	end
 
-	if h < 0 then h = h + 360 end
+	if h < 0 then
+		h = h + 360
+	end
 
 	local v = max
 	local s = range / max
@@ -55,12 +57,16 @@ function reskins.lib.RGBtoHSL(tint)
 		h = (4 + (r - g) / range) * 60
 	end
 
-	if h < 0 then h = h + 360 end
+	if h < 0 then
+		h = h + 360
+	end
 
 	local l = (min + max) / 2
 	local s = 0
 
-	if not (min == 1 or max == 0) then s = (max - l) / math.min(l, 1 - l) end
+	if not (min == 1 or max == 0) then
+		s = (max - l) / math.min(l, 1 - l)
+	end
 
 	return {
 		h = h,

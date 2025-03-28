@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.defines" then return require("__reskins-library__.api.defines") end
+if ... ~= "__reskins-library__.api.defines" then
+	return require("__reskins-library__.api.defines")
+end
 
 --- Provides enumerations for use in Artisanal Reskins.
 ---

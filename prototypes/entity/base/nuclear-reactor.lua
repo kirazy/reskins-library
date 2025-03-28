@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if not (mods["angelsindustries"] or mods["bobpower"]) then return end
+if not (mods["angelsindustries"] or mods["bobpower"]) then
+	return
+end
 
 local reactors = {
 	"nuclear-reactor",
@@ -15,7 +17,9 @@ local reactors = {
 for _, name in pairs(reactors) do
 	local entity = data.raw.reactor[name]
 
-	if not entity then goto continue end
+	if not entity then
+		goto continue
+	end
 
 	-- Lights
 	entity.working_light_picture = {

@@ -106,7 +106,9 @@ function reskins.internal.create_icons_from_list(table, inputs)
 		local icon = data.raw[icon_type][name]
 
 		-- Check if icon exists, if not, skip this iteration
-		if not icon then goto continue end
+		if not icon then
+			goto continue
+		end
 
 		-- Work with a local copy of inputs
 		---@type CreateIconsFromListInputs
@@ -146,7 +148,9 @@ function reskins.internal.create_icons_from_list(table, inputs)
 		end
 
 		-- Prevent double assignment
-		if inputs_copy.defer_to_data_final_fixes then inputs_copy.defer_to_data_updates = nil end
+		if inputs_copy.defer_to_data_final_fixes then
+			inputs_copy.defer_to_data_updates = nil
+		end
 
 		local flat_icon
 		if overrides.flat_icon == false then
@@ -160,7 +164,9 @@ function reskins.internal.create_icons_from_list(table, inputs)
 			-- Setup filename details
 			local image = overrides.image or name
 			local subfolder = inputs_copy.group
-			if inputs_copy.subgroup then subfolder = inputs_copy.group .. "/" .. inputs_copy.subgroup end
+			if inputs_copy.subgroup then
+				subfolder = inputs_copy.group .. "/" .. inputs_copy.subgroup
+			end
 
 			-- Make the icon
 			if inputs_copy.type == "technology" then
@@ -175,13 +181,17 @@ function reskins.internal.create_icons_from_list(table, inputs)
 		else
 			-- Handle tier
 			local tier = overrides.tier or 0
-			if reskins.lib.settings.get_value("reskins-lib-tier-mapping") == "progression-map" then tier = overrides.prog_tier or overrides.tier or 0 end
+			if reskins.lib.settings.get_value("reskins-lib-tier-mapping") == "progression-map" then
+				tier = overrides.prog_tier or overrides.tier or 0
+			end
 
 			-- Handle tints
 			inputs_copy.tint = overrides.tint or inputs_copy.tint or reskins.lib.tiers.get_tint(tier)
 
 			-- Adjust tint to belt-type if necessary
-			if overrides.uses_belt_mask == true then inputs_copy.tint = reskins.lib.tiers.get_belt_tint(tier) end
+			if overrides.uses_belt_mask == true then
+				inputs_copy.tint = reskins.lib.tiers.get_belt_tint(tier)
+			end
 
 			-- Handle icon_name and related parameters
 			inputs_copy.icon_name = overrides.icon_name or inputs_copy.icon_name

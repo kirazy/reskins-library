@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.settings" then return require("__reskins-library__.api.settings") end
+if ... ~= "__reskins-library__.api.settings" then
+	return require("__reskins-library__.api.settings")
+end
 
 --- Provides methods for retrieving and validating startup settings.
 ---
@@ -35,7 +37,9 @@ local _settings = {}
 ---@param name string # The name of a startup setting.
 function _settings.get_value(name)
 	local value = nil
-	if settings.startup[name] then value = settings.startup[name].value end
+	if settings.startup[name] then
+		value = settings.startup[name].value
+	end
 
 	return value
 end

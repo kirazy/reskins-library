@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.icons.pipes" then return require("__reskins-library__.api.icons.pipes") end
+if ... ~= "__reskins-library__.api.icons.pipes" then
+	return require("__reskins-library__.api.icons.pipes")
+end
 
 --- Provides methods for getting icons for pipe-type entities.
 ---

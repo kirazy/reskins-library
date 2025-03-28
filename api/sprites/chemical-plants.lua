@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.sprites.chemical-plants" then return require("__reskins-library__.api.sprites.chemical-plants") end
+if ... ~= "__reskins-library__.api.sprites.chemical-plants" then
+	return require("__reskins-library__.api.sprites.chemical-plants")
+end
 
 --- Provides methods for getting sprites for chemical-plant-type entities.
 ---

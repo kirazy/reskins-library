@@ -19,10 +19,14 @@ reskins.lib.directory = "__reskins-library__"
 --- @return any #The value at the end of the key sequence if it exists; otherwise, `nil`.
 local function try_get_value(root, ...)
 	for i = 1, select("#", ...) do
-		if type(root) ~= "table" then return nil end
+		if type(root) ~= "table" then
+			return nil
+		end
 		local key = select(i, ...)
 		root = root[key]
-		if root == nil then return nil end
+		if root == nil then
+			return nil
+		end
 	end
 
 	return root
@@ -39,13 +43,19 @@ function reskins.lib.setup_standard_entity(name, tier, inputs)
 	reskins.lib.set_inputs_defaults(inputs)
 
 	-- Create particles and explosions
-	if inputs.make_explosions then reskins.lib.create_explosions_and_particles(name, inputs) end
+	if inputs.make_explosions then
+		reskins.lib.create_explosions_and_particles(name, inputs)
+	end
 
 	-- Create remnants
-	if inputs.make_remnants then reskins.lib.create_remnant(name, inputs) end
+	if inputs.make_remnants then
+		reskins.lib.create_remnant(name, inputs)
+	end
 
 	-- Create icons
-	if inputs.make_icons then reskins.lib.construct_icon(name, tier, inputs) end
+	if inputs.make_icons then
+		reskins.lib.construct_icon(name, tier, inputs)
+	end
 end
 
 ---@class ParseInputsInputs
@@ -89,7 +99,9 @@ end
 function reskins.lib.assign_order(name, inputs)
 	-- Initialize paths
 	local entity
-	if inputs.type then entity = data.raw[inputs.type][name] end
+	if inputs.type then
+		entity = data.raw[inputs.type][name]
+	end
 	local item = data.raw["item"][name]
 	local explosion = data.raw["explosion"][name .. "-explosion"]
 	local remnant = data.raw["corpse"][name .. "-remnants"]
@@ -182,7 +194,9 @@ function reskins.lib.create_particle(name, base_entity_name, base_particle_name,
 	-- Assign particle to originating explosion
 	---@type table|nil
 	local target_effects = try_get_value(data.raw.explosion, name .. "-explosion", "created_effect", "action_delivery", "target_effects")
-	if not target_effects or #target_effects == 0 then return end
+	if not target_effects or #target_effects == 0 then
+		return
+	end
 
 	-- Check if the target_effects table has at least one member, check if that member is of type =
 	-- "create-explosion", and if so, collection the entity name and then go find THAT explosion.
@@ -193,7 +207,9 @@ function reskins.lib.create_particle(name, base_entity_name, base_particle_name,
 	end
 
 	local target_effect = try_get_value(target_effects, key)
-	if target_effect and target_effect.type == "create_particle" then target_effect.particle_name = particle.name end
+	if target_effect and target_effect.type == "create_particle" then
+		target_effect.particle_name = particle.name
+	end
 end
 
 ---@class CreateExplosionsAndParticlesInputs : CreateExplosionInputs

@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.sprites.pipes" then return require("__reskins-library__.api.sprites.pipes") end
+if ... ~= "__reskins-library__.api.sprites.pipes" then
+	return require("__reskins-library__.api.sprites.pipes")
+end
 
 --- Provides methods for getting sprites for pipe-type entities.
 ---

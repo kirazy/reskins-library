@@ -76,7 +76,9 @@ function reskins.lib.apply_skin.transport_belt(name, tier, tint, make_tier_label
 
 	---@type data.TransportBeltPrototype
 	local entity = data.raw[inputs.type][name]
-	if not entity then return end
+	if not entity then
+		return
+	end
 
 	if reskin_vanilla_entity == false then
 		reskins.lib.tiers.add_tier_labels_to_prototype_by_reference(tier, entity)

@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.prototypes" then return require("__reskins-library__.api.prototypes") end
+if ... ~= "__reskins-library__.api.prototypes" then
+	return require("__reskins-library__.api.prototypes")
+end
 
 --- Provides methods for working with prototypes.
 ---
@@ -23,7 +25,9 @@ local _prototypes = {}
 ---@return string|nil # The name of the first item found.
 function _prototypes.get_name_of_first_item_that_exists(...)
 	for _, name in pairs({ ... }) do
-		if data.raw.item[name] then return name end
+		if data.raw.item[name] then
+			return name
+		end
 	end
 end
 
@@ -142,7 +146,9 @@ end
 ---@see Reskins.Lib.Prototypes.rescale_prototype
 function _prototypes.rescale_remnants_of_prototype(prototype, scalar)
 	-- Check the entity exists
-	if not prototype then return end
+	if not prototype then
+		return
+	end
 
 	-- Fetch remnant
 	local remnant_name = prototype.corpse

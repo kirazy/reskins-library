@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.version" then return require("__reskins-library__.api.version") end
+if ... ~= "__reskins-library__.api.version" then
+	return require("__reskins-library__.api.version")
+end
 
 ---Provides version comparison tools.
 ---
@@ -38,7 +40,9 @@ function _version.is_newer(version, version_to_compare_with)
 	local v1 = _migration.format_version(version)
 	local v2 = _migration.format_version(version_to_compare_with)
 
-	if v1 and v2 then return v1 > v2 end
+	if v1 and v2 then
+		return v1 > v2
+	end
 	return nil
 end
 
@@ -61,7 +65,9 @@ function _version.is_same_or_newer(version, version_to_compare_with)
 	local v1 = _migration.format_version(version)
 	local v2 = _migration.format_version(version_to_compare_with)
 
-	if v1 and v2 then return v1 >= v2 end
+	if v1 and v2 then
+		return v1 >= v2
+	end
 	return nil
 end
 
@@ -84,7 +90,9 @@ function _version.is_same(version, version_to_compare_with)
 	local v1 = _migration.format_version(version)
 	local v2 = _migration.format_version(version_to_compare_with)
 
-	if v1 and v2 then return v1 == v2 end
+	if v1 and v2 then
+		return v1 == v2
+	end
 	return nil
 end
 
@@ -107,7 +115,9 @@ function _version.is_same_or_older(version, version_to_compare_with)
 	local v1 = _migration.format_version(version)
 	local v2 = _migration.format_version(version_to_compare_with)
 
-	if v1 and v2 then return v1 <= v2 end
+	if v1 and v2 then
+		return v1 <= v2
+	end
 	return nil
 end
 
@@ -131,7 +141,9 @@ function _version.is_older(version, version_to_compare_with)
 	local v1 = _migration.format_version(version)
 	local v2 = _migration.format_version(version_to_compare_with)
 
-	if v1 and v2 then return v1 < v2 end
+	if v1 and v2 then
+		return v1 < v2
+	end
 	return nil
 end
 

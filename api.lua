@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api" then return require("__reskins-library__.api") end
+if ... ~= "__reskins-library__.api" then
+	return require("__reskins-library__.api")
+end
 
 ---Provides access to the Artisanal Reskin's library of API functions.
 ---

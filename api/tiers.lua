@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.tiers" then return require("__reskins-library__.api.tiers") end
+if ... ~= "__reskins-library__.api.tiers" then
+	return require("__reskins-library__.api.tiers")
+end
 
 --- Provides methods for working with tier labels and tints.
 ---
@@ -139,7 +141,9 @@ function _tiers.get_belt_tint(tier)
 
 	---@type data.Color
 	local tint
-	if tier == 0 and is_using_basic_belt_override then tint = util.copy(basic_belt_color_override) end
+	if tier == 0 and is_using_basic_belt_override then
+		tint = util.copy(basic_belt_color_override)
+	end
 
 	if is_using_custom_tier_colors then
 		tint = util.copy(custom_tier_colors[tier])
@@ -190,7 +194,9 @@ function _tiers.is_icons_tier_labeled(icon_data)
 	-- A labeled icon will have minimum three layers.
 	if icon_data and #icon_data >= 3 then
 		for i = #icon_data, 1, -1 do
-			if is_icon_tier_labeled(icon_data[i]) then return true end
+			if is_icon_tier_labeled(icon_data[i]) then
+				return true
+			end
 		end
 	end
 
@@ -222,7 +228,9 @@ end
 function _tiers.get_tier_from_icons(icon_data)
 	if icon_data and #icon_data >= 3 then
 		for i = #icon_data, 1, -1 do
-			if is_icon_tier_labeled(icon_data[i]) then return tonumber(icon_data[i].icon:match("(%d+)%.png")) end
+			if is_icon_tier_labeled(icon_data[i]) then
+				return tonumber(icon_data[i].icon:match("(%d+)%.png"))
+			end
 		end
 	end
 
@@ -258,7 +266,9 @@ function _tiers.remove_tier_labels_from_icons(icon_data)
 
 	if #icon_data >= 2 then
 		for i = #icon_data_copy, 1, -1 do
-			if is_icon_tier_labeled(icon_data_copy[i]) then table.insert(removed_layers, 1, table.remove(icon_data_copy, i)) end
+			if is_icon_tier_labeled(icon_data_copy[i]) then
+				table.insert(removed_layers, 1, table.remove(icon_data_copy, i))
+			end
 		end
 	end
 
@@ -311,7 +321,9 @@ function _tiers.add_tier_labels_to_icons(tier, icon_data)
 	assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
 	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
 
-	if not _tiers.is_tier_labeling_enabled then return util.copy(icon_data) end
+	if not _tiers.is_tier_labeling_enabled then
+		return util.copy(icon_data)
+	end
 
 	local icon_data_copy = _icons.add_missing_icons_defaults(icon_data)
 
@@ -446,10 +458,14 @@ function _tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(tier, p
 	assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
 
 	-- There is not a 0th tier pip.
-	if tier == 0 then return nil end
+	if tier == 0 then
+		return nil
+	end
 
 	local source_icon_data = _icons.get_icon_from_prototype_by_reference(prototype)
-	if not source_icon_data then return nil end
+	if not source_icon_data then
+		return nil
+	end
 
 	-- A list of types that should not have their pictures field set.
 	local filtered_types = {
@@ -499,7 +515,9 @@ function _tiers.add_tier_labels_to_prototype_by_reference(tier, prototype)
 	local deferrable_icon = _tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(tier, prototype)
 
 	-- Prototype doesn't exist, or tier was 0.
-	if not deferrable_icon then return end
+	if not deferrable_icon then
+		return
+	end
 
 	_icons.assign_icons_to_prototype_and_related_prototypes(deferrable_icon.name, deferrable_icon.type_name, deferrable_icon.icon_data, deferrable_icon.pictures)
 end
