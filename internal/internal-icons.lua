@@ -80,7 +80,7 @@ end
 ---@class StoreIconsInputs : AssignIconInputs
 ---@field mod "angels"|"bobs"|"lib"|"compatibility"
 ---@field defer_to_data_updates? boolean # When `true`, stores the icon for assignment at the end of data-updates. Expected if `defer_to_data_final_fixes` is not set.
----@field defer_to_data_final_fixes? boolean # When `true`, stores the icon for assignment at the end of data-final-fixes. Supercedes `defer_to_data_updates`. Expected if `defer_to_data_updates` is not set.
+---@field defer_to_data_final_fixes? boolean # When `true`, stores the icon for assignment at the end of data-final-fixes. Supersedes `defer_to_data_updates`. Expected if `defer_to_data_updates` is not set.
 
 ---The base inputs for `create_icons_from_list`.
 ---@class CreateIconsFromListInputs : ConstructIconInputsOld, ConstructTechnologyIconInputsOld
@@ -88,13 +88,13 @@ end
 ---@field mod? "angels"|"bobs"|"lib"|"compatibility" Required if not specified in the overrides.
 ---@field group? string # Folder under the `graphics/icons` folder. Required if not specified in the overrides.
 ---@field flat_icon? boolean # When `true`, indicates that the icon is a flat icon with one layer.
----@field image? string # The name of a single image file, without extension, in the `graphics/icons/{group}/{subgroup}` or `graphics/technology/{group}/{subgroup}` folders.
+---@field image? string # The name of a single image file, without extension, in the `graphics/icons/{group}/{subgroup}` or `graphics/technology/{group}/{subgroup}` folders. Unused if `flat_icon` is not `true`.
 
 ---Individual overrides to apply over the base `CreateIconsFromListInputs` object passed to `create_icons_from_list`.
 ---@class CreateIconsFromListOverrides : CreateIconsFromListInputs
----@field tier? integer # The tier of the icon. An integer value from 0 to 6. Default `0`.
----@field prog_tier? integer # The tier of the icon, as determined by the progression map. An integer value from 0 to 6. Default `0`.
----@field uses_belt_mask? boolean # When `true`, indicates that the icon should use the belt tier tintset. Default `false`.
+---@field tier? integer # The tier of the icon. An integer value from 0 to 6. Default `nil`.
+---@field prog_tier? integer # The tier of the icon, as determined by the progression map. An integer value from 0 to 6. Default `nil`.
+---@field uses_belt_mask? boolean # When `true`, indicates that the icon should use the belt tier tint-set. Default `false`.
 
 ---A dictionary of `CreateIconsFromListOverrides` objects, keyed by the name of the prototype.
 ---@class CreateIconsFromListTable : { [string] : CreateIconsFromListOverrides }
