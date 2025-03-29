@@ -3,6 +3,7 @@ Version: 2.3.0
 Date: ????
   Features:
     - Migration to Factorio 2.0!
+    - Added new `reskins.lib.tiers.get_tier(tier, prog_tier)` or `get_tier(tier)` function to get the tier number from a PrototypeTierValue or number, and optionally the progression tier number, based on the current setting.
   Breaking Changes:
     - Removed `icon_mipmaps` parameter from `api.icons.create_icon` method
     - Removed `icon_mipmaps` parameter from `api.icons.create_technology_icon` method
