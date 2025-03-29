@@ -4,7 +4,7 @@
 -- See LICENSE.md in the project directory for license information.
 
 ---Provides vanilla-style sprite definition for oil refinery `animation` field. See [Prototype/AssemblingMachine](https://wiki.factorio.com/Prototype/AssemblingMachine).
----@param tint table # [Types/Color](https://wiki.factorio.com/Types/Color)
+---@param tint data.Color
 ---@return table animation # [Types/Animation4Way](https://wiki.factorio.com/Types/Animation4Way)
 local function entity_animation(tint)
 	return reskins.lib.sprites.make_4way_animation_from_spritesheet({
@@ -54,10 +54,11 @@ local function entity_animation(tint)
 end
 
 ---Provides vanilla-style sprite definition for oil refinery corpse `animation` field. See [Prototype/Corpse](https://wiki.factorio.com/Prototype/Corpse).
----@param tint table # [Types/Color](https://wiki.factorio.com/Types/Color)
----@return table animation # [Types/RotatedAnimationVariations](https://wiki.factorio.com/Types/RotatedAnimationVariations)
+---@param tint data.Color
+---@return data.RotatedAnimationVariations
 local function corpse_animation(tint)
-	return make_rotated_animation_variations_from_sheet(1, {
+	---@type data.RotatedAnimation
+	local animation = {
 		layers = {
 			-- Base
 			{
@@ -95,13 +96,15 @@ local function corpse_animation(tint)
 				scale = 0.5,
 			},
 		},
-	})
+	}
+
+	return make_rotated_animation_variations_from_sheet(1, animation)
 end
 
 ---Reskins the named assembling machine with vanilla-style oil refinery sprites and color masking, and sets up appropriate corpse, explosion, and particle prototypes
 ---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
 ---@param tier integer # 1-6 are supported, 0 to disable
----@param tint? table # [Types/Color](https://wiki.factorio.com/Types/Color)
+---@param tint? data.Color
 ---@param make_tier_labels? boolean
 function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
 	---@type SetupStandardEntityInputs
@@ -122,12 +125,7 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
 		return
 	end
 
-	-- angelspetrochem at this version or earlier does icon work in data-final-fixes
-	if reskins.lib.version.is_same_or_older(mods["angelspetrochem"], "0.9.19") then
-		inputs.defer_to_data_final_fixes = true
-	else
-		inputs.defer_to_data_updates = true -- angelspetrochem > 0.9.19 modifies icon in data-updates
-	end
+	inputs.defer_to_data_updates = true -- angelspetrochem > 0.9.19 modifies icon in data-updates
 
 	reskins.lib.setup_standard_entity(name, tier, inputs)
 
