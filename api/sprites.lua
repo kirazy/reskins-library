@@ -182,7 +182,7 @@ end
 function _sprites.get_sprite_light_layer(light_name, tint)
 	---@type data.Sprite
 	local sprite = {
-		flags = { "light" },
+		flags = { "light", "icon" },
 		draw_as_light = true,
 		filename = "__reskins-library__/graphics/icons/lights/" .. light_name .. "-light.png",
 		size = 64,
@@ -247,17 +247,19 @@ function _sprites.create_sprite_variations(directory, sprite_name, num_variation
 				layers = {
 					{
 						filename = directory .. file_name,
+						flags = { "icon" },
 						size = 64,
 						mipmap_count = 4,
 						scale = 0.5,
 					},
 					{
-						draw_as_light = true,
 						filename = directory .. file_name,
+						flags = { "icon" },
 						size = 64,
+						tint = tint or { r = 0.3, g = 0.3, b = 0.3, a = 0.3 },
 						mipmap_count = 4,
 						scale = 0.5,
-						tint = tint or { r = 0.3, g = 0.3, b = 0.3, a = 0.3 },
+						draw_as_light = true,
 						blend_mode = "additive",
 					},
 				},
@@ -268,6 +270,7 @@ function _sprites.create_sprite_variations(directory, sprite_name, num_variation
 			---@type data.Sprite
 			local sprite = {
 				filename = directory .. file_name,
+				flags = { "icon" },
 				size = 64,
 				mipmap_count = 4,
 				scale = 0.5,
