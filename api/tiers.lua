@@ -56,6 +56,12 @@ _tiers.is_pipe_tier_labeling_enabled = _settings.get_value("reskins-bobs-do-pipe
 ---@type TierLabelStyle
 _tiers.tier_labeling_style = _settings.get_value("reskins-lib-icon-tier-labeling-style")
 
+---
+---Defines values for a given prototype's tier for either traditional or progression tier mapping.
+---@class PrototypeTierValue
+---@field tier integer # The traditional tier of the prototype.
+---@field prog_tier integer? # The progression tier of the prototype.
+
 local is_using_custom_tier_colors = _settings.get_value("reskins-lib-customize-tier-colors") == true
 local is_using_angels_tier_colors = _settings.get_value("reskins-angels-use-angels-tier-colors") == true
 local is_using_angels_belt_tier_colors = is_using_angels_tier_colors and (_settings.get_value("reskins-angels-belts-use-angels-tier-colors") == true)
@@ -122,6 +128,51 @@ function _tiers.get_tint(tier)
 		return util.copy(angels_tier_colors[tier])
 	else
 		return util.copy(standard_tier_colors[tier])
+	end
+end
+
+---Gets the tier for the given `tier` and `prog_tier`.
+---@param tier integer # The tier to get a color for; must be between 0 and 6.
+---@param prog_tier? integer # The progression tier to get a color for; must be between 0 and 6.
+---@return integer # The tier appropriate for the current settings.
+local function get_tier_from_parameters(tier, prog_tier)
+	assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
+	assert(not prog_tier or (prog_tier and prog_tier >= 0 and prog_tier <= 6 and prog_tier % 1 == 0), "Invalid parameter: 'prog_tier' must be an integer between 0 and 6.")
+
+	if reskins.lib.settings.get_value("reskins-lib-tier-mapping") == "progression-map" then
+		return prog_tier or tier
+	end
+
+	return tier
+end
+
+---Gets the tier from the given `tier_value` appropriate for the current settings.
+---@param tier_value PrototypeTierValue
+---@return integer # The tier appropriate for the current settings.
+local function get_tier_from_value(tier_value)
+	assert(tier_value.tier, "Invalid parameter: 'tier' field is a required field on PrototypeTierValue.")
+
+	return get_tier_from_parameters(tier_value.tier, tier_value.prog_tier)
+end
+
+---
+---Gets the tier appropriate for the current settings, for the provided `tier` and `prog_tier`.
+---
+---### Returns
+---@return integer # The tier appropriate for the current settings.
+---
+---### Parameters
+---@param tier integer|PrototypeTierValue # The tier to get a color for; must be between 0 and 6, or a `PrototypeTierValue` object.
+---@param prog_tier? integer # The progression tier to get a color for; must be between 0 and 6. Ignored if `tier` is a `PrototypeTierValue`.
+---
+---### Exceptions
+---*@throws* `string` — Thrown when `tier` is a `PrototypeTierValue` object and does not have a `tier` field.
+---*@throws* `string` — Thrown when either of `tier` or `prog_tier` is not an integer between 0 and 6.
+function _tiers.get_tier(tier, prog_tier)
+	if type(tier) == "table" then
+		return get_tier_from_value(tier)
+	else
+		return get_tier_from_parameters(tier, prog_tier)
 	end
 end
 

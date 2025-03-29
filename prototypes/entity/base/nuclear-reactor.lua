@@ -41,6 +41,5 @@ for _, name in pairs(reactors) do
 
 	entity.use_fuel_glow_color = true
 
-	-- Label to skip to next iteration
 	::continue::
 end
