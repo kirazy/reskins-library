@@ -208,7 +208,6 @@ function _chemical_plants.get_standard_animation(tint)
 				width = 312,
 				height = 222,
 				repeat_count = 24,
-				frame_count = 1,
 				shift = util.by_pixel(27, 6),
 				draw_as_shadow = true,
 				scale = 0.5,
@@ -243,10 +242,8 @@ function _chemical_plants.get_standard_remnants(tint)
 			-- Base
 			{
 				filename = "__reskins-library__/graphics/entity/common/chemical-plant/remnants/chemical-plant-remnants-base.png",
-				line_length = 1,
 				width = 446,
 				height = 342,
-				frame_count = 1,
 				direction_count = 1,
 				shift = util.by_pixel(16, -5.5),
 				scale = 0.5,
@@ -254,10 +251,8 @@ function _chemical_plants.get_standard_remnants(tint)
 			-- Mask
 			{
 				filename = "__reskins-library__/graphics/entity/common/chemical-plant/remnants/chemical-plant-remnants-mask.png",
-				line_length = 1,
 				width = 446,
 				height = 342,
-				frame_count = 1,
 				direction_count = 1,
 				shift = util.by_pixel(16, -5.5),
 				tint = tint,
@@ -266,10 +261,8 @@ function _chemical_plants.get_standard_remnants(tint)
 			-- Highlights
 			{
 				filename = "__reskins-library__/graphics/entity/common/chemical-plant/remnants/chemical-plant-remnants-highlights.png",
-				line_length = 1,
 				width = 446,
 				height = 342,
-				frame_count = 1,
 				direction_count = 1,
 				shift = util.by_pixel(16, -5.5),
 				blend_mode = reskins.lib.settings.blend_mode, -- "additive",

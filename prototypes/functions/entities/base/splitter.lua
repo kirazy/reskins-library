@@ -12,12 +12,8 @@ local function corpse_animation(tint)
 			-- Base
 			{
 				filename = "__reskins-library__/graphics/entity/base/splitter/remnants/splitter-remnants-base.png",
-				line_length = 1,
 				width = 190,
 				height = 190,
-				frame_count = 1,
-				variation_count = 1,
-				axially_symmetrical = false,
 				direction_count = 4,
 				shift = util.by_pixel(3.5, 1.5),
 				scale = 0.5,
@@ -25,12 +21,8 @@ local function corpse_animation(tint)
 			-- Mask
 			{
 				filename = "__reskins-library__/graphics/entity/base/splitter/remnants/splitter-remnants-mask.png",
-				line_length = 1,
 				width = 190,
 				height = 190,
-				frame_count = 1,
-				variation_count = 1,
-				axially_symmetrical = false,
 				direction_count = 4,
 				tint = tint,
 				shift = util.by_pixel(3.5, 1.5),
@@ -39,12 +31,8 @@ local function corpse_animation(tint)
 			-- Highlights
 			{
 				filename = "__reskins-library__/graphics/entity/base/splitter/remnants/splitter-remnants-highlights.png",
-				line_length = 1,
 				width = 190,
 				height = 190,
-				frame_count = 1,
-				variation_count = 1,
-				axially_symmetrical = false,
 				direction_count = 4,
 				blend_mode = reskins.lib.settings.blend_mode,
 				shift = util.by_pixel(3.5, 1.5),

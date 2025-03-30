@@ -82,27 +82,27 @@ local custom_tier_colors = {
 ---@type data.Color[]
 local standard_tier_colors = {
 	---@type data.Color
-	[0] = util.color("808080"), -- 1.1.7: 4d4d4d
-	[1] = util.color("ffb726"), -- 1.1.7: de9400
-	[2] = util.color("f22318"), -- 1.1.7: c20600
-	[3] = util.color("33b4ff"), -- 1.1.7: 0099ff, 1.1.0: 1b87c2
-	[4] = util.color("b459ff"), -- 1.1.7: a600bf
-	[5] = util.color("2ee55c"), -- 1.1.7: 16c746, 1.1.6: 23de55
-	[6] = util.color("ff8533"), -- 1.1.7: ff7700
+	[0] = util.color("#808080"), -- 1.1.7: 4d4d4d
+	[1] = util.color("#ffb726"), -- 1.1.7: de9400
+	[2] = util.color("#f22318"), -- 1.1.7: c20600
+	[3] = util.color("#33b4ff"), -- 1.1.7: 0099ff, 1.1.0: 1b87c2
+	[4] = util.color("#b459ff"), -- 1.1.7: a600bf
+	[5] = util.color("#2ee55c"), -- 1.1.7: 16c746, 1.1.6: 23de55
+	[6] = util.color("#ff8533"), -- 1.1.7: ff7700
 }
 
 ---@type data.Color[]
 local angels_tier_colors = {
 	-- Core Angel's set
-	[1] = util.color("595959"), -- Gray
-	[2] = util.color("2957cc"), -- Blue
-	[3] = util.color("cc2929"), -- Red
-	[4] = util.color("ccae29"), -- Yellow
+	[1] = util.color("#595959"), -- Gray
+	[2] = util.color("#2957cc"), -- Blue
+	[3] = util.color("#cc2929"), -- Red
+	[4] = util.color("#ccae29"), -- Yellow
 	-- Pending
 	---@type data.Color
-	[0] = util.color("262626"),
-	[5] = util.color("16c746"),
-	[6] = util.color("ff8533"),
+	[0] = util.color("#262626"),
+	[5] = util.color("#16c746"),
+	[6] = util.color("#ff8533"),
 }
 
 ---@type data.Color
@@ -203,7 +203,7 @@ function _tiers.get_belt_tint(tier)
 	else
 		if tier == 2 then
 			-- Use pure red for belt-related entities to better match the vanilla sprites.
-			tint = util.color("ff0000")
+			tint = util.color("#ff0000")
 		else
 			tint = util.copy(standard_tier_colors[tier])
 		end

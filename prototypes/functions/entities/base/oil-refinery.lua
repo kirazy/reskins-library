@@ -14,7 +14,6 @@ local function entity_animation(tint)
 				filename = "__base__/graphics/entity/oil-refinery/oil-refinery.png",
 				width = 386,
 				height = 430,
-				frame_count = 1,
 				shift = util.by_pixel(0, -7.5),
 				scale = 0.5,
 			},
@@ -23,7 +22,6 @@ local function entity_animation(tint)
 				filename = "__reskins-library__/graphics/entity/base/oil-refinery/oil-refinery-mask.png",
 				width = 386,
 				height = 430,
-				frame_count = 1,
 				shift = util.by_pixel(0, -7.5),
 				tint = tint,
 				scale = 0.5,
@@ -33,7 +31,6 @@ local function entity_animation(tint)
 				filename = "__reskins-library__/graphics/entity/base/oil-refinery/oil-refinery-highlights.png",
 				width = 386,
 				height = 430,
-				frame_count = 1,
 				shift = util.by_pixel(0, -7.5),
 				blend_mode = reskins.lib.settings.blend_mode,
 				scale = 0.5,
@@ -43,10 +40,8 @@ local function entity_animation(tint)
 				filename = "__base__/graphics/entity/oil-refinery/oil-refinery-shadow.png",
 				width = 674,
 				height = 426,
-				frame_count = 1,
 				shift = util.by_pixel(82.5, 26.5),
 				draw_as_shadow = true,
-				force_hr_shadow = true,
 				scale = 0.5,
 			},
 		},
@@ -63,10 +58,8 @@ local function corpse_animation(tint)
 			-- Base
 			{
 				filename = "__base__/graphics/entity/oil-refinery/remnants/refinery-remnants.png",
-				line_length = 1,
 				width = 467,
 				height = 415,
-				frame_count = 1,
 				direction_count = 1,
 				shift = util.by_pixel(-0.25, -0.25), --moved from -8.5 to -4.5
 				scale = 0.5,
@@ -74,10 +67,8 @@ local function corpse_animation(tint)
 			-- Mask
 			{
 				filename = "__reskins-library__/graphics/entity/base/oil-refinery/remnants/refinery-remnants-mask.png",
-				line_length = 1,
 				width = 467,
 				height = 415,
-				frame_count = 1,
 				direction_count = 1,
 				shift = util.by_pixel(-0.25, -0.25),
 				tint = tint,
@@ -86,10 +77,8 @@ local function corpse_animation(tint)
 			-- Highlights
 			{
 				filename = "__reskins-library__/graphics/entity/base/oil-refinery/remnants/refinery-remnants-highlights.png",
-				line_length = 1,
 				width = 467,
 				height = 415,
-				frame_count = 1,
 				direction_count = 1,
 				shift = util.by_pixel(-0.25, -0.25),
 				blend_mode = reskins.lib.settings.blend_mode,

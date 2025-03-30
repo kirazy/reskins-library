@@ -383,7 +383,7 @@ function _sprites.make_4way_animation_from_spritesheet(animation)
 			y = y,
 			width = source_animation.width,
 			height = source_animation.height,
-			frame_count = source_animation.frame_count or 1,
+			frame_count = source_animation.frame_count,
 			line_length = source_animation.line_length,
 			repeat_count = source_animation.repeat_count,
 			shift = source_animation.shift,
@@ -402,11 +402,6 @@ function _sprites.make_4way_animation_from_spritesheet(animation)
 			-- Extend vanilla function with additional parameters.
 			run_mode = source_animation.run_mode,
 			frame_sequence = source_animation.frame_sequence,
-
-			---This may have been deprecated, the Factorio API does not mention this field,
-			---but it is present in the original function defintion.
-			---@diagnostic disable-next-line: undefined-field
-			force_hr_shadow = source_animation.force_hr_shadow,
 		}
 
 		return animation_for_direction

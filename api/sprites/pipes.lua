@@ -573,8 +573,6 @@ function _pipes.get_pipe(material_type)
 			width = 48,
 			height = 30,
 			frame_count = 60,
-			axially_symmetrical = false,
-			direction_count = 1,
 		},
 	}
 
@@ -822,8 +820,6 @@ function _pipes.get_pipe_remnants(material_type)
 		filename = path .. "remnants/pipe-remnants.png",
 		width = 122,
 		height = 120,
-		line_length = 1,
-		frame_count = 1,
 		direction_count = 2,
 		shift = util.by_pixel(1.5, 2.5),
 		scale = 0.5,
@@ -858,9 +854,6 @@ function _pipes.get_pipe_to_ground_remnants(material_type)
 		filename = path .. "remnants/pipe-to-ground-remnants.png",
 		width = 90,
 		height = 80,
-		line_length = 1,
-		frame_count = 1,
-		direction_count = 1,
 		shift = util.by_pixel(0.5, -3),
 		scale = 0.5,
 	}

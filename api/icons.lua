@@ -1460,10 +1460,10 @@ end
 ---| "utility" # A gray background for utility equipment.
 
 local equipment_background_tints = {
-	["offense"] = util.color("e62c2c"),
-	["defense"] = util.color("3282d1"),
-	["energy"] = util.color("32d167"),
-	["utility"] = util.color("cccccc"),
+	["offense"] = util.color("#e62c2c"),
+	["defense"] = util.color("#3282d1"),
+	["energy"] = util.color("#32d167"),
+	["utility"] = util.color("#cccccc"),
 }
 
 ---
