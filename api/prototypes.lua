@@ -103,7 +103,6 @@ function _prototypes.rescale_prototype(entity_prototype, scalar)
 		-- Because Factorio assumes the value of the scale field if left undefined,
 		-- we need to ensure it's defined. Use canon-typical violence.
 		if entity_prototype.filename or entity_prototype.stripes or entity_prototype.filenames then
-			-- Hi-res table.
 			entity_prototype.scale = entity_prototype.scale or 0.5
 		end
 
@@ -119,6 +118,15 @@ function _prototypes.rescale_prototype(entity_prototype, scalar)
 			-- Do nothing.
 		elseif type(value) == "table" then
 			_prototypes.rescale_prototype(value, scalar)
+
+			-- Scale is not a supported property of stripes, but will be added in child tables.
+			-- FIXME: This is a hacky solution to a problem of unused prototypes, and it would be better
+			-- to provide some context to the recursive calls so that scale is not added in the first place.
+			if key == "stripes" then
+				for _, stripe in pairs(value) do
+					stripe.scale = nil
+				end
+			end
 		end
 	end
 end
