@@ -1,7 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.3.2
 Date: ????
-  Changes:
+  Features:
+    - Added Artisanal Reskins: Compatibility support notifications for Loaders Modernized and Miniloader (Redux).
 ---------------------------------------------------------------------------------------------------
 Version: 2.3.1
 Date: 2025-05-10
