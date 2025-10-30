@@ -4,9 +4,6 @@
 -- See LICENSE.md in the project directory for license information.
 
 -- Check to see if reskinning needs to be done.
-if not data.raw["assembling-machine"]["oil-refinery-2"] then
-	return
-end
 if reskins.bobs and (reskins.bobs.triggers.assembly.entities == false) then
 	return
 end
@@ -24,6 +21,9 @@ local tier_map = {
 	["oil-refinery-2"] = { tier = 2, prog_tier = 3 },
 	["oil-refinery-3"] = { tier = 3, prog_tier = 4 },
 	["oil-refinery-4"] = { tier = 4, prog_tier = 5 },
+	["angels-oil-refinery-2"] = { tier = 2, prog_tier = 3 },
+	["angels-oil-refinery-3"] = { tier = 3, prog_tier = 4 },
+	["angels-oil-refinery-4"] = { tier = 4, prog_tier = 5 },
 }
 
 -- Reskin entities, create and assign extra details
