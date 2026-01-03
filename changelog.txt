@@ -3,6 +3,7 @@ Version: 2.3.3
 Date: ????
   Bugfixes:
     - Fixed edge case where a startup error could occur when trying to defer setting an icon
+    - Fixed that the missing mod notification was not correctly resolving the pluralization locale string
 ---------------------------------------------------------------------------------------------------
 Version: 2.3.2
 Date: 2025-07-03
