@@ -394,7 +394,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
 	---@type DeferrableIconData
 	local deferrable_icon = {
 		name = name,
-		type_name = inputs_copy.type,
+		type_name = inputs_copy.type or "item",
 		icon_data = inputs_copy.tier_labels and reskins.lib.tiers.add_tier_labels_to_icons(tier, icon_data) or icon_data,
 		pictures = pictures,
 	}
