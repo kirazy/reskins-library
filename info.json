@@ -1,10 +1,11 @@
 {
-    "name": "reskins-library",
-    "version": "2.3.4",
+    "name": "reskins-framework",
+    "version": "1.0.0",
     "factorio_version": "2.0",
-    "title": "Artisanal Reskins: Library",
+    "title": "Artisanal Reskins: Framework",
     "author": "Kirazy",
-    "contact": "kirazy@live.com",
+    "contact": "https://discord.gg/qAvSyzZFPr",
+    "homepage": "https://github.com/kirazy/reskins-framework",
     "dependencies": [
         "base",
         "flib",

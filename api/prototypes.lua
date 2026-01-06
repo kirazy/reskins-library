@@ -3,15 +3,15 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.prototypes" then
-	return require("__reskins-library__.api.prototypes")
+if ... ~= "__reskins-framework__.api.prototypes" then
+	return require("__reskins-framework__.api.prototypes")
 end
 
 --- Provides methods for working with prototypes.
 ---
 ---### Examples
 ---```lua
----local _prototypes = require("__reskins-library__.api.prototypes")
+---local _prototypes = require("__reskins-framework__.api.prototypes")
 ---```
 ---@class Reskins.Lib.Prototypes
 local _prototypes = {}

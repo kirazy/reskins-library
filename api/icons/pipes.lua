@@ -1,17 +1,12 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
-if ... ~= "__reskins-library__.api.icons.pipes" then
-	return require("__reskins-library__.api.icons.pipes")
+if ... ~= "__reskins-framework__.api.icons.pipes" then
+	return require("__reskins-framework__.api.icons.pipes")
 end
 
 --- Provides methods for getting icons for pipe-type entities.
 ---
 ---### Examples
 ---```lua
----local _icons = require("__reskins-library__.api.icons.pipes")
+---local _icons = require("__reskins-framework__.api.icons.pipes")
 ---```
 ---@class Reskins.Lib.Icons.Pipes
 local _pipes = {}
@@ -28,7 +23,7 @@ local _pipes = {}
 ---local path = _pipes.get_path_to_pipe_material_icons("pipe", "iron")
 ---
 ----- Which has the following value:
----path = "__reskins-library__/graphics/icons/common/pipe/iron"
+---path = "__reskins-framework__/graphics/icons/common/pipe/iron"
 ---```
 ---
 ---### Parameters
@@ -38,7 +33,7 @@ local _pipes = {}
 local function get_path_to_pipe_material_icons(folder_name, material_type)
 	local path
 	if material_type == "iron" then
-		path = "__reskins-library__/graphics/icons/common/" .. folder_name .. "/iron"
+		path = "__reskins-framework__/graphics/icons/common/" .. folder_name .. "/iron"
 	elseif material_type:find("angels") then
 		path = "__reskins-angels__/graphics/icons/smelting/" .. folder_name .. "/" .. material_type:gsub("angels%-", "")
 	else

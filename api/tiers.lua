@@ -3,25 +3,25 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.tiers" then
-	return require("__reskins-library__.api.tiers")
+if ... ~= "__reskins-framework__.api.tiers" then
+	return require("__reskins-framework__.api.tiers")
 end
 
 --- Provides methods for working with tier labels and tints.
 ---
 ---### Examples
 ---```lua
----local _tiers = require("__reskins-library__.api.tiers")
+---local _tiers = require("__reskins-framework__.api.tiers")
 ---```
 ---@class Reskins.Lib.Tiers
 local _tiers = {}
 
 ---@type Reskins.Lib.Icons
-local _icons = require("__reskins-library__.api.icons")
+local _icons = require("__reskins-framework__.api.icons")
 ---@type Reskins.Lib.Sprites
-local _sprites = require("__reskins-library__.api.sprites")
+local _sprites = require("__reskins-framework__.api.sprites")
 ---@type Reskins.Lib.Settings
-local _settings = require("__reskins-library__.api.settings")
+local _settings = require("__reskins-framework__.api.settings")
 
 ---
 ---Indicates whether tier labels should be added to icons or not.
@@ -381,7 +381,7 @@ function _tiers.add_tier_labels_to_icons(tier, icon_data)
 	-- There is not a 0th tier pip.
 	if tier > 0 then
 		local labeling_style = _tiers.tier_labeling_style
-		local icon_file_name = "__reskins-library__/graphics/icons/tiers/" .. labeling_style .. "/" .. tier .. ".png"
+		local icon_file_name = "__reskins-framework__/graphics/icons/tiers/" .. labeling_style .. "/" .. tier .. ".png"
 
 		-- Add base layer.
 		table.insert(

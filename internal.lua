@@ -3,5 +3,5 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-require("__reskins-library__.internal.internal-icons")
-require("__reskins-library__.internal.internal-sprites")
+require("__reskins-framework__.internal.internal-icons")
+require("__reskins-framework__.internal.internal-sprites")

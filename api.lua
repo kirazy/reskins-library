@@ -11,30 +11,30 @@ end
 ---
 ---### Examples
 ---```lua
----local reskins_api = require("__reskins-library__.api")
+---local reskins_api = require("__reskins-framework__.api")
 ---```
 ---@class Reskins.Library
 local _library = {
 	---@type Reskins.Lib.Defines
-	defines = require("__reskins-library__.api.defines"),
+	defines = require("__reskins-framework__.api.defines"),
 
 	---@type Reskins.Lib.Icons
-	icons = require("__reskins-library__.api.icons"),
+	icons = require("__reskins-framework__.api.icons"),
 
 	---@type Reskins.Lib.Prototypes
-	prototypes = require("__reskins-library__.api.prototypes"),
+	prototypes = require("__reskins-framework__.api.prototypes"),
 
 	---@type Reskins.Lib.Settings
-	settings = require("__reskins-library__.api.settings"),
+	settings = require("__reskins-framework__.api.settings"),
 
 	---@type Reskins.Lib.Sprites
-	sprites = require("__reskins-library__.api.sprites"),
+	sprites = require("__reskins-framework__.api.sprites"),
 
 	---@type Reskins.Lib.Tiers
-	tiers = require("__reskins-library__.api.tiers"),
+	tiers = require("__reskins-framework__.api.tiers"),
 
 	---@type Reskins.Lib.Version
-	version = require("__reskins-library__.api.version"),
+	version = require("__reskins-framework__.api.version"),
 }
 
 return _library

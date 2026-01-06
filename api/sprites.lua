@@ -3,30 +3,30 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.sprites" then
-	return require("__reskins-library__.api.sprites")
+if ... ~= "__reskins-framework__.api.sprites" then
+	return require("__reskins-framework__.api.sprites")
 end
 
 --- Provides methods for manipulating sprites.
 ---
 ---### Examples
 ---```lua
----local _sprites = require("__reskins-library__.api.sprites")
+---local _sprites = require("__reskins-framework__.api.sprites")
 ---```
 ---@class Reskins.Lib.Sprites
 local _sprites = {
 	---@type Reskins.Lib.Sprites.Belts
-	belts = require("__reskins-library__.api.sprites.belts"),
+	belts = require("__reskins-framework__.api.sprites.belts"),
 
 	---@type Reskins.Lib.Sprites.ChemicalPlants
-	chemical_plants = require("__reskins-library__.api.sprites.chemical-plants"),
+	chemical_plants = require("__reskins-framework__.api.sprites.chemical-plants"),
 
 	---@type Reskins.Lib.Sprites.Pipes
-	pipes = require("__reskins-library__.api.sprites.pipes"),
+	pipes = require("__reskins-framework__.api.sprites.pipes"),
 }
 
 ---@type Reskins.Lib.Icons
-local _icons = require("__reskins-library__.api.icons")
+local _icons = require("__reskins-framework__.api.icons")
 
 ---@param icon_layer data.IconData # An icon layer.
 ---@param scale? double # The scale to apply to the sprite.
@@ -184,7 +184,7 @@ function _sprites.get_sprite_light_layer(light_name, tint)
 	local sprite = {
 		flags = { "light", "icon" },
 		draw_as_light = true,
-		filename = "__reskins-library__/graphics/icons/lights/" .. light_name .. "-light.png",
+		filename = "__reskins-framework__/graphics/icons/lights/" .. light_name .. "-light.png",
 		size = 64,
 		mipmap_count = 4,
 		scale = 0.5,

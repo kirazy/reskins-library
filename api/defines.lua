@@ -1,17 +1,12 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
-if ... ~= "__reskins-library__.api.defines" then
-	return require("__reskins-library__.api.defines")
+if ... ~= "__reskins-framework__.api.defines" then
+	return require("__reskins-framework__.api.defines")
 end
 
 --- Provides enumerations for use in Artisanal Reskins.
 ---
 ---### Examples
 ---```lua
----local _icons = require("__reskins-library__.api.icons")
+---local _icons = require("__reskins-framework__.api.icons")
 ---```
 ---@class Reskins.Lib.Defines
 local _defines = {}

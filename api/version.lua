@@ -3,15 +3,15 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.version" then
-	return require("__reskins-library__.api.version")
+if ... ~= "__reskins-framework__.api.version" then
+	return require("__reskins-framework__.api.version")
 end
 
 ---Provides version comparison tools.
 ---
 ---### Examples
 ---```lua
----local _version = require("__reskins-library__.api.version")
+---local _version = require("__reskins-framework__.api.version")
 ---```
 ---@class Reskins.Lib.Version
 local _version = {}
@@ -25,7 +25,7 @@ local _migration = require("__flib__.migration")
 ---
 ---### Examples
 ---```lua
----if _version.is_newer(mods["reskins-library"], "2.1.8") then
+---if _version.is_newer(mods["reskins-framework"], "2.1.8") then
 ---    -- Do something for versions more recent than 2.1.8.
 ---end
 ---```
@@ -50,7 +50,7 @@ end
 ---
 ---### Examples
 ---```lua
----if _version.is_same_or_newer(mods["reskins-library"], "2.1.8") then
+---if _version.is_same_or_newer(mods["reskins-framework"], "2.1.8") then
 ---    -- Do something for versions from 2.1.8 or newer.
 ---end
 ---```
@@ -78,7 +78,7 @@ end
 ---
 ---### Examples
 ---```lua
----if _version.is_same(mods["reskins-library"], "2.1.8") then
+---if _version.is_same(mods["reskins-framework"], "2.1.8") then
 ---    -- Do something for version 2.1.8.
 ---end
 ---```
@@ -103,7 +103,7 @@ end
 ---
 ---### Examples
 ---```lua
----if _version.is_same_or_older(mods["reskins-library"], "2.1.8") then
+---if _version.is_same_or_older(mods["reskins-framework"], "2.1.8") then
 ---    -- Do something for versions from 2.1.8 or older.
 ---end
 ---```
@@ -129,7 +129,7 @@ end
 ---
 ---### Examples
 ---```lua
----if _version.is_older(mods["reskins-library"], "2.1.8") then
+---if _version.is_older(mods["reskins-framework"], "2.1.8") then
 ---    -- Do something for versions older than 2.1.8.
 ---end
 ---```

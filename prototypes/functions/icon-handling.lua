@@ -136,7 +136,7 @@ function reskins.lib.technology_equipment_overlay(parameters)
 
 	---@type data.IconData
 	local overlay = {
-		icon = "__reskins-library__/graphics/technology/" .. equipment .. "-equipment-overlay.png",
+		icon = "__reskins-framework__/graphics/technology/" .. equipment .. "-equipment-overlay.png",
 		icon_size = 128,
 		shift = { 64 * scale, 100 * scale },
 		scale = scale,

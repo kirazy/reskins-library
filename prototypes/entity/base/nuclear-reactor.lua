@@ -23,7 +23,7 @@ for _, name in pairs(reactors) do
 
 	-- Lights
 	entity.working_light_picture = {
-		filename = "__reskins-library__/graphics/entity/base/nuclear-reactor/reactor-lights.png",
+		filename = "__reskins-framework__/graphics/entity/base/nuclear-reactor/reactor-lights.png",
 		blend_mode = "additive",
 		draw_as_glow = true,
 		width = 320,

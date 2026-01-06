@@ -1,17 +1,12 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
-if ... ~= "__reskins-library__.api.sprites.chemical-plants" then
-	return require("__reskins-library__.api.sprites.chemical-plants")
+if ... ~= "__reskins-framework__.api.sprites.chemical-plants" then
+	return require("__reskins-framework__.api.sprites.chemical-plants")
 end
 
 --- Provides methods for getting sprites for chemical-plant-type entities.
 ---
 ---### Examples
 ---```lua
----local _sprites = require("__reskins-library__.api.sprites.chemical-plants")
+---local _sprites = require("__reskins-framework__.api.sprites.chemical-plants")
 ---```
 ---@class Reskins.Lib.Sprites.ChemicalPlants
 local _chemical_plants = {}
@@ -172,7 +167,7 @@ function _chemical_plants.get_standard_animation(tint)
 		layers = {
 			-- Base
 			{
-				filename = "__reskins-library__/graphics/entity/common/chemical-plant/chemical-plant-base.png",
+				filename = "__reskins-framework__/graphics/entity/common/chemical-plant/chemical-plant-base.png",
 				width = 220,
 				height = 292,
 				frame_count = 24,
@@ -182,7 +177,7 @@ function _chemical_plants.get_standard_animation(tint)
 			},
 			-- Mask
 			{
-				filename = "__reskins-library__/graphics/entity/common/chemical-plant/chemical-plant-mask.png",
+				filename = "__reskins-framework__/graphics/entity/common/chemical-plant/chemical-plant-mask.png",
 				width = 220,
 				height = 292,
 				frame_count = 24,
@@ -193,7 +188,7 @@ function _chemical_plants.get_standard_animation(tint)
 			},
 			-- Highlights
 			{
-				filename = "__reskins-library__/graphics/entity/common/chemical-plant/chemical-plant-highlights.png",
+				filename = "__reskins-framework__/graphics/entity/common/chemical-plant/chemical-plant-highlights.png",
 				width = 220,
 				height = 292,
 				frame_count = 24,
@@ -241,7 +236,7 @@ function _chemical_plants.get_standard_remnants(tint)
 		layers = {
 			-- Base
 			{
-				filename = "__reskins-library__/graphics/entity/common/chemical-plant/remnants/chemical-plant-remnants-base.png",
+				filename = "__reskins-framework__/graphics/entity/common/chemical-plant/remnants/chemical-plant-remnants-base.png",
 				width = 446,
 				height = 342,
 				direction_count = 1,
@@ -250,7 +245,7 @@ function _chemical_plants.get_standard_remnants(tint)
 			},
 			-- Mask
 			{
-				filename = "__reskins-library__/graphics/entity/common/chemical-plant/remnants/chemical-plant-remnants-mask.png",
+				filename = "__reskins-framework__/graphics/entity/common/chemical-plant/remnants/chemical-plant-remnants-mask.png",
 				width = 446,
 				height = 342,
 				direction_count = 1,
@@ -260,7 +255,7 @@ function _chemical_plants.get_standard_remnants(tint)
 			},
 			-- Highlights
 			{
-				filename = "__reskins-library__/graphics/entity/common/chemical-plant/remnants/chemical-plant-remnants-highlights.png",
+				filename = "__reskins-framework__/graphics/entity/common/chemical-plant/remnants/chemical-plant-remnants-highlights.png",
 				width = 446,
 				height = 342,
 				direction_count = 1,

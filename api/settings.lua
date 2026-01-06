@@ -3,15 +3,15 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.settings" then
-	return require("__reskins-library__.api.settings")
+if ... ~= "__reskins-framework__.api.settings" then
+	return require("__reskins-framework__.api.settings")
 end
 
 --- Provides methods for retrieving and validating startup settings.
 ---
 ---### Examples
 ---```lua
----local _settings = require("__reskins-library__.api.settings")
+---local _settings = require("__reskins-framework__.api.settings")
 ---```
 ---@class Reskins.Lib.Settings
 local _settings = {}

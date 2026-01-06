@@ -11,7 +11,7 @@ local function corpse_animation(tint)
 		layers = {
 			-- Base
 			{
-				filename = "__reskins-library__/graphics/entity/base/underground-belt/remnants/underground-belt-remnants-base.png",
+				filename = "__reskins-framework__/graphics/entity/base/underground-belt/remnants/underground-belt-remnants-base.png",
 				width = 156,
 				height = 144,
 				direction_count = 8,
@@ -20,7 +20,7 @@ local function corpse_animation(tint)
 			},
 			-- Mask
 			{
-				filename = "__reskins-library__/graphics/entity/base/underground-belt/remnants/underground-belt-remnants-mask.png",
+				filename = "__reskins-framework__/graphics/entity/base/underground-belt/remnants/underground-belt-remnants-mask.png",
 				width = 156,
 				height = 144,
 				direction_count = 8,
@@ -30,7 +30,7 @@ local function corpse_animation(tint)
 			},
 			-- Highlights
 			{
-				filename = "__reskins-library__/graphics/entity/base/underground-belt/remnants/underground-belt-remnants-highlights.png",
+				filename = "__reskins-framework__/graphics/entity/base/underground-belt/remnants/underground-belt-remnants-highlights.png",
 				width = 156,
 				height = 144,
 				direction_count = 8,
@@ -51,7 +51,7 @@ local function entity_structure(tint)
 			sheets = {
 				-- Base
 				{
-					filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure.png",
+					filename = "__reskins-framework__/graphics/entity/base/underground-belt/underground-belt-structure.png",
 					priority = "extra-high",
 					width = 192,
 					height = 192,
@@ -60,7 +60,7 @@ local function entity_structure(tint)
 				},
 				-- Mask
 				{
-					filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
+					filename = "__reskins-framework__/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
 					priority = "extra-high",
 					width = 192,
 					height = 192,
@@ -70,7 +70,7 @@ local function entity_structure(tint)
 				},
 				-- Highlights
 				{
-					filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
+					filename = "__reskins-framework__/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
 					priority = "extra-high",
 					width = 192,
 					height = 192,
@@ -84,7 +84,7 @@ local function entity_structure(tint)
 			sheets = {
 				-- Base
 				{
-					filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure.png",
+					filename = "__reskins-framework__/graphics/entity/base/underground-belt/underground-belt-structure.png",
 					priority = "extra-high",
 					width = 192,
 					height = 192,
@@ -92,7 +92,7 @@ local function entity_structure(tint)
 				},
 				-- Mask
 				{
-					filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
+					filename = "__reskins-framework__/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
 					priority = "extra-high",
 					width = 192,
 					height = 192,
@@ -101,7 +101,7 @@ local function entity_structure(tint)
 				},
 				-- Highlights
 				{
-					filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
+					filename = "__reskins-framework__/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
 					priority = "extra-high",
 					width = 192,
 					height = 192,
@@ -114,7 +114,7 @@ local function entity_structure(tint)
 			sheets = {
 				-- Base
 				{
-					filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure.png",
+					filename = "__reskins-framework__/graphics/entity/base/underground-belt/underground-belt-structure.png",
 					priority = "extra-high",
 					width = 192,
 					height = 192,
@@ -123,7 +123,7 @@ local function entity_structure(tint)
 				},
 				-- Mask
 				{
-					filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
+					filename = "__reskins-framework__/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
 					priority = "extra-high",
 					width = 192,
 					height = 192,
@@ -133,7 +133,7 @@ local function entity_structure(tint)
 				},
 				-- Highlights
 				{
-					filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
+					filename = "__reskins-framework__/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
 					priority = "extra-high",
 					width = 192,
 					height = 192,
@@ -147,7 +147,7 @@ local function entity_structure(tint)
 			sheets = {
 				-- Base
 				{
-					filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure.png",
+					filename = "__reskins-framework__/graphics/entity/base/underground-belt/underground-belt-structure.png",
 					priority = "extra-high",
 					width = 192,
 					height = 192,
@@ -156,7 +156,7 @@ local function entity_structure(tint)
 				},
 				-- Mask
 				{
-					filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
+					filename = "__reskins-framework__/graphics/entity/base/underground-belt/underground-belt-structure-mask.png",
 					priority = "extra-high",
 					width = 192,
 					height = 192,
@@ -166,7 +166,7 @@ local function entity_structure(tint)
 				},
 				-- Highlights
 				{
-					filename = "__reskins-library__/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
+					filename = "__reskins-framework__/graphics/entity/base/underground-belt/underground-belt-structure-highlights.png",
 					priority = "extra-high",
 					width = 192,
 					height = 192,

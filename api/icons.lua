@@ -3,20 +3,20 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.icons" then
-	return require("__reskins-library__.api.icons")
+if ... ~= "__reskins-framework__.api.icons" then
+	return require("__reskins-framework__.api.icons")
 end
 
 --- Provides methods for manipulating icons.
 ---
 ---### Examples
 ---```lua
----local _icons = require("__reskins-library__.api.icons")
+---local _icons = require("__reskins-framework__.api.icons")
 ---```
 ---@class Reskins.Lib.Icons
 local _icons = {
 	---@type Reskins.Lib.Icons.Pipes
-	pipes = require("__reskins-library__.api.icons.pipes"),
+	pipes = require("__reskins-framework__.api.icons.pipes"),
 }
 
 ---Basic Icon Utilities
@@ -1292,12 +1292,12 @@ function _icons.get_symbol(symbol, tint)
 	---@type data.IconData[]
 	local icon_data = {
 		{
-			icon = "__reskins-library__/graphics/icons/symbols/" .. symbol:lower() .. "-symbol.png",
+			icon = "__reskins-framework__/graphics/icons/symbols/" .. symbol:lower() .. "-symbol.png",
 			icon_size = 64,
 			scale = 0.5,
 		},
 		{
-			icon = "__reskins-library__/graphics/icons/symbols/" .. symbol:lower() .. "-symbol.png",
+			icon = "__reskins-framework__/graphics/icons/symbols/" .. symbol:lower() .. "-symbol.png",
 			icon_size = 64,
 			scale = 0.5,
 			tint = util.get_color_with_alpha(tint, 0.75),
@@ -1393,12 +1393,12 @@ function _icons.get_letter(letter, tint)
 	---@type data.IconData[]
 	local icon_data = {
 		{
-			icon = "__reskins-library__/graphics/icons/letters/letter-" .. letter:lower() .. ".png",
+			icon = "__reskins-framework__/graphics/icons/letters/letter-" .. letter:lower() .. ".png",
 			icon_size = 64,
 			scale = 0.5,
 		},
 		{
-			icon = "__reskins-library__/graphics/icons/letters/letter-" .. letter:lower() .. ".png",
+			icon = "__reskins-framework__/graphics/icons/letters/letter-" .. letter:lower() .. ".png",
 			icon_size = 64,
 			scale = 0.5,
 			tint = util.get_color_with_alpha(tint, 0.75),
@@ -1490,7 +1490,7 @@ function _icons.get_equipment_icon_background(category)
 
 	---@type data.IconData
 	local icon_data = {
-		icon = "__reskins-library__/graphics/icons/backgrounds/equipment-background.png",
+		icon = "__reskins-framework__/graphics/icons/backgrounds/equipment-background.png",
 		icon_size = 64,
 		scale = 0.5,
 		tint = tint,

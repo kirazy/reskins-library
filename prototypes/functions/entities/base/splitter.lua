@@ -11,7 +11,7 @@ local function corpse_animation(tint)
 		layers = {
 			-- Base
 			{
-				filename = "__reskins-library__/graphics/entity/base/splitter/remnants/splitter-remnants-base.png",
+				filename = "__reskins-framework__/graphics/entity/base/splitter/remnants/splitter-remnants-base.png",
 				width = 190,
 				height = 190,
 				direction_count = 4,
@@ -20,7 +20,7 @@ local function corpse_animation(tint)
 			},
 			-- Mask
 			{
-				filename = "__reskins-library__/graphics/entity/base/splitter/remnants/splitter-remnants-mask.png",
+				filename = "__reskins-framework__/graphics/entity/base/splitter/remnants/splitter-remnants-mask.png",
 				width = 190,
 				height = 190,
 				direction_count = 4,
@@ -30,7 +30,7 @@ local function corpse_animation(tint)
 			},
 			-- Highlights
 			{
-				filename = "__reskins-library__/graphics/entity/base/splitter/remnants/splitter-remnants-highlights.png",
+				filename = "__reskins-framework__/graphics/entity/base/splitter/remnants/splitter-remnants-highlights.png",
 				width = 190,
 				height = 190,
 				direction_count = 4,
@@ -51,7 +51,7 @@ local function entity_structure(tint)
 			layers = {
 				-- Base
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/north/splitter-north-base.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/north/splitter-north-base.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -62,7 +62,7 @@ local function entity_structure(tint)
 				},
 				-- Mask
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/north/splitter-north-mask.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/north/splitter-north-mask.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -74,7 +74,7 @@ local function entity_structure(tint)
 				},
 				-- Highlights
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/north/splitter-north-highlights.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/north/splitter-north-highlights.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -90,7 +90,7 @@ local function entity_structure(tint)
 			layers = {
 				-- Base
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/east/splitter-east-base.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/east/splitter-east-base.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -101,7 +101,7 @@ local function entity_structure(tint)
 				},
 				-- Mask
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/east/splitter-east-mask.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/east/splitter-east-mask.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -113,7 +113,7 @@ local function entity_structure(tint)
 				},
 				-- Highlights
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/east/splitter-east-highlights.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/east/splitter-east-highlights.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -129,7 +129,7 @@ local function entity_structure(tint)
 			layers = {
 				-- Base
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/south/splitter-south-base.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/south/splitter-south-base.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -140,7 +140,7 @@ local function entity_structure(tint)
 				},
 				-- Mask
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/south/splitter-south-mask.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/south/splitter-south-mask.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -152,7 +152,7 @@ local function entity_structure(tint)
 				},
 				-- Highlights
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/south/splitter-south-highlights.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/south/splitter-south-highlights.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -168,7 +168,7 @@ local function entity_structure(tint)
 			layers = {
 				-- Base
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/west/splitter-west-base.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/west/splitter-west-base.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -179,7 +179,7 @@ local function entity_structure(tint)
 				},
 				-- Mask
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/west/splitter-west-mask.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/west/splitter-west-mask.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -191,7 +191,7 @@ local function entity_structure(tint)
 				},
 				-- Highlights
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/west/splitter-west-highlights.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/west/splitter-west-highlights.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -216,7 +216,7 @@ local function entity_structure_patch(tint)
 			layers = {
 				-- Base
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/east/splitter-east-top_patch-base.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/east/splitter-east-top_patch-base.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -227,7 +227,7 @@ local function entity_structure_patch(tint)
 				},
 				-- Mask
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/east/splitter-east-top_patch-mask.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/east/splitter-east-top_patch-mask.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -239,7 +239,7 @@ local function entity_structure_patch(tint)
 				},
 				-- Highlights
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/east/splitter-east-top_patch-highlights.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/east/splitter-east-top_patch-highlights.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -256,7 +256,7 @@ local function entity_structure_patch(tint)
 			layers = {
 				-- Base
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/west/splitter-west-top_patch-base.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/west/splitter-west-top_patch-base.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -267,7 +267,7 @@ local function entity_structure_patch(tint)
 				},
 				-- Mask
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/west/splitter-west-top_patch-mask.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/west/splitter-west-top_patch-mask.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",
@@ -279,7 +279,7 @@ local function entity_structure_patch(tint)
 				},
 				-- Highlights
 				{
-					filename = "__reskins-library__/graphics/entity/base/splitter/west/splitter-west-top_patch-highlights.png",
+					filename = "__reskins-framework__/graphics/entity/base/splitter/west/splitter-west-top_patch-highlights.png",
 					frame_count = 32,
 					line_length = 8,
 					priority = "extra-high",

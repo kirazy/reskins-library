@@ -1,17 +1,12 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
-if ... ~= "__reskins-library__.api.sprites.belts" then
-	return require("__reskins-library__.api.sprites.belts")
+if ... ~= "__reskins-framework__.api.sprites.belts" then
+	return require("__reskins-framework__.api.sprites.belts")
 end
 
 --- Provides methods for getting sprites for belt-type entities.
 ---
 ---### Examples
 ---```lua
----local _belts = require("__reskins-library__.api.sprites.belts")
+---local _belts = require("__reskins-framework__.api.sprites.belts")
 ---```
 ---@class Reskins.Lib.Sprites.Belts
 local _belts = {}
@@ -53,7 +48,7 @@ function _belts.get_belt_animation_set(belt_sprites, tint)
 				layers = {
 					-- Base
 					{
-						filename = "__reskins-library__/graphics/entity/base/transport-belt/transport-belt-1-base.png",
+						filename = "__reskins-framework__/graphics/entity/base/transport-belt/transport-belt-1-base.png",
 						priority = "extra-high",
 						width = 128,
 						height = 128,
@@ -63,7 +58,7 @@ function _belts.get_belt_animation_set(belt_sprites, tint)
 					},
 					-- Mask
 					{
-						filename = "__reskins-library__/graphics/entity/base/transport-belt/transport-belt-1-mask.png",
+						filename = "__reskins-framework__/graphics/entity/base/transport-belt/transport-belt-1-mask.png",
 						priority = "extra-high",
 						width = 128,
 						height = 128,
@@ -74,7 +69,7 @@ function _belts.get_belt_animation_set(belt_sprites, tint)
 					},
 					-- Highlights
 					{
-						filename = "__reskins-library__/graphics/entity/base/transport-belt/transport-belt-1-highlights.png",
+						filename = "__reskins-framework__/graphics/entity/base/transport-belt/transport-belt-1-highlights.png",
 						priority = "extra-high",
 						width = 128,
 						height = 128,
@@ -96,7 +91,7 @@ function _belts.get_belt_animation_set(belt_sprites, tint)
 				layers = {
 					-- Base
 					{
-						filename = "__reskins-library__/graphics/entity/base/transport-belt/transport-belt-2-base.png",
+						filename = "__reskins-framework__/graphics/entity/base/transport-belt/transport-belt-2-base.png",
 						priority = "extra-high",
 						width = 128,
 						height = 128,
@@ -106,7 +101,7 @@ function _belts.get_belt_animation_set(belt_sprites, tint)
 					},
 					-- Mask
 					{
-						filename = "__reskins-library__/graphics/entity/base/transport-belt/transport-belt-2-mask.png",
+						filename = "__reskins-framework__/graphics/entity/base/transport-belt/transport-belt-2-mask.png",
 						priority = "extra-high",
 						width = 128,
 						height = 128,
@@ -117,7 +112,7 @@ function _belts.get_belt_animation_set(belt_sprites, tint)
 					},
 					-- Highlights
 					{
-						filename = "__reskins-library__/graphics/entity/base/transport-belt/transport-belt-2-highlights.png",
+						filename = "__reskins-framework__/graphics/entity/base/transport-belt/transport-belt-2-highlights.png",
 						priority = "extra-high",
 						width = 128,
 						height = 128,

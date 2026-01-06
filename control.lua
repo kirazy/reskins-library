@@ -7,10 +7,10 @@
 ---@diagnostic disable-next-line: different-requires
 
 ---@type Reskins.Lib.Version
-local _version = require("__reskins-library__.api.version")
+local _version = require("__reskins-framework__.api.version")
 
 ---@type Reskins.Control
-local _control = require("__reskins-library__.prototypes.functions.control-functions")
+local _control = require("__reskins-framework__.prototypes.functions.control-functions")
 
 ---The color to use for message notifications.
 local message_color = "#9cdcfe" -- Light blue
@@ -105,25 +105,25 @@ local function check_for_missing_reskin(player)
 					player.print({
 						"",
 						"[",
-						{ "reskins-library.reskins-suite-name" },
+						{ "reskins-framework.reskins-suite-name" },
 						"] ",
 						{
 							"reskins-notifications.reskins-notify-missing-single",
 							{ "", "[color=" .. message_color .. "]", { "reskins-supported-mods." .. notify_mod_name }, "[/color]" },
-							{ "", "[color=" .. message_color .. "]", { "reskins-library.reskins-" .. reskin .. "-mod-name" }, "[/color]" },
+							{ "", "[color=" .. message_color .. "]", { "reskins-framework.reskins-" .. reskin .. "-mod-name" }, "[/color]" },
 						},
 					})
 				else
 					player.print({
 						"",
 						"[",
-						{ "reskins-library.reskins-suite-name" },
+						{ "reskins-framework.reskins-suite-name" },
 						"] ",
 						{
 							"reskins-notifications.reskins-notify-missing-multiple",
 							{ "", "[color=" .. message_color .. "]", { "reskins-supported-mods." .. notify_mod_name }, "[/color]" },
 							count,
-							{ "", "[color=" .. message_color .. "]", { "reskins-library.reskins-" .. reskin .. "-mod-name" }, "[/color]" },
+							{ "", "[color=" .. message_color .. "]", { "reskins-framework.reskins-" .. reskin .. "-mod-name" }, "[/color]" },
 						},
 					})
 				end
@@ -156,34 +156,8 @@ local function notify(data)
 				check_for_missing_reskin(player)
 
 				-- Notify of changes when updated in a save we were already present in
-				if data.mod_changes and data.mod_changes["reskins-library"] and data.mod_changes["reskins-library"].old_version then
-					-- 1.0.4 update
-					if _version.is_older(data.mod_changes["reskins-library"].old_version, "1.0.4") then
-						player.print({ "", "[", { "reskins-library.reskins-suite-name" }, "] ", { "reskins-updates.reskins-lib-1-0-4-update", { "mod-setting-name.reskins-lib-blend-mode" } } })
-					end
-
-					-- 1.1.3 update
-					if not _version.is_older(data.mod_changes["reskins-library"].old_version, "1.1.3") then
-						if script.active_mods["reskins-bobs"] and not script.active_mods["reskins-compatibility"] then
-							player.print({
-								"",
-								"[",
-								{ "reskins-library.reskins-suite-name" },
-								"] ",
-								{ "reskins-updates.reskins-lib-1-1-3-update-bobs", { "", "[color=" .. message_color .. "]", { "reskins-library.reskins-compatibility-mod-name" }, "[/color]" } },
-							})
-						end
-
-						if script.active_mods["reskins-angels"] and not script.active_mods["reskins-compatibility"] then
-							player.print({
-								"",
-								"[",
-								{ "reskins-library.reskins-suite-name" },
-								"] ",
-								{ "reskins-updates.reskins-lib-1-1-3-update-angels", { "", "[color=" .. message_color .. "]", { "reskins-library.reskins-compatibility-mod-name" }, "[/color]" } },
-							})
-						end
-					end
+				if data.mod_changes and data.mod_changes["reskins-framework"] and data.mod_changes["reskins-framework"].old_version then
+					-- Version update notifications here.
 				end
 			end
 		end

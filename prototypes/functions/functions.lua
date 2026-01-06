@@ -4,7 +4,7 @@
 -- See LICENSE.md in the project directory for license information.
 
 -- Library directory
-reskins.lib.directory = "__reskins-library__"
+reskins.lib.directory = "__reskins-framework__"
 
 --- Searches through a nested table based on a sequence of keys and returns the final value.
 ---

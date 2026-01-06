@@ -19,7 +19,7 @@ local function entity_animation(tint)
 			},
 			-- Mask
 			{
-				filename = "__reskins-library__/graphics/entity/base/oil-refinery/oil-refinery-mask.png",
+				filename = "__reskins-framework__/graphics/entity/base/oil-refinery/oil-refinery-mask.png",
 				width = 386,
 				height = 430,
 				shift = util.by_pixel(0, -7.5),
@@ -28,7 +28,7 @@ local function entity_animation(tint)
 			},
 			-- Highlights
 			{
-				filename = "__reskins-library__/graphics/entity/base/oil-refinery/oil-refinery-highlights.png",
+				filename = "__reskins-framework__/graphics/entity/base/oil-refinery/oil-refinery-highlights.png",
 				width = 386,
 				height = 430,
 				shift = util.by_pixel(0, -7.5),
@@ -66,7 +66,7 @@ local function corpse_animation(tint)
 			},
 			-- Mask
 			{
-				filename = "__reskins-library__/graphics/entity/base/oil-refinery/remnants/refinery-remnants-mask.png",
+				filename = "__reskins-framework__/graphics/entity/base/oil-refinery/remnants/refinery-remnants-mask.png",
 				width = 467,
 				height = 415,
 				direction_count = 1,
@@ -76,7 +76,7 @@ local function corpse_animation(tint)
 			},
 			-- Highlights
 			{
-				filename = "__reskins-library__/graphics/entity/base/oil-refinery/remnants/refinery-remnants-highlights.png",
+				filename = "__reskins-framework__/graphics/entity/base/oil-refinery/remnants/refinery-remnants-highlights.png",
 				width = 467,
 				height = 415,
 				direction_count = 1,

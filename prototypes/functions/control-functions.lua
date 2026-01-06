@@ -10,9 +10,6 @@ local _control = {}
 ---
 ---Checks for each of the Artisanal Reskin mods, and sets the notification status to `true` if
 ---they are detected; otherwise, sets to `false`.
----
----### Remarks
----Called by `migration/reskins-library_1.1.3.lua`
 function _control.on_init()
 	storage.notify = {
 		bobs = {
