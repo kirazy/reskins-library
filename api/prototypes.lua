@@ -1,7 +1,3 @@
-if ... ~= "__reskins-framework__.api.prototypes" then
-	return require("__reskins-framework__.api.prototypes")
-end
-
 --- Provides methods for working with prototypes.
 ---
 ---### Examples

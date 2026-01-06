@@ -1,7 +1,3 @@
-if ... ~= "__reskins-framework__.api.icons" then
-	return require("__reskins-framework__.api.icons")
-end
-
 --- Provides methods for manipulating icons.
 ---
 ---### Examples

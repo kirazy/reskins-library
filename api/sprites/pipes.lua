@@ -1,7 +1,3 @@
-if ... ~= "__reskins-framework__.api.sprites.pipes" then
-	return require("__reskins-framework__.api.sprites.pipes")
-end
-
 --- Provides methods for getting sprites for pipe-type entities.
 ---
 ---### Examples

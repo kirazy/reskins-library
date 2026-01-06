@@ -1,7 +1,3 @@
-if ... ~= "__reskins-framework__.api.defines" then
-	return require("__reskins-framework__.api.defines")
-end
-
 --- Provides enumerations for use in Artisanal Reskins.
 ---
 ---### Examples

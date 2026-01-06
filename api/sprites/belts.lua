@@ -1,7 +1,3 @@
-if ... ~= "__reskins-framework__.api.sprites.belts" then
-	return require("__reskins-framework__.api.sprites.belts")
-end
-
 --- Provides methods for getting sprites for belt-type entities.
 ---
 ---### Examples

@@ -1,7 +1,3 @@
-if ... ~= "__reskins-framework__.api.tints" then
-	return require("__reskins-framework__.api.tints")
-end
-
 --- Provides methods for manipulating tints.
 ---
 ---### Examples

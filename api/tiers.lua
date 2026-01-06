@@ -1,7 +1,3 @@
-if ... ~= "__reskins-framework__.api.tiers" then
-	return require("__reskins-framework__.api.tiers")
-end
-
 --- Provides methods for working with tier labels and tints.
 ---
 ---### Examples

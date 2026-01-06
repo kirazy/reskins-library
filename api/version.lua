@@ -1,7 +1,3 @@
-if ... ~= "__reskins-framework__.api.version" then
-	return require("__reskins-framework__.api.version")
-end
-
 ---Provides version comparison tools.
 ---
 ---### Examples

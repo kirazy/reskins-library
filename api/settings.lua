@@ -1,7 +1,3 @@
-if ... ~= "__reskins-framework__.api.settings" then
-	return require("__reskins-framework__.api.settings")
-end
-
 --- Provides methods for retrieving and validating startup settings.
 ---
 ---### Examples

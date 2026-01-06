@@ -1,7 +1,3 @@
-if ... ~= "__reskins-framework__.api.icons.pipes" then
-	return require("__reskins-framework__.api.icons.pipes")
-end
-
 --- Provides methods for getting icons for pipe-type entities.
 ---
 ---### Examples

@@ -1,7 +1,3 @@
-if ... ~= "__reskins-framework__.api.sprites" then
-	return require("__reskins-framework__.api.sprites")
-end
-
 --- Provides methods for manipulating sprites.
 ---
 ---### Examples

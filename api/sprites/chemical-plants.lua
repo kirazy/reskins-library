@@ -1,7 +1,3 @@
-if ... ~= "__reskins-framework__.api.sprites.chemical-plants" then
-	return require("__reskins-framework__.api.sprites.chemical-plants")
-end
-
 --- Provides methods for getting sprites for chemical-plant-type entities.
 ---
 ---### Examples
