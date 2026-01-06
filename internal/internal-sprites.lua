@@ -1,8 +1,3 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
 ---
 ---Creates a `SpriteVariations` object with `num_variations` using the the sprite variations
 ---under the given folder in an Artisanal Reksins mod, with the given `sprite_name`.

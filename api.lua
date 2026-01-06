@@ -1,8 +1,3 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
 if ... ~= "__reskins-library__.api" then
 	return require("__reskins-library__.api")
 end

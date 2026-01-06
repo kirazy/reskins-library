@@ -1,8 +1,3 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
 ---Provides control functions for Artisanal Reskins.
 ---@class Reskins.Control
 local _control = {}

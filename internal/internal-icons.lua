@@ -1,8 +1,3 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
 --- Provides methods and properties for internal use. External use is not recommended.
 reskins.internal = reskins.internal or {}
 

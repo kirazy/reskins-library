@@ -1,8 +1,3 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
 ---Reskins the named assembling machine with vanilla-style chemical plant sprites and color masking, and sets up appropriate corpse, explosion, and particle prototypes
 ---@param name string # [Prototype name](https://wiki.factorio.com/PrototypeBase#name)
 ---@param tier integer # 1-6 are supported, 0 to disable

@@ -1,8 +1,3 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
 -- Check to see if reskinning needs to be done.
 if reskins.bobs and (reskins.bobs.triggers.assembly.entities == false) then
 	return

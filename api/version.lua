@@ -1,8 +1,3 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
 if ... ~= "__reskins-framework__.api.version" then
 	return require("__reskins-framework__.api.version")
 end
@@ -16,7 +11,6 @@ end
 ---@class Reskins.Lib.Version
 local _version = {}
 
----@type flib_migration
 local _migration = require("__flib__.migration")
 
 -- Setup additional version comparison functions

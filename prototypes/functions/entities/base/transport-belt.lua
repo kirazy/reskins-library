@@ -1,8 +1,3 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
 ---Provides vanilla-style sprite definition for transport belt corpse `animation` field. See [Prototype/Corpse](https://wiki.factorio.com/Prototype/Corpse).
 ---@param tint table # [Types/Color](https://wiki.factorio.com/Types/Color)
 ---@return table animation # [Types/RotatedAnimationVariations](https://wiki.factorio.com/Types/RotatedAnimationVariations)

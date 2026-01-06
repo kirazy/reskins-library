@@ -1,9 +1,3 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
--- Make our function host
 reskins = reskins or {}
 reskins.lib = reskins.lib or {}
 reskins.lib.default_tint = "#9cdcfe"

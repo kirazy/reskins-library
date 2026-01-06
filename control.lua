@@ -1,11 +1,3 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
--- Requires
----@diagnostic disable-next-line: different-requires
-
 ---@type Reskins.Lib.Version
 local _version = require("__reskins-framework__.api.version")
 

@@ -1,8 +1,3 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE.md in the project directory for license information.
-
 -- The intention of this script is to determine belt tints, and make them available to anything using belt tints.
 
 -- The following functions are adapted from work done by Maxreader, and implement the formulas for HSV/HSL to RGB and

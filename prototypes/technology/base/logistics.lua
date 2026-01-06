@@ -1,8 +1,3 @@
--- Copyright (c) 2024 Kirazy
--- Part of Artisanal Reskins: Library
---
--- See LICENSE in the project directory for license information.
-
 -- Check if reskinning needs to be done
 if reskins.lib.settings.is_feature_set_enabled("technologies", "reskins-bobs", "boblogistics") == false then
 	return
