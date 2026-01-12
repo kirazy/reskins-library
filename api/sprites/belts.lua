@@ -121,7 +121,14 @@ function _belts.get_belt_animation_set(belt_sprites, tint)
 			},
 		}
 	else
-		error("Unsupported: 'belt_sprites' must be either slow (" .. reskins.lib.defines.belt_sprites.standard .. ") or " .. "fast (" .. reskins.lib.defines.belt_sprites.express .. ").")
+		error(
+			"Unsupported: 'belt_sprites' must be either slow ("
+				.. reskins.lib.defines.belt_sprites.standard
+				.. ") or "
+				.. "fast ("
+				.. reskins.lib.defines.belt_sprites.express
+				.. ")."
+		)
 	end
 	return belt_animation_set
 end

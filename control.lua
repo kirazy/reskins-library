@@ -68,7 +68,11 @@ local function check_for_missing_reskin(player)
 	}
 
 	-- Make sure at least one reskin mod is present
-	if script.active_mods["reskins-bobs"] or script.active_mods["reskins-angels"] or script.active_mods["reskins-compatibility"] then
+	if
+		script.active_mods["reskins-bobs"]
+		or script.active_mods["reskins-angels"]
+		or script.active_mods["reskins-compatibility"]
+	then
 		-- Iterate through each of the reskin mods
 		for reskin, mod_list in pairs(supported_mods) do
 			-- Check if notification for this reskin is needed
@@ -102,7 +106,12 @@ local function check_for_missing_reskin(player)
 						{
 							"reskins-notifications.reskins-notify-missing-single",
 							{ "", "[color=" .. message_color .. "]", { "reskins-supported-mods." .. notify_mod_name }, "[/color]" },
-							{ "", "[color=" .. message_color .. "]", { "reskins-framework.reskins-" .. reskin .. "-mod-name" }, "[/color]" },
+							{
+								"",
+								"[color=" .. message_color .. "]",
+								{ "reskins-framework.reskins-" .. reskin .. "-mod-name" },
+								"[/color]",
+							},
 						},
 					})
 				else
@@ -115,7 +124,12 @@ local function check_for_missing_reskin(player)
 							"reskins-notifications.reskins-notify-missing-multiple",
 							{ "", "[color=" .. message_color .. "]", { "reskins-supported-mods." .. notify_mod_name }, "[/color]" },
 							count,
-							{ "", "[color=" .. message_color .. "]", { "reskins-framework.reskins-" .. reskin .. "-mod-name" }, "[/color]" },
+							{
+								"",
+								"[color=" .. message_color .. "]",
+								{ "reskins-framework.reskins-" .. reskin .. "-mod-name" },
+								"[/color]",
+							},
 						},
 					})
 				end
@@ -148,7 +162,11 @@ local function notify(data)
 				check_for_missing_reskin(player)
 
 				-- Notify of changes when updated in a save we were already present in
-				if data.mod_changes and data.mod_changes["reskins-framework"] and data.mod_changes["reskins-framework"].old_version then
+				if
+					data.mod_changes
+					and data.mod_changes["reskins-framework"]
+					and data.mod_changes["reskins-framework"].old_version
+				then
 					-- Version update notifications here.
 				end
 			end
