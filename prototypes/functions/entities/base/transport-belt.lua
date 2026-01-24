@@ -44,7 +44,14 @@ end
 ---@param make_tier_labels? boolean
 ---@param use_express_spritesheet? boolean
 ---@param reskin_vanilla_entity? boolean
-function reskins.lib.apply_skin.transport_belt(name, tier, tint, make_tier_labels, use_express_spritesheet, reskin_vanilla_entity)
+function reskins.lib.apply_skin.transport_belt(
+	name,
+	tier,
+	tint,
+	make_tier_labels,
+	use_express_spritesheet,
+	reskin_vanilla_entity
+)
 	---@type SetupStandardEntityInputs
 	local inputs = {
 		type = "transport-belt",
@@ -78,5 +85,8 @@ function reskins.lib.apply_skin.transport_belt(name, tier, tint, make_tier_label
 
 	-- Reskin entity
 	local belt_sprite = reskins.lib.defines.belt_sprites
-	entity.belt_animation_set.animation_set = reskins.lib.sprites.belts.get_belt_animation_set(use_express_spritesheet and belt_sprite.express or belt_sprite.standard, inputs.tint).animation_set
+	entity.belt_animation_set.animation_set = reskins.lib.sprites.belts.get_belt_animation_set(
+		use_express_spritesheet and belt_sprite.express or belt_sprite.standard,
+		inputs.tint
+	).animation_set
 end

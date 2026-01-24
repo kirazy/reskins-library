@@ -219,9 +219,18 @@ end
 ---*@throws* `string` — Thrown when `num_variations` is not a positive integer.
 ---@nodiscard
 function _sprites.create_sprite_variations(directory, sprite_name, num_variations, is_light, tint)
-	assert(directory and type(directory) == "string" and directory ~= "", "Invalid parameter: `directory` must not be non-empty string.")
-	assert(sprite_name and type(sprite_name) == "string" and sprite_name ~= "", "Invalid parameter: `sprite_name` must not be non-empty string.")
-	assert(num_variations and num_variations > 0 and num_variations % 1 == 0, "Invalid parameter: `num_variations` must be a positive integer.")
+	assert(
+		directory and type(directory) == "string" and directory ~= "",
+		"Invalid parameter: `directory` must not be non-empty string."
+	)
+	assert(
+		sprite_name and type(sprite_name) == "string" and sprite_name ~= "",
+		"Invalid parameter: `sprite_name` must not be non-empty string."
+	)
+	assert(
+		num_variations and num_variations > 0 and num_variations % 1 == 0,
+		"Invalid parameter: `num_variations` must be a positive integer."
+	)
 
 	if not directory:match("/$") then
 		directory = directory .. "/"

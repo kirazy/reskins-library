@@ -18,7 +18,11 @@ reskins.internal.deferrable_icons = reskins.internal.deferrable_icons or {}
 ---### See Also
 ---@see Reskins.Lib.Icons.store_icon_for_deferred_assigment_in_stage
 function reskins.internal.store_icon_for_deferred_assigment_in_stage(stage, deferrable_icon)
-	reskins.lib.icons.store_icon_for_deferred_assigment_in_stage(reskins.internal.deferrable_icons, stage, deferrable_icon)
+	reskins.lib.icons.store_icon_for_deferred_assigment_in_stage(
+		reskins.internal.deferrable_icons,
+		stage,
+		deferrable_icon
+	)
 end
 
 ---
@@ -146,7 +150,8 @@ function reskins.internal.create_icons_from_list(table, inputs)
 		if overrides.defer_to_data_final_fixes == false then
 			inputs_copy.defer_to_data_final_fixes = false
 		else
-			inputs_copy.defer_to_data_final_fixes = overrides.defer_to_data_final_fixes or inputs_copy.defer_to_data_final_fixes
+			inputs_copy.defer_to_data_final_fixes = overrides.defer_to_data_final_fixes
+				or inputs_copy.defer_to_data_final_fixes
 		end
 
 		-- Prevent double assignment
@@ -172,11 +177,15 @@ function reskins.internal.create_icons_from_list(table, inputs)
 
 			-- Make the icon
 			if inputs_copy.type == "technology" then
-				inputs_copy.technology_icon_filename = overrides.technology_icon_filename or inputs_copy.technology_icon_filename or reskins[inputs_copy.mod].directory .. "/graphics/technology/" .. subfolder .. "/" .. image .. ".png"
+				inputs_copy.technology_icon_filename = overrides.technology_icon_filename
+					or inputs_copy.technology_icon_filename
+					or reskins[inputs_copy.mod].directory .. "/graphics/technology/" .. subfolder .. "/" .. image .. ".png"
 
 				reskins.lib.construct_technology_icon(name, inputs_copy)
 			else
-				inputs_copy.icon_filename = overrides.icon_filename or inputs_copy.icon_filename or reskins[inputs_copy.mod].directory .. "/graphics/icons/" .. subfolder .. "/" .. image .. ".png"
+				inputs_copy.icon_filename = overrides.icon_filename
+					or inputs_copy.icon_filename
+					or reskins[inputs_copy.mod].directory .. "/graphics/icons/" .. subfolder .. "/" .. image .. ".png"
 
 				reskins.lib.construct_icon(name, 0, inputs_copy --[[@as ConstructIconInputsOld]])
 			end

@@ -55,7 +55,8 @@ _tiers.tier_labeling_style = _settings.get_value("reskins-lib-icon-tier-labeling
 
 local is_using_custom_tier_colors = _settings.get_value("reskins-lib-customize-tier-colors") == true
 local is_using_angels_tier_colors = _settings.get_value("reskins-angels-use-angels-tier-colors") == true
-local is_using_angels_belt_tier_colors = is_using_angels_tier_colors and (_settings.get_value("reskins-angels-belts-use-angels-tier-colors") == true)
+local is_using_angels_belt_tier_colors = is_using_angels_tier_colors
+	and (_settings.get_value("reskins-angels-belts-use-angels-tier-colors") == true)
 local is_using_basic_belt_override = _settings.get_value("reskins-bobs-do-basic-belts-separately") == true
 
 ---@type data.Color[]
@@ -111,7 +112,10 @@ local basic_belt_color_override = _settings.get_value("reskins-bobs-basic-belts-
 ---### Exceptions
 ---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.
 function _tiers.get_tint(tier)
-	assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
+	assert(
+		tier and tier >= 0 and tier <= 6 and tier % 1 == 0,
+		"Invalid parameter: 'tier' must be an integer between 0 and 6."
+	)
 
 	if is_using_custom_tier_colors then
 		return util.copy(custom_tier_colors[tier])
@@ -127,8 +131,14 @@ end
 ---@param prog_tier? integer # The progression tier to get a color for; must be between 0 and 6.
 ---@return integer # The tier appropriate for the current settings.
 local function get_tier_from_parameters(tier, prog_tier)
-	assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
-	assert(not prog_tier or (prog_tier and prog_tier >= 0 and prog_tier <= 6 and prog_tier % 1 == 0), "Invalid parameter: 'prog_tier' must be an integer between 0 and 6.")
+	assert(
+		tier and tier >= 0 and tier <= 6 and tier % 1 == 0,
+		"Invalid parameter: 'tier' must be an integer between 0 and 6."
+	)
+	assert(
+		not prog_tier or (prog_tier and prog_tier >= 0 and prog_tier <= 6 and prog_tier % 1 == 0),
+		"Invalid parameter: 'prog_tier' must be an integer between 0 and 6."
+	)
 
 	if reskins.lib.settings.get_value("reskins-lib-tier-mapping") == "progression-map" then
 		return prog_tier or tier
@@ -179,7 +189,10 @@ end
 ---### Exceptions
 ---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.
 function _tiers.get_belt_tint(tier)
-	assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
+	assert(
+		tier and tier >= 0 and tier <= 6 and tier % 1 == 0,
+		"Invalid parameter: 'tier' must be an integer between 0 and 6."
+	)
 
 	---@type data.Color
 	local tint
@@ -360,7 +373,10 @@ end
 ---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
 ---@nodiscard
 function _tiers.add_tier_labels_to_icons(tier, icon_data)
-	assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
+	assert(
+		tier and tier >= 0 and tier <= 6 and tier % 1 == 0,
+		"Invalid parameter: 'tier' must be an integer between 0 and 6."
+	)
 	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
 
 	if not _tiers.is_tier_labeling_enabled then
@@ -497,7 +513,10 @@ end
 ---*@throws* `string` — Thrown when `prototype` has an icon with field `icon` that is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `prototype` has an icon with field `icon_size` that is not a positive integer.<br/>
 function _tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(tier, prototype)
-	assert(tier and tier >= 0 and tier <= 6 and tier % 1 == 0, "Invalid parameter: 'tier' must be an integer between 0 and 6.")
+	assert(
+		tier and tier >= 0 and tier <= 6 and tier % 1 == 0,
+		"Invalid parameter: 'tier' must be an integer between 0 and 6."
+	)
 
 	-- There is not a 0th tier pip.
 	if tier == 0 then
@@ -561,7 +580,12 @@ function _tiers.add_tier_labels_to_prototype_by_reference(tier, prototype)
 		return
 	end
 
-	_icons.assign_icons_to_prototype_and_related_prototypes(deferrable_icon.name, deferrable_icon.type_name, deferrable_icon.icon_data, deferrable_icon.pictures)
+	_icons.assign_icons_to_prototype_and_related_prototypes(
+		deferrable_icon.name,
+		deferrable_icon.type_name,
+		deferrable_icon.icon_data,
+		deferrable_icon.pictures
+	)
 end
 
 ---

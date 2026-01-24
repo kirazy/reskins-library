@@ -152,7 +152,11 @@ local function get_path_to_pipe_material_sprites(folder_name, material_type)
 	if material_type == "iron" then
 		path = "__reskins-framework__/graphics/entity/common/" .. folder_name .. "/iron/"
 	elseif material_type:find("angels") then
-		path = "__reskins-angels__/graphics/entity/smelting/" .. folder_name .. "/" .. material_type:gsub("angels%-", "") .. "/"
+		path = "__reskins-angels__/graphics/entity/smelting/"
+			.. folder_name
+			.. "/"
+			.. material_type:gsub("angels%-", "")
+			.. "/"
 	else
 		path = "__reskins-bobs__/graphics/entity/logistics/" .. folder_name .. "/" .. material_type .. "/"
 	end

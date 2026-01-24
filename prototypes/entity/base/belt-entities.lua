@@ -10,11 +10,22 @@ local make_tier_labels = reskins.lib.settings.get_value("reskins-bobs-do-belt-en
 local transport_belts = {
 	["transport-belt"] = { tier = 1, reskin_vanilla_entity = reskin_vanilla_entity },
 	["fast-transport-belt"] = { tier = 2, use_express_spritesheet = true, reskin_vanilla_entity = reskin_vanilla_entity },
-	["express-transport-belt"] = { tier = 3, use_express_spritesheet = true, reskin_vanilla_entity = reskin_vanilla_entity },
+	["express-transport-belt"] = {
+		tier = 3,
+		use_express_spritesheet = true,
+		reskin_vanilla_entity = reskin_vanilla_entity,
+	},
 }
 
 for name, map in pairs(transport_belts) do
-	reskins.lib.apply_skin.transport_belt(name, map.tier, nil, make_tier_labels, map.use_express_spritesheet, map.reskin_vanilla_entity)
+	reskins.lib.apply_skin.transport_belt(
+		name,
+		map.tier,
+		nil,
+		make_tier_labels,
+		map.use_express_spritesheet,
+		map.reskin_vanilla_entity
+	)
 end
 
 -- UNDERGROUND BELTS
