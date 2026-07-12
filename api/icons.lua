@@ -213,6 +213,7 @@ end
 ---*@throws* `string` — Thrown when `icon_dataum.icon_size` is not a positive integer.<br/>
 ---@nodiscard
 function _icons.add_missing_icon_defaults(icon_datum, is_technology_icon)
+	--stylua: ignore start
 	assert(icon_datum, "Missing required parameter: 'icon_datum' must not be nil.")
 	assert(not (icon_datum[1] and icon_datum[1].icon), "Invalid parameter type: 'icon_datum' must be IconData, but was IconData[].")
 	assert(not icon_datum[1], "Invalid parameter type: 'icon_datum' must be IconData, and not an array.")
@@ -221,12 +222,15 @@ function _icons.add_missing_icon_defaults(icon_datum, is_technology_icon)
 	assert(icon_datum.icon and icon_datum.icon ~= "", "Missing required field: 'icon' must not be nil or empty.")
 	assert(icon_datum.icon:find("^__[%a%d%-%_-]+__"), "Invalid filename: 'icon' must be an absolute file path, but was '" .. icon_datum.icon .. "'.")
 	assert(icon_datum.icon:match("%.([%a%d]+)$"), "Invalid filename: 'icon' must have a valid file extension, but was '" .. icon_datum.icon .. "'.")
+	--stylua: ignore end
 
 	-- Validate icon size, which is now optional.
 	local icon_size = icon_datum.icon_size or defines.default_icon_size
 
+	--stylua: ignore start
 	assert(type(icon_size) == "number", "Invalid type: 'icon_size' must be a number, but was a '" .. type(icon_size) .. "'.")
 	assert(icon_size > 0 and icon_size % 1 == 0, "Invalid value: 'icon_size' must be an integer greater than zero, but was '" .. icon_size .. "'.")
+	--stylua: ignore end
 
 	return {
 		icon = icon_datum.icon,
@@ -399,9 +403,11 @@ function _icons.get_icon_from_prototype_by_reference(prototype)
 	end
 
 	-- Recipes must have an icon or icons field if being passed to this function.
+	--stylua: ignore start
 	assert((prototype.type ~= "recipe" or (prototype.icons or prototype.icon)), "Invalid parameter: 'prototype' must not be a RecipePrototype with an undefined 'icon' or 'icons' field.")
 
 	assert(prototype.icons or prototype.icon, "Invalid parameter: 'prototype' must have a defined 'icon' or 'icons' field.")
+	--stylua: ignore end
 
 	---@type data.IconData[]
 	local icons
@@ -620,13 +626,16 @@ function _icons.store_icon_for_deferred_assigment_in_stage(deferred_icons, stage
 	assert(stage, "Invalid parameter: 'stage' must not be nil.")
 
 	-- Validate the deferred icon.
+	--stylua: ignore start
 	assert(deferrable_icon, "Invalid parameter: 'deferrable_icon' must not be nil.")
 	assert(deferrable_icon.name and deferrable_icon.name ~= "", "Invalid operation: 'deferrable_icon.name' must not be nil or an empty string.")
 	assert(deferrable_icon.type_name and deferrable_icon.type_name ~= "", "Invalid operation: 'deferrable_icon.type_name' must not be nil or an empty string.")
 	assert(deferrable_icon.icon_data or deferrable_icon.icon_datum, "Invalid operation: 'deferrable_icon.icon_data' or `deferrable_icon.icon_datum` are required.")
 	assert(deferrable_icon.icon_data and deferrable_icon.icon_data[1], "Invalid operation: 'deferrable_icon.icon_data' must not be an empty array.")
+	--stylua: ignore end
 
 	-- Validate the icon data and add missing defaults.
+	--stylua: ignore
 	deferrable_icon.icon_data = _icons.add_missing_icons_defaults(deferrable_icon.icon_data, deferrable_icon.type_name == "technology")
 
 	if not deferred_icons[stage] then
@@ -669,9 +678,18 @@ end
 ---@see Reskins.Lib.Icons.assign_icons_to_prototype_and_related_prototypes
 function _icons.assign_deferrable_icon(deferrable_icon)
 	if deferrable_icon.icon_datum then
-		_icons.assign_icons_to_prototype_and_related_prototypes(deferrable_icon.name, deferrable_icon.type_name, { deferrable_icon.icon_datum })
+		_icons.assign_icons_to_prototype_and_related_prototypes(
+			deferrable_icon.name,
+			deferrable_icon.type_name,
+			{ deferrable_icon.icon_datum }
+		)
 	elseif deferrable_icon.icon_data then
-		_icons.assign_icons_to_prototype_and_related_prototypes(deferrable_icon.name, deferrable_icon.type_name, deferrable_icon.icon_data, deferrable_icon.pictures)
+		_icons.assign_icons_to_prototype_and_related_prototypes(
+			deferrable_icon.name,
+			deferrable_icon.type_name,
+			deferrable_icon.icon_data,
+			deferrable_icon.pictures
+		)
 	end
 end
 
@@ -1020,7 +1038,13 @@ function _icons.add_icons_from_prototype_to_icon_by_name(icon_datum, name, type_
 	assert(name and name ~= "", "Invalid parameter: 'name' must not be nil or an empty string.")
 	assert(type_name and type_name ~= "", "Invalid parameter: 'type_name' must not be nil or an empty string.")
 
-	return _icons.add_icons_from_prototype_to_icons_by_reference({ icon_datum }, data.raw[type_name][name], scale, shift, tint)
+	return _icons.add_icons_from_prototype_to_icons_by_reference(
+		{ icon_datum },
+		data.raw[type_name][name],
+		scale,
+		shift,
+		tint
+	)
 end
 
 ---Provides the icon and optional transformations to a sourced `IconData` object.
@@ -1145,7 +1169,13 @@ function _icons.add_icons_from_sources_to_icons(icon_data, sources, is_technolog
 		local icon, is_blank_icon = get_icons_from_source(source, is_technology_icon)
 		has_blank_layers = has_blank_layers or is_blank_icon
 
-		local transformed_icon = _icons.transform_icon(icon, source.scale, source.shift, source.tint, source.is_technology_icon or source.type_name == "technology")
+		local transformed_icon = _icons.transform_icon(
+			icon,
+			source.scale,
+			source.shift,
+			source.tint,
+			source.is_technology_icon or source.type_name == "technology"
+		)
 
 		for _, icon_datum in pairs(transformed_icon) do
 			table.insert(combined_icon, icon_datum)

@@ -76,7 +76,11 @@ local function check_for_missing_reskin(player)
 	}
 
 	-- Make sure at least one reskin mod is present
-	if script.active_mods["reskins-bobs"] or script.active_mods["reskins-angels"] or script.active_mods["reskins-compatibility"] then
+	if
+		script.active_mods["reskins-bobs"]
+		or script.active_mods["reskins-angels"]
+		or script.active_mods["reskins-compatibility"]
+	then
 		-- Iterate through each of the reskin mods
 		for reskin, mod_list in pairs(supported_mods) do
 			-- Check if notification for this reskin is needed
@@ -110,7 +114,12 @@ local function check_for_missing_reskin(player)
 						{
 							"reskins-notifications.reskins-notify-missing-single",
 							{ "", "[color=" .. message_color .. "]", { "reskins-supported-mods." .. notify_mod_name }, "[/color]" },
-							{ "", "[color=" .. message_color .. "]", { "reskins-library.reskins-" .. reskin .. "-mod-name" }, "[/color]" },
+							{
+								"",
+								"[color=" .. message_color .. "]",
+								{ "reskins-library.reskins-" .. reskin .. "-mod-name" },
+								"[/color]",
+							},
 						},
 					})
 				else
@@ -123,7 +132,12 @@ local function check_for_missing_reskin(player)
 							"reskins-notifications.reskins-notify-missing-multiple",
 							{ "", "[color=" .. message_color .. "]", { "reskins-supported-mods." .. notify_mod_name }, "[/color]" },
 							count,
-							{ "", "[color=" .. message_color .. "]", { "reskins-library.reskins-" .. reskin .. "-mod-name" }, "[/color]" },
+							{
+								"",
+								"[color=" .. message_color .. "]",
+								{ "reskins-library.reskins-" .. reskin .. "-mod-name" },
+								"[/color]",
+							},
 						},
 					})
 				end
@@ -156,10 +170,20 @@ local function notify(data)
 				check_for_missing_reskin(player)
 
 				-- Notify of changes when updated in a save we were already present in
-				if data.mod_changes and data.mod_changes["reskins-library"] and data.mod_changes["reskins-library"].old_version then
+				if
+					data.mod_changes
+					and data.mod_changes["reskins-library"]
+					and data.mod_changes["reskins-library"].old_version
+				then
 					-- 1.0.4 update
 					if _version.is_older(data.mod_changes["reskins-library"].old_version, "1.0.4") then
-						player.print({ "", "[", { "reskins-library.reskins-suite-name" }, "] ", { "reskins-updates.reskins-lib-1-0-4-update", { "mod-setting-name.reskins-lib-blend-mode" } } })
+						player.print({
+							"",
+							"[",
+							{ "reskins-library.reskins-suite-name" },
+							"] ",
+							{ "reskins-updates.reskins-lib-1-0-4-update", { "mod-setting-name.reskins-lib-blend-mode" } },
+						})
 					end
 
 					-- 1.1.3 update
@@ -170,7 +194,15 @@ local function notify(data)
 								"[",
 								{ "reskins-library.reskins-suite-name" },
 								"] ",
-								{ "reskins-updates.reskins-lib-1-1-3-update-bobs", { "", "[color=" .. message_color .. "]", { "reskins-library.reskins-compatibility-mod-name" }, "[/color]" } },
+								{
+									"reskins-updates.reskins-lib-1-1-3-update-bobs",
+									{
+										"",
+										"[color=" .. message_color .. "]",
+										{ "reskins-library.reskins-compatibility-mod-name" },
+										"[/color]",
+									},
+								},
 							})
 						end
 
@@ -180,7 +212,15 @@ local function notify(data)
 								"[",
 								{ "reskins-library.reskins-suite-name" },
 								"] ",
-								{ "reskins-updates.reskins-lib-1-1-3-update-angels", { "", "[color=" .. message_color .. "]", { "reskins-library.reskins-compatibility-mod-name" }, "[/color]" } },
+								{
+									"reskins-updates.reskins-lib-1-1-3-update-angels",
+									{
+										"",
+										"[color=" .. message_color .. "]",
+										{ "reskins-library.reskins-compatibility-mod-name" },
+										"[/color]",
+									},
+								},
 							})
 						end
 					end
