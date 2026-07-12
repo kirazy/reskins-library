@@ -3,9 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.sprites.belts" then
-	return require("__reskins-library__.api.sprites.belts")
-end
+---@namespace Reskins.Api.Sprites
 
 --- Provides methods for getting sprites for belt-type entities.
 ---
@@ -13,7 +11,7 @@ end
 ---```lua
 ---local _belts = require("__reskins-library__.api.sprites.belts")
 ---```
----@class Reskins.Lib.Sprites.Belts
+---@class Belts
 local _belts = {}
 
 ---
@@ -34,7 +32,7 @@ local _belts = {}
 ---```
 ---
 ---### Parameters
----@param belt_sprites Reskins.Lib.Defines.BeltSprites # The type of belt animation set to get.
+---@param belt_sprites Reskins.Api.BeltSprites # The type of belt animation set to get.
 ---@param tint data.Color # The tint to apply to the belt animation set.
 ---
 ---### Exceptions

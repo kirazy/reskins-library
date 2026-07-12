@@ -3,9 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.icons.pipes" then
-	return require("__reskins-library__.api.icons.pipes")
-end
+---@using Reskins.Api
+
+---@namespace Reskins.Api.Icons
 
 --- Provides methods for getting icons for pipe-type entities.
 ---
@@ -13,7 +13,7 @@ end
 ---```lua
 ---local _icons = require("__reskins-library__.api.icons.pipes")
 ---```
----@class Reskins.Lib.Icons.Pipes
+---@class Pipes
 local _pipes = {}
 
 ---
@@ -107,11 +107,12 @@ local supported_types = {
 ---*@throws* `string` — Thrown when `prototype` is not of a supported type.
 ---@nodiscard
 function _pipes.get_icon(prototype, material_type, tier)
-	---@type data.IconData
-	local icon_datum = get_icon_datum(prototype.type, material_type)
-
-	assert(prototype, "Invalid parameter: 'prototype' must not be nil.")
+	assert(prototype ~= nil, "Invalid parameter: 'prototype' must not be nil.")
 	assert(supported_types[prototype.type], "Invalid parameter: 'prototype' must be of a supported type.")
+
+	---@type data.IconData
+	---@diagnostic disable-next-line: param-type-mismatch
+	local icon_datum = get_icon_datum(prototype.type, material_type)
 
 	---@type DeferrableIconDatum|DeferrableIconData
 	local deferrable_icon

@@ -3,9 +3,10 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.sprites" then
-	return require("__reskins-library__.api.sprites")
-end
+---@namespace Reskins.Api
+
+---@type Reskins.SpriteUtils.Sprites
+local __sprites = require("__reskins-sprite-utils__.sprites")
 
 --- Provides methods for manipulating sprites.
 ---
@@ -13,43 +14,17 @@ end
 ---```lua
 ---local _sprites = require("__reskins-library__.api.sprites")
 ---```
----@class Reskins.Lib.Sprites
+---@class Sprites
 local _sprites = {
-	---@type Reskins.Lib.Sprites.Belts
+	---@type Sprites.Belts
 	belts = require("__reskins-library__.api.sprites.belts"),
 
-	---@type Reskins.Lib.Sprites.ChemicalPlants
+	---@type Sprites.ChemicalPlants
 	chemical_plants = require("__reskins-library__.api.sprites.chemical-plants"),
 
-	---@type Reskins.Lib.Sprites.Pipes
+	---@type Sprites.Pipes
 	pipes = require("__reskins-library__.api.sprites.pipes"),
 }
-
----@type Reskins.Lib.Icons
-local _icons = require("__reskins-library__.api.icons")
-
----@param icon_layer data.IconData # An icon layer.
----@param scale? double # The scale to apply to the sprite.
----@return data.Sprite # A layer of sprite data.
-local function convert_icon_layer_to_sprite_layer(icon_layer, scale)
-	local icon_copy = _icons.add_missing_icon_defaults(icon_layer)
-	local scale_to_apply = scale and scale * icon_copy.scale or icon_copy.scale or 32 / icon_copy.icon_size
-
-	-- Icon shift is in pixels, so we need to scale it down to 32 pixels per tile.
-	local converted_shift = icon_copy.shift and util.mul_shift(icon_copy.shift, scale_to_apply * 1 / 32) or nil
-
-	---@type data.Sprite
-	local sprite_layer = {
-		flags = { "icon" },
-		filename = icon_copy.icon,
-		size = icon_copy.icon_size,
-		scale = scale_to_apply,
-		shift = converted_shift,
-		tint = icon_copy.tint,
-	}
-
-	return sprite_layer
-end
 
 ---
 ---Creates a `Sprite` object from the given `icon_data` array, at the given `scale`.
@@ -90,21 +65,9 @@ end
 ---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.create_sprite_from_icons
 function _sprites.create_sprite_from_icons(icon_data, scale)
-	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
-
-	---@type data.Sprite
-	local sprite = {}
-	if #icon_data == 1 then
-		sprite = convert_icon_layer_to_sprite_layer(icon_data[1], scale)
-	else
-		sprite = { layers = {} }
-		for n = 1, #icon_data do
-			sprite.layers[n] = convert_icon_layer_to_sprite_layer(icon_data[n], scale)
-		end
-	end
-
-	return sprite
+	return __sprites.create_sprite_from_icons(icon_data, scale)
 end
 
 ---
@@ -139,10 +102,9 @@ end
 ---*@throws* `string` — Thrown when `icon_datum.icon` is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_datum.icon_size` is not a positive integer.<br/>
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.sprites.create_sprite_from_icon
 function _sprites.create_sprite_from_icon(icon_datum, scale)
-	assert(icon_datum, "Invalid parameter: 'icon_datum' must not be nil.")
-
-	return convert_icon_layer_to_sprite_layer(icon_datum, scale)
+	return __sprites.create_sprite_from_icon(icon_datum, scale)
 end
 
 ---@alias LightSpriteNames
@@ -343,110 +305,9 @@ end
 ---### Parameters
 ---@param animation VerticallyOrientableAnimation|data.Animation # The animation object to create the 4-way animation from.
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.make_4way_animation_from_spritesheet
 function _sprites.make_4way_animation_from_spritesheet(animation)
-	local animation_copy = util.copy(animation)
-
-	---@class DirectionDefines : integer
-	local defines = {
-		north = 0,
-		east = 1,
-		south = 2,
-		west = 3,
-	}
-
-	---
-	---Creates the `data.Animation` object for the given `direction` using the given
-	---`source_animation`.
-	---
-	---### Returns
-	---@return data.Animation # The new animation for the given `direction`.
-	---
-	---### Parameters
-	---@param direction DirectionDefines # The direction to create the animation for.
-	---@param source_animation VerticallyOrientableAnimation # The source animation object with a sprite sheet supporting direction-based configurations.
-	local function make_animation_layer_for_direction(direction, source_animation)
-		local start_frame = (source_animation.frame_count or 1) * direction
-		local x, y = 0, 0
-
-		-- Extend vanilla function with handling for vertically_oriented sprite sheets.
-		if source_animation.vertically_oriented then
-			if source_animation.line_length then
-				y = direction * source_animation.height * math.floor(start_frame / (source_animation.line_length or 1))
-			else
-				y = direction * source_animation.height
-			end
-		else
-			if source_animation.line_length then
-				y = source_animation.height * math.floor(start_frame / (source_animation.line_length or 1))
-			else
-				x = direction * source_animation.width
-			end
-		end
-
-		---@type data.Animation
-		local animation_for_direction = {
-			filename = source_animation.filename,
-			priority = source_animation.priority or "high",
-			flags = source_animation.flags,
-			x = x,
-			y = y,
-			width = source_animation.width,
-			height = source_animation.height,
-			frame_count = source_animation.frame_count,
-			line_length = source_animation.line_length,
-			repeat_count = source_animation.repeat_count,
-			shift = source_animation.shift,
-			draw_as_shadow = source_animation.draw_as_shadow,
-			draw_as_glow = source_animation.draw_as_glow,
-			draw_as_light = source_animation.draw_as_light,
-			apply_runtime_tint = source_animation.apply_runtime_tint,
-			animation_speed = source_animation.animation_speed,
-			scale = source_animation.scale or 1,
-			tint = source_animation.tint,
-			blend_mode = source_animation.blend_mode,
-			load_in_minimal_mode = source_animation.load_in_minimal_mode,
-			premul_alpha = source_animation.premul_alpha,
-			generate_sdf = source_animation.generate_sdf,
-
-			-- Extend vanilla function with additional parameters.
-			run_mode = source_animation.run_mode,
-			frame_sequence = source_animation.frame_sequence,
-		}
-
-		return animation_for_direction
-	end
-
-	---
-	---Creates the `data.Animation` object for the given `direction` using the given
-	---`source_animation`.
-	---
-	---### Returns
-	---@return data.Animation # The new animation for the given `direction`.
-	---
-	---### Parameters
-	---@param direction DirectionDefines # The direction to create the animation for.
-	local function make_animation_for_direction(direction)
-		if animation_copy.layers then
-			---@type data.Animation
-			local new_animation = { layers = {} }
-			for _, v in ipairs(animation_copy.layers) do
-				table.insert(new_animation.layers, make_animation_layer_for_direction(direction, v))
-			end
-			return new_animation
-		else
-			return make_animation_layer_for_direction(direction, animation_copy)
-		end
-	end
-
-	---@type data.Animation4Way
-	local animation_4way = {
-		north = make_animation_for_direction(defines.north),
-		east = make_animation_for_direction(defines.east),
-		south = make_animation_for_direction(defines.south),
-		west = make_animation_for_direction(defines.west),
-	}
-
-	return animation_4way
+	return __sprites.make_4way_animation_from_spritesheet(animation)
 end
 
 return _sprites

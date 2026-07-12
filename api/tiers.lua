@@ -3,9 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.tiers" then
-	return require("__reskins-library__.api.tiers")
-end
+---@namespace Reskins.Api
 
 --- Provides methods for working with tier labels and tints.
 ---
@@ -13,14 +11,15 @@ end
 ---```lua
 ---local _tiers = require("__reskins-library__.api.tiers")
 ---```
----@class Reskins.Lib.Tiers
+---@class Tiers
 local _tiers = {}
 
----@type Reskins.Lib.Icons
-local _icons = require("__reskins-library__.api.icons")
----@type Reskins.Lib.Sprites
-local _sprites = require("__reskins-library__.api.sprites")
----@type Reskins.Lib.Settings
+---@type Reskins.SpriteUtils.Icons
+local _icons = require("__reskins-sprite-utils__.icons")
+---@type Reskins.SpriteUtils.Sprites
+local _sprites = require("__reskins-sprite-utils__.sprites")
+
+---@type Settings
 local _settings = require("__reskins-library__.api.settings")
 
 ---
@@ -68,21 +67,19 @@ local is_using_angels_belt_tier_colors = is_using_angels_tier_colors
 	and (_settings.get_value("reskins-angels-belts-use-angels-tier-colors") == true)
 local is_using_basic_belt_override = _settings.get_value("reskins-bobs-do-basic-belts-separately") == true
 
----@type data.Color[]
+---@type { [0|1|2|3|4|5|6]: data.Color }
 local custom_tier_colors = {
-	---@type data.Color
-	[0] = _settings.get_value("reskins-lib-custom-colors-tier-0"),
-	[1] = _settings.get_value("reskins-lib-custom-colors-tier-1"),
-	[2] = _settings.get_value("reskins-lib-custom-colors-tier-2"),
-	[3] = _settings.get_value("reskins-lib-custom-colors-tier-3"),
-	[4] = _settings.get_value("reskins-lib-custom-colors-tier-4"),
-	[5] = _settings.get_value("reskins-lib-custom-colors-tier-5"),
-	[6] = _settings.get_value("reskins-lib-custom-colors-tier-6"),
+	[0] = _settings.get_value("reskins-lib-custom-colors-tier-0") --[[@as data.Color]],
+	[1] = _settings.get_value("reskins-lib-custom-colors-tier-1") --[[@as data.Color]],
+	[2] = _settings.get_value("reskins-lib-custom-colors-tier-2") --[[@as data.Color]],
+	[3] = _settings.get_value("reskins-lib-custom-colors-tier-3") --[[@as data.Color]],
+	[4] = _settings.get_value("reskins-lib-custom-colors-tier-4") --[[@as data.Color]],
+	[5] = _settings.get_value("reskins-lib-custom-colors-tier-5") --[[@as data.Color]],
+	[6] = _settings.get_value("reskins-lib-custom-colors-tier-6") --[[@as data.Color]],
 }
 
----@type data.Color[]
+---@type { [0|1|2|3|4|5|6]: data.Color }
 local standard_tier_colors = {
-	---@type data.Color
 	[0] = util.color("#808080"), -- 1.1.7: 4d4d4d
 	[1] = util.color("#ffb726"), -- 1.1.7: de9400
 	[2] = util.color("#f22318"), -- 1.1.7: c20600
@@ -92,7 +89,7 @@ local standard_tier_colors = {
 	[6] = util.color("#ff8533"), -- 1.1.7: ff7700
 }
 
----@type data.Color[]
+---@type { [0|1|2|3|4|5|6]: data.Color }
 local angels_tier_colors = {
 	-- Core Angel's set
 	[1] = util.color("#595959"), -- Gray
@@ -107,7 +104,7 @@ local angels_tier_colors = {
 }
 
 ---@type data.Color
-local basic_belt_color_override = _settings.get_value("reskins-bobs-basic-belts-color")
+local basic_belt_color_override = _settings.get_value("reskins-bobs-basic-belts-color")--[[@as data.Color]]
 
 ---
 ---Gets the color for the given `tier`.
@@ -160,7 +157,7 @@ end
 ---@param tier_value PrototypeTierValue
 ---@return integer # The tier appropriate for the current settings.
 local function get_tier_from_value(tier_value)
-	assert(tier_value.tier, "Invalid parameter: 'tier' field is a required field on PrototypeTierValue.")
+	assert(tier_value.tier ~= nil, "Invalid parameter: 'tier' field is a required field on PrototypeTierValue.")
 
 	return get_tier_from_parameters(tier_value.tier, tier_value.prog_tier)
 end
@@ -293,7 +290,7 @@ function _tiers.get_tier_from_icons(icon_data)
 	if icon_data and #icon_data >= 3 then
 		for i = #icon_data, 1, -1 do
 			if is_icon_tier_labeled(icon_data[i]) then
-				return tonumber(icon_data[i].icon:match("(%d+)%.png"))
+				return tonumber(icon_data[i].icon:match("(%d+)%.png"))--[[@as integer|nil]]
 			end
 		end
 	end
@@ -321,7 +318,7 @@ end
 ---### Parameters
 ---@param icon_data data.IconData[] # An array of `IconData` objects.
 function _tiers.remove_tier_labels_from_icons(icon_data)
-	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
+	assert(icon_data ~= nil, "Invalid parameter: 'icon_data' must not be nil.")
 
 	local icon_data_copy = util.copy(icon_data)
 
@@ -386,7 +383,7 @@ function _tiers.add_tier_labels_to_icons(tier, icon_data)
 		tier and tier >= 0 and tier <= 6 and tier % 1 == 0,
 		"Invalid parameter: 'tier' must be an integer between 0 and 6."
 	)
-	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
+	assert(icon_data ~= nil, "Invalid parameter: 'icon_data' must not be nil.")
 
 	if not _tiers.is_tier_labeling_enabled then
 		return util.copy(icon_data)
@@ -498,7 +495,7 @@ end
 ---the resulting data as a `DeferrableIcon` object.
 ---
 ---### Returns
----@return DeferrableIconData|nil # The prototype and icon data packaged as a `DerrableIcon` object enabling deferred assignment. Returns `nil` if `tier = 0` or the icon could not be retrieved from `prototype`.
+---@return DeferrableIconData|nil # The prototype and icon data packaged as a `DeferrableIcon` object enabling deferred assignment. Returns `nil` if `tier = 0` or the icon could not be retrieved from `prototype`.
 ---
 ---### Remarks
 ---- Creates a `Sprite` object for the `pictures` field without tier labels for display in the world.
@@ -508,7 +505,7 @@ end
 ---### Examples
 ---```
 ----- Get a deferrable icon with tier labels for a tier 1 tank.
----local derrable_icon = tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(1, data.raw.car["tank"])
+---local deferrable_icon = tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(1, data.raw.car["tank"])
 ---```
 ---
 ---### Parameters
@@ -532,7 +529,7 @@ function _tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(tier, p
 		return nil
 	end
 
-	local source_icon_data = _icons.get_icon_from_prototype_by_reference(prototype)
+	local source_icon_data = _icons.get_icon_from_prototype(prototype)
 	if not source_icon_data then
 		return nil
 	end

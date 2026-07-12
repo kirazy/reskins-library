@@ -3,9 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.sprites.pipes" then
-	return require("__reskins-library__.api.sprites.pipes")
-end
+---@using Reskins.Api
+
+---@namespace Reskins.Api.Sprites
 
 --- Provides methods for getting sprites for pipe-type entities.
 ---
@@ -13,7 +13,7 @@ end
 ---```lua
 ---local _sprites = require("__reskins-library__.api.sprites.pipes")
 ---```
----@class Reskins.Lib.Sprites.Pipes
+---@class Pipes
 local _pipes = {}
 
 ---
@@ -105,37 +105,6 @@ function _pipes.get_horizontal_pipe_shadow(shift)
 
 	return shadow_animation
 end
-
----@alias PipeNamePrefix
----| '"brass"'
----| '"bronze"'
----| '"ceramic"'
----| '"copper"'
----| '"copper-tungsten"'
----| '"nitinol"'
----| '"plastic"'
----| '"steel"'
----| '"stone"'
----| '"titanium"'
----| '"tungsten"'
-
----@alias PipeMaterialType
----| '"angels-ceramic"'
----| '"angels-nitinol"'
----| '"angels-titanium"'
----| '"angels-tungsten"'
----| '"brass"'
----| '"bronze"'
----| '"ceramic"'
----| '"copper"'
----| '"copper-tungsten"'
----| '"iron"'
----| '"nitinol"'
----| '"plastic"'
----| '"steel"'
----| '"stone"'
----| '"titanium"'
----| '"tungsten"'
 
 ---
 ---Gets the path to the sprites for the given `folder_name` and `material_type`.
@@ -842,7 +811,7 @@ end
 ---`material_type`.
 ---
 ---### Returns
----@return data.Sprite4Way # The complete set of remnant sprites in the given `material_type`.
+---@return data.RotatedAnimationVariations # The complete set of remnant sprites in the given `material_type`.
 ---
 ---### Examples
 ---```lua
@@ -876,7 +845,7 @@ end
 ---`material_type`.
 ---
 ---### Returns
----@return data.Sprite4Way # The complete set of remnant sprites in the given `material_type`.
+---@return data.RotatedAnimationVariations # The complete set of remnant sprites in the given `material_type`.
 ---
 ---### Examples
 ---```lua

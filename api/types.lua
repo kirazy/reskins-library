@@ -1,0 +1,45 @@
+---@namespace Reskins.Api
+
+---Represents an icon from an array of `IconData` objects that may be stored for deferred assignment.
+---@class DeferrableIconData
+---@field name string # The name of the prototype to be assigned this icon.
+---@field type_name string # The type name of the prototype to be assigned this icon.
+---@field icon_data data.IconData[] # The icon data to store for deferred assignment.
+---@field pictures? data.SpriteVariations # The pictures data to store for deferred assignment.
+
+---Represents an icon from a single `IconData` object that may be stored for deferred assignment.
+---@class DeferrableIconDatum
+---@field name string # The name of the prototype to be assigned this icon.
+---@field type_name string # The type name of the prototype to be assigned this icon.
+---@field icon_datum data.IconData # The icon data to store for deferred assignment.
+
+---@alias PipeNamePrefix
+---| '"brass"'
+---| '"bronze"'
+---| '"ceramic"'
+---| '"copper"'
+---| '"copper-tungsten"'
+---| '"nitinol"'
+---| '"plastic"'
+---| '"steel"'
+---| '"stone"'
+---| '"titanium"'
+---| '"tungsten"'
+
+---@alias PipeMaterialType
+---| '"angels-ceramic"'
+---| '"angels-nitinol"'
+---| '"angels-titanium"'
+---| '"angels-tungsten"'
+---| '"brass"'
+---| '"bronze"'
+---| '"ceramic"'
+---| '"copper"'
+---| '"copper-tungsten"'
+---| '"iron"'
+---| '"nitinol"'
+---| '"plastic"'
+---| '"steel"'
+---| '"stone"'
+---| '"titanium"'
+---| '"tungsten"'

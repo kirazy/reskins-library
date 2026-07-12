@@ -3,9 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.defines" then
-	return require("__reskins-library__.api.defines")
-end
+---@namespace Reskins.Api
 
 --- Provides enumerations for use in Artisanal Reskins.
 ---
@@ -13,11 +11,11 @@ end
 ---```lua
 ---local _icons = require("__reskins-library__.api.icons")
 ---```
----@class Reskins.Lib.Defines
+---@class Defines
 local _defines = {}
 
 ---Represents stages of the Factorio mod loading process.
----@enum Reskins.Lib.Defines.Stage
+---@enum Stage
 _defines.stage = {
 	---The settings stage.
 	settings = 0,
@@ -36,7 +34,7 @@ _defines.stage = {
 }
 
 ---Represents the different types of animated transport belt sprite sheets.
----@enum Reskins.Lib.Defines.BeltSprites
+---@enum BeltSprites
 _defines.belt_sprites = {
 	---The sprites for a typical belt. Used for slower belt speeds.
 	standard = 0,

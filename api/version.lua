@@ -3,21 +3,18 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.version" then
-	return require("__reskins-library__.api.version")
-end
+---@namespace Reskins.Api
 
 ---Provides version comparison tools.
+---
+---This module is deprecated. Use `helpers.compare_versions` directly.
 ---
 ---### Examples
 ---```lua
 ---local _version = require("__reskins-library__.api.version")
 ---```
----@class Reskins.Lib.Version
+---@class Version
 local _version = {}
-
----@type flib_migration
-local _migration = require("__flib__.migration")
 
 -- Setup additional version comparison functions
 
@@ -36,14 +33,9 @@ local _migration = require("__flib__.migration")
 ---### Parameters
 ---@param version string # The version of interest; a semantic version string.
 ---@param version_to_compare_with string # The version to compare with; a semantic version string.
+---@deprecated helpers.compare_versions(version_to_compare_with, version) > 0
 function _version.is_newer(version, version_to_compare_with)
-	local v1 = _migration.format_version(version)
-	local v2 = _migration.format_version(version_to_compare_with)
-
-	if v1 and v2 then
-		return v1 > v2
-	end
-	return nil
+	return helpers.compare_versions(version_to_compare_with, version) > 0
 end
 
 --- Check if `version` is the same as or is newer than `version_to_compare_with`.
@@ -61,14 +53,9 @@ end
 ---### Parameters
 ---@param version string # The version of interest; a semantic version string.
 ---@param version_to_compare_with string # The version to compare with; a semantic version string.
+---@deprecated helpers.compare_versions(version_to_compare_with, version) >= 0
 function _version.is_same_or_newer(version, version_to_compare_with)
-	local v1 = _migration.format_version(version)
-	local v2 = _migration.format_version(version_to_compare_with)
-
-	if v1 and v2 then
-		return v1 >= v2
-	end
-	return nil
+	return helpers.compare_versions(version_to_compare_with, version) >= 0
 end
 
 --- Check if `version` is the same as `version_to_compare_with`.
@@ -86,14 +73,9 @@ end
 ---### Parameters
 ---@param version string # The version of interest; a semantic version string.
 ---@param version_to_compare_with string # The version to compare with; a semantic version string.
+---@deprecated Use helpers.compare_versions(version_to_compare_with, version) == 0
 function _version.is_same(version, version_to_compare_with)
-	local v1 = _migration.format_version(version)
-	local v2 = _migration.format_version(version_to_compare_with)
-
-	if v1 and v2 then
-		return v1 == v2
-	end
-	return nil
+	return helpers.compare_versions(version_to_compare_with, version) == 0
 end
 
 ---Check if `version` is the same as or is older than `version_to_compare_with`.
@@ -111,14 +93,9 @@ end
 ---### Parameters
 ---@param version string # The version of interest; a semantic version string.
 ---@param version_to_compare_with string # The version to compare with; a semantic version string.
+---@deprecated Use helpers.compare_versions(version_to_compare_with, version) <= 0
 function _version.is_same_or_older(version, version_to_compare_with)
-	local v1 = _migration.format_version(version)
-	local v2 = _migration.format_version(version_to_compare_with)
-
-	if v1 and v2 then
-		return v1 <= v2
-	end
-	return nil
+	return helpers.compare_versions(version_to_compare_with, version) <= 0
 end
 
 ---
@@ -137,14 +114,9 @@ end
 ---### Parameters
 ---@param version string # The version of interest; a semantic version string.
 ---@param version_to_compare_with string # The version to compare with; a semantic version string.
+---@deprecated Use helpers.compare_versions(version_to_compare_with, version) < 0
 function _version.is_older(version, version_to_compare_with)
-	local v1 = _migration.format_version(version)
-	local v2 = _migration.format_version(version_to_compare_with)
-
-	if v1 and v2 then
-		return v1 < v2
-	end
-	return nil
+	return helpers.compare_versions(version_to_compare_with, version) < 0
 end
 
 return _version

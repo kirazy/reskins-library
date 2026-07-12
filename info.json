@@ -9,6 +9,7 @@
 	"dependencies": [
 		"base",
 		"flib",
+		"reskins-sprite-utils",
 		"(?) bobassembly",
 		"(?) boblogistics",
 		"(?) angelspetrochem",

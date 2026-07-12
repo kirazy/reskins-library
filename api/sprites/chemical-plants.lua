@@ -3,9 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.sprites.chemical-plants" then
-	return require("__reskins-library__.api.sprites.chemical-plants")
-end
+---@namespace Reskins.Api.Sprites
 
 --- Provides methods for getting sprites for chemical-plant-type entities.
 ---
@@ -13,7 +11,7 @@ end
 ---```lua
 ---local _sprites = require("__reskins-library__.api.sprites.chemical-plants")
 ---```
----@class Reskins.Lib.Sprites.ChemicalPlants
+---@class ChemicalPlants
 local _chemical_plants = {}
 
 ---
@@ -168,7 +166,7 @@ end
 ---@param tint data.Color
 ---@nodiscard
 function _chemical_plants.get_standard_animation(tint)
-	return reskins.lib.sprites.make_4way_animation_from_spritesheet({
+	return make_4way_animation_from_spritesheet({
 		layers = {
 			-- Base
 			{
@@ -227,9 +225,9 @@ end
 ---```lua
 ----- Get the remnant sprites colored for a tier 3 chemical plant.
 ---local tint = reskins.lib.tiers.get_tint(3)
----local chemical_plant_remants = data.raw["corpse"]["chemical-plant-3-remnants"]
+---local chemical_plant_remnants = data.raw["corpse"]["chemical-plant-3-remnants"]
 ---
----chemical_plant_remants.animation = _chemical_plants.get_standard_remnants(tint)
+---chemical_plant_remnants.animation = _chemical_plants.get_standard_remnants(tint)
 ---```
 ---
 ---### Parameters

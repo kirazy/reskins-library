@@ -3,6 +3,37 @@ Version: 2.4.0
 Date: ????
   Features:
     - Updated for Factorio 2.1
+  Deprecated:
+    - Methods moved to Artisanal Reskins: Sprite Utils have been deprecated:
+      - `icons.empty_icon` -> `reskins-sprite-utils.icon.empty_icon`
+      - `icons.empty_technology_icon` -> `reskins-sprite-utils.icon.empty_icon`
+      - `icons.scale_icon` -> `reskins-sprite-utils.icon.scale_icon`
+      - `icons.clear_icon_from_prototype_by_reference` -> `reskins-sprite-utils.icon.prototype`
+      - `icons.clear_icon_from_prototype_by_name` -> `reskins-sprite-utils.icon.name`
+      - `icons.add_missing_icon_defaults` -> `reskins-sprite-utils.icon.add_missing_icon_defaults`
+      - `icons.add_missing_icons_defaults` -> `reskins-sprite-utils.icon.add_missing_icons_defaults`
+      - `icons.create_icon` -> `reskins-sprite-utils.icon.create_icon`
+      - `icons.create_technology_icon` -> `reskins-sprite-utils.icon.create_technology_icon`
+      - `icons.get_icon_from_prototype_by_reference` -> `reskins-sprite-utils.icon.get_icon_from_prototype`
+      - `icons.get_icon_from_prototype_by_name` -> `reskins-sprite-utils.icon.get_icon_from_named_prototype`
+      - `icons.assign_icons_to_prototype_and_related_prototypes` -> `reskins-sprite-utils.icon.assign_icons_to_prototype_and_related_prototypes`
+      - `icons.store_icon_for_deferred_assigment_in_stage` -> `reskins-sprite-utils.icon.store_icon_for_deferred_assignment_in_stage`
+      - `icons.assign_deferrable_icon` -> `reskins-sprite-utils.icon.assign_deferrable_icon`
+      - `icons.assign_icons_deferred_to_stage` -> `reskins-sprite-utils.icon.assign_icons_deferred_to_stage`
+      - `icons.combine_icons` -> `reskins-sprite-utils.icon.compose_icons`
+      - `icons.transform_icon` -> `reskins-sprite-utils.icon.transform_icon`
+      - `icons.add_icons_from_prototype_to_icons_by_reference` -> `reskins-sprite-utils.icon.add_icons_from_prototype_to_icons`
+      - `icons.add_icons_from_prototype_to_icon_by_reference` -> `reskins-sprite-utils.icon.add_icons_from_prototype_to_icon`
+      - `icons.add_icons_from_prototype_to_icons_by_name` -> `reskins-sprite-utils.icon.add_icons_from_prototype_to_icons_by_name`
+      - `icons.add_icons_from_prototype_to_icon_by_name` -> `reskins-sprite-utils.icon.add_icons_from_prototype_to_icon_by_name`
+      - `icons.add_icons_from_sources_to_icons` -> `reskins-sprite-utils.icon.add_icons_from_sources_to_icons`
+      - `icons.create_icons_from_sources` -> `reskins-sprite-utils.icon.create_icons_from_sources`
+      - `icons.create_and_assign_combined_icons_from_sources_to_recipe` -> `reskins-sprite-utils.icon.create_and_assign_combined_icons_from_sources_to_recipe`
+      - `prototypes.rescale_prototype` -> `reskins-sprite-utils.sprites.rescale_prototype`
+      - `prototypes.rescale_remnants_of_prototype` -> `reskins-sprite-utils.sprites.rescale_remnants_of_prototype`
+      - `sprites.create_sprite_from_icons` -> `reskins-sprite-utils.sprites.create_sprite_from_icons`
+      - `sprites.create_sprite_from_icon` -> `reskins-sprite-utils.sprites.create_sprite_from_icon`
+      - `sprites.make_4way_animation_from_spritesheet` -> `reskins-sprite-utils.sprites.make_4way_animation_from_spritesheet`
 ---------------------------------------------------------------------------------------------------
 Version: 2.3.3
 Date: 2026-01-03

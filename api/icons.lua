@@ -3,9 +3,10 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if ... ~= "__reskins-library__.api.icons" then
-	return require("__reskins-library__.api.icons")
-end
+---@namespace Reskins.Api
+
+---@type Reskins.SpriteUtils.Icons
+local __icons = require("__reskins-sprite-utils__.icons")
 
 --- Provides methods for manipulating icons.
 ---
@@ -13,9 +14,9 @@ end
 ---```lua
 ---local _icons = require("__reskins-library__.api.icons")
 ---```
----@class Reskins.Lib.Icons
+---@class Icons
 local _icons = {
-	---@type Reskins.Lib.Icons.Pipes
+	---@type Icons.Pipes
 	pipes = require("__reskins-library__.api.icons.pipes"),
 }
 
@@ -38,12 +39,9 @@ local _icons = {
 ---local icon_data = _icons.empty_icon()
 ---```
 ---@return data.IconData
+---@deprecated Use reskins-sprite-utils.icons.empty_icon()
 function _icons.empty_icon()
-	return {
-		icon = "__core__/graphics/empty.png",
-		icon_size = 1,
-		scale = 32,
-	}
+	return __icons.empty_icon()
 end
 
 ---
@@ -63,12 +61,9 @@ end
 ---local icon_data = _icons.empty_technology_icon()
 ---```
 ---@return data.IconData
+---@deprecated Use reskins-sprite-utils.icons.empty_icon("technology")
 function _icons.empty_technology_icon()
-	return {
-		icon = "__core__/graphics/empty.png",
-		icon_size = 1,
-		scale = 256,
-	}
+	return __icons.empty_icon("technology")
 end
 
 ---
@@ -127,22 +122,16 @@ end
 ---}
 ---
 ----- Increase the size of the icon by a factor of 2.
----icon_data = _icons.rescale_icon(icon_data, 2)
+---icon_data = _icons.scale_icon(icon_data, 2)
 ---```
 ---
 ---### Parameters
 ---@param icon_data data.IconData[]
 ---@param scalar double # The scalar to rescale the icon by.
 ---@param is_technology_icon? boolean # When `true`, indicates that `icon_data` represents a technology icon.
+---@deprecated Use reskins-sprite-utils.icons.scale_icon
 function _icons.scale_icon(icon_data, scalar, is_technology_icon)
-	local icon_data_copy = _icons.add_missing_icons_defaults(icon_data, is_technology_icon)
-
-	for _, icon_datum in pairs(icon_data_copy) do
-		icon_datum.scale = icon_datum.scale * scalar
-		icon_datum.shift = icon_datum.shift and util.mul_shift(icon_datum.shift, scalar) or nil
-	end
-
-	return icon_data_copy
+	return __icons.scale_icon(icon_data, scalar, is_technology_icon and "technology" or "default")
 end
 
 ---
@@ -158,12 +147,9 @@ end
 ---
 ---### Parameters
 ---@param prototype data.EntityPrototype|data.ItemPrototype|data.FluidPrototype|data.RecipePrototype|data.TechnologyPrototype # The prototype object.
+---@deprecated Use reskins-sprite-utils.clear_icon_from_prototype(prototype)
 function _icons.clear_icon_from_prototype_by_reference(prototype)
-	if prototype then
-		prototype.icons = nil
-		prototype.icon = nil
-		prototype.icon_size = nil
-	end
+	__icons.clear_icon_from_prototype(prototype)
 end
 
 ---
@@ -180,8 +166,9 @@ end
 ---### Parameters
 ---@param name string # The name of the prototype.
 ---@param type_name string # The type name of the prototype.
+---@deprecated Use reskins-sprite-utils.clear_icon_from_named_prototype(name, type_name)
 function _icons.clear_icon_from_prototype_by_name(name, type_name)
-	_icons.clear_icon_from_prototype_by_reference(data.raw[type_name][name])
+	__icons.clear_icon_from_named_prototype(name, type_name)
 end
 
 ---
@@ -212,33 +199,9 @@ end
 ---*@throws* `string` — Thrown when `icon_dataum.icon` is not a mod-prefixed absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_dataum.icon_size` is not a positive integer.<br/>
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.add_missing_icon_defaults(icon_datum, ...)
 function _icons.add_missing_icon_defaults(icon_datum, is_technology_icon)
-	--stylua: ignore start
-	assert(icon_datum, "Missing required parameter: 'icon_datum' must not be nil.")
-	assert(not (icon_datum[1] and icon_datum[1].icon), "Invalid parameter type: 'icon_datum' must be IconData, but was IconData[].")
-	assert(not icon_datum[1], "Invalid parameter type: 'icon_datum' must be IconData, and not an array.")
-
-	-- Validate icon file path.
-	assert(icon_datum.icon and icon_datum.icon ~= "", "Missing required field: 'icon' must not be nil or empty.")
-	assert(icon_datum.icon:find("^__[%a%d%-%_-]+__"), "Invalid filename: 'icon' must be an absolute file path, but was '" .. icon_datum.icon .. "'.")
-	assert(icon_datum.icon:match("%.([%a%d]+)$"), "Invalid filename: 'icon' must have a valid file extension, but was '" .. icon_datum.icon .. "'.")
-	--stylua: ignore end
-
-	-- Validate icon size, which is now optional.
-	local icon_size = icon_datum.icon_size or defines.default_icon_size
-
-	--stylua: ignore start
-	assert(type(icon_size) == "number", "Invalid type: 'icon_size' must be a number, but was a '" .. type(icon_size) .. "'.")
-	assert(icon_size > 0 and icon_size % 1 == 0, "Invalid value: 'icon_size' must be an integer greater than zero, but was '" .. icon_size .. "'.")
-	--stylua: ignore end
-
-	return {
-		icon = icon_datum.icon,
-		icon_size = icon_size,
-		scale = icon_datum.scale or (is_technology_icon and 256 / icon_size) or (32 / icon_size),
-		shift = icon_datum.shift or nil,
-		tint = icon_datum.tint or nil,
-	}
+	return __icons.add_missing_icon_defaults(icon_datum, is_technology_icon and "technology" or "default")
 end
 
 ---
@@ -277,48 +240,9 @@ end
 ---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.add_missing_icons_defaults(icon_data, ...)
 function _icons.add_missing_icons_defaults(icon_data, is_technology_icon)
-	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
-
-	local new_icon_data = {}
-	for n = 1, #icon_data do
-		new_icon_data[n] = _icons.add_missing_icon_defaults(icon_data[n], is_technology_icon)
-	end
-
-	return new_icon_data
-end
-
----
----Packs the given parameters into an `IconData` object.
----
----No validation or setting of default values is performed.
----
----### Returns
----@return data.IconData # An `IconData` object representing the packed icon data.
----
----### Examples
----```
----local icon_datum = pack_as_icon_data("__base__/graphics/icons/iron-plate.png", 64, 4, 0.5)
----```
----
----### Parameters
----@param icon data.FileName # The file name of the icon to use.
----@param icon_size data.SpriteSizeType # The size of the icon.
----@param scale? double # The scale of the icon.
----@param shift? data.Vector # The shift of the icon.
----@param tint? data.Color # The tint of the icon.
----@nodiscard
-local function pack_as_icon_datum(icon, icon_size, scale, shift, tint)
-	---@type data.IconData
-	local icon_datum = {
-		icon = icon,
-		icon_size = icon_size,
-		scale = scale,
-		shift = shift,
-		tint = tint,
-	}
-
-	return icon_datum
+	return __icons.add_missing_icons_defaults(icon_data, is_technology_icon and "technology" or "default")
 end
 
 ---
@@ -343,8 +267,9 @@ end
 ---*@throws* `string` — Thrown when `icon` is not a mod-prefixed absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_size` is not a positive integer.<br/>
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.create_icon(...)
 function _icons.create_icon(icon, icon_size, scale, shift, tint)
-	return _icons.add_missing_icon_defaults(pack_as_icon_datum(icon, icon_size, scale, shift, tint), false)
+	return __icons.create_icon(icon, icon_size, scale, shift, tint)
 end
 
 ---
@@ -370,8 +295,9 @@ end
 ---*@throws* `string` — Thrown when `icon` is not a mod-prefixed absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_size` is not a positive integer.<br/>
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.create_technology_icon(...)
 function _icons.create_technology_icon(icon, icon_size, scale, shift, tint)
-	return _icons.add_missing_icon_defaults(pack_as_icon_datum(icon, icon_size, scale, shift, tint), true)
+	return __icons.create_technology_icon(icon, icon_size, scale, shift, tint)
 end
 
 ---
@@ -397,39 +323,9 @@ end
 ---### Exceptions
 ---*@throws* `string` — Thrown when `prototype` has no defined field `icon` or `icons`.<br/>
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.get_icon_from_prototype(prototype)
 function _icons.get_icon_from_prototype_by_reference(prototype)
-	if not prototype then
-		return
-	end
-
-	-- Recipes must have an icon or icons field if being passed to this function.
-	--stylua: ignore start
-	assert((prototype.type ~= "recipe" or (prototype.icons or prototype.icon)), "Invalid parameter: 'prototype' must not be a RecipePrototype with an undefined 'icon' or 'icons' field.")
-
-	assert(prototype.icons or prototype.icon, "Invalid parameter: 'prototype' must have a defined 'icon' or 'icons' field.")
-	--stylua: ignore end
-
-	---@type data.IconData[]
-	local icons
-
-	-- Give precedence to an existing icons field.
-	if prototype.icons then
-		---@type data.IconData[]
-		icons = util.copy(prototype.icons)
-
-		-- Ensure icon_size is set for all elements before adding defaults.
-		for n = 1, #icons do
-			icons[n].icon_size = icons[n].icon_size or prototype.icon_size or defines.default_icon_size
-		end
-	else
-		---@type data.IconData[]
-		icons = { {
-			icon = prototype.icon,
-			icon_size = prototype.icon_size,
-		} }
-	end
-
-	return _icons.add_missing_icons_defaults(icons, prototype.type == "technology")
+	return __icons.get_icon_from_prototype(prototype)
 end
 
 ---
@@ -456,11 +352,9 @@ end
 ---*@throws* `string` — Thrown when `type_name` is `nil` or an empty string.<br/>
 ---*@throws* `string` — Thrown when the prototype has no defined field `icon` or `icons`.<br/>
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.get_icon_from_named_prototype
 function _icons.get_icon_from_prototype_by_name(name, type_name)
-	assert(name and name ~= "", "Invalid parameter: 'name' must not be nil or an empty string.")
-	assert(type_name and type_name ~= "", "Invalid parameter: 'type_name' must not be nil or an empty string.")
-
-	return _icons.get_icon_from_prototype_by_reference(data.raw[type_name][name])
+	return __icons.get_icon_from_named_prototype(name, type_name)
 end
 
 local related_prototypes = {
@@ -507,72 +401,12 @@ local related_prototypes = {
 ---*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
+---@deprecated Use reskins-sprite-utils.icons.assign_icons_to_prototype_and_related_prototypes
 function _icons.assign_icons_to_prototype_and_related_prototypes(name, type_name, icon_data, pictures)
-	assert(name and name ~= "", "Invalid parameter: 'name' must not be nil or an empty string.")
-
-	local icon_data_copy = _icons.add_missing_icons_defaults(icon_data, type_name == "technology")
-
-	local prototype = (type_name and not related_prototypes[type_name]) and data.raw[type_name][name] or nil
-
-	-- Exclude technologies and recipies from related-prototype updates.
-	if type_name ~= "technology" and type_name ~= "recipe" then
-		local item = data.raw["item"][name]
-		if item then
-			_icons.clear_icon_from_prototype_by_reference(item)
-			item.icons = icon_data_copy
-			item.pictures = pictures
-		end
-
-		local item_with_entity_data = data.raw["item-with-entity-data"][name]
-		if item_with_entity_data then
-			_icons.clear_icon_from_prototype_by_reference(item_with_entity_data)
-			item_with_entity_data.icons = icon_data_copy
-
-			-- The pictures field is ignored as of 1.0, this has been left active
-			-- in the hopes the default behavior is adjusted.
-			item_with_entity_data.pictures = pictures
-		end
-
-		local explosion = data.raw["explosion"][name .. "-explosion"]
-		if explosion then
-			_icons.clear_icon_from_prototype_by_reference(explosion)
-			explosion.icons = icon_data_copy
-		end
-
-		local remnants = data.raw["corpse"][name .. "-remnants"]
-		if remnants then
-			_icons.clear_icon_from_prototype_by_reference(remnants)
-			remnants.icons = icon_data_copy
-		end
-
-		-- Clear out recipes of the same name so that the item icon is inherited properly.
-		-- Possibly a dangerous assumption that all recipes with the same name as the item
-		-- are intended to inherit the icon directly and do not use a custom icon.
-		-- Possible additional checks to make sure the recipe has only one output and it's the item?
-		local recipe = data.raw["recipe"][name]
-		_icons.clear_icon_from_prototype_by_reference(recipe)
-	end
-
-	if prototype then
-		_icons.clear_icon_from_prototype_by_reference(prototype)
-		prototype.icons = icon_data_copy
-	end
+	__icons.assign_icons_to_prototype_and_related_prototypes(name, type_name, icon_data, pictures)
 end
 
 ---Icon Assignment Utilities
-
----Represents an icon from an array of `IconData` objects that may be stored for deferred assignment.
----@class DeferrableIconData
----@field name string # The name of the prototype to be assigned this icon.
----@field type_name string # The type name of the prototype to be assigned this icon.
----@field icon_data data.IconData[] # The icon data to store for deferred assignment.
----@field pictures? data.SpriteVariations # The pictures data to store for deferred assignment.
-
----Represents an icon from a single `IconData` object that may be stored for deferred assignement.
----@class DeferrableIconDatum
----@field name string # The name of the prototype to be assigned this icon.
----@field type_name string # The type name of the prototype to be assigned this icon.
----@field icon_datum data.IconData # The icon data to store for deferred assignment.
 
 ---
 ---Performs validation and sanitization of the given `deferrable_icon`, and adds it to the
@@ -607,8 +441,8 @@ end
 ---```
 ---
 ---### Parameters
----@param deferred_icons { [Reskins.Lib.Defines.Stage]: (DeferrableIconData|DeferrableIconDatum)[] } # The dictionary of deferrable icons, indexed by stage, to add the deferrable icon to.
----@param stage Reskins.Lib.Defines.Stage # The key to the data stage to store the deferrable icon in.
+---@param deferred_icons { [Stage]: (DeferrableIconData|DeferrableIconDatum)[] } # The dictionary of deferrable icons, indexed by stage, to add the deferrable icon to.
+---@param stage Stage # The key to the data stage to store the deferrable icon in.
 ---@param deferrable_icon DeferrableIconData|DeferrableIconDatum # The icon data to store for deferred assignment.
 ---
 ---### Exceptions
@@ -620,29 +454,10 @@ end
 ---*@throws* `string` — Thrown when both `deferrable_icon.icon_data` and `deferrable_icon.icon_datum` is `nil`, or `deferrable_icon.icon_data` is not an array of `IconData` objects, or the `IconData` objects are invalid.
 ---
 ---### See Also
----@see Reskins.Lib.Icons.assign_icons_deferred_to_stage
+---@see Icons.assign_icons_deferred_to_stage
+---@deprecated Use reskins-sprite-utils.store_icon_for_deferred_assignment_in_stage
 function _icons.store_icon_for_deferred_assigment_in_stage(deferred_icons, stage, deferrable_icon)
-	assert(deferred_icons, "Invalid parameter: 'deferred_icons' must not be nil.")
-	assert(stage, "Invalid parameter: 'stage' must not be nil.")
-
-	-- Validate the deferred icon.
-	--stylua: ignore start
-	assert(deferrable_icon, "Invalid parameter: 'deferrable_icon' must not be nil.")
-	assert(deferrable_icon.name and deferrable_icon.name ~= "", "Invalid operation: 'deferrable_icon.name' must not be nil or an empty string.")
-	assert(deferrable_icon.type_name and deferrable_icon.type_name ~= "", "Invalid operation: 'deferrable_icon.type_name' must not be nil or an empty string.")
-	assert(deferrable_icon.icon_data or deferrable_icon.icon_datum, "Invalid operation: 'deferrable_icon.icon_data' or `deferrable_icon.icon_datum` are required.")
-	assert(deferrable_icon.icon_data and deferrable_icon.icon_data[1], "Invalid operation: 'deferrable_icon.icon_data' must not be an empty array.")
-	--stylua: ignore end
-
-	-- Validate the icon data and add missing defaults.
-	--stylua: ignore
-	deferrable_icon.icon_data = _icons.add_missing_icons_defaults(deferrable_icon.icon_data, deferrable_icon.type_name == "technology")
-
-	if not deferred_icons[stage] then
-		deferred_icons[stage] = {}
-	end
-
-	table.insert(deferred_icons[stage], deferrable_icon)
+	__icons.store_icon_for_deferred_assignment_in_stage(deferred_icons, stage, deferrable_icon)
 end
 
 ---
@@ -675,22 +490,10 @@ end
 ---*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon_size` field is not a positive integer.<br/>
 ---
 ---### See Also
----@see Reskins.Lib.Icons.assign_icons_to_prototype_and_related_prototypes
+---@see Icons.assign_icons_to_prototype_and_related_prototypes
+---@deprecated Use reskins-sprite-utils.icons.assign_deferrable_icon
 function _icons.assign_deferrable_icon(deferrable_icon)
-	if deferrable_icon.icon_datum then
-		_icons.assign_icons_to_prototype_and_related_prototypes(
-			deferrable_icon.name,
-			deferrable_icon.type_name,
-			{ deferrable_icon.icon_datum }
-		)
-	elseif deferrable_icon.icon_data then
-		_icons.assign_icons_to_prototype_and_related_prototypes(
-			deferrable_icon.name,
-			deferrable_icon.type_name,
-			deferrable_icon.icon_data,
-			deferrable_icon.pictures
-		)
-	end
+	__icons.assign_deferrable_icon(deferrable_icon)
 end
 
 ---
@@ -703,8 +506,8 @@ end
 ---```
 ---
 ---### Parameters
----@param deferred_icons { [Reskins.Lib.Defines.Stage]: (DeferrableIconData|DeferrableIconDatum)[] } # The dictionary of deferrable icons, indexed by stage, to assign the deferrable icons from.
----@param stage Reskins.Lib.Defines.Stage # The index of the data stage to source deferrable icons from.
+---@param deferred_icons { [Stage]: (DeferrableIconData|DeferrableIconDatum)[] } # The dictionary of deferrable icons, indexed by stage, to assign the deferrable icons from.
+---@param stage Stage # The index of the data stage to source deferrable icons from.
 ---
 ---### Exceptions
 ---*@throws* `string` — Thrown when a deferred icon's `name` field is `nil` or an empty string.<br/>
@@ -714,16 +517,11 @@ end
 ---*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon_size` field is not a positive integer.<br/>
 ---
 ---### See Also
----@see Reskins.Lib.Icons.store_icon_for_deferred_assigment_in_stage
----@see Reskins.Lib.Icons.assign_deferrable_icon
+---@see Icons.store_icon_for_deferred_assigment_in_stage
+---@see Icons.assign_deferrable_icon
+---@deprecated Use reskins-sprite-utils.icons.assign_icons_deferred_to_stage
 function _icons.assign_icons_deferred_to_stage(deferred_icons, stage)
-	if not deferred_icons[stage] then
-		return
-	end
-
-	for _, deferrable_icon in pairs(deferred_icons[stage]) do
-		_icons.assign_deferrable_icon(deferrable_icon)
-	end
+	__icons.assign_icons_deferred_to_stage(deferred_icons, stage)
 end
 
 ---Composite Icon Utilities
@@ -744,27 +542,11 @@ end
 ---@param ... data.IconData|data.IconData[] # An variable set of `IconData` or `IconData` arrays to combine.
 ---
 ---### See Also
----@see Reskins.Lib.Icons.add_missing_icon_defaults
+---@see Icons.add_missing_icon_defaults
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.compose_icons(...)
 function _icons.combine_icons(is_technology_icon, ...)
-	---@type data.IconData[]
-	local combined_icon_data = {}
-
-	for _, input_icon in pairs({ ... }) do
-		if input_icon and input_icon.icon then
-			-- It's an IconData object.
-			table.insert(combined_icon_data, _icons.add_missing_icon_defaults(input_icon, is_technology_icon))
-		elseif input_icon[1] and input_icon[1].icon then
-			-- It's an array of IconData objects.
-			for _, icon_datum in pairs(input_icon) do
-				table.insert(combined_icon_data, _icons.add_missing_icon_defaults(icon_datum, is_technology_icon))
-			end
-		else
-			-- Skip.
-		end
-	end
-
-	return combined_icon_data
+	return __icons.compose_icons(is_technology_icon and "technology" or "default", ...)
 end
 
 ---
@@ -812,27 +594,9 @@ end
 ---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
 ---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.transform_icon(icon_data, scale, shift, tint, ...)
 function _icons.transform_icon(icon_data, scale, shift, tint, is_technology_icon)
-	local icon_data_copy = _icons.add_missing_icons_defaults(icon_data, is_technology_icon)
-	if not scale and not shift and not tint then
-		return icon_data_copy
-	end
-
-	local transformed_icon_data = {}
-	for _, layer in pairs(icon_data_copy) do
-		---@type data.IconData
-		local icon_datum = {
-			icon = layer.icon,
-			icon_size = layer.icon_size,
-			scale = layer.scale * (scale or 1),
-			shift = shift and util.add_shift(util.mul_shift(layer.shift or { 0, 0 }, scale or 1), shift) or layer.shift,
-			tint = tint or layer.tint,
-		}
-
-		table.insert(transformed_icon_data, icon_datum)
-	end
-
-	return transformed_icon_data
+	return __icons.transform_icon(icon_data, scale, shift, tint, is_technology_icon and "technology" or "default")
 end
 
 ---
@@ -875,30 +639,12 @@ end
 ---*@throws* `string` — Thrown when `icon_data` is `nil`.
 ---
 ---### See Also
----@see Reskins.Lib.Icons.add_missing_icons_defaults
----@see Reskins.Lib.Icons.get_icon_from_prototype_by_reference
+---@see Icons.add_missing_icons_defaults
+---@see Icons.get_icon_from_prototype_by_reference
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.add_icons_from_prototype_to_icons
 function _icons.add_icons_from_prototype_to_icons_by_reference(icon_data, prototype, scale, shift, tint)
-	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
-
-	if not prototype then
-		return util.copy(icon_data)
-	end
-
-	local icon_data_copy = _icons.add_missing_icons_defaults(icon_data, prototype.type == "technology")
-
-	-- Ensure working with a copy of the prototype.
-	-- This method sets default values for missing fields, so scale is present.
-	local sourced_icon_data = _icons.get_icon_from_prototype_by_reference(prototype)
-	if not sourced_icon_data then
-		return icon_data_copy
-	end
-
-	for _, icon_datum in pairs(sourced_icon_data) do
-		table.insert(icon_data_copy, _icons.transform_icon(icon_datum, scale, shift, tint, prototype.type == "technology"))
-	end
-
-	return icon_data_copy
+	return __icons.add_icons_from_prototype_to_icons(icon_data, prototype, scale, shift, tint)
 end
 
 ---
@@ -941,13 +687,11 @@ end
 ---*@throws* `string` — Thrown when `icon_datum` is not an IconData object with a defined `icon` field.
 ---
 ---### See Also
----@see Reskins.Lib.Icons.add_icons_from_prototype_to_icons_by_reference
+---@see Icons.add_icons_from_prototype_to_icons_by_reference
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.add_icons_from_prototype_to_icon
 function _icons.add_icons_from_prototype_to_icon_by_reference(icon_datum, prototype, scale, shift, tint)
-	assert(icon_datum, "Invalid parameter: 'icon_datum' must not be nil.")
-	assert(icon_datum.icon, "Invalid parameter: 'icon_datum' must be an IconData object with a defined 'icon' field.")
-
-	return _icons.add_icons_from_prototype_to_icons_by_reference({ icon_datum }, prototype, scale, shift, tint)
+	return __icons.add_icons_from_prototype_to_icon(icon_datum, prototype, scale, shift, tint)
 end
 
 ---
@@ -978,14 +722,11 @@ end
 ---*@throws* `string` — Thrown when `type_name` is `nil` or an empty string.
 ---
 ---### See Also
----@see Reskins.Lib.Icons.add_icons_from_prototype_to_icons_by_reference
+---@see Icons.add_icons_from_prototype_to_icons_by_reference
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.add_icons_from_prototype_to_icons_by_name
 function _icons.add_icons_from_prototype_to_icons_by_name(icon_data, name, type_name, scale, shift, tint)
-	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
-	assert(name and name ~= "", "Invalid parameter: 'name' must not be nil or an empty string.")
-	assert(type_name and type_name ~= "", "Invalid parameter: 'type_name' must not be nil or an empty string.")
-
-	return _icons.add_icons_from_prototype_to_icons_by_reference(icon_data, data.raw[type_name][name], scale, shift, tint)
+	return __icons.add_icons_from_prototype_to_icons_by_name(icon_data, name, type_name, scale, shift, tint)
 end
 
 ---
@@ -1030,21 +771,11 @@ end
 ---*@throws* `string` — Thrown when `type_name` is `nil` or an empty string.
 ---
 ---### See Also
----@see Reskins.Lib.Icons.add_icons_from_prototype_to_icons_by_reference
+---@see Icons.add_icons_from_prototype_to_icons_by_reference
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.add_icons_from_prototype_to_icon_by_name
 function _icons.add_icons_from_prototype_to_icon_by_name(icon_datum, name, type_name, scale, shift, tint)
-	assert(icon_datum, "Invalid parameter: 'icon_datum' must not be nil.")
-	assert(icon_datum.icon, "Invalid parameter: 'icon_datum' must be an IconData object with a defined 'icon' field.")
-	assert(name and name ~= "", "Invalid parameter: 'name' must not be nil or an empty string.")
-	assert(type_name and type_name ~= "", "Invalid parameter: 'type_name' must not be nil or an empty string.")
-
-	return _icons.add_icons_from_prototype_to_icons_by_reference(
-		{ icon_datum },
-		data.raw[type_name][name],
-		scale,
-		shift,
-		tint
-	)
+	return __icons.add_icons_from_prototype_to_icon_by_name(icon_datum, name, type_name, scale, shift, tint)
 end
 
 ---Provides the icon and optional transformations to a sourced `IconData` object.
@@ -1076,57 +807,45 @@ end
 
 ---@alias IconSources (IconDatumSource|IconDataSource|PrototypeIconSource)[]
 
----
----Gets an `IconData` object from the given `source`.
----
----### Returns
----@return data.IconData[], boolean # A copy of the icon data from `source`, if it exists; otherwise, a blank icon. When the second return value is `true`, a blank icon was created.
----
----### Remarks
----- Any layer of the icon using a `PrototypeIconSource` for a prototype that does not exist
----  will be replaced with a blank icon.
----- Missing icon fields are set to default values as appropriate.
----- `source` is not modified.
----
----### Examples
----```lua
-------@type PrototypeIconSource
----local icon_datum_source = {
----    name = "iron-plate",
----    type_name = "item",
----}
----
------ Get the icon data from the source.
-------@type data.IconData[]
----local icon_data = _icons.get_icon_from_source(icon_datum_source)
----```
----
----### Parameters
----@param source? IconSource # A source of `icon_data`.
----@param is_technology_icon? boolean # When `true`, indicates that a blank technology icon should be returned if the source is missing.
+---@param source IconSource
+---@return Reskins.SpriteUtils.IconSource
 ---@nodiscard
-local function get_icons_from_source(source, is_technology_icon)
-	---@type data.IconData[]
-	local icon_data
-
-	if source and source.icon_data then
-		---@cast source IconDataSource
-		icon_data = _icons.add_missing_icons_defaults(source.icon_data, source.is_technology_icon)
-	elseif source and source.icon_datum then
-		---@cast source IconDatumSource
-		icon_data = { _icons.add_missing_icon_defaults(source.icon_datum, source.is_technology_icon) }
-	elseif source and source.name then
-		---@cast source PrototypeIconSource
-		icon_data = _icons.get_icon_from_prototype_by_name(source.name, source.type_name)
+local function convert_icon_source(source)
+	if source.icon_data then
+		---@type Reskins.SpriteUtils.IconDataSource
+		local converted = {
+			icon_data = source.icon_data,
+			defaults_type = source.is_technology_icon and "technology" or "default",
+			scale = source.scale,
+			shift = source.shift,
+			tint = source.tint,
+		}
+		return converted
+	elseif source.icon_datum then
+		---@type Reskins.SpriteUtils.IconDatumSource
+		local converted = {
+			icon_datum = source.icon_datum,
+			defaults_type = source.is_technology_icon and "technology" or "default",
+			scale = source.scale,
+			shift = source.shift,
+			tint = source.tint,
+		}
+		return converted
+	else
+		return source--[[@as Reskins.SpriteUtils.PrototypeIconSource]]
 	end
+end
 
-	local is_blank_icon = false
-	if not icon_data then
-		is_blank_icon = true
-		icon_data = is_technology_icon and { _icons.empty_technology_icon() } or { _icons.empty_icon() }
+---@param sources IconSources
+---@return Reskins.SpriteUtils.IconSources
+---@nodiscard
+local function convert_icon_sources(sources)
+	---@type Reskins.SpriteUtils.IconSources
+	local converted = {}
+	for _, v in pairs(sources) do
+		converted[#converted + 1] = convert_icon_source(v)
 	end
-
-	return icon_data, is_blank_icon
+	return converted
 end
 
 ---
@@ -1152,37 +871,17 @@ end
 ---*@throws* `string` — Thrown when `sources` is `nil`.
 ---
 ---### See Also
----@see Reskins.Lib.Icons.add_missing_icons_defaults
----@see Reskins.Lib.Icons.add_missing_icon_defaults
----@see Reskins.Lib.Icons.get_icon_from_prototype_by_name
+---@see Icons.add_missing_icons_defaults
+---@see Icons.add_missing_icon_defaults
+---@see Icons.get_icon_from_prototype_by_name
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.add_icons_from_sources_to_icons
 function _icons.add_icons_from_sources_to_icons(icon_data, sources, is_technology_icon)
-	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
-	assert(sources, "Invalid parameter: 'sources' must not be nil.")
-
-	---@type data.IconData[]
-	local combined_icon = _icons.add_missing_icons_defaults(icon_data, is_technology_icon)
-
-	local has_blank_layers = false
-	for _, source in pairs(sources) do
-		-- Icon may be blank if the prototype did not exist.
-		local icon, is_blank_icon = get_icons_from_source(source, is_technology_icon)
-		has_blank_layers = has_blank_layers or is_blank_icon
-
-		local transformed_icon = _icons.transform_icon(
-			icon,
-			source.scale,
-			source.shift,
-			source.tint,
-			source.is_technology_icon or source.type_name == "technology"
-		)
-
-		for _, icon_datum in pairs(transformed_icon) do
-			table.insert(combined_icon, icon_datum)
-		end
-	end
-
-	return combined_icon, has_blank_layers
+	return __icons.add_icons_from_sources_to_icons(
+		icon_data,
+		convert_icon_sources(sources),
+		is_technology_icon and "technology" or "default"
+	)
 end
 
 ---
@@ -1228,29 +927,9 @@ end
 ---### Exceptions
 ---*@throws* `string` — Thrown when `sources` is `nil`.<br/>
 ---@nodiscard
+---@deprecated Use reskins-sprite-utils.icons.create_icons_from_sources
 function _icons.create_icons_from_sources(sources)
-	assert(sources, "Invalid parameter: 'sources' must not be nil.")
-
-	---@type IconSources
-	local sources_copy = util.copy(sources)
-
-	local has_blank_layers = false
-
-	-- Get the base icon from the first source,
-	local base_source = table.remove(sources_copy, 1)
-	local base_icon_data, is_blank_icon = get_icons_from_source(base_source)
-
-	has_blank_layers = (has_blank_layers or is_blank_icon)
-
-	-- Apply only a tint transformation on the base layer. Scale and shift are not applicable.
-	for _, icon_datum in pairs(base_icon_data) do
-		icon_datum.tint = sources[1].tint or icon_datum.tint
-	end
-
-	local icon_data, added_blank_layers = _icons.add_icons_from_sources_to_icons(base_icon_data, sources_copy)
-	has_blank_layers = (has_blank_layers or added_blank_layers)
-
-	return icon_data, has_blank_layers
+	return __icons.create_icons_from_sources(convert_icon_sources(sources))
 end
 
 ---
@@ -1279,11 +958,14 @@ end
 ---
 ---### Parameters
 ---@param recipe_icon_source_map { [string]: IconSources } # A map of recipe names to the icon sources used to create a combined icon. The first entry in each IconSources is the first layer of the created icon.
+---@deprecated Use reskins-sprite-utils.icons.create_and_assign_combined_icons_from_sources_to_recipe
 function _icons.create_and_assign_combined_icons_from_sources_to_recipe(recipe_icon_source_map)
-	for recipe_name, sources in pairs(recipe_icon_source_map) do
-		local icon_data = _icons.create_icons_from_sources(sources)
-		_icons.assign_icons_to_prototype_and_related_prototypes(recipe_name, "recipe", icon_data)
+	local converted = {}
+	for k, v in pairs(recipe_icon_source_map) do
+		converted[k] = convert_icon_sources(v)
 	end
+
+	__icons.create_and_assign_composed_icons_from_sources_to_recipe(converted)
 end
 
 ---@alias IconSymbol
@@ -1317,7 +999,10 @@ local supported_symbols = {
 ---*@throws* `string` — Thrown when `symbol` is not one of `"area-drill"`, `"filter"`, or `"shield"`.
 ---@nodiscard
 function _icons.get_symbol(symbol, tint)
-	assert(supported_symbols[symbol], "Invalid parameter: 'symbol' must be one of 'area-drill', 'filter', or 'shield'.")
+	assert(
+		supported_symbols[symbol] ~= nil,
+		"Invalid parameter: 'symbol' must be one of 'area-drill', 'filter', or 'shield'."
+	)
 
 	---@type data.IconData[]
 	local icon_data = {
@@ -1364,7 +1049,7 @@ end
 ---*@throws* `string` — Thrown when `icon_data` is `nil`.
 ---@nodiscard
 function _icons.remove_symbols_from_icons(icon_data)
-	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
+	assert(icon_data ~= nil, "Invalid parameter: 'icon_data' must not be nil.")
 
 	---@type data.IconData[]
 	local icon_data_copy = util.copy(icon_data)
@@ -1418,7 +1103,7 @@ local supported_letters = {
 ---*@throws* `string` — Thrown when `letter` is not one of `"F"`, `"H"`, `"L"`, `"M"`, or `"S"`.
 ---@nodiscard
 function _icons.get_letter(letter, tint)
-	assert(supported_letters[letter], "Invalid parameter: 'letter' must be one of 'F', 'H', 'L', 'M', or 'S'.")
+	assert(supported_letters[letter] ~= nil, "Invalid parameter: 'letter' must be one of 'F', 'H', 'L', 'M', or 'S'.")
 
 	---@type data.IconData[]
 	local icon_data = {
@@ -1464,7 +1149,7 @@ end
 ---*@throws* `string` — Thrown when `icon_data` is `nil`.
 ---@nodiscard
 function _icons.remove_letters_from_icons(icon_data)
-	assert(icon_data, "Invalid parameter: 'icon_data' must not be nil.")
+	assert(icon_data ~= nil, "Invalid parameter: 'icon_data' must not be nil.")
 
 	---@type data.IconData[]
 	local icon_data_copy = util.copy(icon_data)
@@ -1516,7 +1201,7 @@ local equipment_background_tints = {
 ---@nodiscard
 function _icons.get_equipment_icon_background(category)
 	local tint = equipment_background_tints[category]
-	assert(tint, "Invalid parameter: 'category' must be one of 'defense', 'energy', 'offense', or 'utility'.")
+	assert(tint ~= nil, "Invalid parameter: 'category' must be one of 'defense', 'energy', 'offense', or 'utility'.")
 
 	---@type data.IconData
 	local icon_data = {
