@@ -9,7 +9,7 @@
 ---
 ---### Examples
 ---```lua
----local _icons = require("__reskins-library__.api.icons")
+---local _defines = require("__reskins-library__.api.defines")
 ---```
 ---@class Defines
 local _defines = {}
