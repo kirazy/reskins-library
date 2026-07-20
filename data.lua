@@ -6,8 +6,7 @@
 -- Setup the reskins global.
 reskins = {}
 
----@type Reskins.Library
-reskins.lib = require("__reskins-library__.api")
+reskins.lib = require("api")
 
 require("internal")
 

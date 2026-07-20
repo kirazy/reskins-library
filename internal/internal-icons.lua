@@ -3,13 +3,15 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
+---@using Reskins.Api
+
 --- Provides methods and properties for internal use. External use is not recommended.
 reskins.internal = reskins.internal or {}
 
 ---
 ---Internal dictionary of deferrable icons, indexed by stage, for assignment in later stages.
 ---
----@type { [Reskins.Lib.Defines.Stage]: (DeferrableIconData|DeferrableIconDatum)[] }
+---@type { [Stage]: (DeferrableIconData|DeferrableIconDatum)[] }
 reskins.internal.deferrable_icons = reskins.internal.deferrable_icons or {}
 
 ---
@@ -17,7 +19,7 @@ reskins.internal.deferrable_icons = reskins.internal.deferrable_icons or {}
 ---dictionary of deferrable icons for later assignment in the given `stage`.
 ---
 ---### Parameters
----@param stage Reskins.Lib.Defines.Stage # The key to the data stage to store the deferrable icon in.
+---@param stage Stage # The key to the data stage to store the deferrable icon in.
 ---@param deferrable_icon DeferrableIconData|DeferrableIconDatum # The icon data to store for deferred assignment.
 ---
 ---### See Also
@@ -35,10 +37,10 @@ end
 ---to the associated prototypes.
 ---
 ---### Parameters
----@param stage Reskins.Lib.Defines.Stage # The index of the data stage to source deferrable icons from.
+---@param stage Stage # The index of the data stage to source deferrable icons from.
 ---
 ---### See Also
----@see Reskins.Lib.Icons.assign_icons_deferred_to_stage
+---@see Reskins.Api.Icons.assign_icons_deferred_to_stage
 function reskins.internal.assign_icons_deferred_to_stage(stage)
 	reskins.lib.icons.assign_icons_deferred_to_stage(reskins.internal.deferrable_icons, stage)
 end

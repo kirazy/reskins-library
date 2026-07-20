@@ -3,14 +3,8 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
--- Requires
----@diagnostic disable-next-line: different-requires
-
----@type Reskins.Lib.Version
-local _version = require("__reskins-library__.api.version")
-
----@type Reskins.Control
-local _control = require("__reskins-library__.prototypes.functions.control-functions")
+local _version = require("api.version")
+local _control = require("prototypes.functions.control-functions")
 
 ---The color to use for message notifications.
 local message_color = "#9cdcfe" -- Light blue

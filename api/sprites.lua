@@ -3,9 +3,10 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
+---@using data
+
 ---@namespace Reskins.Api
 
----@type Reskins.SpriteUtils.Sprites
 local __sprites = require("__reskins-sprite-utils__.sprites")
 
 --- Provides methods for manipulating sprites.
@@ -16,14 +17,9 @@ local __sprites = require("__reskins-sprite-utils__.sprites")
 ---```
 ---@class Sprites
 local _sprites = {
-	---@type Sprites.Belts
-	belts = require("__reskins-library__.api.sprites.belts"),
-
-	---@type Sprites.ChemicalPlants
-	chemical_plants = require("__reskins-library__.api.sprites.chemical-plants"),
-
-	---@type Sprites.Pipes
-	pipes = require("__reskins-library__.api.sprites.pipes"),
+	belts = require("api.sprites.belts"),
+	chemical_plants = require("api.sprites.chemical-plants"),
+	pipes = require("api.sprites.pipes"),
 }
 
 ---
@@ -36,7 +32,7 @@ local _sprites = {
 ---
 ---### Examples
 ---```lua
-------@type data.IconData[]
+------@type IconData[]
 ---local icon_data = {
 ---    {
 ---        icon = "__base__/graphics/icons/iron-plate.png",
@@ -55,10 +51,10 @@ local _sprites = {
 ---```
 ---
 ---### Parameters
----@param icon_data data.IconData[] # An array of `IconData` objects.
+---@param icon_data IconData[] # An array of `IconData` objects.
 ---@param scale? double # The scale to apply to the sprite.
 ---### Returns
----@return data.Sprite # A `Sprite` object created from `icon_data`.
+---@return Sprite # A `Sprite` object created from `icon_data`.
 ---
 ---### Exceptions
 ---*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
@@ -80,7 +76,7 @@ end
 ---
 ---### Examples
 ---```lua
-------@type data.IconData
+------@type IconData
 ---local icon_datum = {
 ---    icon = "__base__/graphics/icons/iron-plate.png",
 ---    icon_size = 64,
@@ -91,10 +87,10 @@ end
 ---```
 ---
 ---### Parameters
----@param icon_datum data.IconData  # An `IconData` object.
+---@param icon_datum IconData  # An `IconData` object.
 ---@param scale? double # The scale to apply to the sprite.
 ---### Returns
----@return data.Sprite # A `Sprite` object created from `icon_datum`.
+---@return Sprite # A `Sprite` object created from `icon_datum`.
 ---
 ---### Exceptions
 ---*@throws* `string` — Thrown when `icon_datum` is `nil`.<br/>
@@ -137,12 +133,12 @@ end
 ---
 ---### Parameters
 ---@param light_name LightSpriteNames # The name of the light sprite used to create the light layer.
----@param tint? data.Color # The tint of the light layer. Default `nil`.
+---@param tint? Color # The tint of the light layer. Default `nil`.
 ---### Returns
----@return data.Sprite # A `Sprite` object configured for use as a light layer.
+---@return Sprite # A `Sprite` object configured for use as a light layer.
 ---@nodiscard
 function _sprites.get_sprite_light_layer(light_name, tint)
-	---@type data.Sprite
+	---@type Sprite
 	local sprite = {
 		flags = { "light", "icon" },
 		draw_as_light = true,
@@ -180,9 +176,9 @@ end
 ---@param sprite_name string # The name of the sprite variations, without number or extensions, e.g. `{sprite_name}.png` or `{sprite_name}-#.png`.
 ---@param num_variations integer # The number of sprite variations; this must match the number of files.
 ---@param is_light? boolean # Whether the sprite variations include a light layer. Defaults to `false`.
----@param tint? data.Color # The tint of the light layer. Defaults to `{ r = 0.3, g = 0.3, b = 0.3, a = 0.3 }`.
+---@param tint? Color # The tint of the light layer. Defaults to `{ r = 0.3, g = 0.3, b = 0.3, a = 0.3 }`.
 ---### Returns
----@return data.SpriteVariations[] # The `SpriteVariations` object for the given parameters.
+---@return SpriteVariations[] # The `SpriteVariations` object for the given parameters.
 ---
 ---### Exceptions
 ---*@throws* `string` — Thrown when `directory` is not a non-empty string.<br/>
@@ -207,13 +203,13 @@ function _sprites.create_sprite_variations(directory, sprite_name, num_variation
 		directory = directory .. "/"
 	end
 
-	---@type data.SpriteVariations[]
+	---@type SpriteVariations[]
 	local sprites = {}
 	for n = 1, num_variations do
 		local file_name = sprite_name .. ((n > 1) and ("-" .. (n - 1) .. ".png") or ".png")
 
 		if is_light then
-			---@type data.Sprite
+			---@type Sprite
 			local sprite = {
 				layers = {
 					{
@@ -238,7 +234,7 @@ function _sprites.create_sprite_variations(directory, sprite_name, num_variation
 
 			table.insert(sprites, sprite)
 		else
-			---@type data.Sprite
+			---@type Sprite
 			local sprite = {
 				filename = directory .. file_name,
 				flags = { "icon" },
@@ -254,9 +250,9 @@ function _sprites.create_sprite_variations(directory, sprite_name, num_variation
 	return sprites
 end
 
----Provides additional fields for the `data.Animation` object when using a sprite sheet with
+---Provides additional fields for the `Animation` object when using a sprite sheet with
 ---frames laid out in vertical stripes instead of the standard convention of horizontal stripes.
----@class VerticallyOrientableAnimation : data.Animation
+---@class VerticallyOrientableAnimation : Animation
 ---When `true`, indicates that the Animation sprites are laid out vertically and should be processed
 ---accordingly by `_sprites.make_4way_animation_from_spritesheet`.
 ---@field vertically_oriented? boolean
@@ -277,7 +273,7 @@ end
 ---and `frame_count` fields to slice a sprite sheet into direction-based `Animation` objects.
 ---
 ---### Returns
----@return data.Animation4Way|data.Sprite4Way # The 4-way animation object created from `animation`.
+---@return Animation4Way|Sprite4Way # The 4-way animation object created from `animation`.
 ---
 ---### Remarks
 ---Extends the functionality of `make_rotated_animation_variations_from_sheet` to include handling
@@ -290,7 +286,7 @@ end
 ---To use the `vertically_oriented` parameter, include it in the `animation` object:
 ---```lua
 ---{
----    filename = "__modname__/graphics/entity/prototype/prototype.png",
+---    filename = "__mod-name__/graphics/entity/prototype/prototype.png",
 ---    priority = "extra-high",
 ---    vertically_oriented = true,
 ---    width = 660,
@@ -303,7 +299,7 @@ end
 ---Angel's Mods.
 ---
 ---### Parameters
----@param animation VerticallyOrientableAnimation|data.Animation # The animation object to create the 4-way animation from.
+---@param animation VerticallyOrientableAnimation|Animation # The animation object to create the 4-way animation from.
 ---@nodiscard
 ---@deprecated Use reskins-sprite-utils.make_4way_animation_from_spritesheet
 function _sprites.make_4way_animation_from_spritesheet(animation)

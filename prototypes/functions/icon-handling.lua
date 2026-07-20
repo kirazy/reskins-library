@@ -3,6 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
+---@using data
+---@using Reskins.Api
+
 ----------------------------------------------------------------------------------------------------
 -- TECHNOLOGY ICON FUNCTIONS
 ----------------------------------------------------------------------------------------------------
@@ -12,14 +15,14 @@
 ---@field group string # Folder under the `graphics/technology` folder.
 ---@field subgroup? string # Folder under the `group` folder, e.g. `group/subgroup`. Default `nil`.
 ---@field untinted_icon_mask? boolean # Overrides default tinting behavior; when `true`, will not apply `tint` to the mask layer.
----@field tint? data.Color # Expected if `untinted_icon_mask` is not `true`. If not provided, defaults to white ({1, 1, 1, 1}).
----@field technology_icon_filename? data.FileName # Required if `icon_name` is not defined.
----@field technology_icon_size? data.SpriteSizeType # Default `128`.
+---@field tint? Color # Expected if `untinted_icon_mask` is not `true`. If not provided, defaults to white ({1, 1, 1, 1}).
+---@field technology_icon_filename? FileName # Required if `icon_name` is not defined.
+---@field technology_icon_size? SpriteSizeType # Default `128`.
 ---@field icon_name? string # Required if `technology_icon_filename` is not defined. Specifies the folder/filenames to prepare the layered icon.
 ---@field icon_base? string # Override of `icon_name` for filename variants within the folder specified by `icon_name`, for the base layer
 ---@field icon_mask? string # Override of `icon_name` for filename variants within the folder specified by `icon_name`, for the mask layer
 ---@field icon_highlights? string # Override of `icon_name` for filename variants within the folder specified by `icon_name`, for the highlights layer
----@field technology_icon_extras? data.IconData[] # An array of `IconData` objects to append to the main icon.
+---@field technology_icon_extras? IconData[] # An array of `IconData` objects to append to the main icon.
 ---@field technology_icon_layers? 1|2|3 # Default 3 if used with `technology_icon_name`, 1 if used with `technology_icon_filename`, corresponds to the number of standard-form files to prepare
 ---@field defer_to_data_updates? boolean # When `true`, stores the icon for assignment at the end of data-updates. Expected if `defer_to_data_final_fixes` is not set.
 ---@field defer_to_data_final_fixes? boolean # When `true`, stores the icon for assignment at the end of data-final-fixes. Supercedes `defer_to_data_updates`. Expected if `defer_to_data_updates` is not set.
@@ -60,14 +63,14 @@ function reskins.lib.construct_technology_icon(name, inputs)
 	local icon_highlights = inputs_copy.icon_highlights or inputs_copy.icon_name
 
 	-- Setup icon layers
-	---@type data.IconData
+	---@type IconData
 	local icon_base_layer = {
 		--stylua: ignore
 		icon = inputs_copy.technology_icon_filename or reskins[inputs_copy.mod].directory .. "/graphics/technology/" .. folder_path .. "/" .. inputs_copy.icon_name .. "/" .. icon_base .. "-technology-base.png",
 		icon_size = inputs_copy.technology_icon_size,
 	}
 
-	---@type data.IconData, data.IconData
+	---@type IconData, IconData
 	local icon_mask_layer, icon_highlights_layer
 	if icon_layers > 1 then
 		icon_mask_layer = {
@@ -85,7 +88,7 @@ function reskins.lib.construct_technology_icon(name, inputs)
 		}
 	end
 
-	---@type data.IconData[]
+	---@type IconData[]
 	local icon_data = { icon_base_layer }
 
 	if icon_layers > 1 then
@@ -137,7 +140,7 @@ function reskins.lib.technology_equipment_overlay(parameters)
 	local equipment = (parameters and parameters.is_vehicle) and "vehicle" or "personal"
 	local scale = parameters and parameters.scale or 0.5
 
-	---@type data.IconData
+	---@type IconData
 	local overlay = {
 		icon = "__reskins-library__/graphics/technology/" .. equipment .. "-equipment-overlay.png",
 		icon_size = 128,
@@ -186,9 +189,9 @@ local technology_constants = {
 ---comment
 ---@param constant TechnologyConstant
 ---@param scale double?
----@return data.IconData
+---@return IconData
 function reskins.lib.return_technology_effect_icon(constant, scale)
-	---@type data.IconData
+	---@type IconData
 	local icon_data = {
 		icon = technology_constants[constant].icon,
 		icon_size = 128,
@@ -211,28 +214,28 @@ end
 ---
 ---Mandatory if `icon_size` is not specified outside of `icons`.
 ---
----[View Documentation](https://lua-api.factorio.com/latest/types/IconData.html#icon_size)
----@field icon_size data.SpriteSizeType
+---[View Documentation](https://lua-api.factorio.com/latest/types/Iconhtml#icon_size)
+---@field icon_size SpriteSizeType
 ---
 ---Defaults to `32/icon_size` for items and recipes, and `256/icon_size` for technologies.
 ---
 ---Specifies the scale of the icon on the GUI scale. A scale of `2` means that the icon will be two
 ---times bigger on screen (and thus more pixelated).
 ---
----[View Documentation](https://lua-api.factorio.com/latest/types/IconData.html#scale)
+---[View Documentation](https://lua-api.factorio.com/latest/types/Iconhtml#scale)
 ---@field scale? double
 ---
 ---Used to offset the icon "layer" from the overall icon. The shift is applied from the center (so
 ---negative shifts are left and up, respectively). Shift values are based on final size (`icon_size
 ---* scale`) of the first icon.
 ---
----[View Documentation](https://lua-api.factorio.com/latest/types/IconData.html#shift)
----@field shift? data.Vector
+---[View Documentation](https://lua-api.factorio.com/latest/types/Iconhtml#shift)
+---@field shift? Vector
 ---
 ---The tint to apply to the icon.
 ---
----[View Documentation](https://lua-api.factorio.com/latest/types/IconData.html#tint)
----@field tint? data.Color
+---[View Documentation](https://lua-api.factorio.com/latest/types/Iconhtml#tint)
+---@field tint? Color
 
 ---A creatable multi-layer icon that uses the standard form of a base layer, mask layer, and a
 ---highlights layer.
@@ -253,7 +256,7 @@ end
 ---@field icon_highlights? string
 ---
 ---The tint to apply to the mask layer.
----@field tint data.Color
+---@field tint Color
 ---
 ---The number of layers in the icon. Default `3`.
 ---@field num_layers? 1|2|3
@@ -264,7 +267,7 @@ end
 ---@field icon string
 ---
 ---An optional tint to apply to the icon.
----@field tint? data.Color
+---@field tint? Color
 
 ---@class ConstructIconInputsOld
 ---@field type string # The type name of the prototype.
@@ -272,16 +275,16 @@ end
 ---@field group string # Folder under the `graphics/icons` folder.
 ---@field subgroup? string # Folder under the `group` folder, e.g. `group/subgroup`. Default `nil`.
 ---@field untinted_icon_mask? boolean # Overrides default tinting behavior; when `true`, will not apply `tint` to the mask layer.
----@field tint? data.Color # Expected if `untinted_icon_mask` is not `true`. If not provided, defaults to white ({1, 1, 1, 1}).
+---@field tint? Color # Expected if `untinted_icon_mask` is not `true`. If not provided, defaults to white ({1, 1, 1, 1}).
 ---@field tier_labels? boolean # Default `true`, displays tier labels on icons.
----@field icon_filename? data.FileName # Required if `icon_name` is not defined.
----@field icon_size? data.SpriteSizeType # Default `64`.
+---@field icon_filename? FileName # Required if `icon_name` is not defined.
+---@field icon_size? SpriteSizeType # Default `64`.
 ---@field icon_name? string # Required if `icon_filename` is not defined. Specifies the folder/filenames to prepare the layered icon.
 ---@field icon_base? string # Override of `icon_name` for filename variants within the folder specified by `icon_name`, for the base layer
 ---@field icon_mask? string # Override of `icon_name` for filename variants within the folder specified by `icon_name`, for the mask layer
 ---@field icon_highlights? string # Override of `icon_name` for filename variants within the folder specified by `icon_name`, for the highlights layer
----@field icon_extras? data.IconData[] # An array of `IconData` objects to append to the main icon.
----@field icon_picture_extras? data.SpriteVariations[] # An array of `SpriteVariations` objects to append to the main sprite for the item-on-ground.
+---@field icon_extras? IconData[] # An array of `IconData` objects to append to the main icon.
+---@field icon_picture_extras? SpriteVariations[] # An array of `SpriteVariations` objects to append to the main sprite for the item-on-ground.
 ---@field icon_layers? 1|2|3 # Default 3 if used with `icon_name`, 1 if used with `icon_filename`, corresponds to the number of standard-form files to prepare
 ---@field equipment_category? EquipmentCategory # When specified, the icon will have a background corresponding to the equipment category. Does not work with technology icons.
 ---@field defer_to_data_updates? boolean # When `true`, stores the icon for assignment at the end of data-updates. Expected if `defer_to_data_final_fixes` is not set.
@@ -308,7 +311,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
 	end
 
 	-- Handle mask tinting defaults
-	---@type data.Color|nil
+	---@type Color|nil
 	local icon_tint = inputs_copy.tint
 	if inputs_copy.untinted_icon_mask then
 		icon_tint = nil
@@ -331,14 +334,14 @@ function reskins.lib.construct_icon(name, tier, inputs)
 	local icon_highlights = inputs_copy.icon_highlights or inputs_copy.icon_name
 
 	-- Setup icon layers
-	---@type data.IconData
+	---@type IconData
 	local icon_base_layer = {
 		--stylua: ignore
 		icon = inputs_copy.icon_filename or reskins[inputs_copy.mod].directory .. "/graphics/icons/" .. folder_path .. "/" .. inputs_copy.icon_name .. "/" .. icon_base .. "-icon-base.png",
 		icon_size = inputs_copy.icon_size,
 	}
 
-	---@type data.IconData, data.IconData
+	---@type IconData, IconData
 	local icon_mask_layer, icon_highlights_layer
 	if icon_layers > 1 then
 		icon_mask_layer = {
@@ -356,7 +359,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
 		}
 	end
 
-	---@type data.IconData[]
+	---@type IconData[]
 	local icon_data = { icon_base_layer }
 
 	if icon_layers > 1 then
@@ -367,7 +370,7 @@ function reskins.lib.construct_icon(name, tier, inputs)
 		table.insert(icon_data, icon_highlights_layer)
 	end
 
-	---@type data.SpriteVariations
+	---@type SpriteVariations
 	local pictures = reskins.lib.sprites.create_sprite_from_icons(icon_data, 1.0)
 
 	-- Append icon extras as needed

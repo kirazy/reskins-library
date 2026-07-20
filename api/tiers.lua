@@ -3,6 +3,8 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
+---@using data
+
 ---@namespace Reskins.Api
 
 --- Provides methods for working with tier labels and tints.
@@ -14,13 +16,10 @@
 ---@class Tiers
 local _tiers = {}
 
----@type Reskins.SpriteUtils.Icons
 local _icons = require("__reskins-sprite-utils__.icons")
----@type Reskins.SpriteUtils.Sprites
 local _sprites = require("__reskins-sprite-utils__.sprites")
 
----@type Settings
-local _settings = require("__reskins-library__.api.settings")
+local _settings = require("api.settings")
 
 ---
 ---Indicates whether tier labels should be added to icons or not.
@@ -67,50 +66,50 @@ local is_using_angels_belt_tier_colors = is_using_angels_tier_colors
 	and (_settings.get_value("reskins-angels-belts-use-angels-tier-colors") == true)
 local is_using_basic_belt_override = _settings.get_value("reskins-bobs-do-basic-belts-separately") == true
 
----@type { [0|1|2|3|4|5|6]: data.Color }
+---@type { [0|1|2|3|4|5|6]: Color }
 local custom_tier_colors = {
-	[0] = _settings.get_value("reskins-lib-custom-colors-tier-0") --[[@as data.Color]],
-	[1] = _settings.get_value("reskins-lib-custom-colors-tier-1") --[[@as data.Color]],
-	[2] = _settings.get_value("reskins-lib-custom-colors-tier-2") --[[@as data.Color]],
-	[3] = _settings.get_value("reskins-lib-custom-colors-tier-3") --[[@as data.Color]],
-	[4] = _settings.get_value("reskins-lib-custom-colors-tier-4") --[[@as data.Color]],
-	[5] = _settings.get_value("reskins-lib-custom-colors-tier-5") --[[@as data.Color]],
-	[6] = _settings.get_value("reskins-lib-custom-colors-tier-6") --[[@as data.Color]],
+	[0] = _settings.get_value("reskins-lib-custom-colors-tier-0") --[[@as Color]],
+	[1] = _settings.get_value("reskins-lib-custom-colors-tier-1") --[[@as Color]],
+	[2] = _settings.get_value("reskins-lib-custom-colors-tier-2") --[[@as Color]],
+	[3] = _settings.get_value("reskins-lib-custom-colors-tier-3") --[[@as Color]],
+	[4] = _settings.get_value("reskins-lib-custom-colors-tier-4") --[[@as Color]],
+	[5] = _settings.get_value("reskins-lib-custom-colors-tier-5") --[[@as Color]],
+	[6] = _settings.get_value("reskins-lib-custom-colors-tier-6") --[[@as Color]],
 }
 
----@type { [0|1|2|3|4|5|6]: data.Color }
+---@type { [0|1|2|3|4|5|6]: Color }
 local standard_tier_colors = {
-	[0] = util.color("#808080"), -- 1.1.7: 4d4d4d
-	[1] = util.color("#ffb726"), -- 1.1.7: de9400
-	[2] = util.color("#f22318"), -- 1.1.7: c20600
-	[3] = util.color("#33b4ff"), -- 1.1.7: 0099ff, 1.1.0: 1b87c2
-	[4] = util.color("#b459ff"), -- 1.1.7: a600bf
-	[5] = util.color("#2ee55c"), -- 1.1.7: 16c746, 1.1.6: 23de55
-	[6] = util.color("#ff8533"), -- 1.1.7: ff7700
+	[0] = util.color("#808080") --[[@as Color]], -- 1.1.7: 4d4d4d
+	[1] = util.color("#ffb726") --[[@as Color]], -- 1.1.7: de9400
+	[2] = util.color("#f22318") --[[@as Color]], -- 1.1.7: c20600
+	[3] = util.color("#33b4ff") --[[@as Color]], -- 1.1.7: 0099ff, 1.1.0: 1b87c2
+	[4] = util.color("#b459ff") --[[@as Color]], -- 1.1.7: a600bf
+	[5] = util.color("#2ee55c") --[[@as Color]], -- 1.1.7: 16c746, 1.1.6: 23de55
+	[6] = util.color("#ff8533") --[[@as Color]], -- 1.1.7: ff7700
 }
 
----@type { [0|1|2|3|4|5|6]: data.Color }
+---@type { [0|1|2|3|4|5|6]: Color }
 local angels_tier_colors = {
 	-- Core Angel's set
-	[1] = util.color("#595959"), -- Gray
-	[2] = util.color("#2957cc"), -- Blue
-	[3] = util.color("#cc2929"), -- Red
-	[4] = util.color("#ccae29"), -- Yellow
+	[1] = util.color("#595959") --[[@as Color]], -- Gray
+	[2] = util.color("#2957cc") --[[@as Color]], -- Blue
+	[3] = util.color("#cc2929") --[[@as Color]], -- Red
+	[4] = util.color("#ccae29") --[[@as Color]], -- Yellow
 	-- Pending
-	---@type data.Color
-	[0] = util.color("#262626"),
-	[5] = util.color("#16c746"),
-	[6] = util.color("#ff8533"),
+	---@type Color
+	[0] = util.color("#262626") --[[@as Color]],
+	[5] = util.color("#16c746") --[[@as Color]],
+	[6] = util.color("#ff8533") --[[@as Color]],
 }
 
----@type data.Color
-local basic_belt_color_override = _settings.get_value("reskins-bobs-basic-belts-color")--[[@as data.Color]]
+---@type Color
+local basic_belt_color_override = _settings.get_value("reskins-bobs-basic-belts-color")--[[@as Color]]
 
 ---
 ---Gets the color for the given `tier`.
 ---
 ---### Returns
----@return data.Color # The color for the given `tier`.
+---@return Color # The color for the given `tier`.
 ---
 ---### Parameters
 ---@param tier integer # The tier to get a color for; must be between 0 and 6.
@@ -187,7 +186,7 @@ end
 ---Gets the color to use for belt-related entities for the given `tier`.
 ---
 ---### Returns
----@return data.Color # The color for the given `tier` of belt-related entity.
+---@return Color # The color for the given `tier` of belt-related entity.
 ---
 ---### Parameters
 ---@param tier integer # The tier to get a color for; must be between 0 and 6.
@@ -200,7 +199,7 @@ function _tiers.get_belt_tint(tier)
 		"Invalid parameter: 'tier' must be an integer between 0 and 6."
 	)
 
-	---@type data.Color
+	---@type Color
 	local tint
 	if tier == 0 and is_using_basic_belt_override then
 		tint = util.copy(basic_belt_color_override)
@@ -213,7 +212,7 @@ function _tiers.get_belt_tint(tier)
 	else
 		if tier == 2 then
 			-- Use pure red for belt-related entities to better match the vanilla sprites.
-			tint = util.color("#ff0000")
+			tint = util.color("#ff0000") --[[@as Color]]
 		else
 			tint = util.copy(standard_tier_colors[tier])
 		end
@@ -228,7 +227,7 @@ end
 ---### Returns
 ---@return boolean # `true` if `icon_data` is a tier label; otherwise, `false`.
 ---
----@param icon_datum data.IconData # An `IconData` object to check for tier labels.
+---@param icon_datum IconData # An `IconData` object to check for tier labels.
 local function is_icon_tier_labeled(icon_datum)
 	return icon_datum and icon_datum.icon:find("__reskins%-library__%/graphics%/icons%/tiers%/") ~= nil
 end
@@ -250,7 +249,7 @@ end
 ---```
 ---
 ---### Parameters
----@param icon_data data.IconData[] # An array of `IconData` objects.
+---@param icon_data IconData[] # An array of `IconData` objects.
 function _tiers.is_icons_tier_labeled(icon_data)
 	-- A labeled icon will have minimum three layers.
 	if icon_data and #icon_data >= 3 then
@@ -285,7 +284,7 @@ end
 ---```
 ---
 ---### Parameters
----@param icon_data data.IconData[] # An array of `IconData` objects.
+---@param icon_data IconData[] # An array of `IconData` objects.
 function _tiers.get_tier_from_icons(icon_data)
 	if icon_data and #icon_data >= 3 then
 		for i = #icon_data, 1, -1 do
@@ -302,8 +301,8 @@ end
 ---Removes any tier labels from a copy of the given `icon_data`.
 ---
 ---### Returns
----@return data.IconData[] # A copy of `icon_data` with any tier labels removed.
----@return data.IconData[] # A copy of the tier labels removed from `icon_data`.
+---@return IconData[] # A copy of `icon_data` with any tier labels removed.
+---@return IconData[] # A copy of the tier labels removed from `icon_data`.
 ---
 ---### Examples
 ---```lua
@@ -316,13 +315,13 @@ end
 ---```
 ---
 ---### Parameters
----@param icon_data data.IconData[] # An array of `IconData` objects.
+---@param icon_data IconData[] # An array of `IconData` objects.
 function _tiers.remove_tier_labels_from_icons(icon_data)
 	assert(icon_data ~= nil, "Invalid parameter: 'icon_data' must not be nil.")
 
 	local icon_data_copy = util.copy(icon_data)
 
-	---@type data.IconData[]
+	---@type IconData[]
 	local removed_layers = {}
 
 	if #icon_data >= 2 then
@@ -340,7 +339,7 @@ end
 ---Adds tier labels representing the given `tier` to a copy of the given `icon_data`.
 ---
 ---### Returns
----@return data.IconData[] # An array of `IconData` objects representing a copy of `icon_data` with added tier labels.
+---@return IconData[] # An array of `IconData` objects representing a copy of `icon_data` with added tier labels.
 ---
 ---### Remarks
 ---- If tier labeling is disabled, an unmodified copy of `icon_data` is returned.
@@ -350,7 +349,7 @@ end
 ---
 ---### Examples
 ---```
-------@type data.IconData[]
+------@type IconData[]
 ---local icon_data = {
 ---    {
 ---        icon = "__base__/graphics/icons/iron-plate.png",
@@ -370,7 +369,7 @@ end
 ---
 ---### Parameters
 ---@param tier integer # The tier of the added labels. An integer value from 0 to 6.
----@param icon_data data.IconData[] # An icon represented by an array of `IconData` objects to add tier labels to.
+---@param icon_data IconData[] # An icon represented by an array of `IconData` objects to add tier labels to.
 ---
 ---### Exceptions
 ---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.<br/>
@@ -411,7 +410,7 @@ function _tiers.add_tier_labels_to_icons(tier, icon_data)
 			_icons.add_missing_icon_defaults({
 				icon = icon_file_name,
 				icon_size = 64,
-				tint = util.get_color_with_alpha(reskins.lib.tiers.get_tint(tier), 0.75),
+				tint = util.get_color_with_alpha(reskins.lib.tiers.get_tint(tier), 0.75) --[[@as Color]],
 			})
 		)
 	end
@@ -423,7 +422,7 @@ end
 ---Adds tier labels representing the given `tier` to a copy of the given `icon_datum`.
 ---
 ---### Returns
----@return data.IconData[] # An array of `IconData` objects representing a copy of `icon_datum` with added tier labels.
+---@return IconData[] # An array of `IconData` objects representing a copy of `icon_datum` with added tier labels.
 ---
 ---### Remarks
 ---- If tier labeling is disabled, an unmodified copy of `icon_datum` is returned, packaged as an
@@ -434,7 +433,7 @@ end
 ---
 ---### Examples
 ---```
-------@type data.IconData
+------@type IconData
 ---local icon_datum = {
 ---    icon = "__base__/graphics/icons/assembling-machine-1.png",
 ---    icon_size = 64,
@@ -446,7 +445,7 @@ end
 ---
 ---### Parameters
 ---@param tier integer # The tier of the added labels.
----@param icon_datum data.IconData # An icon represented by an `IconData` object to add tier labels to.
+---@param icon_datum IconData # An icon represented by an `IconData` object to add tier labels to.
 ---
 ---### Exceptions
 ---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.<br/>
@@ -462,7 +461,7 @@ end
 ---Adds tier labels representing the given `tier` to an icon created from the given parameters.
 ---
 ---### Returns
----@return data.IconData[] # An array of `IconData` objects representing the created icon with added tier labels.
+---@return IconData[] # An array of `IconData` objects representing the created icon with added tier labels.
 ---
 ---### Remarks
 ---- The parameters are assumed to be for an entity, item, fluid, or recipe icon. Technology icons are not supported.
@@ -475,11 +474,11 @@ end
 ---
 ---### Parameters
 ---@param tier integer # The tier of the added labels.
----@param icon data.FileName # The file name of the icon to use.
----@param icon_size data.SpriteSizeType # The size of the icon.
+---@param icon FileName # The file name of the icon to use.
+---@param icon_size SpriteSizeType # The size of the icon.
 ---@param scale? double # The scale of the icon. Default `32 / icon_size`.
----@param shift? data.Vector # The shift of the icon. Default `nil`.
----@param tint? data.Color # The tint of the icon. Default `nil`.
+---@param shift? Vector # The shift of the icon. Default `nil`.
+---@param tint? Color # The tint of the icon. Default `nil`.
 ---
 ---### Exceptions
 ---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.<br/>
@@ -510,7 +509,7 @@ end
 ---
 ---### Parameters
 ---@param tier integer # The tier of the added labels.
----@param prototype data.EntityPrototype|data.ItemPrototype|data.RecipePrototype # The prototype to add tier labels to.
+---@param prototype EntityPrototype|ItemPrototype|RecipePrototype # The prototype to add tier labels to.
 ---
 ---### Exceptions
 ---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.<br/>
@@ -570,7 +569,7 @@ end
 ---
 ---### Parameters
 ---@param tier integer # The tier of the added labels.
----@param prototype data.EntityPrototype|data.ItemPrototype|data.RecipePrototype # The prototype to add tier labels to.
+---@param prototype EntityPrototype|ItemPrototype|RecipePrototype # The prototype to add tier labels to.
 ---
 ---### Exceptions
 ---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.<br/>

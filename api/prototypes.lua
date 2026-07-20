@@ -3,9 +3,10 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
+---@using data
+
 ---@namespace Reskins.Api
 
----@type Reskins.SpriteUtils.Sprites
 local __sprites = require("__reskins-sprite-utils__.sprites")
 
 --- Provides methods for working with prototypes.
@@ -76,7 +77,7 @@ end
 ---```
 ---
 ---### Parameters
----@param prototype data.EntityWithHealthPrototype # The entity with the remnants to rescale.
+---@param prototype EntityWithHealthPrototype # The entity with the remnants to rescale.
 ---@param scalar double # The scale factor to resize the prototype by.
 ---
 ---### See Also

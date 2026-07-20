@@ -3,6 +3,8 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
+---@using data
+
 ---@namespace Reskins.Api
 
 --- Provides methods for retrieving and validating startup settings.
@@ -27,7 +29,7 @@ local _settings = {}
 ---local value = setting_tools.get_value("reskins-bobs-do-custom-furnace-variants")
 ---
 ----- Get the color of the standard furnace variant.
-------@type data.Color
+------@type Color
 ---local color = setting_tools.get_value("reskins-bobs-standard-furnace-color")
 ---```
 ---
@@ -45,7 +47,7 @@ end
 ---
 ---Gets the blend mode to use for applying the highlights layer of Artisanal Reskins sprite sets.
 ---
----@type data.BlendMode
+---@type BlendMode
 _settings.blend_mode = _settings.get_value("reskins-lib-blend-mode")
 
 ---@alias TargetMod
