@@ -34,6 +34,10 @@ Date: ????
       - `sprites.create_sprite_from_icons` -> `reskins-sprite-utils.sprites.create_sprite_from_icons`
       - `sprites.create_sprite_from_icon` -> `reskins-sprite-utils.sprites.create_sprite_from_icon`
       - `sprites.make_4way_animation_from_spritesheet` -> `reskins-sprite-utils.sprites.make_4way_animation_from_spritesheet`
+      - `lib.RGBtoHSV` -> `reskins-sprite-utils.colors.rgba_to_hsva`
+      - `lib.RGBtoHSL` -> `reskins-sprite-utils.colors.rgba_to_hsla`
+      - `lib.HSVtoRGB` -> `reskins-sprite-utils.colors.hsva_to_rgba`
+      - `lib.HSLtoRGB` -> `reskins-sprite-utils.colors.hsla_to_rgba`
 ---------------------------------------------------------------------------------------------------
 Version: 2.3.3
 Date: 2026-01-03
