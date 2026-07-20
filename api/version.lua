@@ -31,11 +31,14 @@ local _version = {}
 ---@return boolean|nil # `true` if `version` is newer than `version_to_compare_with`, `false` if `version` is older than `version_to_compare_with`, `nil` if the version strings are invalid.
 ---
 ---### Parameters
----@param version string # The version of interest; a semantic version string.
----@param version_to_compare_with string # The version to compare with; a semantic version string.
+---@param version? string # The version of interest; a semantic version string.
+---@param version_to_compare_with? string # The version to compare with; a semantic version string.
 ---@deprecated helpers.compare_versions(version, version_to_compare_with) > 0
 function _version.is_newer(version, version_to_compare_with)
-	return helpers.compare_versions(version, version_to_compare_with) > 0
+	--stylua: ignore
+	return (version and version_to_compare_with) 
+		and helpers.compare_versions(version, version_to_compare_with) > 0
+		or nil
 end
 
 --- Check if `version` is the same as or is newer than `version_to_compare_with`.
@@ -51,11 +54,14 @@ end
 ---@return boolean|nil # `true` if `version` is the same as or newer than `version_to_compare_with`, `false` if `version` is older than `version_to_compare_with`, `nil` if the version strings are invalid.
 ---
 ---### Parameters
----@param version string # The version of interest; a semantic version string.
----@param version_to_compare_with string # The version to compare with; a semantic version string.
+---@param version? string # The version of interest; a semantic version string.
+---@param version_to_compare_with? string # The version to compare with; a semantic version string.
 ---@deprecated helpers.compare_versions(version, version_to_compare_with) >= 0
 function _version.is_same_or_newer(version, version_to_compare_with)
-	return helpers.compare_versions(version, version_to_compare_with) >= 0
+	--stylua: ignore
+	return (version and version_to_compare_with) 
+		and helpers.compare_versions(version, version_to_compare_with) >= 0
+		or nil
 end
 
 --- Check if `version` is the same as `version_to_compare_with`.
@@ -71,11 +77,14 @@ end
 ---```
 ---
 ---### Parameters
----@param version string # The version of interest; a semantic version string.
----@param version_to_compare_with string # The version to compare with; a semantic version string.
+---@param version? string # The version of interest; a semantic version string.
+---@param version_to_compare_with? string # The version to compare with; a semantic version string.
 ---@deprecated Use helpers.compare_versions(version, version_to_compare_with) == 0
 function _version.is_same(version, version_to_compare_with)
-	return helpers.compare_versions(version, version_to_compare_with) == 0
+	--stylua: ignore
+	return (version and version_to_compare_with) 
+		and helpers.compare_versions(version, version_to_compare_with) == 0
+		or nil
 end
 
 ---Check if `version` is the same as or is older than `version_to_compare_with`.
@@ -91,11 +100,14 @@ end
 ---```
 ---
 ---### Parameters
----@param version string # The version of interest; a semantic version string.
----@param version_to_compare_with string # The version to compare with; a semantic version string.
+---@param version? string # The version of interest; a semantic version string.
+---@param version_to_compare_with? string # The version to compare with; a semantic version string.
 ---@deprecated Use helpers.compare_versions(version, version_to_compare_with) <= 0
 function _version.is_same_or_older(version, version_to_compare_with)
-	return helpers.compare_versions(version, version_to_compare_with) <= 0
+	--stylua: ignore
+	return (version and version_to_compare_with) 
+		and helpers.compare_versions(version, version_to_compare_with) <= 0
+		or nil
 end
 
 ---
@@ -112,11 +124,14 @@ end
 ---```
 ---
 ---### Parameters
----@param version string # The version of interest; a semantic version string.
----@param version_to_compare_with string # The version to compare with; a semantic version string.
+---@param version? string # The version of interest; a semantic version string.
+---@param version_to_compare_with? string # The version to compare with; a semantic version string.
 ---@deprecated Use helpers.compare_versions(version, version_to_compare_with) < 0
 function _version.is_older(version, version_to_compare_with)
-	return helpers.compare_versions(version, version_to_compare_with) < 0
+	--stylua: ignore
+	return (version and version_to_compare_with) 
+		and helpers.compare_versions(version, version_to_compare_with) < 0
+		or nil
 end
 
 return _version
