@@ -3,51 +3,6 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
----Provides vanilla-style sprite definition for oil refinery `animation` field. See [Prototype/AssemblingMachine](https://wiki.factorio.com/Prototype/AssemblingMachine).
----@param tint data.Color
----@return table animation # [Types/Animation4Way](https://wiki.factorio.com/Types/Animation4Way)
-local function entity_animation(tint)
-	return reskins.lib.sprites.make_4way_animation_from_spritesheet({
-		layers = {
-			-- Base
-			{
-				filename = "__base__/graphics/entity/oil-refinery/oil-refinery.png",
-				width = 386,
-				height = 430,
-				shift = util.by_pixel(0, -7.5),
-				scale = 0.5,
-			},
-			-- Mask
-			{
-				filename = "__reskins-library__/graphics/entity/base/oil-refinery/oil-refinery-mask.png",
-				width = 386,
-				height = 430,
-				shift = util.by_pixel(0, -7.5),
-				tint = tint,
-				scale = 0.5,
-			},
-			-- Highlights
-			{
-				filename = "__reskins-library__/graphics/entity/base/oil-refinery/oil-refinery-highlights.png",
-				width = 386,
-				height = 430,
-				shift = util.by_pixel(0, -7.5),
-				blend_mode = reskins.lib.settings.blend_mode,
-				scale = 0.5,
-			},
-			-- Shadow
-			{
-				filename = "__base__/graphics/entity/oil-refinery/oil-refinery-shadow.png",
-				width = 674,
-				height = 426,
-				shift = util.by_pixel(82.5, 26.5),
-				draw_as_shadow = true,
-				scale = 0.5,
-			},
-		},
-	})
-end
-
 ---Provides vanilla-style sprite definition for oil refinery corpse `animation` field. See [Prototype/Corpse](https://wiki.factorio.com/Prototype/Corpse).
 ---@param tint data.Color
 ---@return data.RotatedAnimationVariations
@@ -55,18 +10,16 @@ local function corpse_animation(tint)
 	---@type data.RotatedAnimation
 	local animation = {
 		layers = {
-			-- Base
 			{
-				filename = "__base__/graphics/entity/oil-refinery/remnants/refinery-remnants.png",
+				filename = "__reskins-assets-base__/graphics/entity/oil-refinery/remnants/oil-refinery-remnants-base.png",
 				width = 467,
 				height = 415,
 				direction_count = 1,
-				shift = util.by_pixel(-0.25, -0.25), --moved from -8.5 to -4.5
+				shift = util.by_pixel(-0.25, -0.25),
 				scale = 0.5,
 			},
-			-- Mask
 			{
-				filename = "__reskins-library__/graphics/entity/base/oil-refinery/remnants/refinery-remnants-mask.png",
+				filename = "__reskins-assets-base__/graphics/entity/oil-refinery/remnants/oil-refinery-remnants-mask.png",
 				width = 467,
 				height = 415,
 				direction_count = 1,
@@ -74,9 +27,8 @@ local function corpse_animation(tint)
 				tint = tint,
 				scale = 0.5,
 			},
-			-- Highlights
 			{
-				filename = "__reskins-library__/graphics/entity/base/oil-refinery/remnants/refinery-remnants-highlights.png",
+				filename = "__reskins-assets-base__/graphics/entity/oil-refinery/remnants/oil-refinery-remnants-highlights.png",
 				width = 467,
 				height = 415,
 				direction_count = 1,
@@ -125,5 +77,117 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
 	corpse.animation = corpse_animation(inputs.tint)
 
 	-- Reskin entity
-	entity.graphics_set.animation = entity_animation(inputs.tint)
+	entity.graphics_set = {
+		animation = reskins.lib.sprites.make_4way_animation_from_spritesheet({
+			layers = {
+				{
+					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-base.png",
+					width = 386,
+					height = 430,
+					shift = util.by_pixel(0, -7.5),
+					scale = 0.5,
+				},
+				{
+					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-mask.png",
+					width = 386,
+					height = 430,
+					shift = util.by_pixel(0, -7.5),
+					tint = inputs.tint,
+					scale = 0.5,
+				},
+				{
+					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-highlights.png",
+					width = 386,
+					height = 430,
+					shift = util.by_pixel(0, -7.5),
+					blend_mode = reskins.lib.settings.blend_mode,
+					scale = 0.5,
+				},
+				{
+					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-shadow.png",
+					width = 674,
+					height = 426,
+					shift = util.by_pixel(82.5, 26.5),
+					draw_as_shadow = true,
+					scale = 0.5,
+				},
+			},
+		}),
+		working_visualisations = {
+			{
+				fadeout = true,
+				constant_speed = true,
+				north_position = util.by_pixel(34, -65),
+				east_position = util.by_pixel(-52, -61),
+				south_position = util.by_pixel(-59, -82),
+				west_position = util.by_pixel(57, -58),
+				animation = {
+					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-fire.png",
+					line_length = 10,
+					width = 40,
+					height = 81,
+					frame_count = 60,
+					animation_speed = 0.75,
+					scale = 0.5,
+					draw_as_glow = true,
+					shift = util.by_pixel(0, -14.25),
+				},
+			},
+			{
+				fadeout = true,
+				north_animation = {
+					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-light.png",
+					width = 321,
+					height = 205,
+					blend_mode = "additive",
+					draw_as_glow = true,
+					shift = util.by_pixel(-1, -50),
+					scale = 0.5,
+				},
+				east_animation = {
+					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-light.png",
+					width = 321,
+					x = 321,
+					height = 205,
+					blend_mode = "additive",
+					draw_as_glow = true,
+					shift = util.by_pixel(-1, -50),
+					scale = 0.5,
+				},
+				south_animation = {
+					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-light.png",
+					width = 321,
+					x = 321 * 2,
+					height = 205,
+					blend_mode = "additive",
+					draw_as_glow = true,
+					shift = util.by_pixel(-1, -50),
+					scale = 0.5,
+				},
+				west_animation = {
+					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-light.png",
+					width = 321,
+					x = 321 * 3,
+					height = 205,
+					blend_mode = "additive",
+					draw_as_glow = true,
+					shift = util.by_pixel(-1, -50),
+					scale = 0.5,
+				},
+			},
+		},
+		water_reflection = {
+			pictures = {
+				filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-reflection.png",
+				priority = "extra-high",
+				width = 40,
+				height = 48,
+				shift = util.by_pixel(5, 95),
+				variation_count = 4,
+				scale = 5,
+			},
+			rotate = false,
+			orientation_to_variation = true,
+		},
+	}
 end
