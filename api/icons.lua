@@ -4,8 +4,9 @@
 -- See LICENSE.md in the project directory for license information.
 
 ---@using data
+---@using Reskins.SpriteUtils
 
----@namespace Reskins.Api
+---@namespace Reskins.Library
 
 local __icons = require("__reskins-sprite-utils__.icons")
 
@@ -195,9 +196,9 @@ end
 ---@param is_technology_icon? boolean # When `true`, indicates that `icon_datum` represents a technology icon.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `icon_dataum` is `nil`<br/>
----*@throws* `string` — Thrown when `icon_dataum.icon` is not a mod-prefixed absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when `icon_dataum.icon_size` is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `icon_dataum` is `nil`\
+---*@throws* `string` — Thrown when `icon_dataum.icon` is not a mod-prefixed absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when `icon_dataum.icon_size` is not a positive integer.\
 ---@nodiscard
 ---@deprecated Use reskins-sprite-utils.icons.add_missing_icon_defaults(icon_datum, ...)
 function _icons.add_missing_icon_defaults(icon_datum, is_technology_icon)
@@ -236,9 +237,9 @@ end
 ---@param is_technology_icon? boolean # When `true`, indicates that `icon_data` represents a technology icon.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `icon_data` is `nil`.\
+---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.\
 ---@nodiscard
 ---@deprecated Use reskins-sprite-utils.icons.add_missing_icons_defaults(icon_data, ...)
 function _icons.add_missing_icons_defaults(icon_data, is_technology_icon)
@@ -264,8 +265,8 @@ end
 ---@param tint? Color # The tint of the icon. Default `nil`.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `icon` is not a mod-prefixed absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when `icon_size` is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `icon` is not a mod-prefixed absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when `icon_size` is not a positive integer.\
 ---@nodiscard
 ---@deprecated Use reskins-sprite-utils.icons.create_icon(...)
 function _icons.create_icon(icon, icon_size, scale, shift, tint)
@@ -292,8 +293,8 @@ end
 ---@nodiscard
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `icon` is not a mod-prefixed absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when `icon_size` is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `icon` is not a mod-prefixed absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when `icon_size` is not a positive integer.\
 ---@nodiscard
 ---@deprecated Use reskins-sprite-utils.icons.create_technology_icon(...)
 function _icons.create_technology_icon(icon, icon_size, scale, shift, tint)
@@ -321,7 +322,7 @@ end
 ---@param prototype EntityPrototype|ItemPrototype|FluidPrototype|RecipePrototype|TechnologyPrototype # The prototype to get the icon from.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `prototype` has no defined field `icon` or `icons`.<br/>
+---*@throws* `string` — Thrown when `prototype` has no defined field `icon` or `icons`.\
 ---@nodiscard
 ---@deprecated Use reskins-sprite-utils.icons.get_icon_from_prototype(prototype)
 function _icons.get_icon_from_prototype_by_reference(prototype)
@@ -348,9 +349,9 @@ end
 ---@param type_name string # The type name of the prototype.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `name` is `nil` or an empty string.<br/>
----*@throws* `string` — Thrown when `type_name` is `nil` or an empty string.<br/>
----*@throws* `string` — Thrown when the prototype has no defined field `icon` or `icons`.<br/>
+---*@throws* `string` — Thrown when `name` is `nil` or an empty string.\
+---*@throws* `string` — Thrown when `type_name` is `nil` or an empty string.\
+---*@throws* `string` — Thrown when the prototype has no defined field `icon` or `icons`.\
 ---@nodiscard
 ---@deprecated Use reskins-sprite-utils.icons.get_icon_from_named_prototype
 function _icons.get_icon_from_prototype_by_name(name, type_name)
@@ -395,15 +396,16 @@ local related_prototypes = {
 ---@param type_name? string # The type name of the prototype.
 ---@param icon_data IconData[] # An icon represented by an array of `IconData` objects.
 ---@param pictures? SpriteVariations # A `SpriteVariations` object. Typical use is when `icon_data` has tier labels and the in-world sprite should not.
+---@param options? IconAssignmentOptions # Controls which related prototypes the icon cascades to.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `name` is `nil` or an empty string.<br/>
----*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `name` is `nil` or an empty string.\
+---*@throws* `string` — Thrown when `icon_data` is `nil`.\
+---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.\
 ---@deprecated Use reskins-sprite-utils.icons.assign_icons_to_prototype_and_related_prototypes
-function _icons.assign_icons_to_prototype_and_related_prototypes(name, type_name, icon_data, pictures)
-	__icons.assign_icons_to_prototype_and_related_prototypes(name, type_name, icon_data, pictures)
+function _icons.assign_icons_to_prototype_and_related_prototypes(name, type_name, icon_data, pictures, options)
+	__icons.assign_icons_to_prototype_and_related_prototypes(name, type_name, icon_data, pictures, options)
 end
 
 ---Icon Assignment Utilities
@@ -446,11 +448,11 @@ end
 ---@param deferrable_icon DeferrableIconData|DeferrableIconDatum # The icon data to store for deferred assignment.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `deferred_icons` is `nil`.<br/>
----*@throws* `string` — Thrown when `stage` is `nil` <br/>
----*@throws* `string` — Thrown when `deferrable_icon` is `nil`.<br/>
----*@throws* `string` — Thrown when `deferrable_icon.name` is `nil` or an empty string.<br/>
----*@throws* `string` — Thrown when `deferrable_icon.type_name` is `nil` or an empty string.<br/>
+---*@throws* `string` — Thrown when `deferred_icons` is `nil`.\
+---*@throws* `string` — Thrown when `stage` is `nil` \
+---*@throws* `string` — Thrown when `deferrable_icon` is `nil`.\
+---*@throws* `string` — Thrown when `deferrable_icon.name` is `nil` or an empty string.\
+---*@throws* `string` — Thrown when `deferrable_icon.type_name` is `nil` or an empty string.\
 ---*@throws* `string` — Thrown when both `deferrable_icon.icon_data` and `deferrable_icon.icon_datum` is `nil`, or `deferrable_icon.icon_data` is not an array of `IconData` objects, or the `IconData` objects are invalid.
 ---
 ---### See Also
@@ -483,17 +485,17 @@ end
 ---@param deferrable_icon DeferrableIconData|DeferrableIconDatum # An icon configured for deferrable assignment to a prototype.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when a deferred icon's `name` field is `nil` or an empty string.<br/>
----*@throws* `string` — Thrown when a deferred icon's `type_name` field is `nil` or an empty string.<br/>
----*@throws* `string` — Thrown when a deferred icon's `icon_data` field is `nil`<br/>
----*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon` field is not an absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon_size` field is not a positive integer.<br/>
+---*@throws* `string` — Thrown when a deferred icon's `name` field is `nil` or an empty string.\
+---*@throws* `string` — Thrown when a deferred icon's `type_name` field is `nil` or an empty string.\
+---*@throws* `string` — Thrown when a deferred icon's `icon_data` field is `nil`\
+---*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon` field is not an absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon_size` field is not a positive integer.\
 ---
 ---### See Also
 ---@see Icons.assign_icons_to_prototype_and_related_prototypes
 ---@deprecated Use reskins-sprite-utils.icons.assign_deferrable_icon
 function _icons.assign_deferrable_icon(deferrable_icon)
-	__icons.assign_deferrable_icon(deferrable_icon)
+	__icons.apply_icon_assignment(deferrable_icon)
 end
 
 ---
@@ -510,11 +512,11 @@ end
 ---@param stage Stage # The index of the data stage to source deferrable icons from.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when a deferred icon's `name` field is `nil` or an empty string.<br/>
----*@throws* `string` — Thrown when a deferred icon's `type_name` field is `nil` or an empty string.<br/>
----*@throws* `string` — Thrown when a deferred icon's `icon_data` field is `nil`<br/>
----*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon` field is not an absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon_size` field is not a positive integer.<br/>
+---*@throws* `string` — Thrown when a deferred icon's `name` field is `nil` or an empty string.\
+---*@throws* `string` — Thrown when a deferred icon's `type_name` field is `nil` or an empty string.\
+---*@throws* `string` — Thrown when a deferred icon's `icon_data` field is `nil`\
+---*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon` field is not an absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when a deferred icon's `icon_data[n].icon_size` field is not a positive integer.\
 ---
 ---### See Also
 ---@see Icons.store_icon_for_deferred_assigment_in_stage
@@ -590,9 +592,9 @@ end
 ---@param is_technology_icon? boolean # When `true`, indicates that `icon_data` represents a technology icon.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `icon_data` is `nil`.\
+---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.\
 ---@nodiscard
 ---@deprecated Use reskins-sprite-utils.icons.transform_icon(icon_data, scale, shift, tint, ...)
 function _icons.transform_icon(icon_data, scale, shift, tint, is_technology_icon)
@@ -683,7 +685,7 @@ end
 ---@param tint? Color # The tint to apply to the sourced icon. Default `nil`.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `icon_datum` is `nil`.<br/>
+---*@throws* `string` — Thrown when `icon_datum` is `nil`.\
 ---*@throws* `string` — Thrown when `icon_datum` is not an IconData object with a defined `icon` field.
 ---
 ---### See Also
@@ -717,8 +719,8 @@ end
 ---@param tint? Color # The tint to apply to the sourced icon. Default `nil`.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
----*@throws* `string` — Thrown when `name` is `nil` or an empty string.<br/>
+---*@throws* `string` — Thrown when `icon_data` is `nil`.\
+---*@throws* `string` — Thrown when `name` is `nil` or an empty string.\
 ---*@throws* `string` — Thrown when `type_name` is `nil` or an empty string.
 ---
 ---### See Also
@@ -765,9 +767,9 @@ end
 ---@param tint? Color # The tint to apply to the sourced icon. Default `nil`.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `icon_datum` is `nil`.<br/>
----*@throws* `string` — Thrown when `icon_datum` is not an IconData object with a defined `icon` field.<br/>
----*@throws* `string` — Thrown when `name` is `nil` or an empty string.<br/>
+---*@throws* `string` — Thrown when `icon_datum` is `nil`.\
+---*@throws* `string` — Thrown when `icon_datum` is not an IconData object with a defined `icon` field.\
+---*@throws* `string` — Thrown when `name` is `nil` or an empty string.\
 ---*@throws* `string` — Thrown when `type_name` is `nil` or an empty string.
 ---
 ---### See Also
@@ -867,7 +869,7 @@ end
 ---@param is_technology_icon? boolean # When `true`, indicates that `icon_data` represents a technology icon.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
+---*@throws* `string` — Thrown when `icon_data` is `nil`.\
 ---*@throws* `string` — Thrown when `sources` is `nil`.
 ---
 ---### See Also
@@ -925,7 +927,7 @@ end
 ---@param sources IconSources # An array of `IconData` sources to layer on `icon_data`.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `sources` is `nil`.<br/>
+---*@throws* `string` — Thrown when `sources` is `nil`.\
 ---@nodiscard
 ---@deprecated Use reskins-sprite-utils.icons.create_icons_from_sources
 function _icons.create_icons_from_sources(sources)
@@ -1009,12 +1011,11 @@ function _icons.get_symbol(symbol, tint)
 		{
 			icon = "__reskins-library__/graphics/icons/symbols/" .. symbol:lower() .. "-symbol.png",
 			icon_size = 64,
-			scale = 0.5,
 		},
 		{
 			icon = "__reskins-library__/graphics/icons/symbols/" .. symbol:lower() .. "-symbol.png",
 			icon_size = 64,
-			scale = 0.5,
+			---@diagnostic disable-next-line: param-type-mismatch
 			tint = util.get_color_with_alpha(tint, 0.75) --[[@as Color]],
 		},
 	}
@@ -1116,6 +1117,7 @@ function _icons.get_letter(letter, tint)
 			icon = "__reskins-library__/graphics/icons/letters/letter-" .. letter:lower() .. ".png",
 			icon_size = 64,
 			scale = 0.5,
+			---@diagnostic disable-next-line: param-type-mismatch
 			tint = util.get_color_with_alpha(tint, 0.75) --[[@as Color]],
 		},
 	}

@@ -4,7 +4,8 @@
 -- See LICENSE.md in the project directory for license information.
 
 ---@using data
----@using Reskins.Api
+---@using Reskins.Library
+---@using Reskins.SpriteUtils
 
 ----------------------------------------------------------------------------------------------------
 -- TECHNOLOGY ICON FUNCTIONS

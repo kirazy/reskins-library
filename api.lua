@@ -3,7 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
----@namespace Reskins.Api
+---@namespace Reskins
 
 ---Provides access to the Artisanal Reskin's library of API functions.
 ---

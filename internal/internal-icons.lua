@@ -4,6 +4,9 @@
 -- See LICENSE.md in the project directory for license information.
 
 ---@using Reskins.Api
+---@using Reskins.SpriteUtils
+
+---@namespace Reskins.Library.Internal
 
 --- Provides methods and properties for internal use. External use is not recommended.
 reskins.internal = reskins.internal or {}

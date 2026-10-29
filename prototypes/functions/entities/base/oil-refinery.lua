@@ -3,6 +3,8 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
+local assets_assorted = "__reskins-assets-assorted__/graphics/entity/oil-refinery-original/"
+
 ---Provides vanilla-style sprite definition for oil refinery corpse `animation` field. See [Prototype/Corpse](https://wiki.factorio.com/Prototype/Corpse).
 ---@param tint data.Color
 ---@return data.RotatedAnimationVariations
@@ -11,7 +13,7 @@ local function corpse_animation(tint)
 	local animation = {
 		layers = {
 			{
-				filename = "__reskins-assets-base__/graphics/entity/oil-refinery/remnants/oil-refinery-remnants-base.png",
+				filename = assets_assorted .. "remnants/oil-refinery-remnants-base.png",
 				width = 467,
 				height = 415,
 				direction_count = 1,
@@ -19,7 +21,7 @@ local function corpse_animation(tint)
 				scale = 0.5,
 			},
 			{
-				filename = "__reskins-assets-base__/graphics/entity/oil-refinery/remnants/oil-refinery-remnants-mask.png",
+				filename = assets_assorted .. "remnants/oil-refinery-remnants-mask.png",
 				width = 467,
 				height = 415,
 				direction_count = 1,
@@ -28,7 +30,7 @@ local function corpse_animation(tint)
 				scale = 0.5,
 			},
 			{
-				filename = "__reskins-assets-base__/graphics/entity/oil-refinery/remnants/oil-refinery-remnants-highlights.png",
+				filename = assets_assorted .. "remnants/oil-refinery-remnants-highlights.png",
 				width = 467,
 				height = 415,
 				direction_count = 1,
@@ -81,14 +83,14 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
 		animation = reskins.lib.sprites.make_4way_animation_from_spritesheet({
 			layers = {
 				{
-					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-base.png",
+					filename = assets_assorted .. "oil-refinery-base.png",
 					width = 386,
 					height = 430,
 					shift = util.by_pixel(0, -7.5),
 					scale = 0.5,
 				},
 				{
-					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-mask.png",
+					filename = assets_assorted .. "oil-refinery-mask.png",
 					width = 386,
 					height = 430,
 					shift = util.by_pixel(0, -7.5),
@@ -96,7 +98,7 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
 					scale = 0.5,
 				},
 				{
-					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-highlights.png",
+					filename = assets_assorted .. "oil-refinery-highlights.png",
 					width = 386,
 					height = 430,
 					shift = util.by_pixel(0, -7.5),
@@ -104,7 +106,7 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
 					scale = 0.5,
 				},
 				{
-					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-shadow.png",
+					filename = assets_assorted .. "oil-refinery-shadow.png",
 					width = 674,
 					height = 426,
 					shift = util.by_pixel(82.5, 26.5),
@@ -122,7 +124,7 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
 				south_position = util.by_pixel(-59, -82),
 				west_position = util.by_pixel(57, -58),
 				animation = {
-					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-fire.png",
+					filename = assets_assorted .. "oil-refinery-fire.png",
 					line_length = 10,
 					width = 40,
 					height = 81,
@@ -136,7 +138,7 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
 			{
 				fadeout = true,
 				north_animation = {
-					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-light.png",
+					filename = assets_assorted .. "oil-refinery-light.png",
 					width = 321,
 					height = 205,
 					blend_mode = "additive",
@@ -145,7 +147,7 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
 					scale = 0.5,
 				},
 				east_animation = {
-					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-light.png",
+					filename = assets_assorted .. "oil-refinery-light.png",
 					width = 321,
 					x = 321,
 					height = 205,
@@ -155,7 +157,7 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
 					scale = 0.5,
 				},
 				south_animation = {
-					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-light.png",
+					filename = assets_assorted .. "oil-refinery-light.png",
 					width = 321,
 					x = 321 * 2,
 					height = 205,
@@ -165,7 +167,7 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
 					scale = 0.5,
 				},
 				west_animation = {
-					filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-light.png",
+					filename = assets_assorted .. "oil-refinery-light.png",
 					width = 321,
 					x = 321 * 3,
 					height = 205,
@@ -178,7 +180,7 @@ function reskins.lib.apply_skin.oil_refinery(name, tier, tint, make_tier_labels)
 		},
 		water_reflection = {
 			pictures = {
-				filename = "__reskins-assets-base__/graphics/entity/oil-refinery/oil-refinery-reflection.png",
+				filename = assets_assorted .. "oil-refinery-reflection.png",
 				priority = "extra-high",
 				width = 40,
 				height = 48,

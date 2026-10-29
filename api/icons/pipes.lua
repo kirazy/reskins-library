@@ -3,9 +3,10 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
----@using Reskins.Api
+---@using Reskins.Library
+---@using Reskins.SpriteUtils
 
----@namespace Reskins.Api.Icons
+---@namespace Reskins.Library.Icons
 
 --- Provides methods for getting icons for pipe-type entities.
 ---

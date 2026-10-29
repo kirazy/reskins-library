@@ -5,7 +5,7 @@
 
 ---@using data
 
----@namespace Reskins.Api
+---@namespace Reskins.Library
 
 --- Provides methods for retrieving and validating startup settings.
 ---
@@ -41,6 +41,7 @@ function _settings.get_value(name)
 		value = settings.startup[name].value
 	end
 
+	---@diagnostic disable-next-line: return-type-mismatch
 	return value
 end
 

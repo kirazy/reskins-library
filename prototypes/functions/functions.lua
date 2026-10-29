@@ -3,6 +3,8 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
+---@using Reskins.Library.Internal
+
 -- Library directory
 reskins.lib.directory = "__reskins-library__"
 

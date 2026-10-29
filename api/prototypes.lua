@@ -5,7 +5,7 @@
 
 ---@using data
 
----@namespace Reskins.Api
+---@namespace Reskins.Library
 
 local __sprites = require("__reskins-sprite-utils__.sprites")
 
@@ -63,7 +63,7 @@ end
 
 ---Resizes a copy of the `CorpsePrototype` associated with the given `prototype` by the given
 ---`scalar`, and assigns the rescaled copy to `prototype`. The name of the rescaled copy is
----prefixed with "rescaled-".
+---prefixed with "ar-rescaled-".
 ---
 ---### Remarks
 ---`scalar` is recommended to be the ratio of the new tile and the original tile size.
@@ -84,6 +84,10 @@ end
 ---@see Prototypes.rescale_prototype
 ---@deprecated Use reskins-sprite-utils.sprites.rescale_remnants_of_prototype
 function _prototypes.rescale_remnants_of_prototype(prototype, scalar)
+	if prototype == nil then
+		return
+	end
+
 	__sprites.rescale_remnants_of_prototype(prototype, scalar)
 end
 

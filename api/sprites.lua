@@ -57,9 +57,9 @@ local _sprites = {
 ---@return Sprite # A `Sprite` object created from `icon_data`.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `icon_data` is `nil`.\
+---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.
 ---@nodiscard
 ---@deprecated Use reskins-sprite-utils.icons.create_sprite_from_icons
 function _sprites.create_sprite_from_icons(icon_data, scale)
@@ -93,10 +93,10 @@ end
 ---@return Sprite # A `Sprite` object created from `icon_datum`.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `icon_datum` is `nil`.<br/>
----*@throws* `string` — Thrown when `icon_datum` is not an IconData object.<br/>
----*@throws* `string` — Thrown when `icon_datum.icon` is not an absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when `icon_datum.icon_size` is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `icon_datum` is `nil`.\
+---*@throws* `string` — Thrown when `icon_datum` is not an IconData object.\
+---*@throws* `string` — Thrown when `icon_datum.icon` is not an absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when `icon_datum.icon_size` is not a positive integer.
 ---@nodiscard
 ---@deprecated Use reskins-sprite-utils.sprites.create_sprite_from_icon
 function _sprites.create_sprite_from_icon(icon_datum, scale)
@@ -181,8 +181,8 @@ end
 ---@return SpriteVariations[] # The `SpriteVariations` object for the given parameters.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `directory` is not a non-empty string.<br/>
----*@throws* `string` — Thrown when `sprite_name` is not a non-empty string.<br/>
+---*@throws* `string` — Thrown when `directory` is not a non-empty string.\
+---*@throws* `string` — Thrown when `sprite_name` is not a non-empty string.\
 ---*@throws* `string` — Thrown when `num_variations` is not a positive integer.
 ---@nodiscard
 function _sprites.create_sprite_variations(directory, sprite_name, num_variations, is_light, tint)

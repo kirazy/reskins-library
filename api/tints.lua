@@ -3,7 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
----@namespace Reskins.Api
+---@namespace Reskins.Library
 
 --- Provides methods for manipulating tints.
 ---

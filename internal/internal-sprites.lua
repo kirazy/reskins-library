@@ -3,9 +3,11 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
+---@namespace Reskins.Library.Internal
+
 ---
 ---Creates a `SpriteVariations` object with `num_variations` using the the sprite variations
----under the given folder in an Artisanal Reksins mod, with the given `sprite_name`.
+---under the given folder in an Artisanal Reskins mod, with the given `sprite_name`.
 ---Provide a `tint` to include a light layer.
 ---
 ---Convenience method. Expects files at `reskins[mod_key].directory .. "/graphics/icons/{folder}/{sprite_name}/{sprite_name}.png"`.
@@ -35,7 +37,7 @@
 ---@return data.SpriteVariations[] # The `SpriteVariations` object for the given parameters.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `reskins[mod_key].directory` does not exist.<br/>
+---*@throws* `string` — Thrown when `reskins[mod_key].directory` does not exist.\
 ---
 ---### See Also
 ---@see Reskins.Lib.Sprites.create_sprite_variations

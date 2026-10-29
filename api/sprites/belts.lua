@@ -3,7 +3,9 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
----@namespace Reskins.Api.Sprites
+---@using Reskins.Library
+
+---@namespace Reskins.Library.Sprites
 
 --- Provides methods for getting sprites for belt-type entities.
 ---
@@ -32,7 +34,7 @@ local _belts = {}
 ---```
 ---
 ---### Parameters
----@param belt_sprites Reskins.Api.BeltSprites # The type of belt animation set to get.
+---@param belt_sprites BeltSprites # The type of belt animation set to get.
 ---@param tint data.Color # The tint to apply to the belt animation set.
 ---
 ---### Exceptions

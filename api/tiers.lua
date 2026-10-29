@@ -4,8 +4,9 @@
 -- See LICENSE.md in the project directory for license information.
 
 ---@using data
+---@using Reskins.SpriteUtils
 
----@namespace Reskins.Api
+---@namespace Reskins.Library
 
 --- Provides methods for working with tier labels and tints.
 ---
@@ -372,10 +373,10 @@ end
 ---@param icon_data IconData[] # An icon represented by an array of `IconData` objects to add tier labels to.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.<br/>
----*@throws* `string` — Thrown when `icon_data` is `nil`.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.\
+---*@throws* `string` — Thrown when `icon_data` is `nil`.\
+---*@throws* `string` — Thrown when `icon_data[n].icon` is not an absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when `icon_data[n].icon_size` is not a positive integer.
 ---@nodiscard
 function _tiers.add_tier_labels_to_icons(tier, icon_data)
 	assert(
@@ -448,10 +449,10 @@ end
 ---@param icon_datum IconData # An icon represented by an `IconData` object to add tier labels to.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.<br/>
----*@throws* `string` — Thrown when `icon_datum` is `nil`.<br/>
----*@throws* `string` — Thrown when `icon_datum.icon` is not an absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when `icon_datum.icon_size` is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.\
+---*@throws* `string` — Thrown when `icon_datum` is `nil`.\
+---*@throws* `string` — Thrown when `icon_datum.icon` is not an absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when `icon_datum.icon_size` is not a positive integer.
 ---@nodiscard
 function _tiers.add_tier_labels_to_icon(tier, icon_datum)
 	return _tiers.add_tier_labels_to_icons(tier, { icon_datum })
@@ -481,9 +482,9 @@ end
 ---@param tint? Color # The tint of the icon. Default `nil`.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.<br/>
----*@throws* `string` — Thrown when `icon` is not an absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when `icon_size` is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.\
+---*@throws* `string` — Thrown when `icon` is not an absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when `icon_size` is not a positive integer.
 ---@nodiscard
 function _tiers.create_icon_with_tier_labels(tier, icon, icon_size, scale, shift, tint)
 	return _tiers.add_tier_labels_to_icon(tier, _icons.create_icon(icon, icon_size, scale, shift, tint))
@@ -512,11 +513,11 @@ end
 ---@param prototype EntityPrototype|ItemPrototype|RecipePrototype # The prototype to add tier labels to.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.<br/>
----*@throws* `string` — Thrown when `prototype` has no defined field `icon` or `icons`.<br/>
----*@throws* `string` — Thrown when `prototype` has no defined field `icon_size` at the root, or at the root of the first element in `icons`.<br/>
----*@throws* `string` — Thrown when `prototype` has an icon with field `icon` that is not an absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when `prototype` has an icon with field `icon_size` that is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.\
+---*@throws* `string` — Thrown when `prototype` has no defined field `icon` or `icons`.\
+---*@throws* `string` — Thrown when `prototype` has no defined field `icon_size` at the root, or at the root of the first element in `icons`.\
+---*@throws* `string` — Thrown when `prototype` has an icon with field `icon` that is not an absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when `prototype` has an icon with field `icon_size` that is not a positive integer.
 function _tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(tier, prototype)
 	assert(
 		tier and tier >= 0 and tier <= 6 and tier % 1 == 0,
@@ -547,7 +548,7 @@ function _tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(tier, p
 		name = prototype.name,
 		type_name = prototype.type,
 		icon_data = _tiers.add_tier_labels_to_icons(tier, source_icon_data),
-		pictures = not filtered_types[prototype.type] and _sprites.create_sprite_from_icons(source_icon_data, 1.0) or nil,
+		pictures = not filtered_types[prototype.type] and _sprites.create_sprite_from_icons(source_icon_data, 1.0) --[[@as SpriteVariations]] or nil,
 	}
 
 	return deferrable_icon
@@ -572,11 +573,11 @@ end
 ---@param prototype EntityPrototype|ItemPrototype|RecipePrototype # The prototype to add tier labels to.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.<br/>
----*@throws* `string` — Thrown when `prototype` has no defined field `icon` or `icons`.<br/>
----*@throws* `string` — Thrown when `prototype` has no defined field `icon_size` at the root, or at the root of the first element in `icons`.<br/>
----*@throws* `string` — Thrown when `prototype` has an icon with field `icon` that is not an absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when `prototype` has an icon with field `icon_size` that is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.\
+---*@throws* `string` — Thrown when `prototype` has no defined field `icon` or `icons`.\
+---*@throws* `string` — Thrown when `prototype` has no defined field `icon_size` at the root, or at the root of the first element in `icons`.\
+---*@throws* `string` — Thrown when `prototype` has an icon with field `icon` that is not an absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when `prototype` has an icon with field `icon_size` that is not a positive integer.\
 function _tiers.add_tier_labels_to_prototype_by_reference(tier, prototype)
 	local deferrable_icon = _tiers.get_deferrable_icon_for_prototype_with_added_tier_labels(tier, prototype)
 
@@ -614,12 +615,12 @@ end
 ---@param type_name string # The type name of the prototype to add tier labels to.
 ---
 ---### Exceptions
----*@throws* `string` — Thrown when `name` is `nil` or an empty string.<br/>
----*@throws* `string` — Thrown when `type_name` is `nil` or an empty string.<br/>
----*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.<br/>
----*@throws* `string` — Thrown when the prototype has no defined field `icon` or `icons`.<br/>
----*@throws* `string` — Thrown when the prototype icon has an with field `icon` that is not an absolute file path with a valid extension.<br/>
----*@throws* `string` — Thrown when the prototype icon has an with field `icon_size` that is not a positive integer.<br/>
+---*@throws* `string` — Thrown when `name` is `nil` or an empty string.\
+---*@throws* `string` — Thrown when `type_name` is `nil` or an empty string.\
+---*@throws* `string` — Thrown when `tier` is not an integer between 0 and 6.\
+---*@throws* `string` — Thrown when the prototype has no defined field `icon` or `icons`.\
+---*@throws* `string` — Thrown when the prototype icon has an with field `icon` that is not an absolute file path with a valid extension.\
+---*@throws* `string` — Thrown when the prototype icon has an with field `icon_size` that is not a positive integer.\
 function _tiers.add_tier_labels_to_prototype_by_name(tier, name, type_name)
 	assert(name and name ~= "", "Invalid parameter: 'name' must not be nil or an empty string.")
 	assert(type_name and type_name ~= "", "Invalid parameter: 'type_name' must not be nil or an empty string.")

@@ -3,7 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
----@namespace Reskins.Api.Sprites
+---@namespace Reskins.Library.Sprites
 
 --- Provides methods for getting sprites for chemical-plant-type entities.
 ---
