@@ -38,12 +38,10 @@ require("prototypes.functions.entity-functions")
 ----------------------------------------------------------------------------------------------------
 -- ENTITIES
 ----------------------------------------------------------------------------------------------------
--- Common
-require("prototypes.entity.common.pipe")
-
 -- Base
-require("prototypes.entity.base.oil-refinery")
-require("prototypes.entity.base.belt-entities")
+-- The require below is disabled because Artisanal Reskins: Bob's Mods reskins the belt entities of the base game with
+-- the Assets API.
+-- require("prototypes.entity.base.belt-entities")
 
 ----------------------------------------------------------------------------------------------------
 -- TECHNOLOGIES

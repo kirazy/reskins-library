@@ -10,8 +10,3 @@ reskins.internal.assign_icons_deferred_to_stage(reskins.lib.defines.stage.data_u
 -- ENTITIES
 ----------------------------------------------------------------------------------------------------
 require("prototypes.entity.base.nuclear-reactor")
-
--- Reskin the vanilla pipes
-data.raw["pipe"]["pipe"].pictures = reskins.lib.sprites.pipes.get_pipe("iron")
-data.raw["pipe-to-ground"]["pipe-to-ground"].pictures = reskins.lib.sprites.pipes.get_pipe_to_ground("iron")
-data.raw["pipe-to-ground"]["pipe-to-ground"].fluid_box.pipe_covers = reskins.lib.sprites.pipes.get_pipe_covers("iron")

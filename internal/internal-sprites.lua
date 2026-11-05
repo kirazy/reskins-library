@@ -34,7 +34,7 @@
 ---@param is_light? boolean # Whether the sprite variations include a light layer. Defaults to `false`.
 ---@param tint? data.Color # The tint of the light layer. Defaults to `{ r = 0.3, g = 0.3, b = 0.3, a = 0.3 }`.
 ---### Returns
----@return data.SpriteVariations[] # The `SpriteVariations` object for the given parameters.
+---@return data.SpriteVariations # The `SpriteVariations` object for the given parameters.
 ---
 ---### Exceptions
 ---*@throws* `string` — Thrown when `reskins[mod_key].directory` does not exist.\

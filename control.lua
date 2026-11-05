@@ -61,7 +61,6 @@ local function check_for_missing_reskin(player)
 			"extendedangels",
 			"RealisticReactorGlow",
 			"P-U-M-P-S",
-			"NauvisDay",
 			"classic-beacon",
 			"classic-mining-drill",
 			"semi-classic-mining-drill",
