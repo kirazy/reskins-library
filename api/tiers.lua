@@ -303,7 +303,7 @@ end
 ---
 ---### Returns
 ---@return IconData[] # A copy of `icon_data` with any tier labels removed.
----@return IconData[] # A copy of the tier labels removed from `icon_data`.
+---@return IconData[]|nil # A copy of the tier labels removed from `icon_data`, if found; otherwise, `nil`.
 ---
 ---### Examples
 ---```lua
@@ -333,7 +333,7 @@ function _tiers.remove_tier_labels_from_icons(icon_data)
 		end
 	end
 
-	return icon_data_copy, removed_layers
+	return icon_data_copy, #removed_layers > 0 and removed_layers or nil
 end
 
 ---

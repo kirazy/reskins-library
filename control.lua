@@ -46,8 +46,10 @@ local function check_for_missing_reskin(player)
 		compatibility = {
 			"aai-loaders",
 			"loaders-modernized",
+			"loaders-modernized-integrations",
 			"miniloader-redux",
-			"deadlock-beltboxes-loaders",
+			"deadlock-beltboxes-loaders-continued",
+			"black-rubber-belts-remastered",
 			"vanilla-loaders-hd",
 			"mini-machines",
 			"Clowns-Processing",
