@@ -3,7 +3,7 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
-if not (mods["angelsindustries"] or mods["bobpower"]) then
+if not mods["bobpower"] then
 	return
 end
 

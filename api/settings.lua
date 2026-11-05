@@ -56,8 +56,6 @@ _settings.blend_mode = _settings.get_value("reskins-lib-blend-mode")
 ---| '"angelsaddons-mobility"'
 ---| '"angelsaddons-storage"'
 ---| '"angelsbioprocessing"'
----| '"angelsexploration"'
----| '"angelsindustries"'
 ---| '"angelspetrochem"'
 ---| '"angelsrefining"'
 ---| '"angelssmelting"'
