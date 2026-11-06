@@ -3,14 +3,6 @@
 --
 -- See LICENSE.md in the project directory for license information.
 
--- Check to see if reskinning needs to be done.
-if reskins.bobs and (reskins.bobs.triggers.assembly.entities == false) then
-	return
-end
-if reskins.angels and (reskins.angels.triggers.petrochem.entities == false) then
-	return
-end
-
 local tier_map = {
 	["oil-refinery"] = { tier = 1, prog_tier = 2 },
 	["oil-refinery-2"] = { tier = 2, prog_tier = 3 },
@@ -21,7 +13,6 @@ local tier_map = {
 	["angels-oil-refinery-4"] = { tier = 4, prog_tier = 5 },
 }
 
--- Reskin entities, create and assign extra details
 for name, map in pairs(tier_map) do
 	reskins.lib.apply_skin.oil_refinery(
 		name,

@@ -228,7 +228,6 @@ function reskins.internal.create_icons_from_list(table, inputs)
 			end
 		end
 
-		-- Label to skip to next iteration
 		::continue::
 	end
 end

@@ -3,10 +3,6 @@
 --
 -- See LICENSE in the project directory for license information.
 
-if reskins.lib.settings.is_feature_set_enabled("technologies", "reskins-bobs", "boblogistics") == false then
-	return
-end
-
 -- Setup standard inputs
 local inputs = {
 	mod = "lib",

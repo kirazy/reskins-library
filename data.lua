@@ -10,17 +10,13 @@ reskins.lib = require("api")
 
 require("internal")
 
--- Setup function hosts and import triggers
+-- Setup function hosts
 if mods["reskins-angels"] then
-	reskins.angels = {
-		triggers = require("__reskins-angels__.prototypes.functions.triggers"),
-	}
+	reskins.angels = {}
 end
 
 if mods["reskins-bobs"] then
-	reskins.bobs = {
-		triggers = require("__reskins-bobs__.prototypes.functions.triggers"),
-	}
+	reskins.bobs = {}
 end
 
 require("prototypes.functions.functions")

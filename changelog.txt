@@ -3,6 +3,7 @@ Version: 2.5.0
 Date: ????
   Changes:
     - NOT A SHIPPED VERSION. PLANNED TO OBSOLETE THE MOD.
+    - Removed the settings that turned off the reskins of entities, equipment, items and fluids, technologies, and the interface, and `settings.is_feature_set_enabled`
     - Removed the notices for Angel's Industries, Angel's Exploration, Angel's Extended Smelting and Compression, Circuit Processing, Deadlock's Crating Machine, Intermodal Containers, Loader Redux, Miniloader, and Offshore P.U.M.P.S., which are not available for Factorio 2.1
     - Added the notices for Black Rubber Belts - Remastered, Deadlock's Stacking Beltboxes & Compact Loaders Continued, and Loaders Modernized: Integrations, in place of the notice for Deadlock's Stacking Beltboxes & Compact Loaders
   Bugfixes:
