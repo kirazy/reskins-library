@@ -11,11 +11,6 @@ if reskins.angels and (reskins.angels.triggers.petrochem.entities == false) then
 	return
 end
 
--- Flag available for Mini-Machines compatibility pass
-if reskins.compatibility then
-	reskins.compatibility.triggers.minimachines.refineries = true
-end
-
 local tier_map = {
 	["oil-refinery"] = { tier = 1, prog_tier = 2 },
 	["oil-refinery-2"] = { tier = 2, prog_tier = 3 },

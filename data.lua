@@ -23,12 +23,6 @@ if mods["reskins-bobs"] then
 	}
 end
 
-if mods["reskins-compatibility"] then
-	reskins.compatibility = {
-		triggers = require("__reskins-compatibility__.prototypes.functions.triggers"),
-	}
-end
-
 require("prototypes.functions.functions")
 require("prototypes.functions.tints")
 require("prototypes.functions.icon-handling")
