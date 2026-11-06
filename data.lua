@@ -37,4 +37,6 @@ require("prototypes.functions.entity-functions")
 -- TECHNOLOGIES
 ----------------------------------------------------------------------------------------------------
 -- Base
-require("prototypes.technology.base.logistics")
+-- The require below is disabled because Artisanal Reskins: Bob's Mods and Artisanal Reskins: Angel's Mods reskin the
+-- logistics technologies of the base game and Bob's mods with the Assets API.
+-- require("prototypes.technology.base.logistics")
