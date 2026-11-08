@@ -127,6 +127,41 @@ data:extend({
 	},
 
 	-- Reskin scope settings
+	{
+		type = "bool-setting",
+		name = "reskins-lib-scope-entities",
+		setting_type = "startup",
+		order = "aa",
+		default_value = true,
+	},
+	{
+		type = "bool-setting",
+		name = "reskins-lib-scope-equipment",
+		setting_type = "startup",
+		order = "ab",
+		default_value = true,
+	},
+	{
+		type = "bool-setting",
+		name = "reskins-lib-scope-items-and-fluids",
+		setting_type = "startup",
+		order = "ac",
+		default_value = true,
+	},
+	{
+		type = "bool-setting",
+		name = "reskins-lib-scope-technologies",
+		setting_type = "startup",
+		order = "ad",
+		default_value = true,
+	},
+	{
+		type = "bool-setting",
+		name = "reskins-lib-scope-interface",
+		setting_type = "startup",
+		order = "af",
+		default_value = true,
+	},
 
 	-- Runtime settings
 	{

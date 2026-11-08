@@ -7,6 +7,6 @@
 reskins.internal.assign_icons_deferred_to_stage(reskins.lib.defines.stage.data_updates)
 
 ----------------------------------------------------------------------------------------------------
--- ENTITIES
+-- TRIGGERS
 ----------------------------------------------------------------------------------------------------
-require("prototypes.entity.base.nuclear-reactor")
+require("prototypes.triggers.data-updates")

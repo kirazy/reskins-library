@@ -10,13 +10,23 @@ reskins.lib = require("api")
 
 require("internal")
 
--- Setup function hosts
+-- Setup function hosts and import triggers
 if mods["reskins-angels"] then
-	reskins.angels = {}
+	reskins.angels = {
+		triggers = require("prototypes.functions.angels.triggers"),
+	}
 end
 
 if mods["reskins-bobs"] then
-	reskins.bobs = {}
+	reskins.bobs = {
+		triggers = require("prototypes.functions.bobs.triggers"),
+	}
+end
+
+if mods["reskins-compatibility"] then
+	reskins.compatibility = {
+		triggers = require("prototypes.functions.compatibility.triggers"),
+	}
 end
 
 require("prototypes.functions.functions")
@@ -25,18 +35,24 @@ require("prototypes.functions.icon-handling")
 require("prototypes.functions.label-items")
 require("prototypes.functions.entity-functions")
 
-----------------------------------------------------------------------------------------------------
--- ENTITIES
-----------------------------------------------------------------------------------------------------
--- Base
--- The require below is disabled because Artisanal Reskins: Bob's Mods reskins the belt entities of the base game with
--- the Assets API.
--- require("prototypes.entity.base.belt-entities")
+-- Import the functions for Artisanal Reskins: Bob's Mods.
+if mods["reskins-bobs"] then
+	require("prototypes.functions.bobs.functions")
+	require("prototypes.functions.entities.assembly.assembling-machine")
+end
+
+-- Import the functions for Artisanal Reskins: Angel's Mods.
+if mods["reskins-angels"] then
+	require("prototypes.functions.angels.functions")
+	require("prototypes.functions.entities.petrochem.chemical-plant")
+end
+
+-- Import the functions for Artisanal Reskins: Compatibility.
+if mods["reskins-compatibility"] then
+	require("prototypes.functions.compatibility.functions")
+end
 
 ----------------------------------------------------------------------------------------------------
--- TECHNOLOGIES
+-- TRIGGERS
 ----------------------------------------------------------------------------------------------------
--- Base
--- The require below is disabled because Artisanal Reskins: Bob's Mods and Artisanal Reskins: Angel's Mods reskin the
--- logistics technologies of the base game and Bob's mods with the Assets API.
--- require("prototypes.technology.base.logistics")
+require("prototypes.triggers.data")
