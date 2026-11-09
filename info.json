@@ -9,8 +9,8 @@
 	"dependencies": [
 		"base",
 		"flib",
-		"reskins-sprite-utils >= 0.3.0",
-		"reskins-assets-assorted >= 2.2.0",
+		"reskins-sprite-utils >= 0.3.1",
+		"reskins-assets-assorted >= 2.3.0",
 		"(?) bobassembly",
 		"(?) boblogistics",
 		"(?) angelspetrochem"
