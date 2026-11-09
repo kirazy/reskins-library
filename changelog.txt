@@ -1,15 +1,16 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.5.0
 Date: ????
+  Deprecated:
+    - This mod will be marked deprecated and will only receive bug fixes while Artisanal Reskins: Bob's Mods, Artisanal Reskins: Angel's Mods, and Artisanal Reskins: Compatibility are within the 2.5 minor version.
+      - It is retained for backwards compatibility with existing mods, providing the settings, triggers, and reskins global with all fields and methods.
   Changes:
-    - NOT A SHIPPED VERSION. PLANNED TO OBSOLETE THE MOD.
-    - Removed the settings that turned off the reskins of entities, equipment, items and fluids, technologies, and the interface, and `settings.is_feature_set_enabled`
-    - Removed the notices for Angel's Industries, Angel's Exploration, Angel's Extended Smelting and Compression, Circuit Processing, Deadlock's Crating Machine, Intermodal Containers, Loader Redux, Miniloader, and Offshore P.U.M.P.S., which are not available for Factorio 2.1
-    - The logistics technologies are no longer reskinned by this mod; Artisanal Reskins: Bob's Mods and Artisanal Reskins: Angel's Mods reskin them
-    - Added the notices for Black Rubber Belts - Remastered, Deadlock's Stacking Beltboxes & Compact Loaders Continued, and Loaders Modernized: Integrations, in place of the notice for Deadlock's Stacking Beltboxes & Compact Loaders
+    - Removed all reskinning operations performed by this mod; those steps have been migrated to the appropriate Artisanal Reskins mod.
+    - Removed mod support notifications for Angel's Industries, Angel's Exploration, Angel's Extended Smelting and Compression, Circuit Processing, Deadlock's Crating Machine, Intermodal Containers, Loader Redux, Miniloader, and Offshore P.U.M.P.S., which are not available for Factorio 2.1
+    - Added support notifications for Black Rubber Belts - Remastered, Deadlock's Stacking Beltboxes & Compact Loaders Continued, and Loaders Modernized: Integrations, in place of Deadlock's Stacking Beltboxes & Compact Loaders
   Bugfixes:
-    - Fixed that the notices for Loaders Modernized and Miniloader (Redux) showed a missing locale key
-    - Fixed that `tiers.remove_tier_labels_from_icons` returned an empty array of removed tier labels for an icon without tier labels
+    - Fixed that the support notifications for Loaders Modernized and Miniloader (Redux) showed a missing locale key
+    - Fixed that `tiers.remove_tier_labels_from_icons` returned an empty array of removed tier labels instead of `nil` when no tier labels were present
 ---------------------------------------------------------------------------------------------------
 Version: 2.4.2
 Date: 2026-11-01
