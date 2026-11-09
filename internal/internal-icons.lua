@@ -1,3 +1,4 @@
+---@diagnostic disable: inject-field, undefined-field
 -- Copyright (c) 2024 Kirazy
 -- Part of Artisanal Reskins: Library
 --
