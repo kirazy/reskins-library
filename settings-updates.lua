@@ -22,7 +22,7 @@ reskins.lib.setting_override("bool-setting", "reskins-lib-scope-technologies", t
 reskins.lib.setting_override("bool-setting", "reskins-lib-scope-interface", true)
 
 ---Sets the given `setting` in place as a hidden startup setting and adds it, if no setting with the same name exists.
----@param setting data.BoolSettingPrototype|data.ColorSettingPrototype
+---@param setting data.ModBoolSettingPrototype|data.ModColorSettingPrototype
 local function add_hidden_setting(setting)
 	if data.raw[setting.type][setting.name] then
 		return
