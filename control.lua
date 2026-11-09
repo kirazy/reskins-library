@@ -135,6 +135,33 @@ local function check_for_missing_reskin(player)
 	end
 end
 
+---Notifies the given `player` that this mod is deprecated, once for each player in a save, if Artisanal Reskins:
+---Framework is active.
+---@param player LuaPlayer
+local function notify_deprecation(player)
+	if not script.active_mods["reskins-framework"] then
+		return
+	end
+
+	storage.deprecation_notified = storage.deprecation_notified or {}
+	if storage.deprecation_notified[player.index] then
+		return
+	end
+
+	storage.deprecation_notified[player.index] = true
+	player.print({
+		"",
+		"[",
+		{ "reskins-library.reskins-suite-name" },
+		"] ",
+		{
+			"reskins-notifications.reskins-library-deprecated",
+			{ "", "[color=" .. message_color .. "]", { "mod-name.reskins-library" }, "[/color]" },
+			{ "", "[color=" .. message_color .. "]", { "mod-name.reskins-framework" }, "[/color]" },
+		},
+	})
+end
+
 ----------------------------------------------------------------------------------------------------
 -- ON INIT
 ----------------------------------------------------------------------------------------------------
@@ -152,6 +179,8 @@ local function notify(data)
 	for _, player in pairs(game.connected_players) do
 		if player.admin then
 			if player.mod_settings["reskins-lib-display-notifications"].value == true then
+				notify_deprecation(player)
+
 				-- Check for supported mods for which a reskin mod is missing, and notify
 				check_for_missing_reskin(player)
 
@@ -226,6 +255,8 @@ script.on_event(defines.events.on_player_joined_game, function(event)
 	local player = game.get_player(event.player_index)
 	if player and player.admin then
 		if player.mod_settings["reskins-lib-display-notifications"].value == true then
+			notify_deprecation(player)
+
 			-- Check for supported mods for which a reskin mod is missing, and notify
 			check_for_missing_reskin(player)
 		end
