@@ -52,42 +52,42 @@ end
 _settings.blend_mode = _settings.get_value("reskins-lib-blend-mode")
 
 ---@alias TargetMod
----| '"angelsaddons-cab"'
----| '"angelsaddons-mobility"'
----| '"angelsaddons-storage"'
----| '"angelsbioprocessing"'
----| '"angelsexploration"'
----| '"angelsindustries"'
----| '"angelspetrochem"'
----| '"angelsrefining"'
----| '"angelssmelting"'
----| '"bobassembly"'
----| '"bobelectronics"'
----| '"bobenemies"'
----| '"bobequipment"'
----| '"bobgreenhouse"'
----| '"boblogistics"'
----| '"bobmining"'
----| '"bobmodules"'
----| '"bobores"'
----| '"bobplates"'
----| '"bobpower"'
----| '"bobrevamp"'
----| '"bobtech"'
----| '"bobvehicleequipment"'
----| '"bobwarfare"'
+---| "angelsaddons-cab"
+---| "angelsaddons-mobility"
+---| "angelsaddons-storage"
+---| "angelsbioprocessing"
+---| "angelsexploration"
+---| "angelsindustries"
+---| "angelspetrochem"
+---| "angelsrefining"
+---| "angelssmelting"
+---| "bobassembly"
+---| "bobelectronics"
+---| "bobenemies"
+---| "bobequipment"
+---| "bobgreenhouse"
+---| "boblogistics"
+---| "bobmining"
+---| "bobmodules"
+---| "bobores"
+---| "bobplates"
+---| "bobpower"
+---| "bobrevamp"
+---| "bobtech"
+---| "bobvehicleequipment"
+---| "bobwarfare"
 
 ---@alias SourceMod
----| '"reskins-angels"'
----| '"reskins-bobs"'
----| '"reskins-lib"'
----| '"reskins-compatibility"'
+---| "reskins-angels"
+---| "reskins-bobs"
+---| "reskins-lib"
+---| "reskins-compatibility"
 
 ---@alias FeatureSet
----| '"entities"'
----| '"equipment"'
----| '"items-and-fluids"'
----| '"technologies"'
+---| "entities"
+---| "equipment"
+---| "items-and-fluids"
+---| "technologies"
 
 ---
 ---Checks if reskinning the given `feature_set` is enabled for a given `source_mod`
