@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.5.0
-Date: ????
+Date: 2026-11-09
   Deprecated:
     - This mod will be marked deprecated and will only receive bug fixes while Artisanal Reskins: Bob's Mods, Artisanal Reskins: Angel's Mods, and Artisanal Reskins: Compatibility are within the 2.5 minor version.
       - It is retained for backwards compatibility with existing mods, providing the settings, triggers, and reskins global with all fields and methods.
