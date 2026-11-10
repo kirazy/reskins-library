@@ -839,10 +839,10 @@ local function convert_icon_source(source)
 end
 
 ---@param sources IconSources
----@return Reskins.SpriteUtils.IconSources
+---@return Reskins.SpriteUtils.IconSource[]
 ---@nodiscard
 local function convert_icon_sources(sources)
-	---@type Reskins.SpriteUtils.IconSources
+	---@type Reskins.SpriteUtils.IconSource[]
 	local converted = {}
 	for _, v in pairs(sources) do
 		converted[#converted + 1] = convert_icon_source(v)
@@ -850,16 +850,35 @@ local function convert_icon_sources(sources)
 	return converted
 end
 
+---The file of the icon that Artisanal Reskins: Sprite Utils puts in place of a source for which no prototype with an
+---icon exists.
+local ERROR_ICON_FILE = "__core__/graphics/buildability-collision.png"
+
+---Indicates whether the given `icon_data` has a layer that replaces a source for which no prototype with an icon
+---exists.
+---@param icon_data IconData[] The icon.
+---@return boolean # `true` when a layer uses the error icon; otherwise, `false`.
+---@nodiscard
+local function has_error_layers(icon_data)
+	for _, icon_datum in pairs(icon_data) do
+		if icon_datum.icon == ERROR_ICON_FILE then
+			return true
+		end
+	end
+
+	return false
+end
+
 ---
 ---Adds the icons from the given `sources` to a copy of the given `icon_data` array, and applies any
 ---of the optional transformations.
 ---
 ---### Returns
----@return IconData[], boolean # A copy of `icon_data` with the sourced icons from `sources` transformed and layered on top, if any exist; otherwise, a straight, unmodified copy of `icon_data`. When the second return value is `true`, a blank icon layer was created.
+---@return IconData[], boolean # A copy of `icon_data` with the sourced icons from `sources` transformed and layered on top, if any exist; otherwise, a straight, unmodified copy of `icon_data`. When the second return value is `true`, an error icon layer was created.
 ---
 ---### Remarks
 ---- Any layer of the icon using a `PrototypeIconSource` for a prototype that does not exist
----  will be replaced with a blank icon.
+---  will be replaced with an error icon.
 ---- Missing icon fields are set to default values as appropriate.
 ---- `icon_data` and `sources` are not modified.
 ---
@@ -879,11 +898,13 @@ end
 ---@nodiscard
 ---@deprecated Use reskins-sprite-utils.icons.add_icons_from_sources_to_icons
 function _icons.add_icons_from_sources_to_icons(icon_data, sources, is_technology_icon)
-	return __icons.add_icons_from_sources_to_icons(
+	local combined_icon = __icons.add_icons_from_sources_to_icons(
 		icon_data,
 		convert_icon_sources(sources),
 		is_technology_icon and "technology" or "default"
 	)
+
+	return combined_icon, has_error_layers(combined_icon)
 end
 
 ---
@@ -892,11 +913,11 @@ end
 ---each source, though only `tint` is applied to the base icon.
 ---
 ---### Returns
----@return IconData[], boolean # A new icon created from the sources, with the base icon from the first source, and icons from the remaining sources layered on top. When the second return value is `true`, a blank icon layer was created.
+---@return IconData[], boolean # A new icon created from the sources, with the base icon from the first source, and icons from the remaining sources layered on top. When the second return value is `true`, an error icon layer was created.
 ---
 ---### Remarks
 ---- Any layer of the icon using a `PrototypeIconSource` for a prototype that does not exist
----  will be replaced with a blank icon, including the base layer.
+---  will be replaced with an error icon, including the base layer.
 ---- Missing icon fields are set to default values as appropriate.
 ---- `sources` is not modified.
 ---
@@ -931,7 +952,9 @@ end
 ---@nodiscard
 ---@deprecated Use reskins-sprite-utils.icons.create_icons_from_sources
 function _icons.create_icons_from_sources(sources)
-	return __icons.create_icons_from_sources(convert_icon_sources(sources))
+	local icon_data = __icons.create_icons_from_sources(convert_icon_sources(sources))
+
+	return icon_data, has_error_layers(icon_data)
 end
 
 ---
@@ -940,7 +963,7 @@ end
 ---
 ---### Remarks
 ---- Any layer of the icon using a `PrototypeIconSource` for a prototype that does not exist
----  will be replaced with a blank icon.
+---  will be replaced with an error icon.
 ---- Missing icon fields are set to default values as appropriate.
 ---
 ---### Examples
