@@ -11,6 +11,8 @@ Date: ????
   Bugfixes:
     - Fixed that the support notifications for Loaders Modernized and Miniloader (Redux) showed a missing locale key
     - Fixed that `tiers.remove_tier_labels_from_icons` returned an empty array of removed tier labels instead of `nil` when no tier labels were present
+  Locale:
+    - Added localization for Swedish
 ---------------------------------------------------------------------------------------------------
 Version: 2.4.2
 Date: 2026-11-01
