@@ -4,6 +4,7 @@ Date: ????
   Deprecated:
     - This mod will be marked deprecated and will only receive bug fixes while Artisanal Reskins: Bob's Mods, Artisanal Reskins: Angel's Mods, and Artisanal Reskins: Compatibility are within the 2.5 minor version.
       - It is retained for backwards compatibility with existing mods, providing the settings, triggers, and reskins global with all fields and methods.
+      - Any mods that rely on this mod must migrate to Artisanal Reskins: Sprite Utils, Artisanal Reskins: Assets API, or Artisanal Reskins: Framework, as appropriate.
   Changes:
     - Removed all reskinning operations performed by this mod; those steps have been migrated to the appropriate Artisanal Reskins mod.
     - Removed mod support notifications for Angel's Industries, Angel's Exploration, Angel's Extended Smelting and Compression, Circuit Processing, Deadlock's Crating Machine, Intermodal Containers, Loader Redux, Miniloader, and Offshore P.U.M.P.S., which are not available for Factorio 2.1
